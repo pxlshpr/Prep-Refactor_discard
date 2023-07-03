@@ -1,6 +1,8 @@
 import Foundation
 import CoreData
 
+import FoodDataTypes
+
 extension MealEntity: Entity {
     
     convenience init(context: NSManagedObjectContext, meal: Meal) {
@@ -8,13 +10,27 @@ extension MealEntity: Entity {
         self.id = meal.id
         self.name = meal.name
         self.time = meal.time
+        
+        self.energy = meal.energy
+        self.energyUnit = meal.energyUnit
+        self.carb = meal.carb
+        self.fat = meal.fat
+        self.protein = meal.protein
+        self.badgeWidth = meal.badgeWidth
     }
     
-    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyMeal, _ dayEntity: DayEntity) {
+    convenience init(
+        _ context: NSManagedObjectContext,
+        _ legacy: LegacyMeal,
+        _ dayEntity: DayEntity
+    ) {
         self.init(context: context)
         self.id = UUID(uuidString: legacy.id)!
         self.name = legacy.name
         self.time = Date(timeIntervalSince1970: legacy.time)
+        
+        self.badgeWidth = legacy.badgeWidth ?? 0
+        
         self.dayEntity = dayEntity
     }
 }
@@ -38,6 +54,15 @@ extension MealEntity {
         }
         set {
             self.timeString = newValue.timeString
+        }
+    }
+    
+    var energyUnit: EnergyUnit {
+        get {
+            EnergyUnit(rawValue: Int(energyUnitValue)) ?? .kcal
+        }
+        set {
+            energyUnitValue = Int16(newValue.rawValue)
         }
     }
 }

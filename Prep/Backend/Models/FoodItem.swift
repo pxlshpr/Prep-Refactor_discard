@@ -203,22 +203,19 @@ import FoodDataTypes
 
 extension FoodItem {
     func scaledEnergyValue(in unit: EnergyUnit) -> Double {
-        0
-//        guard let value = food.value(for: .energy) else { return 0 }
-//        let scaledValue = value.value * nutrientScaleFactor
-//        return scaledValue
+        guard let value = food.value(for: .energy) else { return 0 }
+        let scaledValue = value.value * nutrientScaleFactor
+        return scaledValue
     }
 
     func scaledMacroValue(for macro: Macro) -> Double {
-        0
-//        guard let value = food.value(for: .macro(macro)) else { return 0 }
-//        return value.value * nutrientScaleFactor
+        guard let value = food.value(for: .macro(macro)) else { return 0 }
+        return value.value * nutrientScaleFactor
     }
     
     var nutrientScaleFactor: Double {
-        0
-//        guard let quantity = food.quantity(for: amount) else { return 0 }
-//        return food.nutrientScaleFactor(for: quantity) ?? 0
+        guard let quantity = food.quantity(for: amount) else { return 0 }
+        return food.nutrientScaleFactor(for: quantity) ?? 0
     }
 }
 

@@ -18,6 +18,11 @@ extension FoodItemEntity: Entity {
         self.foodEntity = foodEntity
         self.mealEntity = mealEntity
         
+        self.energy = foodItem.energy
+        self.energyUnit = foodItem.energyUnit
+        self.carb = foodItem.carb
+        self.fat = foodItem.fat
+        self.protein = foodItem.protein
         self.badgeWidth = foodItem.badgeWidth
         self.sortPosition = Int16(foodItem.sortPosition)
 
@@ -55,6 +60,16 @@ extension FoodItemEntity: Entity {
         
         self.foodEntity = foodEntity
         self.mealEntity = mealEntity
+        
+        /// Manually calculating totals
+        guard let foodItem = FoodItem(self) else {
+            fatalError()
+        }
+        self.energy = foodItem.scaledEnergyValue(in: foodEntity.energyUnit)
+        self.energyUnit = foodEntity.energyUnit
+        self.carb = foodItem.scaledMacroValue(for: .carb)
+        self.fat = foodItem.scaledMacroValue(for: .fat)
+        self.protein = foodItem.scaledMacroValue(for: .protein)
     }
 }
 

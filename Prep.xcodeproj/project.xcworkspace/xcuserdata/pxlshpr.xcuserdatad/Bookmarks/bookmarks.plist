@@ -787,6 +787,7 @@
 			<dict>
 				<key>focused</key>
 				<string>    var dataset: FoodDataset?
+    var datasetID: String?
 </string>
 				<key>leading</key>
 				<string>    let type: FoodType
@@ -800,6 +801,92 @@
 			</dict>
 			<key>title</key>
 			<string>Add datasetID</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingLineNumber</key>
+					<string>102</string>
+					<key>StartingLineNumber</key>
+					<string>102</string>
+					<key>Timestamp</key>
+					<string>710116344.034453</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Views/Log/DayView.AddFoodCell.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>        let energy = meal.energy(in: .kcal)
+</string>
+				<key>leading</key>
+				<string>    
+    var energyText: some View {
+</string>
+				<key>trailing</key>
+				<string>//        let energy = meal.energy(in: .kcal)
+        let string = NumberFormatter.energyValue.string(for: energy) ?? ""
+        return Text("\(string)")
+</string>
+			</dict>
+			<key>title</key>
+			<string>Use user energy unit here. A</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingLineNumber</key>
+					<string>118</string>
+					<key>StartingLineNumber</key>
+					<string>118</string>
+					<key>Timestamp</key>
+					<string>710116234.030815</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Models/Meal.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>            $0 + $1.scaledEnergyValue(in: unit)
+</string>
+				<key>leading</key>
+				<string>    func calculateEnergy(in unit: EnergyUnit) -&gt; Double {
+        foodItems.reduce(0) {
+</string>
+				<key>trailing</key>
+				<string>        }
+    }
+}
+</string>
+			</dict>
+			<key>title</key>
+			<string>Ensure that all values are converted to unit provided</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>

@@ -31,6 +31,7 @@ struct Food: Identifiable, Codable, Hashable {
     let type: FoodType
     var publishStatus: PublishStatus?
     var dataset: FoodDataset?
+    var datasetID: String?
     
     var lastUsedAt: Date?
     var lastAmount: FoodValue?
@@ -60,6 +61,7 @@ struct Food: Identifiable, Codable, Hashable {
         type: FoodType = .food,
         publishStatus: PublishStatus? = nil,
         dataset: FoodDataset? = nil,
+        datasetID: String? = nil,
         lastUsedAt: Date? = nil,
         lastAmount: FoodValue? = nil,
         updatedAt: Date = Date.now,
@@ -86,6 +88,7 @@ struct Food: Identifiable, Codable, Hashable {
         self.type = type
         self.publishStatus = publishStatus
         self.dataset = dataset
+        self.datasetID = datasetID
         self.lastUsedAt = lastUsedAt
         self.lastAmount = lastAmount
         self.updatedAt = updatedAt
@@ -117,6 +120,7 @@ extension Food {
             type: entity.type,
             publishStatus: entity.publishStatus,
             dataset: entity.dataset,
+            datasetID: entity.datasetID,
             lastUsedAt: entity.lastUsedAt,
             lastAmount: entity.lastAmount,
             updatedAt: entity.updatedAt!,

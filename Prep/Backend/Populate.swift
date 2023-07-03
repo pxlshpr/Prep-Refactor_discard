@@ -1,8 +1,10 @@
 import Foundation
 import CoreData
+import OSLog
+
+import FoodDataTypes
 import SwiftSugar
 
-import OSLog
 private let logger = Logger(subsystem: "CoreDataManager", category: "Populate")
 
 extension CoreDataManager {
@@ -45,7 +47,9 @@ extension CoreDataManager {
             await run("Food Items", populateFoodItems4)
             await run("Food Items", populateFoodItems5)
             await run("Food Items", populateFoodItems6)
-            
+
+            await run("Meal Stats", populateMealStats)
+
             await run("setHasPopulated", setHasPopulated)
             logger.info("Populate took: \(CFAbsoluteTimeGetCurrent()-start)s")
             
@@ -329,4 +333,20 @@ extension CoreDataManager {
             logger.debug("Inserted Food Item: \(legacy.id, privacy: .public)")
         }
     }
+    
+    func populateMealStats(_ context: NSManagedObjectContext) {
+    
+        let mealEntities = MealEntity.objects(in: context)
+        for entity in mealEntities {
+            let meal = Meal(entity)
+            let energyUnit: EnergyUnit = .kcal
+            entity.energy = meal.calculateEnergy(in: energyUnit)
+            entity.energyUnit = energyUnit
+            entity.carb = meal.total(for: .carb)
+            entity.fat = meal.total(for: .fat)
+            entity.protein = meal.total(for: .protein)
+        }
+    }
+    
+
 }

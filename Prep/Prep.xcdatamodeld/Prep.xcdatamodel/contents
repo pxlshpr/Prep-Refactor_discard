@@ -15,6 +15,7 @@
         <attribute name="brand" optional="YES" attributeType="String"/>
         <attribute name="carb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="datasetID" optional="YES" attributeType="String"/>
         <attribute name="datasetValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="densityData" optional="YES" attributeType="Binary"/>
         <attribute name="detail" optional="YES" attributeType="String"/>
@@ -67,8 +68,14 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="MealEntity" representedClassName="MealEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="badgeWidth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="carb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="energy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="energyUnitValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="fat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="protein" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="timeString" optional="YES" attributeType="String"/>
         <relationship name="dayEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity" inverseName="mealEntities" inverseEntity="DayEntity"/>
         <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity" inverseName="mealEntity" inverseEntity="FoodItemEntity"/>

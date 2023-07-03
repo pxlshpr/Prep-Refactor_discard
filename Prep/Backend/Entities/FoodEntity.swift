@@ -31,6 +31,8 @@ extension FoodEntity: Entity {
         self.type = food.type
         self.publishStatus = food.publishStatus
         self.dataset = food.dataset
+        self.datasetID = food.datasetID
+        self.lastAmount = food.lastAmount
         self.lastUsedAt = food.lastUsedAt
         self.updatedAt = food.updatedAt
         self.createdAt = food.createdAt
@@ -57,6 +59,7 @@ extension FoodEntity: Entity {
         self.barcodes = []
         self.type = .food
         self.publishStatus = nil
+        self.datasetID = legacy.datasetFoodId
         self.dataset = legacy.dataset
         self.lastAmount = lastFoodItem?.amount.foodValue
         if let lastUsedAt = lastFoodItem?.updatedAt {
@@ -99,6 +102,7 @@ extension FoodEntity: Entity {
         self.type = .food
         self.publishStatus = nil
         self.dataset = legacy.dataset
+        self.datasetID = nil
         
         self.lastAmount = lastFoodItem?.amount.foodValue
         if let lastUsedAt = lastFoodItem?.updatedAt {

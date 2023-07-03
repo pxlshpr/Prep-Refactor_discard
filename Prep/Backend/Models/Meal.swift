@@ -5,6 +5,14 @@ struct Meal: Identifiable, Codable, Hashable {
     var name: String
     var time: Date
     var date: Date
+    
+    var energy: Double
+    var energyUnit: EnergyUnit
+    var carb: Double
+    var fat: Double
+    var protein: Double
+    var badgeWidth: CGFloat
+
     var foodItems: [FoodItem]
     
     init(
@@ -12,12 +20,24 @@ struct Meal: Identifiable, Codable, Hashable {
         name: String,
         time: Date,
         date: Date,
+        energy: Double,
+        energyUnit: EnergyUnit,
+        carb: Double,
+        fat: Double,
+        protein: Double,
+        badgeWidth: CGFloat,
         foodItems: [FoodItem]
     ) {
         self.id = id
         self.name = name
         self.time = time
         self.date = date
+        self.energy = energy
+        self.energyUnit = energyUnit
+        self.carb = carb
+        self.fat = fat
+        self.protein = protein
+        self.badgeWidth = badgeWidth
         self.foodItems = foodItems
     }
     
@@ -27,11 +47,20 @@ struct Meal: Identifiable, Codable, Hashable {
             name: entity.name!,
             time: entity.time,
             date: Date(fromCalendarDayString: entity.dayEntity!.dateString!)!,
+            energy: entity.energy,
+            energyUnit: entity.energyUnit,
+            carb: entity.carb,
+            fat: entity.fat,
+            protein: entity.protein,
+            badgeWidth: entity.badgeWidth,
             foodItems: entity.foodItems
         )
     }
 }
 
+extension Meal {
+    
+}
 extension Meal: Comparable {
 
     static func <(lhs: Meal, rhs: Meal) -> Bool {
@@ -58,24 +87,37 @@ import FoodDataTypes
 extension Meal {
     var macrosChartData: [MacroValue] {
         [
-            MacroValue(macro: .carb, value: total(for: .carb)),
-            MacroValue(macro: .fat, value: total(for: .fat)),
-            MacroValue(macro: .protein, value: total(for: .protein))
+            MacroValue(macro: .carb, value: carb),
+            MacroValue(macro: .fat, value: fat),
+            MacroValue(macro: .protein, value: protein)
         ]
     }
     
     func total(for macro: Macro) -> Double {
-        0
-//        foodItems.reduce(0) {
-//            $0 + $1.scaledMacroValue(for: macro)
-//        }
+        foodItems.reduce(0) {
+            $0 + $1.scaledMacroValue(for: macro)
+        }
+    }
+
+    func energy(in unit: EnergyUnit) -> Double {
+        switch unit {
+        case .kJ:
+            switch energyUnit {
+            case .kJ:   energy
+            case .kcal: energy / KjPerKcal
+            }
+        case .kcal:
+            switch energyUnit {
+            case .kcal: energy
+            case .kJ:   energy * KjPerKcal
+            }
+        }
     }
     
-    func energy(in unit: EnergyUnit) -> Double {
-        586
-//        foodItems.reduce(0) {
-//            $0 + $1.scaledEnergyValue(in: unit)
-//        }
+    func calculateEnergy(in unit: EnergyUnit) -> Double {
+        foodItems.reduce(0) {
+            $0 + $1.scaledEnergyValue(in: unit)
+        }
     }
 }
 

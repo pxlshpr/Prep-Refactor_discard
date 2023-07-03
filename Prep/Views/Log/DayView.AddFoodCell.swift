@@ -78,12 +78,30 @@ extension DayView.AddFoodCell {
                 Text("kcal")
                     .font(.caption2)
                     .foregroundStyle(Color(.tertiaryLabel))
+//                macrosChart
             }
         }
     }
     
+    var macrosChart: some View {
+        Chart(meal.macrosChartData, id: \.macro) { macroValue in
+            SectorMark(
+                angle: .value("kcal", macroValue.kcal),
+                innerRadius: .ratio(0.5),
+                angularInset: 0.5
+            )
+            .cornerRadius(3)
+            .foregroundStyle(by: .value("Macro", macroValue.macro))
+        }
+        .chartForegroundStyleScale(Macro.chartStyleScale(colorScheme))
+        .chartLegend(.hidden)
+        .frame(width: 28, height: 28)
+    }
+
+    
     var energyText: some View {
         let energy = meal.energy(in: .kcal)
+//        let energy = meal.energy(in: .kcal)
         let string = NumberFormatter.energyValue.string(for: energy) ?? ""
         return Text("\(string)")
     }
