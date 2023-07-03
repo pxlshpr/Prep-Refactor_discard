@@ -12,9 +12,25 @@ extension Date {
         self = date
     }
 
+    init?(fromTimeString string: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy_MM_dd-hh_mm"
+        guard let date = dateFormatter.date(from: string) else {
+            return nil
+        }
+        self = date
+    }
+
     var calendarDayString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy_MM_dd"
+        return dateFormatter.string(from: self).lowercased()
+    }
+
+    var timeString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy_MM_dd-hh_mm"
         return dateFormatter.string(from: self).lowercased()
     }
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E2672C7D2A52C1B00002E95C /* FoodItemEntity2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity2.swift */; };
+		E2672C802A52C3F90002E95C /* MealEntity2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity2.swift */; };
 		E28002002A52B84300C6D528 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001572A52B84300C6D528 /* Import.swift */; };
 		E28002012A52B84300C6D528 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015A2A52B84300C6D528 /* Day.swift */; };
 		E28002022A52B84300C6D528 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015B2A52B84300C6D528 /* Meal.swift */; };
@@ -155,6 +157,11 @@
 		E28002912A52B84300C6D528 /* SizeForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FC2A52B84300C6D528 /* SizeForm.swift */; };
 		E28002922A52B84300C6D528 /* ItemFormAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FE2A52B84300C6D528 /* ItemFormAction.swift */; };
 		E28002932A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FF2A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift */; };
+		E28002952A52B99C00C6D528 /* Meal2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28002942A52B99C00C6D528 /* Meal2.swift */; };
+		E28002972A52B9A000C6D528 /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28002962A52B9A000C6D528 /* Day2.swift */; };
+		E28002992A52B9A600C6D528 /* FoodItem2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28002982A52B9A600C6D528 /* FoodItem2.swift */; };
+		E280029B2A52BC0100C6D528 /* DayEntity2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280029A2A52BC0100C6D528 /* DayEntity2.swift */; };
+		E280029D2A52BC7A00C6D528 /* FoodEntity2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280029C2A52BC7A00C6D528 /* FoodEntity2.swift */; };
 		E280FC162A529E3D00C6D528 /* PrepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FC152A529E3D00C6D528 /* PrepApp.swift */; };
 		E280FC182A529E3D00C6D528 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FC172A529E3D00C6D528 /* Persistence.swift */; };
 		E280FC1B2A529E3D00C6D528 /* Prep.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E280FC192A529E3D00C6D528 /* Prep.xcdatamodeld */; };
@@ -174,6 +181,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E2672C7C2A52C1B00002E95C /* FoodItemEntity2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemEntity2.swift; sourceTree = "<group>"; };
+		E2672C7F2A52C3F90002E95C /* MealEntity2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity2.swift; sourceTree = "<group>"; };
 		E28001572A52B84300C6D528 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
 		E280015A2A52B84300C6D528 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		E280015B2A52B84300C6D528 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
@@ -322,6 +331,11 @@
 		E28001FC2A52B84300C6D528 /* SizeForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeForm.swift; sourceTree = "<group>"; };
 		E28001FE2A52B84300C6D528 /* ItemFormAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFormAction.swift; sourceTree = "<group>"; };
 		E28001FF2A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableMealItemQuantityModifier.swift; sourceTree = "<group>"; };
+		E28002942A52B99C00C6D528 /* Meal2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal2.swift; sourceTree = "<group>"; };
+		E28002962A52B9A000C6D528 /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
+		E28002982A52B9A600C6D528 /* FoodItem2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem2.swift; sourceTree = "<group>"; };
+		E280029A2A52BC0100C6D528 /* DayEntity2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntity2.swift; sourceTree = "<group>"; };
+		E280029C2A52BC7A00C6D528 /* FoodEntity2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntity2.swift; sourceTree = "<group>"; };
 		E280FC122A529E3D00C6D528 /* Prep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E280FC152A529E3D00C6D528 /* PrepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepApp.swift; sourceTree = "<group>"; };
 		E280FC172A529E3D00C6D528 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -354,11 +368,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E2672C7E2A52C3E80002E95C /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				E280029A2A52BC0100C6D528 /* DayEntity2.swift */,
+				E2672C7F2A52C3F90002E95C /* MealEntity2.swift */,
+				E280029C2A52BC7A00C6D528 /* FoodEntity2.swift */,
+				E2672C7C2A52C1B00002E95C /* FoodItemEntity2.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		E28001582A52B84300C6D528 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				E2672C7E2A52C3E80002E95C /* Entities */,
 				E28001592A52B84300C6D528 /* Legacy */,
 				E28001632A52B84300C6D528 /* Food2.swift */,
+				E28002942A52B99C00C6D528 /* Meal2.swift */,
+				E28002962A52B9A000C6D528 /* Day2.swift */,
+				E28002982A52B9A600C6D528 /* FoodItem2.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -870,6 +899,7 @@
 				E28002672A52B84300C6D528 /* Constants.swift in Sources */,
 				E28002092A52B84300C6D528 /* Food2.swift in Sources */,
 				E28002352A52B84300C6D528 /* FoodModel+Scan.swift in Sources */,
+				E2672C7D2A52C1B00002E95C /* FoodItemEntity2.swift in Sources */,
 				E28002072A52B84300C6D528 /* FoodItemEntity.swift in Sources */,
 				E280023E2A52B84300C6D528 /* FoodLabelValue.swift in Sources */,
 				E28002872A52B84300C6D528 /* ItemForm.swift in Sources */,
@@ -883,6 +913,7 @@
 				E280025B2A52B84300C6D528 /* FoodSize.swift in Sources */,
 				E28002572A52B84300C6D528 /* VolumeQuantity.swift in Sources */,
 				E280FC1B2A529E3D00C6D528 /* Prep.xcdatamodeld in Sources */,
+				E28002972A52B9A000C6D528 /* Day2.swift in Sources */,
 				E28002522A52B84300C6D528 /* FoodQuantity.Size.swift in Sources */,
 				E280027E2A52B84300C6D528 /* DayView.AddFoodCell.swift in Sources */,
 				E28002812A52B84300C6D528 /* MealView.swift in Sources */,
@@ -891,8 +922,10 @@
 				E280028C2A52B84300C6D528 /* NutrientFieldModel.swift in Sources */,
 				E28002772A52B84300C6D528 /* Shimmer.swift in Sources */,
 				E280FC162A529E3D00C6D528 /* PrepApp.swift in Sources */,
+				E28002952A52B99C00C6D528 /* Meal2.swift in Sources */,
 				E28002392A52B84300C6D528 /* VolumeUnit.swift in Sources */,
 				E28002582A52B84300C6D528 /* SizeQuantity.swift in Sources */,
+				E28002992A52B9A600C6D528 /* FoodItem2.swift in Sources */,
 				E28002902A52B84300C6D528 /* NutrientField.swift in Sources */,
 				E280023B2A52B84300C6D528 /* VolumeUnitType.swift in Sources */,
 				E28002512A52B84300C6D528 /* Food+NutrientScaleFactor.swift in Sources */,
@@ -916,6 +949,7 @@
 				E28002632A52B84300C6D528 /* String.swift in Sources */,
 				E28002012A52B84300C6D528 /* Day.swift in Sources */,
 				E28002832A52B84300C6D528 /* FoodsViewCell.swift in Sources */,
+				E280029D2A52BC7A00C6D528 /* FoodEntity2.swift in Sources */,
 				E28002402A52B84300C6D528 /* FoodType.swift in Sources */,
 				E28002822A52B84300C6D528 /* DayView.swift in Sources */,
 				E280028D2A52B84300C6D528 /* LabelExtractor.swift in Sources */,
@@ -930,8 +964,10 @@
 				E28002642A52B84300C6D528 /* ScanResult.swift in Sources */,
 				E280024A2A52B84300C6D528 /* FoodDataset.swift in Sources */,
 				E280027D2A52B84300C6D528 /* FoodPickerModel.swift in Sources */,
+				E280029B2A52BC0100C6D528 /* DayEntity2.swift in Sources */,
 				E28002662A52B84300C6D528 /* UIFont.swift in Sources */,
 				E280027C2A52B84300C6D528 /* MealForm.swift in Sources */,
+				E2672C802A52C3F90002E95C /* MealEntity2.swift in Sources */,
 				E28002782A52B84300C6D528 /* TimeSlider.swift in Sources */,
 				E280FC1D2A529E3D00C6D528 /* ContentView.swift in Sources */,
 				E28002412A52B84300C6D528 /* WeightUnit.swift in Sources */,

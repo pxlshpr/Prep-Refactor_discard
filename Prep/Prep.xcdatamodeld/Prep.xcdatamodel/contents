@@ -3,7 +3,7 @@
     <entity name="DayEntity2" representedClassName="DayEntity2" syncable="YES" codeGenerationType="class">
         <attribute name="dateString" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <relationship name="meals" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntity2" inverseName="day" inverseEntity="MealEntity2"/>
+        <relationship name="mealEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntity2" inverseName="dayEntity" inverseEntity="MealEntity2"/>
     </entity>
     <entity name="FoodEntity2" representedClassName="FoodEntity2" syncable="YES" codeGenerationType="class">
         <attribute name="amountData" optional="YES" attributeType="Binary"/>
@@ -12,7 +12,7 @@
         <attribute name="carb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="datasetValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="density" optional="YES" attributeType="Binary"/>
+        <attribute name="densityData" optional="YES" attributeType="Binary"/>
         <attribute name="detail" optional="YES" attributeType="String"/>
         <attribute name="emoji" optional="YES" attributeType="String"/>
         <attribute name="energy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -29,7 +29,7 @@
         <attribute name="typeValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="url" optional="YES" attributeType="String"/>
-        <relationship name="foodItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity2" inverseName="food" inverseEntity="FoodItemEntity2"/>
+        <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity2" inverseName="foodEntity" inverseEntity="FoodItemEntity2"/>
     </entity>
     <entity name="FoodItemEntity2" representedClassName="FoodItemEntity2" syncable="YES" codeGenerationType="class">
         <attribute name="amountData" optional="YES" attributeType="Binary"/>
@@ -39,8 +39,8 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="sortPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="food" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodEntity2" inverseName="foodItems" inverseEntity="FoodEntity2"/>
-        <relationship name="meal" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealEntity2" inverseName="foodItems" inverseEntity="MealEntity2"/>
+        <relationship name="foodEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodEntity2" inverseName="foodItemEntities" inverseEntity="FoodEntity2"/>
+        <relationship name="mealEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealEntity2" inverseName="foodItemEntities" inverseEntity="MealEntity2"/>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -49,7 +49,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="timeString" optional="YES" attributeType="String"/>
-        <relationship name="day" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity2" inverseName="meals" inverseEntity="DayEntity2"/>
-        <relationship name="foodItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity2" inverseName="meal" inverseEntity="FoodItemEntity2"/>
+        <relationship name="dayEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity2" inverseName="mealEntities" inverseEntity="DayEntity2"/>
+        <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity2" inverseName="mealEntity" inverseEntity="FoodItemEntity2"/>
     </entity>
 </model>
