@@ -1,0 +1,113 @@
+{
+  "pins" : [
+    {
+      "identity" : "alertlayer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/AlertLayer.git",
+      "state" : {
+        "revision" : "f14366ce0726f71638f0c79a29bad9bc941e79b5",
+        "version" : "0.0.3"
+      }
+    },
+    {
+      "identity" : "colorkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/ColorKit",
+      "state" : {
+        "revision" : "d45ed513998a88230316f8b0ca57230311394896",
+        "version" : "1.2.1"
+      }
+    },
+    {
+      "identity" : "colorsugar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/ColorSugar",
+      "state" : {
+        "revision" : "ca642a18e471e0be2bda54f752fc1ad51e8d827a",
+        "version" : "0.0.8"
+      }
+    },
+    {
+      "identity" : "fooddatatypes",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/FoodDataTypes.git",
+      "state" : {
+        "revision" : "4e8fd289756a82a8f75dda76b226e3864b4c0537",
+        "version" : "0.0.20"
+      }
+    },
+    {
+      "identity" : "foodlabelscanner",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/FoodLabelScanner.git",
+      "state" : {
+        "revision" : "2f4f41550b49c60473287cfc65d8769b44183cfe",
+        "version" : "0.0.167"
+      }
+    },
+    {
+      "identity" : "formsugar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/FormSugar",
+      "state" : {
+        "revision" : "a234645c3823f548e8cbb084755b2ce09dcb690f",
+        "version" : "0.0.12"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections",
+      "state" : {
+        "revision" : "937e904258d22af6e447a0b72c0bc67583ef64a2",
+        "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "swifthaptics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/SwiftHaptics",
+      "state" : {
+        "revision" : "045e42a7650744361da92943474b09ba7bbaa39b",
+        "version" : "0.1.4"
+      }
+    },
+    {
+      "identity" : "swiftsugar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/SwiftSugar",
+      "state" : {
+        "revision" : "1a03a2ca2ea9c0f459e0870c25e8470556bbc842",
+        "version" : "0.0.97"
+      }
+    },
+    {
+      "identity" : "swiftuicamera",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/SwiftUICamera",
+      "state" : {
+        "revision" : "e15f94421a18ae82ae147f0ef02247590d091374",
+        "version" : "0.0.46"
+      }
+    },
+    {
+      "identity" : "viewsugar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/ViewSugar",
+      "state" : {
+        "revision" : "f1b896f2ab2ff7ebb2ab7c2ab9f40b3987aaa8cc",
+        "version" : "0.0.4"
+      }
+    },
+    {
+      "identity" : "visionsugar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pxlshpr/VisionSugar",
+      "state" : {
+        "revision" : "603c843e2482d44233259a4eb38012114c859054",
+        "version" : "0.0.80"
+      }
+    }
+  ],
+  "version" : 2
+}
