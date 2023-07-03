@@ -79,13 +79,16 @@ extension FoodEntity {
     }
 }
 
-extension Food {
+extension Food2 {
     var isPublished: Bool {
         switch publishStatus {
         case .hidden, .rejected, .none: false
         case .pendingReview, .verified: true
         }
     }
+}
+
+extension Food {
 
     func quantity(for amount: FoodValue) -> FoodQuantity? {
         guard let unit = FoodQuantity.Unit(foodValue: amount, in: self) else { return nil }

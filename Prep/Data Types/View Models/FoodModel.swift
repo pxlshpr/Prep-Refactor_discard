@@ -18,8 +18,7 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
 @Observable class FoodModel {
 
-    var foodBeingEdited: Food? = nil
-    var foodIDBeingEdited: String? = nil /// required for thread-safe access
+    var foodBeingEdited: Food2? = nil
 
     var emoji: String = ""
     var name: String = ""
@@ -52,7 +51,7 @@ let DefaultServingValue = FormValue(100, .weight(.g))
     var urlString: String = ""
     var isPublished: Bool = false
 
-    var imageIDs: [String] = []
+    var imageIDs: [UUID] = []
 
     var images: [UIImage] = [] /// Not stored
 
@@ -74,7 +73,6 @@ let DefaultServingValue = FormValue(100, .weight(.g))
     }
     
     init(
-        foodIDBeingEdited: String?,
         emoji: String,
         name: String,
         detail: String,
@@ -100,9 +98,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
         scanResult: ScanResult?,
         urlString: String,
         isPublished: Bool,
-        imageIDs: [String]
+        imageIDs: [UUID]
     ) {
-        self.foodIDBeingEdited = foodIDBeingEdited
         self.emoji = emoji
         self.name = name
         self.detail = detail
@@ -154,7 +151,7 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 }
 
 extension FoodModel {
-    func resetFoodModel(for food: Food? = nil) {
+    func resetFoodModel(for food: Food2? = nil) {
         foodModelLogger.debug("Resetting FoodModel.shared")
         
 //        reset()
@@ -163,7 +160,6 @@ extension FoodModel {
             
             /// Only set what's on the first screen on the main thread
             foodBeingEdited = food
-            foodIDBeingEdited = food.id
             emoji = food.emoji
             name = food.name
             detail = food.detail ?? ""
@@ -207,7 +203,7 @@ extension FoodModel {
                     
                     self.barcode = food.barcodes.first
                     self.scanResult = nil
-                    self.urlString = food.linkURL ?? ""
+                    self.urlString = food.url ?? ""
                     self.isPublished = food.publishStatus == .hidden ? false : true
                     
                     self.images = []
@@ -219,7 +215,6 @@ extension FoodModel {
         } else {
             
             foodBeingEdited = nil
-            foodIDBeingEdited = nil
             
             emoji = String.randomFoodEmoji
             name = ""
@@ -386,7 +381,7 @@ extension FoodModel {
         foodBeingEdited != nil
     }
     
-    func fillFood(_ food: Food) {
+    func fillFood(_ food: Food2) {
         var food = food
         food.emoji = emoji
         food.name = name
@@ -411,7 +406,7 @@ extension FoodModel {
         food.sizes = sizes.map { FoodSize($0) }
         food.density = density
         
-        food.linkURL = urlString
+        food.url = urlString
 //        food.imageIDs = ...
         if let barcode {
             food.barcodes = [barcode]
@@ -429,11 +424,11 @@ extension FoodModel {
         }
     }
     
-    var updatedFood: Food? {
+    var updatedFood: Food2? {
         guard let foodBeingEdited else { return nil }
         var food = foodBeingEdited
         fillFood(food)
-        food.updatedAt = Date.now.timeIntervalSince1970
+        food.updatedAt = Date.now
         return food
     }
     
@@ -445,11 +440,11 @@ extension FoodModel {
         return true
     }
     
-    var newFood: Food {
-        var food = Food()
+    var newFood: Food2 {
+        var food = Food2()
         fillFood(food)
-//        food.createdAt = Date.now.timeIntervalSince1970
-        food.updatedAt = Date.now.timeIntervalSince1970
+        food.createdAt = Date.now
+        food.updatedAt = Date.now
         return food
     }
     
@@ -467,7 +462,7 @@ extension FoodModel {
     }
 
     
-    func hasPendingChanges(from food: Food) -> Bool {
+    func hasPendingChanges(from food: Food2) -> Bool {
         !(
             emoji == food.emoji
             && name == food.name
@@ -727,7 +722,7 @@ extension FoodModel {
     }
     
     func addImage(_ image: UIImage) {
-        let id = UUID().uuidString
+        let id = UUID()
         images.append(image)
         imageIDs.append(id)
         

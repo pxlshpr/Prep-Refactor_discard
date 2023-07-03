@@ -17,16 +17,16 @@ struct FoodCell: View {
 
     @Binding var showingForm: Bool
     
-    init(food: Food, showingForm: Binding<Bool>) {
-        self.emoji = food.emoji
-        self.name = food.name
-        self.detail = food.detail
-        self.brand = food.brand
-        self.carb = food.carb
-        self.fat = food.fat
-        self.protein = food.protein
-        _showingForm = showingForm
-    }
+//    init(food: Food, showingForm: Binding<Bool>) {
+//        self.emoji = food.emoji
+//        self.name = food.name
+//        self.detail = food.detail
+//        self.brand = food.brand
+//        self.carb = food.carb
+//        self.fat = food.fat
+//        self.protein = food.protein
+//        _showingForm = showingForm
+//    }
 
 //    init(foodResult result: FoodResult) {
 //        self.emoji = result.emoji
@@ -39,7 +39,7 @@ struct FoodCell: View {
 //        _showingForm = .constant(false)
 //    }
 
-    init(food: Food2) {
+    init(food: Food2, showingForm: Binding<Bool> = .constant(false)) {
         self.emoji = food.emoji
         self.name = food.name
         self.detail = food.detail
@@ -47,7 +47,7 @@ struct FoodCell: View {
         self.carb = food.carb
         self.fat = food.fat
         self.protein = food.protein
-        _showingForm = .constant(false)
+        _showingForm = showingForm
     }
 
     var body: some View {

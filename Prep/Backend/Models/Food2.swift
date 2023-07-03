@@ -39,30 +39,30 @@ struct Food2: Identifiable, Codable, Hashable {
     var createdAt: Date
     
     init(
-        id: UUID,
-        emoji: String,
-        name: String,
+        id: UUID = UUID(),
+        emoji: String = String.randomFoodEmoji,
+        name: String = "",
         detail: String? = nil,
         brand: String? = nil,
-        amount: FoodValue,
-        serving: FoodValue? = nil,
-        energy: Double,
-        energyUnit: EnergyUnit,
-        carb: Double,
-        protein: Double,
-        fat: Double,
-        micros: [FoodNutrient],
-        sizes: [FoodSize],
+        amount: FoodValue = FoodValue(100, .weight(.g)),
+        serving: FoodValue? = FoodValue(100, .weight(.g)),
+        energy: Double = 0,
+        energyUnit: EnergyUnit = .kcal,
+        carb: Double = 0,
+        protein: Double = 0,
+        fat: Double = 0,
+        micros: [FoodNutrient] = [],
+        sizes: [FoodSize] = [],
         density: FoodDensity? = nil,
         url: String? = nil,
-        imageIDs: [UUID],
-        barcodes: [String],
-        type: FoodType,
+        imageIDs: [UUID] = [],
+        barcodes: [String] = [],
+        type: FoodType = .food,
         publishStatus: PublishStatus? = nil,
         dataset: FoodDataset? = nil,
         lastUsedAt: Date? = nil,
-        updatedAt: Date,
-        createdAt: Date
+        updatedAt: Date = Date.now,
+        createdAt: Date = Date.now
     ) {
         self.id = id
         self.emoji = emoji

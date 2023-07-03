@@ -1,12 +1,12 @@
 import UIKit
 
 struct ImageManager {
-    static func url(for id: String) -> URL {
+    static func url(for id: UUID) -> URL {
         let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return dir.appendingPathComponent("\(id).heic")
+        return dir.appendingPathComponent("\(id.uuidString).heic")
     }
     
-    static func load(_ id: String) async -> UIImage? {
+    static func load(_ id: UUID) async -> UIImage? {
         do {
             imagesLogger.debug("Loading image: \(id, privacy: .public)")
             let data = try Data(contentsOf: url(for: id))
@@ -22,7 +22,7 @@ struct ImageManager {
         }
     }
 
-    static func delete(_ id: String) {
+    static func delete(_ id: UUID) {
         do {
             imagesLogger.debug("Deleting image: \(id, privacy: .public)")
             try FileManager.default.removeItem(at: url(for: id))
@@ -32,7 +32,7 @@ struct ImageManager {
         }
     }
 
-    static func save(image: UIImage, id: String) {
+    static func save(image: UIImage, id: UUID) {
         guard let data = image.heicData() else {
             imagesLogger.error("Couldn't get HEIC data for image: \(id, privacy: .public)")
             return

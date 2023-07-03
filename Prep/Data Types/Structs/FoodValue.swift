@@ -43,7 +43,7 @@ extension FoodValue {
 }
 
 extension FoodValue {
-    func formUnit(for food: Food) -> FormUnit? {
+    func formUnit(for food: Food2) -> FormUnit? {
         switch unitType {
         case .serving:
             return .serving
