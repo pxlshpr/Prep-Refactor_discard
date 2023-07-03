@@ -36,8 +36,7 @@ extension FoodEntity2: Entity {
         self.createdAt = food.createdAt
     }
     
-    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyPresetFood) {
-        self.init(context: context)
+    func fill(_ legacy: LegacyPresetFood) {
         self.id = UUID(uuidString: legacy.id)
         self.emoji = legacy.emoji
         self.name = legacy.name
@@ -63,8 +62,12 @@ extension FoodEntity2: Entity {
         self.createdAt = Date(timeIntervalSince1970: legacy.createdAt)
     }
     
-    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyUserFood) {
+    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyPresetFood) {
         self.init(context: context)
+        fill(legacy)
+    }
+    
+    func fill(_ legacy: LegacyUserFood) {
         self.id = UUID(uuidString: legacy.id)!
         self.emoji = legacy.emoji
         self.name = legacy.name
@@ -91,6 +94,11 @@ extension FoodEntity2: Entity {
         }
         self.updatedAt = Date(timeIntervalSince1970: legacy.updatedAt)
         self.createdAt = Date(timeIntervalSince1970: legacy.updatedAt)
+    }
+    
+    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyUserFood) {
+        self.init(context: context)
+        fill(legacy)
     }
 }
 

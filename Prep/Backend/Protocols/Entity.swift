@@ -7,13 +7,31 @@ extension Entity {
     static var entityName : String {
         return NSStringFromClass(self).components(separatedBy: ".").last!
     }
-    static func countAll(in context: NSManagedObjectContext) throws -> Int {
-        let request = NSFetchRequest<FetchableType>(entityName: entityName)
-        return try context.count(for: request)
+    static func countAll(in context: NSManagedObjectContext) -> Int {
+        do {
+            let request = NSFetchRequest<FetchableType>(entityName: entityName)
+            return try context.count(for: request)
+        } catch {
+            fatalError()
+        }
     }
-    static func objects(for predicate: NSPredicate?, in context: NSManagedObjectContext) throws -> [FetchableType] {
-        let request = NSFetchRequest<FetchableType>(entityName: entityName)
-        request.predicate = predicate
-        return try context.fetch(request)
+    static func objects(for predicate: NSPredicate? = nil, in context: NSManagedObjectContext) -> [FetchableType] {
+        do {
+            let request = NSFetchRequest<FetchableType>(entityName: entityName)
+            request.predicate = predicate
+            return try context.fetch(request)
+        } catch {
+            fatalError()
+        }
+    }
+    static func object(with id: UUID, in context: NSManagedObjectContext) -> FetchableType? {
+        do {
+            let request = NSFetchRequest<FetchableType>(entityName: entityName)
+            request.predicate = NSPredicate(format: "id == %@", id.uuidString)
+            let objects = try context.fetch(request)
+            return objects.first
+        } catch {
+            fatalError()
+        }
     }
 }

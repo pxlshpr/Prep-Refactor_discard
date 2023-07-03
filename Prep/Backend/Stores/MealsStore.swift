@@ -49,10 +49,10 @@ extension CoreDataManager {
                     
                     let request: NSFetchRequest<DayEntity2> = DayEntity2.fetchRequest()
                     request.predicate = predicate
-                    request.relationshipKeyPathsForPrefetching = ["mealEntities.foodItemEntities.foodEntity", "mealEntities.foodItemEntities.mealEntity"]
+//                    request.relationshipKeyPathsForPrefetching = ["mealEntities.foodItemEntities.foodEntity", "mealEntities.foodItemEntities.mealEntity"]
                     let days = try bgContext.fetch(request)
 
-                    logger.error("Fetched day for: \(dayString, privacy: .public)")
+                    logger.info("Fetched day for: \(dayString, privacy: .public)")
                     completion(days.first)
                 } catch {
                     logger.error("Error: \(error.localizedDescription, privacy: .public)")

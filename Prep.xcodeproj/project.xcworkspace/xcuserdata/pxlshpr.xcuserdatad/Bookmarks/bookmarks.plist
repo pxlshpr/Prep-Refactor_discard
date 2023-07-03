@@ -681,11 +681,11 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingLineNumber</key>
-					<string>41</string>
+					<string>67</string>
 					<key>StartingLineNumber</key>
-					<string>41</string>
+					<string>67</string>
 					<key>Timestamp</key>
-					<string>710092040.212009</string>
+					<string>710096235.2924581</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -701,16 +701,45 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>        self.emoji = legacy.emoji
+				<string>    }
+    
+    func fill(_ legacy: LegacyUserFood) {
+        self.id = UUID(uuidString: legacy.id)!
+        self.emoji = legacy.emoji
+        self.name = legacy.name
+        self.detail = legacy.detail
+        self.brand = legacy.brand
+        self.amount = legacy.info.amount.foodValue
+        self.serving = legacy.info.serving?.foodValue
+        self.energy = legacy.info.nutrients.energyInKcal
+        self.energyUnit = .kcal
+        self.carb = legacy.info.nutrients.carb
+        self.protein = legacy.info.nutrients.protein
+        self.fat = legacy.info.nutrients.fat
+        self.micros = legacy.info.nutrients.micros.map { FoodNutrient($0) }
+        self.sizes = legacy.info.sizes.map { FoodSize(legacy: $0) }
+        self.density = legacy.info.density?.density
+        self.url = nil
+        self.imageIDs = []
+        self.barcodes = []
+        self.type = .food
+        self.publishStatus = nil
+        self.dataset = legacy.dataset
+        if let lastUsedAt = legacy.lastUsedAt {
+            self.lastUsedAt = Date(timeIntervalSince1970: lastUsedAt)
+        }
+        self.updatedAt = Date(timeIntervalSince1970: legacy.updatedAt)
+        self.createdAt = Date(timeIntervalSince1970: legacy.updatedAt)
+    }
 </string>
 				<key>leading</key>
 				<string>        self.init(context: context)
-        self.id = UUID(uuidString: legacy.id)
+        fill(legacy)
 </string>
 				<key>trailing</key>
-				<string>        self.name = legacy.name
-        self.detail = legacy.detail
-        self.brand = legacy.brand
+				<string>    
+    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyUserFood) {
+        self.init(context: context)
 </string>
 			</dict>
 			<key>title</key>
@@ -724,11 +753,11 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingLineNumber</key>
-					<string>42</string>
+					<string>97</string>
 					<key>StartingLineNumber</key>
-					<string>42</string>
+					<string>97</string>
 					<key>Timestamp</key>
-					<string>710092040.2124161</string>
+					<string>710096251.650038</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -744,16 +773,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>        self.name = legacy.name
+				<string>    
 </string>
 				<key>leading</key>
-				<string>        self.id = UUID(uuidString: legacy.id)
-        self.emoji = legacy.emoji
+				<string>        self.createdAt = Date(timeIntervalSince1970: legacy.updatedAt)
+    }
 </string>
 				<key>trailing</key>
-				<string>        self.detail = legacy.detail
-        self.brand = legacy.brand
-        self.amount = legacy.amount.foodValue
+				<string>    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyUserFood) {
+        self.init(context: context)
+        fill(legacy)
 </string>
 			</dict>
 			<key>type</key>

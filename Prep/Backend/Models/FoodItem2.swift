@@ -38,14 +38,10 @@ struct FoodItem2: Identifiable, Codable, Hashable {
     }
     
     init?(_ entity: FoodItemEntity2) {
-        guard let food = entity.food else {
-            logger.error("Could not get food for FoodItemEntity with id: \(entity.id!, privacy: .public)")
-            return nil
-        }
         self.init(
             id: entity.id!,
             amount: entity.amount,
-            food: food,
+            food: entity.food,
             mealID: entity.mealID,
             badgeWidth: entity.badgeWidth,
             sortPosition: Int(entity.sortPosition),

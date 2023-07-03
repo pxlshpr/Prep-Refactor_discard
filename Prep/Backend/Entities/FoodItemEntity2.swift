@@ -26,18 +26,9 @@ extension FoodItemEntity2: Entity {
         self.createdAt = foodItem.createdAt
     }
     
-    convenience init(
-        _ context: NSManagedObjectContext,
-        _ legacy: LegacyFoodItem,
-        _ foodEntity: FoodEntity2,
-        _ mealEntity: MealEntity2? = nil
-    ) {
-        self.init(context: context)
+    func fill(_ legacy: LegacyFoodItem) {
         self.id = UUID(uuidString: legacy.id)
         self.amount = legacy.amount.foodValue
-        
-        self.foodEntity = foodEntity
-        self.mealEntity = mealEntity
         
         if let badgeWidth = legacy.badgeWidth {
             self.badgeWidth = badgeWidth
@@ -52,12 +43,24 @@ extension FoodItemEntity2: Entity {
         self.updatedAt = Date(timeIntervalSince1970: legacy.updatedAt)
         self.createdAt = Date(timeIntervalSince1970: legacy.updatedAt)
     }
+    
+    convenience init(
+        _ context: NSManagedObjectContext,
+        _ legacy: LegacyFoodItem,
+        _ foodEntity: FoodEntity2,
+        _ mealEntity: MealEntity2? = nil
+    ) {
+        self.init(context: context)
+        self.fill(legacy)
+        
+        self.foodEntity = foodEntity
+        self.mealEntity = mealEntity
+    }
 }
 
 extension FoodItemEntity2 {
-    var food: Food2? {
-        guard let foodEntity else { return nil }
-        return Food2(foodEntity)
+    var food: Food2 {
+        Food2(foodEntity!)
     }
     
     var mealID: UUID? {

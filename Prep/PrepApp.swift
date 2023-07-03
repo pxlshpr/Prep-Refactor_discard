@@ -11,8 +11,8 @@ struct PrepApp: App {
 
     var body: some Scene {
         WindowGroup {
-            EmptyView()
-//            HomeView()
+//            EmptyView()
+            HomeView()
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
