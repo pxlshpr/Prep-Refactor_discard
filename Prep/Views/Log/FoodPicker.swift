@@ -4,7 +4,6 @@ import OSLog
 import SwiftSugar
 import SwiftHaptics
 
-
 struct FoodPicker: View {
     
     @Environment(\.dismiss) var dismiss

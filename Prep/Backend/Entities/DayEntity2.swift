@@ -24,6 +24,8 @@ extension DayEntity2 {
         mealEntities?.allObjects as? [MealEntity2] ?? []
     }
     var meals: [Meal2] {
-        mealEntitiesArray.map { Meal2($0) }
+        mealEntitiesArray
+            .map { Meal2($0) }
+            .sorted()
     }
 }

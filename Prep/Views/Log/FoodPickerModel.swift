@@ -16,20 +16,15 @@ import SwiftSugar
     }
     
     func fetchRecents() {
-//        task?.cancel()
-//        task = Task {
-//            do {
-//                let recents = try await SearchStore.shared.recents()
-//                try Task.checkCancellation()
-//                logger.debug("Setting \(recents.count) recents")
-//                await MainActor.run {
-//                    self.foodResults = recents
-//                }
-//                
-//            } catch {
-//                logger.debug("Error during recents fetch: \(error, privacy: .public)")
-//            }
-//        }
+        task?.cancel()
+        task = Task {
+            let recents = await SearchStore.recents()
+            try Task.checkCancellation()
+            logger.debug("Setting \(recents.count) recents")
+            await MainActor.run {
+                self.foodResults = recents
+            }
+        }
     }
     
     func reset() {
@@ -37,19 +32,14 @@ import SwiftSugar
     }
     
     func search(_ text: String) {
-//        task?.cancel()
-//        task = Task {
-//            do {
-//                let results = try await SearchStore.shared.search(text)
-//                try Task.checkCancellation()
-//                logger.debug("Setting \(results.count) results")
-//                await MainActor.run {
-//                    self.foodResults = results
-//                }
-//                
-//            } catch {
-//                logger.debug("Error during search: \(error, privacy: .public)")
-//            }
-//        }
+        task?.cancel()
+        task = Task {
+            let results = await SearchStore.search(text)
+            try Task.checkCancellation()
+            logger.debug("Setting \(results.count) results")
+            await MainActor.run {
+                self.foodResults = results
+            }
+        }
     }
 }

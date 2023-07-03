@@ -31,6 +31,22 @@ struct FoodResult: Codable, Hashable, Equatable {
         )
     }
     
+    init(_ food: FoodEntity2) {
+        self.init(
+            uuid: food.id!.uuidString,
+            name: food.name!,
+            emoji: food.emoji!,
+            detail: food.detail,
+            brand: food.brand,
+            energy: NutrientValue(value: food.energy, energyUnit: food.energyUnit),
+            carb: food.carb,
+            fat: food.fat,
+            protein: food.protein,
+            micros: food.micros.compactMap { NutrientValue($0) },
+            lastUsedAt: food.lastUsedAt?.timeIntervalSince1970 ?? 0
+        )
+    }
+    
     init(
         uuid: String = "",
         name: String = "",

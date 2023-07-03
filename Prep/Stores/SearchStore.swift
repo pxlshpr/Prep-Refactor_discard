@@ -1,41 +1,22 @@
-//import Foundation
-//import SwiftData
-//import OSLog
-//
-//actor SearchStore: ModelActor {
-//
-//    let logger = Logger(subsystem: "Search", category: "SearchStore")
-//
-//    static let shared = SearchStore()
-//    
-//    let NumberOfRecents = 100
-//    
-//    let executor: any ModelExecutor
-//    init() {
-//        let container = try! ModelContainer(for: allModelTypes)
-//        let context = ModelContext(container)
-//        let executor = DefaultModelExecutor(context: context)
-//        self.executor = executor
-//    }
-//    
-//    func recents() throws -> [FoodResult] {
-//        
-//        let start = CFAbsoluteTimeGetCurrent()
-//        
-//        logger.debug("Fetching recents")
-//
-//        var descriptor = FetchDescriptor<FoodEntity>(
-//            sortBy: [SortDescriptor(\.lastUsedAt, order: .reverse)]
-//        )
-//        descriptor.fetchLimit = NumberOfRecents
-//        let results: [FoodResult] = try context.fetch(descriptor)
-//            .map { FoodResult($0) }
-//        
-//        logger.debug("Fetched \(results.count) recents in: \(CFAbsoluteTimeGetCurrent()-start)s")
-//        
-//        return Array(results.prefix(NumberOfRecents))
-//    }
-//
+import Foundation
+import CoreData
+import OSLog
+
+private let logger = Logger(subsystem: "Search", category: "SearchStore")
+private let NumberOfRecents = 100
+
+class SearchStore {
+
+    static let shared = SearchStore()
+    
+    static func recents() async -> [FoodResult] {
+        logger.debug("Fetching recents")
+        let start = CFAbsoluteTimeGetCurrent()
+        let results = await DataManager.shared.recents()
+        logger.debug("Fetched \(results.count) recents in: \(CFAbsoluteTimeGetCurrent()-start)s")
+        return results
+    }
+
 //    func foods(page: Int) throws -> [FoodResult] {
 //        
 //        let start = CFAbsoluteTimeGetCurrent()
@@ -66,49 +47,120 @@
 //        return Array(results)
 //    }
 //
-//    func search(_ text: String) throws -> [FoodResult] {
-//        
-//        guard !text.isEmpty else {
-//            return try recents()
-//        }
-//        
-//        var descriptor: FetchDescriptor<FoodEntity> {
-//
-//            let lowercased = text.lowercased()
-//            let predicate: Predicate<FoodEntity> = #Predicate {
-//                $0.lowercasedName.contains(lowercased)
-//                || $0.lowercasedDetail.contains(lowercased)
-//                || $0.lowercasedBrand.contains(lowercased)
-//            }
-//            var descriptor = FetchDescriptor(predicate: predicate)
-//            descriptor.fetchLimit = 100
-//            return descriptor
-//        }
-//        
-//        var start = CFAbsoluteTimeGetCurrent()
-//        logger.debug("Fetching foods matching '\(text, privacy: .public)'")
-//
-//        var results = try context.fetch(descriptor).map { FoodResult($0) }
-//        
-//        logger.debug("Fetched \(results.count) foods in: \(CFAbsoluteTimeGetCurrent()-start)s")
-//
-//        start = CFAbsoluteTimeGetCurrent()
-//        results.sort(by: {
-//            
-//            let distance0 = $0.distanceOfSearchText(text)
-//            let distance1 = $1.distanceOfSearchText(text)
-//            
-//            if distance0 == distance1 {
-//                /// When distance of search text within food is equal, prioritise the most recently used
-//                return $0.lastUsedAt > $1.lastUsedAt
-//            }
-//                
-//            return distance0 < distance1
-//        })
-//        
-//        logger.debug("Sorted in: \(CFAbsoluteTimeGetCurrent()-start)s")
-//
-//        
-//        return results
-//    }
-//}
+    static func search(_ text: String) async -> [FoodResult] {
+        
+        guard !text.isEmpty else {
+            return await recents()
+        }
+        var start = CFAbsoluteTimeGetCurrent()
+        logger.debug("Fetching foods matching '\(text, privacy: .public)'")
+
+        var results = await DataManager.shared.foods(matching: text)
+        
+        logger.debug("Fetched \(results.count) foods in: \(CFAbsoluteTimeGetCurrent()-start)s")
+
+        start = CFAbsoluteTimeGetCurrent()
+        results.sort(by: {
+            
+            let distance0 = $0.distanceOfSearchText(text)
+            let distance1 = $1.distanceOfSearchText(text)
+            
+            if distance0 == distance1 {
+                /// When distance of search text within food is equal, prioritise the most recently used
+                return $0.lastUsedAt > $1.lastUsedAt
+            }
+                
+            return distance0 < distance1
+        })
+        
+        logger.debug("Sorted in: \(CFAbsoluteTimeGetCurrent()-start)s")
+
+        return results
+    }
+}
+
+extension DataManager {
+    func recents() async -> [FoodResult] {
+        do {
+            return try await withCheckedThrowingContinuation { continuation in
+                do {
+                    try coreDataManager.recents { recents in
+                        let results = recents.map { FoodResult($0) }
+                        continuation.resume(returning: results)
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        } catch {
+            logger.error("Error getting recents: \(error.localizedDescription, privacy: .public)")
+            return []
+        }
+    }
+    func foods(matching text: String) async -> [FoodResult] {
+        do {
+            return try await withCheckedThrowingContinuation { continuation in
+                do {
+                    try coreDataManager.foods(matching: text) { foods in
+                        let results = foods.map { FoodResult($0) }
+                        continuation.resume(returning: results)
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        } catch {
+            logger.error("Error getting recents: \(error.localizedDescription, privacy: .public)")
+            return []
+        }
+    }
+}
+
+extension CoreDataManager {
+    
+    func foods(matching text: String, completion: @escaping (([FoodEntity2]) -> ())) throws {
+        Task {
+            let bgContext =  newBackgroundContext()
+            await bgContext.perform {
+                do {
+                    let request: NSFetchRequest<FoodEntity2> = FoodEntity2.fetchRequest()
+                    
+                    let name = NSPredicate(format: "name CONTAINS[cd] %@", text)
+                    let detail = NSPredicate(format: "detail CONTAINS[cd] %@", text)
+                    let brand = NSPredicate(format: "brand CONTAINS[cd] %@", text)
+                    let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [
+                        name, detail, brand
+                    ])
+                    
+                    request.predicate = predicate
+                    request.fetchLimit = 100
+                    let entities = try bgContext.fetch(request)
+                    completion(entities)
+                } catch {
+                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
+                    completion([])
+                }
+            }
+        }
+    }
+    
+    func recents(completion: @escaping (([FoodEntity2]) -> ())) throws {
+        Task {
+            let bgContext =  newBackgroundContext()
+            await bgContext.perform {
+                do {
+                    let request: NSFetchRequest<FoodEntity2> = FoodEntity2.fetchRequest()
+                    request.sortDescriptors = [
+                        NSSortDescriptor(key: "lastUsedAt", ascending: false)
+                    ]
+                    request.fetchLimit = NumberOfRecents
+                    let entities = try bgContext.fetch(request)
+                    completion(entities)
+                } catch {
+                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
+                    completion([])
+                }
+            }
+        }
+    }
+}

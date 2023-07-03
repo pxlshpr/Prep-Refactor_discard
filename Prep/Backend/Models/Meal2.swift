@@ -89,3 +89,10 @@ extension Meal2 {
     }
 
 }
+
+extension Meal2: Comparable {
+
+    static func <(lhs: Meal2, rhs: Meal2) -> Bool {
+        return lhs.time < rhs.time
+    }
+}
