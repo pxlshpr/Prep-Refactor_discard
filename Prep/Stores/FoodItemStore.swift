@@ -1,9 +1,14 @@
-//import Foundation
-//import SwiftData
-//import OSLog
-//
-//private let logger = Logger(subsystem: "FoodItemStore", category: "")
-//
+import Foundation
+import SwiftData
+import OSLog
+
+private let logger = Logger(subsystem: "FoodItemStore", category: "")
+
+enum FoodItemStoreError: Error {
+    case couldNotFindFood
+    case couldNotFindMeal
+}
+
 //actor FoodItemStore: ModelActor {
 //
 //    static let shared = FoodItemStore()
@@ -72,9 +77,3 @@
 //        }
 //    }
 //}
-//
-//enum FoodItemStoreError: Error {
-//    case couldNotFindFood
-//    case couldNotFindMeal
-//}
-//

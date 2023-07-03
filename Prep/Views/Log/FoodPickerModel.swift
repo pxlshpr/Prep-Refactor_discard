@@ -16,8 +16,8 @@ import SwiftSugar
     }
     
     func fetchRecents() {
-        task?.cancel()
-        task = Task {
+//        task?.cancel()
+//        task = Task {
 //            do {
 //                let recents = try await SearchStore.shared.recents()
 //                try Task.checkCancellation()
@@ -29,7 +29,7 @@ import SwiftSugar
 //            } catch {
 //                logger.debug("Error during recents fetch: \(error, privacy: .public)")
 //            }
-        }
+//        }
     }
     
     func reset() {
@@ -37,8 +37,8 @@ import SwiftSugar
     }
     
     func search(_ text: String) {
-        task?.cancel()
-        task = Task {
+//        task?.cancel()
+//        task = Task {
 //            do {
 //                let results = try await SearchStore.shared.search(text)
 //                try Task.checkCancellation()
@@ -50,6 +50,6 @@ import SwiftSugar
 //            } catch {
 //                logger.debug("Error during search: \(error, privacy: .public)")
 //            }
-        }
+//        }
     }
 }

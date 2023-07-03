@@ -123,70 +123,70 @@ struct ItemForm2: View {
         isPresented = false
 //        dismiss()
         
-//        if let foodItem {
-//            /// Update
-//        } else {
-//            
-//            var foodItem = FoodItem()
-//            foodItem.amount = foodValue
-//            foodItem.food = food
-//            foodItem.mealID = mealID
-//            
-////            FoodItemStore.create(foodItem: foodItem)
-//  
-//            do {
-//                logger.debug("Fetching food")
-//                let foodID = foodItem.food.id
-//                let foodDescriptor = FetchDescriptor<FoodEntity>(predicate: #Predicate {
-//                    $0.uuid == foodID
-//                })
-//                guard let foodEntity = try context.fetch(foodDescriptor).first else {
-//                    logger.error("Could not find food with ID: \(foodID, privacy: .public)")
-//                    throw FoodItemStoreError.couldNotFindFood
-//                }
-//                
-//                let mealEntity: MealEntity?
-//                if let mealID = foodItem.mealID {
-//                    logger.debug("Fetching Meal with ID: \(mealID, privacy: .public)...")
-//                    let mealDescriptor = FetchDescriptor<MealEntity>(predicate: #Predicate {
-//                        $0.uuid == mealID
-//                    })
-//                    guard let fetched = try context.fetch(mealDescriptor).first else {
-//                        logger.error("Could not find meal with id: \(mealID, privacy: .public)")
-//                        return
-//                    }
-//                    logger.debug("... fetched Meal")
-//                    mealEntity = fetched
-//                } else {
-//                    logger.debug("Meal is nil")
-//                    mealEntity = nil
-//                }
-//                
-//                logger.debug("Creating and inserting FoodItemEntity")
-//                let foodItemEntity = FoodItemEntity(
-//                    uuid: foodItem.id,
-//                    foodEntity: foodEntity,
-//                    mealEntity: mealEntity,
-//                    amount: foodItem.amount,
-//                    markedAsEatenAt: foodItem.markedAsEatenDate?.timeIntervalSince1970,
-//                    sortPosition: foodItem.sortPosition,
-//                    updatedAt: foodItem.updatedDate.timeIntervalSince1970,
-//                    badgeWidth: foodItem.badgeWidth
-//                )
-//                context.insert(foodItemEntity)
-//                
-//                post(.didAddFoodItem, userInfo: [.foodItem: foodItem])
-//                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                    Task {
-//                        logger.debug("Saving context")
-//                        try context.save()
-//                    }
-//                }
-//            } catch {
-//                fatalError(error.localizedDescription)
-//            }
-//        }
+        if let foodItem {
+            /// Update
+        } else {
+            
+            var foodItem = FoodItem()
+            foodItem.amount = foodValue
+            foodItem.food = food
+            foodItem.mealID = mealID
+            
+//            FoodItemStore.create(foodItem: foodItem)
+  
+            do {
+                logger.debug("Fetching food")
+                let foodID = foodItem.food.id
+                let foodDescriptor = FetchDescriptor<FoodEntity>(predicate: #Predicate {
+                    $0.uuid == foodID
+                })
+                guard let foodEntity = try context.fetch(foodDescriptor).first else {
+                    logger.error("Could not find food with ID: \(foodID, privacy: .public)")
+                    throw FoodItemStoreError.couldNotFindFood
+                }
+                
+                let mealEntity: MealEntity?
+                if let mealID = foodItem.mealID {
+                    logger.debug("Fetching Meal with ID: \(mealID, privacy: .public)...")
+                    let mealDescriptor = FetchDescriptor<MealEntity>(predicate: #Predicate {
+                        $0.uuid == mealID
+                    })
+                    guard let fetched = try context.fetch(mealDescriptor).first else {
+                        logger.error("Could not find meal with id: \(mealID, privacy: .public)")
+                        return
+                    }
+                    logger.debug("... fetched Meal")
+                    mealEntity = fetched
+                } else {
+                    logger.debug("Meal is nil")
+                    mealEntity = nil
+                }
+                
+                logger.debug("Creating and inserting FoodItemEntity")
+                let foodItemEntity = FoodItemEntity(
+                    uuid: foodItem.id,
+                    foodEntity: foodEntity,
+                    mealEntity: mealEntity,
+                    amount: foodItem.amount,
+                    markedAsEatenAt: foodItem.markedAsEatenDate?.timeIntervalSince1970,
+                    sortPosition: foodItem.sortPosition,
+                    updatedAt: foodItem.updatedDate.timeIntervalSince1970,
+                    badgeWidth: foodItem.badgeWidth
+                )
+                context.insert(foodItemEntity)
+                
+                post(.didAddFoodItem, userInfo: [.foodItem: foodItem])
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    Task {
+                        logger.debug("Saving context")
+                        try context.save()
+                    }
+                }
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
     }
     var form: some View {
         Form {

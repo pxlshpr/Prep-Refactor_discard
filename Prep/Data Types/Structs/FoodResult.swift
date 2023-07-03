@@ -91,3 +91,32 @@ extension FoodResult {
         ]
     }
 }
+
+extension FoodResult {
+    func distanceOfSearchText(_ text: String) -> Int {
+        
+        let text = text.lowercased()
+        
+//        logger.debug("Getting distance within \(self.description, privacy: .public)")
+        var distance: Int = Int.max
+        if let index = name.lowercased().index(of: text) {
+            distance = index
+        }
+        
+        if let detail,
+           let index = detail.lowercased().index(of: text),
+           index < distance {
+            distance = index + 100
+        }
+        if let brand,
+           let index = brand.lowercased().index(of: brand),
+           index < distance {
+            distance = index + 200
+        }
+        
+//        let logger = Logger(subsystem: "Search", category: "Text Distance")
+//        logger.debug("Distance of \(text, privacy: .public) within \(self.description, privacy: .public) = \(distance)")
+        
+        return distance
+    }
+}

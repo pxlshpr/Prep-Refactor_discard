@@ -7,159 +7,160 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E28002002A52B84300C6D528 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001572A52B84300C6D528 /* Import.swift */; };
+		E28002012A52B84300C6D528 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015A2A52B84300C6D528 /* Day.swift */; };
+		E28002022A52B84300C6D528 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015B2A52B84300C6D528 /* Meal.swift */; };
+		E28002032A52B84300C6D528 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015C2A52B84300C6D528 /* FoodItem.swift */; };
+		E28002042A52B84300C6D528 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015D2A52B84300C6D528 /* Food.swift */; };
+		E28002052A52B84300C6D528 /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015F2A52B84300C6D528 /* MealEntity.swift */; };
+		E28002062A52B84300C6D528 /* FoodEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001602A52B84300C6D528 /* FoodEntity.swift */; };
+		E28002072A52B84300C6D528 /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001612A52B84300C6D528 /* FoodItemEntity.swift */; };
+		E28002082A52B84300C6D528 /* DayEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001622A52B84300C6D528 /* DayEntity.swift */; };
+		E28002092A52B84300C6D528 /* Food2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001632A52B84300C6D528 /* Food2.swift */; };
+		E280020A2A52B84300C6D528 /* click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001662A52B84300C6D528 /* click2.wav */; };
+		E280020B2A52B84300C6D528 /* letterpress_click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001672A52B84300C6D528 /* letterpress_click2.wav */; };
+		E280020C2A52B84300C6D528 /* octave_tap-simple.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001682A52B84300C6D528 /* octave_tap-simple.wav */; };
+		E280020D2A52B84300C6D528 /* click3.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001692A52B84300C6D528 /* click3.wav */; };
+		E280020E2A52B84300C6D528 /* popOpen2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280016A2A52B84300C6D528 /* popOpen2.wav */; };
+		E280020F2A52B84300C6D528 /* wellDone.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280016B2A52B84300C6D528 /* wellDone.wav */; };
+		E28002102A52B84300C6D528 /* letterpress_click1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280016C2A52B84300C6D528 /* letterpress_click1.wav */; };
+		E28002112A52B84300C6D528 /* calcbot_down.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280016D2A52B84300C6D528 /* calcbot_down.wav */; };
+		E28002122A52B84300C6D528 /* clear_DragPickup.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280016E2A52B84300C6D528 /* clear_DragPickup.wav */; };
+		E28002132A52B84300C6D528 /* tweetbot-swipe_fail.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280016F2A52B84300C6D528 /* tweetbot-swipe_fail.wav */; };
+		E28002142A52B84300C6D528 /* clear_swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001702A52B84300C6D528 /* clear_swoosh.wav */; };
+		E28002152A52B84300C6D528 /* tweetbot-swipe.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001712A52B84300C6D528 /* tweetbot-swipe.wav */; };
+		E28002162A52B84300C6D528 /* click4.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001722A52B84300C6D528 /* click4.wav */; };
+		E28002172A52B84300C6D528 /* calcbot_clear.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001732A52B84300C6D528 /* calcbot_clear.wav */; };
+		E28002182A52B84300C6D528 /* click5.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001742A52B84300C6D528 /* click5.wav */; };
+		E28002192A52B84300C6D528 /* clear_swooshTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001752A52B84300C6D528 /* clear_swooshTap.wav */; };
+		E280021A2A52B84300C6D528 /* popCloseLong.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001762A52B84300C6D528 /* popCloseLong.wav */; };
+		E280021B2A52B84300C6D528 /* octave_slide-paper.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001772A52B84300C6D528 /* octave_slide-paper.wav */; };
+		E280021C2A52B84300C6D528 /* tweetbot-cell_swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001782A52B84300C6D528 /* tweetbot-cell_swoosh.wav */; };
+		E280021D2A52B84300C6D528 /* letterpress_swoosh2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001792A52B84300C6D528 /* letterpress_swoosh2.wav */; };
+		E280021E2A52B84300C6D528 /* letterpress_swoosh1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280017A2A52B84300C6D528 /* letterpress_swoosh1.wav */; };
+		E280021F2A52B84300C6D528 /* popClose2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280017B2A52B84300C6D528 /* popClose2.wav */; };
+		E28002202A52B84300C6D528 /* octave_slide-scissors.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280017C2A52B84300C6D528 /* octave_slide-scissors.wav */; };
+		E28002212A52B84300C6D528 /* clear_tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280017D2A52B84300C6D528 /* clear_tap.wav */; };
+		E28002222A52B84300C6D528 /* tweetbot-bubble_pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280017E2A52B84300C6D528 /* tweetbot-bubble_pop.wav */; };
+		E28002232A52B84300C6D528 /* overlayOff2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280017F2A52B84300C6D528 /* overlayOff2.wav */; };
+		E28002242A52B84300C6D528 /* tweetbot-swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001802A52B84300C6D528 /* tweetbot-swoosh.wav */; };
+		E28002252A52B84300C6D528 /* popOpen.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001812A52B84300C6D528 /* popOpen.wav */; };
+		E28002262A52B84300C6D528 /* overlayOn2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001822A52B84300C6D528 /* overlayOn2.wav */; };
+		E28002272A52B84300C6D528 /* clear_DragPutdown.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001832A52B84300C6D528 /* clear_DragPutdown.wav */; };
+		E28002282A52B84300C6D528 /* emptyTrash.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001842A52B84300C6D528 /* emptyTrash.wav */; };
+		E28002292A52B84300C6D528 /* popClose.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001852A52B84300C6D528 /* popClose.wav */; };
+		E280022A2A52B84300C6D528 /* tweetbot-button_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001862A52B84300C6D528 /* tweetbot-button_click.wav */; };
+		E280022B2A52B84300C6D528 /* button_touchDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001872A52B84300C6D528 /* button_touchDown.wav */; };
+		E280022C2A52B84300C6D528 /* octave_tap-smallest.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001882A52B84300C6D528 /* octave_tap-smallest.wav */; };
+		E280022D2A52B84300C6D528 /* letterpress_bip1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E28001892A52B84300C6D528 /* letterpress_bip1.wav */; };
+		E280022E2A52B84300C6D528 /* letterpress_delete.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280018A2A52B84300C6D528 /* letterpress_delete.wav */; };
+		E280022F2A52B84300C6D528 /* letterpress_bip2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280018B2A52B84300C6D528 /* letterpress_bip2.wav */; };
+		E28002302A52B84300C6D528 /* calcbot_up.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280018C2A52B84300C6D528 /* calcbot_up.wav */; };
+		E28002312A52B84300C6D528 /* calcbot_equals.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280018D2A52B84300C6D528 /* calcbot_equals.wav */; };
+		E28002322A52B84300C6D528 /* chord.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280018E2A52B84300C6D528 /* chord.wav */; };
+		E28002332A52B84300C6D528 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280018F2A52B84300C6D528 /* SoundPlayer.swift */; };
+		E28002342A52B84300C6D528 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001922A52B84300C6D528 /* FoodModel.swift */; };
+		E28002352A52B84300C6D528 /* FoodModel+Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001932A52B84300C6D528 /* FoodModel+Scan.swift */; };
+		E28002362A52B84300C6D528 /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001942A52B84300C6D528 /* MealModel.swift */; };
+		E28002372A52B84300C6D528 /* FormSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001962A52B84300C6D528 /* FormSize.swift */; };
+		E28002382A52B84300C6D528 /* Micro.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001972A52B84300C6D528 /* Micro.swift */; };
+		E28002392A52B84300C6D528 /* VolumeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001982A52B84300C6D528 /* VolumeUnit.swift */; };
+		E280023A2A52B84300C6D528 /* FoodFormRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001992A52B84300C6D528 /* FoodFormRoute.swift */; };
+		E280023B2A52B84300C6D528 /* VolumeUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280019A2A52B84300C6D528 /* VolumeUnitType.swift */; };
+		E280023C2A52B84300C6D528 /* UnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280019B2A52B84300C6D528 /* UnitType.swift */; };
+		E280023D2A52B84300C6D528 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280019C2A52B84300C6D528 /* Unit.swift */; };
+		E280023E2A52B84300C6D528 /* FoodLabelValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280019D2A52B84300C6D528 /* FoodLabelValue.swift */; };
+		E280023F2A52B84300C6D528 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280019E2A52B84300C6D528 /* Macro.swift */; };
+		E28002402A52B84300C6D528 /* FoodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280019F2A52B84300C6D528 /* FoodType.swift */; };
+		E28002412A52B84300C6D528 /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A02A52B84300C6D528 /* WeightUnit.swift */; };
+		E28002422A52B84300C6D528 /* NutrientMeterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A12A52B84300C6D528 /* NutrientMeterComponent.swift */; };
+		E28002432A52B84300C6D528 /* EnergyUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A22A52B84300C6D528 /* EnergyUnit.swift */; };
+		E28002442A52B84300C6D528 /* PublishStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A32A52B84300C6D528 /* PublishStatus.swift */; };
+		E28002452A52B84300C6D528 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A42A52B84300C6D528 /* Tab.swift */; };
+		E28002462A52B84300C6D528 /* MicronutrientGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A52A52B84300C6D528 /* MicronutrientGroup.swift */; };
+		E28002472A52B84300C6D528 /* Nutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A62A52B84300C6D528 /* Nutrient.swift */; };
+		E28002482A52B84300C6D528 /* NutrientUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A72A52B84300C6D528 /* NutrientUnit.swift */; };
+		E28002492A52B84300C6D528 /* FormUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A82A52B84300C6D528 /* FormUnit.swift */; };
+		E280024A2A52B84300C6D528 /* FoodDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001A92A52B84300C6D528 /* FoodDataset.swift */; };
+		E280024B2A52B84300C6D528 /* FoodResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001AB2A52B84300C6D528 /* FoodResult.swift */; };
+		E280024C2A52B84300C6D528 /* FoodNutrients.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001AC2A52B84300C6D528 /* FoodNutrients.swift */; };
+		E280024D2A52B84300C6D528 /* FoodValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001AD2A52B84300C6D528 /* FoodValue.swift */; };
+		E280024E2A52B84300C6D528 /* FoodNutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001AE2A52B84300C6D528 /* FoodNutrient.swift */; };
+		E280024F2A52B84300C6D528 /* WeightQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B02A52B84300C6D528 /* WeightQuantity.swift */; };
+		E28002502A52B84300C6D528 /* FoodQuantity.Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B22A52B84300C6D528 /* FoodQuantity.Unit.swift */; };
+		E28002512A52B84300C6D528 /* Food+NutrientScaleFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B32A52B84300C6D528 /* Food+NutrientScaleFactor.swift */; };
+		E28002522A52B84300C6D528 /* FoodQuantity.Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B42A52B84300C6D528 /* FoodQuantity.Size.swift */; };
+		E28002532A52B84300C6D528 /* FoodQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B52A52B84300C6D528 /* FoodQuantity.swift */; };
+		E28002542A52B84300C6D528 /* FoodUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B62A52B84300C6D528 /* FoodUnit.swift */; };
+		E28002552A52B84300C6D528 /* FoodQuantity+EquivalentQuantities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B72A52B84300C6D528 /* FoodQuantity+EquivalentQuantities.swift */; };
+		E28002562A52B84300C6D528 /* FoodQuantity+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B82A52B84300C6D528 /* FoodQuantity+Convert.swift */; };
+		E28002572A52B84300C6D528 /* VolumeQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001B92A52B84300C6D528 /* VolumeQuantity.swift */; };
+		E28002582A52B84300C6D528 /* SizeQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001BA2A52B84300C6D528 /* SizeQuantity.swift */; };
+		E28002592A52B84300C6D528 /* FormValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001BB2A52B84300C6D528 /* FormValue.swift */; };
+		E280025A2A52B84300C6D528 /* MacroValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001BC2A52B84300C6D528 /* MacroValue.swift */; };
+		E280025B2A52B84300C6D528 /* FoodSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001BD2A52B84300C6D528 /* FoodSize.swift */; };
+		E280025C2A52B84300C6D528 /* FoodDensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001BE2A52B84300C6D528 /* FoodDensity.swift */; };
+		E280025D2A52B84300C6D528 /* VolumeUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001BF2A52B84300C6D528 /* VolumeUnits.swift */; };
+		E280025E2A52B84300C6D528 /* NutrientValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C02A52B84300C6D528 /* NutrientValue.swift */; };
+		E280025F2A52B84300C6D528 /* Fond.Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C22A52B84300C6D528 /* Fond.Weight.swift */; };
+		E28002602A52B84300C6D528 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C32A52B84300C6D528 /* Date.swift */; };
+		E28002612A52B84300C6D528 /* PhotosPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C42A52B84300C6D528 /* PhotosPickerItem.swift */; };
+		E28002622A52B84300C6D528 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C52A52B84300C6D528 /* Notification.swift */; };
+		E28002632A52B84300C6D528 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C62A52B84300C6D528 /* String.swift */; };
+		E28002642A52B84300C6D528 /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C72A52B84300C6D528 /* ScanResult.swift */; };
+		E28002652A52B84300C6D528 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C82A52B84300C6D528 /* Double.swift */; };
+		E28002662A52B84300C6D528 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001C92A52B84300C6D528 /* UIFont.swift */; };
+		E28002672A52B84300C6D528 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001CA2A52B84300C6D528 /* Constants.swift */; };
+		E28002682A52B84300C6D528 /* sources.md in Resources */ = {isa = PBXBuildFile; fileRef = E28001CC2A52B84300C6D528 /* sources.md */; };
+		E28002692A52B84300C6D528 /* days.json in Resources */ = {isa = PBXBuildFile; fileRef = E28001CD2A52B84300C6D528 /* days.json */; };
+		E280026A2A52B84300C6D528 /* meals.json in Resources */ = {isa = PBXBuildFile; fileRef = E28001CE2A52B84300C6D528 /* meals.json */; };
+		E280026B2A52B84300C6D528 /* presetFoods.json in Resources */ = {isa = PBXBuildFile; fileRef = E28001CF2A52B84300C6D528 /* presetFoods.json */; };
+		E280026C2A52B84300C6D528 /* foodItems.json in Resources */ = {isa = PBXBuildFile; fileRef = E28001D02A52B84300C6D528 /* foodItems.json */; };
+		E280026D2A52B84300C6D528 /* emojis-by-group.json in Resources */ = {isa = PBXBuildFile; fileRef = E28001D12A52B84300C6D528 /* emojis-by-group.json */; };
+		E280026E2A52B84300C6D528 /* emoji-keywords.json in Resources */ = {isa = PBXBuildFile; fileRef = E28001D22A52B84300C6D528 /* emoji-keywords.json */; };
+		E280026F2A52B84300C6D528 /* foods.json in Resources */ = {isa = PBXBuildFile; fileRef = E28001D32A52B84300C6D528 /* foods.json */; };
+		E28002702A52B84300C6D528 /* SearchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001D52A52B84300C6D528 /* SearchStore.swift */; };
+		E28002712A52B84300C6D528 /* MealStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001D62A52B84300C6D528 /* MealStore.swift */; };
+		E28002722A52B84300C6D528 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001D72A52B84300C6D528 /* Database.swift */; };
+		E28002732A52B84300C6D528 /* FoodItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001D82A52B84300C6D528 /* FoodItemStore.swift */; };
+		E28002742A52B84300C6D528 /* ItemForm2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001DA2A52B84300C6D528 /* ItemForm2.swift */; };
+		E28002752A52B84300C6D528 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001DB2A52B84300C6D528 /* HomeView.swift */; };
+		E28002762A52B84300C6D528 /* FoodBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001DD2A52B84300C6D528 /* FoodBadge.swift */; };
+		E28002772A52B84300C6D528 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001DE2A52B84300C6D528 /* Shimmer.swift */; };
+		E28002782A52B84300C6D528 /* TimeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001DF2A52B84300C6D528 /* TimeSlider.swift */; };
+		E28002792A52B84300C6D528 /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E02A52B84300C6D528 /* EmojiPicker.swift */; };
+		E280027A2A52B84300C6D528 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E12A52B84300C6D528 /* FoodCell.swift */; };
+		E280027B2A52B84300C6D528 /* FoodPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E32A52B84300C6D528 /* FoodPicker.swift */; };
+		E280027C2A52B84300C6D528 /* MealForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E42A52B84300C6D528 /* MealForm.swift */; };
+		E280027D2A52B84300C6D528 /* FoodPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E52A52B84300C6D528 /* FoodPickerModel.swift */; };
+		E280027E2A52B84300C6D528 /* DayView.AddFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E62A52B84300C6D528 /* DayView.AddFoodCell.swift */; };
+		E280027F2A52B84300C6D528 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E72A52B84300C6D528 /* LogView.swift */; };
+		E28002802A52B84300C6D528 /* MealItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E82A52B84300C6D528 /* MealItemCell.swift */; };
+		E28002812A52B84300C6D528 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E92A52B84300C6D528 /* MealView.swift */; };
+		E28002822A52B84300C6D528 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EA2A52B84300C6D528 /* DayView.swift */; };
+		E28002832A52B84300C6D528 /* FoodsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EC2A52B84300C6D528 /* FoodsViewCell.swift */; };
+		E28002842A52B84300C6D528 /* FoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001ED2A52B84300C6D528 /* FoodsView.swift */; };
+		E28002852A52B84300C6D528 /* ItemFormFoodLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EF2A52B84300C6D528 /* ItemFormFoodLabel.swift */; };
+		E28002862A52B84300C6D528 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F02A52B84300C6D528 /* ItemModel.swift */; };
+		E28002872A52B84300C6D528 /* ItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F12A52B84300C6D528 /* ItemForm.swift */; };
+		E28002882A52B84300C6D528 /* ServingField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F32A52B84300C6D528 /* ServingField.swift */; };
+		E28002892A52B84300C6D528 /* SizesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F42A52B84300C6D528 /* SizesList.swift */; };
+		E280028A2A52B84300C6D528 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F52A52B84300C6D528 /* ImageManager.swift */; };
+		E280028B2A52B84300C6D528 /* NutrientsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F62A52B84300C6D528 /* NutrientsForm.swift */; };
+		E280028C2A52B84300C6D528 /* NutrientFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F72A52B84300C6D528 /* NutrientFieldModel.swift */; };
+		E280028D2A52B84300C6D528 /* LabelExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F82A52B84300C6D528 /* LabelExtractor.swift */; };
+		E280028E2A52B84300C6D528 /* MicroPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F92A52B84300C6D528 /* MicroPicker.swift */; };
+		E280028F2A52B84300C6D528 /* FoodForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FA2A52B84300C6D528 /* FoodForm.swift */; };
+		E28002902A52B84300C6D528 /* NutrientField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FB2A52B84300C6D528 /* NutrientField.swift */; };
+		E28002912A52B84300C6D528 /* SizeForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FC2A52B84300C6D528 /* SizeForm.swift */; };
+		E28002922A52B84300C6D528 /* ItemFormAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FE2A52B84300C6D528 /* ItemFormAction.swift */; };
+		E28002932A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FF2A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift */; };
 		E280FC162A529E3D00C6D528 /* PrepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FC152A529E3D00C6D528 /* PrepApp.swift */; };
 		E280FC182A529E3D00C6D528 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FC172A529E3D00C6D528 /* Persistence.swift */; };
 		E280FC1B2A529E3D00C6D528 /* Prep.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E280FC192A529E3D00C6D528 /* Prep.xcdatamodeld */; };
 		E280FC1D2A529E3D00C6D528 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FC1C2A529E3D00C6D528 /* ContentView.swift */; };
 		E280FC1F2A529E3E00C6D528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E280FC1E2A529E3E00C6D528 /* Assets.xcassets */; };
 		E280FC232A529E3E00C6D528 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E280FC222A529E3E00C6D528 /* Preview Assets.xcassets */; };
-		E280FE2A2A52AF6200C6D528 /* Fond.Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD862A52AF6100C6D528 /* Fond.Weight.swift */; };
-		E280FE2B2A52AF6200C6D528 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD872A52AF6100C6D528 /* Date.swift */; };
-		E280FE2C2A52AF6200C6D528 /* PhotosPickerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD882A52AF6100C6D528 /* PhotosPickerItem.swift */; };
-		E280FE2D2A52AF6200C6D528 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD892A52AF6100C6D528 /* Notification.swift */; };
-		E280FE2E2A52AF6200C6D528 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD8A2A52AF6100C6D528 /* String.swift */; };
-		E280FE2F2A52AF6200C6D528 /* ScanResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD8B2A52AF6100C6D528 /* ScanResult.swift */; };
-		E280FE302A52AF6200C6D528 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD8C2A52AF6100C6D528 /* Double.swift */; };
-		E280FE312A52AF6200C6D528 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD8D2A52AF6100C6D528 /* UIFont.swift */; };
-		E280FE322A52AF6200C6D528 /* ItemForm2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD8F2A52AF6100C6D528 /* ItemForm2.swift */; };
-		E280FE332A52AF6200C6D528 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD902A52AF6100C6D528 /* HomeView.swift */; };
-		E280FE342A52AF6200C6D528 /* FoodBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD922A52AF6100C6D528 /* FoodBadge.swift */; };
-		E280FE352A52AF6200C6D528 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD932A52AF6100C6D528 /* Shimmer.swift */; };
-		E280FE362A52AF6200C6D528 /* TimeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD942A52AF6100C6D528 /* TimeSlider.swift */; };
-		E280FE372A52AF6200C6D528 /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD952A52AF6100C6D528 /* EmojiPicker.swift */; };
-		E280FE382A52AF6200C6D528 /* FoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD962A52AF6100C6D528 /* FoodCell.swift */; };
-		E280FE392A52AF6200C6D528 /* FoodPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD982A52AF6100C6D528 /* FoodPicker.swift */; };
-		E280FE3A2A52AF6200C6D528 /* MealForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD992A52AF6100C6D528 /* MealForm.swift */; };
-		E280FE3B2A52AF6200C6D528 /* FoodPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD9A2A52AF6100C6D528 /* FoodPickerModel.swift */; };
-		E280FE3C2A52AF6200C6D528 /* DayView.AddFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD9B2A52AF6100C6D528 /* DayView.AddFoodCell.swift */; };
-		E280FE3D2A52AF6200C6D528 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD9C2A52AF6100C6D528 /* LogView.swift */; };
-		E280FE3E2A52AF6200C6D528 /* MealItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD9D2A52AF6100C6D528 /* MealItemCell.swift */; };
-		E280FE3F2A52AF6200C6D528 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD9E2A52AF6100C6D528 /* MealView.swift */; };
-		E280FE402A52AF6200C6D528 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FD9F2A52AF6100C6D528 /* DayView.swift */; };
-		E280FE412A52AF6200C6D528 /* FoodsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDA12A52AF6100C6D528 /* FoodsViewCell.swift */; };
-		E280FE422A52AF6200C6D528 /* FoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDA22A52AF6100C6D528 /* FoodsView.swift */; };
-		E280FE432A52AF6200C6D528 /* ItemFormFoodLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDA42A52AF6100C6D528 /* ItemFormFoodLabel.swift */; };
-		E280FE442A52AF6200C6D528 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDA52A52AF6100C6D528 /* ItemModel.swift */; };
-		E280FE452A52AF6200C6D528 /* ItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDA62A52AF6100C6D528 /* ItemForm.swift */; };
-		E280FE462A52AF6200C6D528 /* ServingField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDA82A52AF6100C6D528 /* ServingField.swift */; };
-		E280FE472A52AF6200C6D528 /* SizesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDA92A52AF6100C6D528 /* SizesList.swift */; };
-		E280FE482A52AF6200C6D528 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDAA2A52AF6100C6D528 /* ImageManager.swift */; };
-		E280FE492A52AF6200C6D528 /* NutrientsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDAB2A52AF6100C6D528 /* NutrientsForm.swift */; };
-		E280FE4A2A52AF6200C6D528 /* NutrientFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDAC2A52AF6100C6D528 /* NutrientFieldModel.swift */; };
-		E280FE4B2A52AF6200C6D528 /* LabelExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDAD2A52AF6100C6D528 /* LabelExtractor.swift */; };
-		E280FE4C2A52AF6200C6D528 /* MicroPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDAE2A52AF6100C6D528 /* MicroPicker.swift */; };
-		E280FE4D2A52AF6200C6D528 /* FoodForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDAF2A52AF6100C6D528 /* FoodForm.swift */; };
-		E280FE4E2A52AF6200C6D528 /* NutrientField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDB02A52AF6100C6D528 /* NutrientField.swift */; };
-		E280FE4F2A52AF6200C6D528 /* SizeForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDB12A52AF6100C6D528 /* SizeForm.swift */; };
-		E280FE502A52AF6200C6D528 /* ItemFormAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDB32A52AF6100C6D528 /* ItemFormAction.swift */; };
-		E280FE512A52AF6200C6D528 /* AnimatableMealItemQuantityModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDB42A52AF6100C6D528 /* AnimatableMealItemQuantityModifier.swift */; };
-		E280FE522A52AF6200C6D528 /* SearchStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDB62A52AF6100C6D528 /* SearchStore.swift */; };
-		E280FE532A52AF6200C6D528 /* MealStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDB72A52AF6100C6D528 /* MealStore.swift */; };
-		E280FE542A52AF6200C6D528 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDB82A52AF6100C6D528 /* Database.swift */; };
-		E280FE552A52AF6200C6D528 /* FoodItemStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDB92A52AF6100C6D528 /* FoodItemStore.swift */; };
-		E280FE562A52AF6200C6D528 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDBB2A52AF6100C6D528 /* Day.swift */; };
-		E280FE572A52AF6200C6D528 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDBC2A52AF6100C6D528 /* Meal.swift */; };
-		E280FE582A52AF6200C6D528 /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDBD2A52AF6100C6D528 /* FoodItem.swift */; };
-		E280FE592A52AF6200C6D528 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDBE2A52AF6100C6D528 /* Food.swift */; };
-		E280FE5A2A52AF6200C6D528 /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDC02A52AF6100C6D528 /* MealEntity.swift */; };
-		E280FE5B2A52AF6200C6D528 /* FoodEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDC12A52AF6100C6D528 /* FoodEntity.swift */; };
-		E280FE5C2A52AF6200C6D528 /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDC22A52AF6100C6D528 /* FoodItemEntity.swift */; };
-		E280FE5D2A52AF6200C6D528 /* DayEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDC32A52AF6100C6D528 /* DayEntity.swift */; };
-		E280FE5E2A52AF6200C6D528 /* sources.md in Resources */ = {isa = PBXBuildFile; fileRef = E280FDC52A52AF6100C6D528 /* sources.md */; };
-		E280FE5F2A52AF6200C6D528 /* days.json in Resources */ = {isa = PBXBuildFile; fileRef = E280FDC62A52AF6100C6D528 /* days.json */; };
-		E280FE602A52AF6200C6D528 /* meals.json in Resources */ = {isa = PBXBuildFile; fileRef = E280FDC72A52AF6100C6D528 /* meals.json */; };
-		E280FE612A52AF6200C6D528 /* presetFoods.json in Resources */ = {isa = PBXBuildFile; fileRef = E280FDC82A52AF6100C6D528 /* presetFoods.json */; };
-		E280FE622A52AF6200C6D528 /* foodItems.json in Resources */ = {isa = PBXBuildFile; fileRef = E280FDC92A52AF6100C6D528 /* foodItems.json */; };
-		E280FE632A52AF6200C6D528 /* emojis-by-group.json in Resources */ = {isa = PBXBuildFile; fileRef = E280FDCA2A52AF6100C6D528 /* emojis-by-group.json */; };
-		E280FE642A52AF6200C6D528 /* emoji-keywords.json in Resources */ = {isa = PBXBuildFile; fileRef = E280FDCB2A52AF6100C6D528 /* emoji-keywords.json */; };
-		E280FE652A52AF6200C6D528 /* foods.json in Resources */ = {isa = PBXBuildFile; fileRef = E280FDCC2A52AF6100C6D528 /* foods.json */; };
-		E280FE662A52AF6200C6D528 /* click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDCF2A52AF6100C6D528 /* click2.wav */; };
-		E280FE672A52AF6200C6D528 /* letterpress_click2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD02A52AF6100C6D528 /* letterpress_click2.wav */; };
-		E280FE682A52AF6200C6D528 /* octave_tap-simple.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD12A52AF6100C6D528 /* octave_tap-simple.wav */; };
-		E280FE692A52AF6200C6D528 /* click3.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD22A52AF6100C6D528 /* click3.wav */; };
-		E280FE6A2A52AF6200C6D528 /* popOpen2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD32A52AF6100C6D528 /* popOpen2.wav */; };
-		E280FE6B2A52AF6200C6D528 /* wellDone.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD42A52AF6100C6D528 /* wellDone.wav */; };
-		E280FE6C2A52AF6200C6D528 /* letterpress_click1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD52A52AF6100C6D528 /* letterpress_click1.wav */; };
-		E280FE6D2A52AF6200C6D528 /* calcbot_down.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD62A52AF6100C6D528 /* calcbot_down.wav */; };
-		E280FE6E2A52AF6200C6D528 /* clear_DragPickup.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD72A52AF6100C6D528 /* clear_DragPickup.wav */; };
-		E280FE6F2A52AF6200C6D528 /* tweetbot-swipe_fail.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD82A52AF6100C6D528 /* tweetbot-swipe_fail.wav */; };
-		E280FE702A52AF6200C6D528 /* clear_swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDD92A52AF6100C6D528 /* clear_swoosh.wav */; };
-		E280FE712A52AF6200C6D528 /* tweetbot-swipe.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDDA2A52AF6100C6D528 /* tweetbot-swipe.wav */; };
-		E280FE722A52AF6200C6D528 /* click4.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDDB2A52AF6100C6D528 /* click4.wav */; };
-		E280FE732A52AF6200C6D528 /* calcbot_clear.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDDC2A52AF6100C6D528 /* calcbot_clear.wav */; };
-		E280FE742A52AF6200C6D528 /* click5.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDDD2A52AF6100C6D528 /* click5.wav */; };
-		E280FE752A52AF6200C6D528 /* clear_swooshTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDDE2A52AF6100C6D528 /* clear_swooshTap.wav */; };
-		E280FE762A52AF6200C6D528 /* popCloseLong.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDDF2A52AF6100C6D528 /* popCloseLong.wav */; };
-		E280FE772A52AF6200C6D528 /* octave_slide-paper.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE02A52AF6100C6D528 /* octave_slide-paper.wav */; };
-		E280FE782A52AF6200C6D528 /* tweetbot-cell_swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE12A52AF6100C6D528 /* tweetbot-cell_swoosh.wav */; };
-		E280FE792A52AF6200C6D528 /* letterpress_swoosh2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE22A52AF6100C6D528 /* letterpress_swoosh2.wav */; };
-		E280FE7A2A52AF6200C6D528 /* letterpress_swoosh1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE32A52AF6100C6D528 /* letterpress_swoosh1.wav */; };
-		E280FE7B2A52AF6200C6D528 /* popClose2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE42A52AF6100C6D528 /* popClose2.wav */; };
-		E280FE7C2A52AF6200C6D528 /* octave_slide-scissors.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE52A52AF6100C6D528 /* octave_slide-scissors.wav */; };
-		E280FE7D2A52AF6200C6D528 /* clear_tap.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE62A52AF6100C6D528 /* clear_tap.wav */; };
-		E280FE7E2A52AF6200C6D528 /* tweetbot-bubble_pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE72A52AF6100C6D528 /* tweetbot-bubble_pop.wav */; };
-		E280FE7F2A52AF6200C6D528 /* overlayOff2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE82A52AF6100C6D528 /* overlayOff2.wav */; };
-		E280FE802A52AF6200C6D528 /* tweetbot-swoosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDE92A52AF6100C6D528 /* tweetbot-swoosh.wav */; };
-		E280FE812A52AF6200C6D528 /* popOpen.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDEA2A52AF6100C6D528 /* popOpen.wav */; };
-		E280FE822A52AF6200C6D528 /* overlayOn2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDEB2A52AF6100C6D528 /* overlayOn2.wav */; };
-		E280FE832A52AF6200C6D528 /* clear_DragPutdown.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDEC2A52AF6100C6D528 /* clear_DragPutdown.wav */; };
-		E280FE842A52AF6200C6D528 /* emptyTrash.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDED2A52AF6100C6D528 /* emptyTrash.wav */; };
-		E280FE852A52AF6200C6D528 /* popClose.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDEE2A52AF6100C6D528 /* popClose.wav */; };
-		E280FE862A52AF6200C6D528 /* tweetbot-button_click.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDEF2A52AF6100C6D528 /* tweetbot-button_click.wav */; };
-		E280FE872A52AF6200C6D528 /* button_touchDown.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDF02A52AF6100C6D528 /* button_touchDown.wav */; };
-		E280FE882A52AF6200C6D528 /* octave_tap-smallest.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDF12A52AF6100C6D528 /* octave_tap-smallest.wav */; };
-		E280FE892A52AF6200C6D528 /* letterpress_bip1.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDF22A52AF6100C6D528 /* letterpress_bip1.wav */; };
-		E280FE8A2A52AF6200C6D528 /* letterpress_delete.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDF32A52AF6100C6D528 /* letterpress_delete.wav */; };
-		E280FE8B2A52AF6200C6D528 /* letterpress_bip2.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDF42A52AF6100C6D528 /* letterpress_bip2.wav */; };
-		E280FE8C2A52AF6200C6D528 /* calcbot_up.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDF52A52AF6100C6D528 /* calcbot_up.wav */; };
-		E280FE8D2A52AF6200C6D528 /* calcbot_equals.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDF62A52AF6100C6D528 /* calcbot_equals.wav */; };
-		E280FE8E2A52AF6200C6D528 /* chord.wav in Resources */ = {isa = PBXBuildFile; fileRef = E280FDF72A52AF6100C6D528 /* chord.wav */; };
-		E280FE8F2A52AF6200C6D528 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDF82A52AF6100C6D528 /* SoundPlayer.swift */; };
-		E280FE902A52AF6200C6D528 /* FoodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDFB2A52AF6100C6D528 /* FoodModel.swift */; };
-		E280FE912A52AF6200C6D528 /* FoodModel+Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDFC2A52AF6100C6D528 /* FoodModel+Scan.swift */; };
-		E280FE922A52AF6200C6D528 /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDFD2A52AF6100C6D528 /* MealModel.swift */; };
-		E280FE932A52AF6200C6D528 /* FormSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FDFF2A52AF6100C6D528 /* FormSize.swift */; };
-		E280FE942A52AF6200C6D528 /* Micro.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE002A52AF6100C6D528 /* Micro.swift */; };
-		E280FE952A52AF6200C6D528 /* VolumeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE012A52AF6100C6D528 /* VolumeUnit.swift */; };
-		E280FE962A52AF6200C6D528 /* FoodFormRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE022A52AF6100C6D528 /* FoodFormRoute.swift */; };
-		E280FE972A52AF6200C6D528 /* VolumeUnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE032A52AF6100C6D528 /* VolumeUnitType.swift */; };
-		E280FE982A52AF6200C6D528 /* UnitType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE042A52AF6100C6D528 /* UnitType.swift */; };
-		E280FE992A52AF6200C6D528 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE052A52AF6100C6D528 /* Unit.swift */; };
-		E280FE9A2A52AF6200C6D528 /* FoodLabelValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE062A52AF6100C6D528 /* FoodLabelValue.swift */; };
-		E280FE9B2A52AF6200C6D528 /* Macro.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE072A52AF6100C6D528 /* Macro.swift */; };
-		E280FE9C2A52AF6200C6D528 /* FoodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE082A52AF6100C6D528 /* FoodType.swift */; };
-		E280FE9D2A52AF6200C6D528 /* WeightUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE092A52AF6100C6D528 /* WeightUnit.swift */; };
-		E280FE9E2A52AF6200C6D528 /* NutrientMeterComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE0A2A52AF6100C6D528 /* NutrientMeterComponent.swift */; };
-		E280FE9F2A52AF6200C6D528 /* EnergyUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE0B2A52AF6100C6D528 /* EnergyUnit.swift */; };
-		E280FEA02A52AF6200C6D528 /* PublishStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE0C2A52AF6100C6D528 /* PublishStatus.swift */; };
-		E280FEA12A52AF6200C6D528 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE0D2A52AF6100C6D528 /* Tab.swift */; };
-		E280FEA22A52AF6200C6D528 /* MicronutrientGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE0E2A52AF6100C6D528 /* MicronutrientGroup.swift */; };
-		E280FEA32A52AF6200C6D528 /* Nutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE0F2A52AF6100C6D528 /* Nutrient.swift */; };
-		E280FEA42A52AF6200C6D528 /* NutrientUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE102A52AF6100C6D528 /* NutrientUnit.swift */; };
-		E280FEA52A52AF6200C6D528 /* FormUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE112A52AF6100C6D528 /* FormUnit.swift */; };
-		E280FEA62A52AF6200C6D528 /* FoodDataset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE122A52AF6100C6D528 /* FoodDataset.swift */; };
-		E280FEA72A52AF6200C6D528 /* FoodResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE142A52AF6100C6D528 /* FoodResult.swift */; };
-		E280FEA82A52AF6200C6D528 /* FoodNutrients.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE152A52AF6100C6D528 /* FoodNutrients.swift */; };
-		E280FEA92A52AF6200C6D528 /* FoodValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE162A52AF6100C6D528 /* FoodValue.swift */; };
-		E280FEAA2A52AF6200C6D528 /* FoodNutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE172A52AF6100C6D528 /* FoodNutrient.swift */; };
-		E280FEAB2A52AF6200C6D528 /* WeightQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE192A52AF6100C6D528 /* WeightQuantity.swift */; };
-		E280FEAC2A52AF6200C6D528 /* FoodQuantity.Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE1B2A52AF6100C6D528 /* FoodQuantity.Unit.swift */; };
-		E280FEAD2A52AF6200C6D528 /* Food+NutrientScaleFactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE1C2A52AF6100C6D528 /* Food+NutrientScaleFactor.swift */; };
-		E280FEAE2A52AF6200C6D528 /* FoodQuantity.Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE1D2A52AF6100C6D528 /* FoodQuantity.Size.swift */; };
-		E280FEAF2A52AF6200C6D528 /* FoodQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE1E2A52AF6100C6D528 /* FoodQuantity.swift */; };
-		E280FEB02A52AF6200C6D528 /* FoodUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE1F2A52AF6100C6D528 /* FoodUnit.swift */; };
-		E280FEB12A52AF6200C6D528 /* FoodQuantity+EquivalentQuantities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE202A52AF6100C6D528 /* FoodQuantity+EquivalentQuantities.swift */; };
-		E280FEB22A52AF6200C6D528 /* FoodQuantity+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE212A52AF6100C6D528 /* FoodQuantity+Convert.swift */; };
-		E280FEB32A52AF6200C6D528 /* VolumeQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE222A52AF6100C6D528 /* VolumeQuantity.swift */; };
-		E280FEB42A52AF6200C6D528 /* SizeQuantity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE232A52AF6100C6D528 /* SizeQuantity.swift */; };
-		E280FEB52A52AF6200C6D528 /* FormValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE242A52AF6100C6D528 /* FormValue.swift */; };
-		E280FEB62A52AF6200C6D528 /* MacroValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE252A52AF6100C6D528 /* MacroValue.swift */; };
-		E280FEB72A52AF6200C6D528 /* FoodSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE262A52AF6100C6D528 /* FoodSize.swift */; };
-		E280FEB82A52AF6200C6D528 /* FoodDensity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE272A52AF6100C6D528 /* FoodDensity.swift */; };
-		E280FEB92A52AF6200C6D528 /* VolumeUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE282A52AF6100C6D528 /* VolumeUnits.swift */; };
-		E280FEBA2A52AF6200C6D528 /* NutrientValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FE292A52AF6100C6D528 /* NutrientValue.swift */; };
-		E280FEBD2A52AF6B00C6D528 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FEBB2A52AF6B00C6D528 /* Constants.swift */; };
-		E280FEBE2A52AF6B00C6D528 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FEBC2A52AF6B00C6D528 /* Import.swift */; };
 		E280FEC12A52B03A00C6D528 /* SwiftHaptics in Frameworks */ = {isa = PBXBuildFile; productRef = E280FEC02A52B03A00C6D528 /* SwiftHaptics */; };
 		E280FEC42A52B04600C6D528 /* SwiftSugar in Frameworks */ = {isa = PBXBuildFile; productRef = E280FEC32A52B04600C6D528 /* SwiftSugar */; };
 		E280FEC72A52B05000C6D528 /* ColorSugar in Frameworks */ = {isa = PBXBuildFile; productRef = E280FEC62A52B05000C6D528 /* ColorSugar */; };
@@ -173,6 +174,154 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E28001572A52B84300C6D528 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
+		E280015A2A52B84300C6D528 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		E280015B2A52B84300C6D528 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		E280015C2A52B84300C6D528 /* FoodItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
+		E280015D2A52B84300C6D528 /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		E280015F2A52B84300C6D528 /* MealEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
+		E28001602A52B84300C6D528 /* FoodEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodEntity.swift; sourceTree = "<group>"; };
+		E28001612A52B84300C6D528 /* FoodItemEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItemEntity.swift; sourceTree = "<group>"; };
+		E28001622A52B84300C6D528 /* DayEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayEntity.swift; sourceTree = "<group>"; };
+		E28001632A52B84300C6D528 /* Food2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food2.swift; sourceTree = "<group>"; };
+		E28001662A52B84300C6D528 /* click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click2.wav; sourceTree = "<group>"; };
+		E28001672A52B84300C6D528 /* letterpress_click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_click2.wav; sourceTree = "<group>"; };
+		E28001682A52B84300C6D528 /* octave_tap-simple.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "octave_tap-simple.wav"; sourceTree = "<group>"; };
+		E28001692A52B84300C6D528 /* click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click3.wav; sourceTree = "<group>"; };
+		E280016A2A52B84300C6D528 /* popOpen2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popOpen2.wav; sourceTree = "<group>"; };
+		E280016B2A52B84300C6D528 /* wellDone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wellDone.wav; sourceTree = "<group>"; };
+		E280016C2A52B84300C6D528 /* letterpress_click1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_click1.wav; sourceTree = "<group>"; };
+		E280016D2A52B84300C6D528 /* calcbot_down.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calcbot_down.wav; sourceTree = "<group>"; };
+		E280016E2A52B84300C6D528 /* clear_DragPickup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_DragPickup.wav; sourceTree = "<group>"; };
+		E280016F2A52B84300C6D528 /* tweetbot-swipe_fail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-swipe_fail.wav"; sourceTree = "<group>"; };
+		E28001702A52B84300C6D528 /* clear_swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_swoosh.wav; sourceTree = "<group>"; };
+		E28001712A52B84300C6D528 /* tweetbot-swipe.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-swipe.wav"; sourceTree = "<group>"; };
+		E28001722A52B84300C6D528 /* click4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click4.wav; sourceTree = "<group>"; };
+		E28001732A52B84300C6D528 /* calcbot_clear.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calcbot_clear.wav; sourceTree = "<group>"; };
+		E28001742A52B84300C6D528 /* click5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click5.wav; sourceTree = "<group>"; };
+		E28001752A52B84300C6D528 /* clear_swooshTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_swooshTap.wav; sourceTree = "<group>"; };
+		E28001762A52B84300C6D528 /* popCloseLong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popCloseLong.wav; sourceTree = "<group>"; };
+		E28001772A52B84300C6D528 /* octave_slide-paper.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "octave_slide-paper.wav"; sourceTree = "<group>"; };
+		E28001782A52B84300C6D528 /* tweetbot-cell_swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-cell_swoosh.wav"; sourceTree = "<group>"; };
+		E28001792A52B84300C6D528 /* letterpress_swoosh2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_swoosh2.wav; sourceTree = "<group>"; };
+		E280017A2A52B84300C6D528 /* letterpress_swoosh1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_swoosh1.wav; sourceTree = "<group>"; };
+		E280017B2A52B84300C6D528 /* popClose2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popClose2.wav; sourceTree = "<group>"; };
+		E280017C2A52B84300C6D528 /* octave_slide-scissors.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "octave_slide-scissors.wav"; sourceTree = "<group>"; };
+		E280017D2A52B84300C6D528 /* clear_tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_tap.wav; sourceTree = "<group>"; };
+		E280017E2A52B84300C6D528 /* tweetbot-bubble_pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-bubble_pop.wav"; sourceTree = "<group>"; };
+		E280017F2A52B84300C6D528 /* overlayOff2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = overlayOff2.wav; sourceTree = "<group>"; };
+		E28001802A52B84300C6D528 /* tweetbot-swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-swoosh.wav"; sourceTree = "<group>"; };
+		E28001812A52B84300C6D528 /* popOpen.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popOpen.wav; sourceTree = "<group>"; };
+		E28001822A52B84300C6D528 /* overlayOn2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = overlayOn2.wav; sourceTree = "<group>"; };
+		E28001832A52B84300C6D528 /* clear_DragPutdown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_DragPutdown.wav; sourceTree = "<group>"; };
+		E28001842A52B84300C6D528 /* emptyTrash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = emptyTrash.wav; sourceTree = "<group>"; };
+		E28001852A52B84300C6D528 /* popClose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popClose.wav; sourceTree = "<group>"; };
+		E28001862A52B84300C6D528 /* tweetbot-button_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-button_click.wav"; sourceTree = "<group>"; };
+		E28001872A52B84300C6D528 /* button_touchDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = button_touchDown.wav; sourceTree = "<group>"; };
+		E28001882A52B84300C6D528 /* octave_tap-smallest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "octave_tap-smallest.wav"; sourceTree = "<group>"; };
+		E28001892A52B84300C6D528 /* letterpress_bip1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_bip1.wav; sourceTree = "<group>"; };
+		E280018A2A52B84300C6D528 /* letterpress_delete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_delete.wav; sourceTree = "<group>"; };
+		E280018B2A52B84300C6D528 /* letterpress_bip2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_bip2.wav; sourceTree = "<group>"; };
+		E280018C2A52B84300C6D528 /* calcbot_up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calcbot_up.wav; sourceTree = "<group>"; };
+		E280018D2A52B84300C6D528 /* calcbot_equals.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calcbot_equals.wav; sourceTree = "<group>"; };
+		E280018E2A52B84300C6D528 /* chord.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chord.wav; sourceTree = "<group>"; };
+		E280018F2A52B84300C6D528 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		E28001922A52B84300C6D528 /* FoodModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
+		E28001932A52B84300C6D528 /* FoodModel+Scan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FoodModel+Scan.swift"; sourceTree = "<group>"; };
+		E28001942A52B84300C6D528 /* MealModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealModel.swift; sourceTree = "<group>"; };
+		E28001962A52B84300C6D528 /* FormSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSize.swift; sourceTree = "<group>"; };
+		E28001972A52B84300C6D528 /* Micro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Micro.swift; sourceTree = "<group>"; };
+		E28001982A52B84300C6D528 /* VolumeUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeUnit.swift; sourceTree = "<group>"; };
+		E28001992A52B84300C6D528 /* FoodFormRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodFormRoute.swift; sourceTree = "<group>"; };
+		E280019A2A52B84300C6D528 /* VolumeUnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeUnitType.swift; sourceTree = "<group>"; };
+		E280019B2A52B84300C6D528 /* UnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitType.swift; sourceTree = "<group>"; };
+		E280019C2A52B84300C6D528 /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
+		E280019D2A52B84300C6D528 /* FoodLabelValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodLabelValue.swift; sourceTree = "<group>"; };
+		E280019E2A52B84300C6D528 /* Macro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
+		E280019F2A52B84300C6D528 /* FoodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodType.swift; sourceTree = "<group>"; };
+		E28001A02A52B84300C6D528 /* WeightUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightUnit.swift; sourceTree = "<group>"; };
+		E28001A12A52B84300C6D528 /* NutrientMeterComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientMeterComponent.swift; sourceTree = "<group>"; };
+		E28001A22A52B84300C6D528 /* EnergyUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnergyUnit.swift; sourceTree = "<group>"; };
+		E28001A32A52B84300C6D528 /* PublishStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishStatus.swift; sourceTree = "<group>"; };
+		E28001A42A52B84300C6D528 /* Tab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		E28001A52A52B84300C6D528 /* MicronutrientGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicronutrientGroup.swift; sourceTree = "<group>"; };
+		E28001A62A52B84300C6D528 /* Nutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nutrient.swift; sourceTree = "<group>"; };
+		E28001A72A52B84300C6D528 /* NutrientUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientUnit.swift; sourceTree = "<group>"; };
+		E28001A82A52B84300C6D528 /* FormUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUnit.swift; sourceTree = "<group>"; };
+		E28001A92A52B84300C6D528 /* FoodDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDataset.swift; sourceTree = "<group>"; };
+		E28001AB2A52B84300C6D528 /* FoodResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodResult.swift; sourceTree = "<group>"; };
+		E28001AC2A52B84300C6D528 /* FoodNutrients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodNutrients.swift; sourceTree = "<group>"; };
+		E28001AD2A52B84300C6D528 /* FoodValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodValue.swift; sourceTree = "<group>"; };
+		E28001AE2A52B84300C6D528 /* FoodNutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodNutrient.swift; sourceTree = "<group>"; };
+		E28001B02A52B84300C6D528 /* WeightQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightQuantity.swift; sourceTree = "<group>"; };
+		E28001B22A52B84300C6D528 /* FoodQuantity.Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodQuantity.Unit.swift; sourceTree = "<group>"; };
+		E28001B32A52B84300C6D528 /* Food+NutrientScaleFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Food+NutrientScaleFactor.swift"; sourceTree = "<group>"; };
+		E28001B42A52B84300C6D528 /* FoodQuantity.Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodQuantity.Size.swift; sourceTree = "<group>"; };
+		E28001B52A52B84300C6D528 /* FoodQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodQuantity.swift; sourceTree = "<group>"; };
+		E28001B62A52B84300C6D528 /* FoodUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodUnit.swift; sourceTree = "<group>"; };
+		E28001B72A52B84300C6D528 /* FoodQuantity+EquivalentQuantities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FoodQuantity+EquivalentQuantities.swift"; sourceTree = "<group>"; };
+		E28001B82A52B84300C6D528 /* FoodQuantity+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FoodQuantity+Convert.swift"; sourceTree = "<group>"; };
+		E28001B92A52B84300C6D528 /* VolumeQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeQuantity.swift; sourceTree = "<group>"; };
+		E28001BA2A52B84300C6D528 /* SizeQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeQuantity.swift; sourceTree = "<group>"; };
+		E28001BB2A52B84300C6D528 /* FormValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValue.swift; sourceTree = "<group>"; };
+		E28001BC2A52B84300C6D528 /* MacroValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroValue.swift; sourceTree = "<group>"; };
+		E28001BD2A52B84300C6D528 /* FoodSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSize.swift; sourceTree = "<group>"; };
+		E28001BE2A52B84300C6D528 /* FoodDensity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDensity.swift; sourceTree = "<group>"; };
+		E28001BF2A52B84300C6D528 /* VolumeUnits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeUnits.swift; sourceTree = "<group>"; };
+		E28001C02A52B84300C6D528 /* NutrientValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientValue.swift; sourceTree = "<group>"; };
+		E28001C22A52B84300C6D528 /* Fond.Weight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fond.Weight.swift; sourceTree = "<group>"; };
+		E28001C32A52B84300C6D528 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		E28001C42A52B84300C6D528 /* PhotosPickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosPickerItem.swift; sourceTree = "<group>"; };
+		E28001C52A52B84300C6D528 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		E28001C62A52B84300C6D528 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		E28001C72A52B84300C6D528 /* ScanResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
+		E28001C82A52B84300C6D528 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		E28001C92A52B84300C6D528 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		E28001CA2A52B84300C6D528 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E28001CC2A52B84300C6D528 /* sources.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = sources.md; sourceTree = "<group>"; };
+		E28001CD2A52B84300C6D528 /* days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = days.json; sourceTree = "<group>"; };
+		E28001CE2A52B84300C6D528 /* meals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = meals.json; sourceTree = "<group>"; };
+		E28001CF2A52B84300C6D528 /* presetFoods.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = presetFoods.json; sourceTree = "<group>"; };
+		E28001D02A52B84300C6D528 /* foodItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = foodItems.json; sourceTree = "<group>"; };
+		E28001D12A52B84300C6D528 /* emojis-by-group.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "emojis-by-group.json"; sourceTree = "<group>"; };
+		E28001D22A52B84300C6D528 /* emoji-keywords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "emoji-keywords.json"; sourceTree = "<group>"; };
+		E28001D32A52B84300C6D528 /* foods.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = foods.json; sourceTree = "<group>"; };
+		E28001D52A52B84300C6D528 /* SearchStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStore.swift; sourceTree = "<group>"; };
+		E28001D62A52B84300C6D528 /* MealStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealStore.swift; sourceTree = "<group>"; };
+		E28001D72A52B84300C6D528 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		E28001D82A52B84300C6D528 /* FoodItemStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItemStore.swift; sourceTree = "<group>"; };
+		E28001DA2A52B84300C6D528 /* ItemForm2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemForm2.swift; sourceTree = "<group>"; };
+		E28001DB2A52B84300C6D528 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		E28001DD2A52B84300C6D528 /* FoodBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodBadge.swift; sourceTree = "<group>"; };
+		E28001DE2A52B84300C6D528 /* Shimmer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
+		E28001DF2A52B84300C6D528 /* TimeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlider.swift; sourceTree = "<group>"; };
+		E28001E02A52B84300C6D528 /* EmojiPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
+		E28001E12A52B84300C6D528 /* FoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
+		E28001E32A52B84300C6D528 /* FoodPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodPicker.swift; sourceTree = "<group>"; };
+		E28001E42A52B84300C6D528 /* MealForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealForm.swift; sourceTree = "<group>"; };
+		E28001E52A52B84300C6D528 /* FoodPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodPickerModel.swift; sourceTree = "<group>"; };
+		E28001E62A52B84300C6D528 /* DayView.AddFoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.AddFoodCell.swift; sourceTree = "<group>"; };
+		E28001E72A52B84300C6D528 /* LogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		E28001E82A52B84300C6D528 /* MealItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealItemCell.swift; sourceTree = "<group>"; };
+		E28001E92A52B84300C6D528 /* MealView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
+		E28001EA2A52B84300C6D528 /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		E28001EC2A52B84300C6D528 /* FoodsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsViewCell.swift; sourceTree = "<group>"; };
+		E28001ED2A52B84300C6D528 /* FoodsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsView.swift; sourceTree = "<group>"; };
+		E28001EF2A52B84300C6D528 /* ItemFormFoodLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFormFoodLabel.swift; sourceTree = "<group>"; };
+		E28001F02A52B84300C6D528 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
+		E28001F12A52B84300C6D528 /* ItemForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemForm.swift; sourceTree = "<group>"; };
+		E28001F32A52B84300C6D528 /* ServingField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServingField.swift; sourceTree = "<group>"; };
+		E28001F42A52B84300C6D528 /* SizesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizesList.swift; sourceTree = "<group>"; };
+		E28001F52A52B84300C6D528 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		E28001F62A52B84300C6D528 /* NutrientsForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientsForm.swift; sourceTree = "<group>"; };
+		E28001F72A52B84300C6D528 /* NutrientFieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientFieldModel.swift; sourceTree = "<group>"; };
+		E28001F82A52B84300C6D528 /* LabelExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelExtractor.swift; sourceTree = "<group>"; };
+		E28001F92A52B84300C6D528 /* MicroPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicroPicker.swift; sourceTree = "<group>"; };
+		E28001FA2A52B84300C6D528 /* FoodForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodForm.swift; sourceTree = "<group>"; };
+		E28001FB2A52B84300C6D528 /* NutrientField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientField.swift; sourceTree = "<group>"; };
+		E28001FC2A52B84300C6D528 /* SizeForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeForm.swift; sourceTree = "<group>"; };
+		E28001FE2A52B84300C6D528 /* ItemFormAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFormAction.swift; sourceTree = "<group>"; };
+		E28001FF2A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableMealItemQuantityModifier.swift; sourceTree = "<group>"; };
 		E280FC122A529E3D00C6D528 /* Prep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prep.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E280FC152A529E3D00C6D528 /* PrepApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrepApp.swift; sourceTree = "<group>"; };
 		E280FC172A529E3D00C6D528 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -182,153 +331,6 @@
 		E280FC202A529E3E00C6D528 /* Prep.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Prep.entitlements; sourceTree = "<group>"; };
 		E280FC222A529E3E00C6D528 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E280FC242A529E3E00C6D528 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E280FD862A52AF6100C6D528 /* Fond.Weight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fond.Weight.swift; sourceTree = "<group>"; };
-		E280FD872A52AF6100C6D528 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		E280FD882A52AF6100C6D528 /* PhotosPickerItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosPickerItem.swift; sourceTree = "<group>"; };
-		E280FD892A52AF6100C6D528 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		E280FD8A2A52AF6100C6D528 /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		E280FD8B2A52AF6100C6D528 /* ScanResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResult.swift; sourceTree = "<group>"; };
-		E280FD8C2A52AF6100C6D528 /* Double.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
-		E280FD8D2A52AF6100C6D528 /* UIFont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
-		E280FD8F2A52AF6100C6D528 /* ItemForm2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemForm2.swift; sourceTree = "<group>"; };
-		E280FD902A52AF6100C6D528 /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		E280FD922A52AF6100C6D528 /* FoodBadge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodBadge.swift; sourceTree = "<group>"; };
-		E280FD932A52AF6100C6D528 /* Shimmer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
-		E280FD942A52AF6100C6D528 /* TimeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSlider.swift; sourceTree = "<group>"; };
-		E280FD952A52AF6100C6D528 /* EmojiPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPicker.swift; sourceTree = "<group>"; };
-		E280FD962A52AF6100C6D528 /* FoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCell.swift; sourceTree = "<group>"; };
-		E280FD982A52AF6100C6D528 /* FoodPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodPicker.swift; sourceTree = "<group>"; };
-		E280FD992A52AF6100C6D528 /* MealForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealForm.swift; sourceTree = "<group>"; };
-		E280FD9A2A52AF6100C6D528 /* FoodPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodPickerModel.swift; sourceTree = "<group>"; };
-		E280FD9B2A52AF6100C6D528 /* DayView.AddFoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.AddFoodCell.swift; sourceTree = "<group>"; };
-		E280FD9C2A52AF6100C6D528 /* LogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
-		E280FD9D2A52AF6100C6D528 /* MealItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealItemCell.swift; sourceTree = "<group>"; };
-		E280FD9E2A52AF6100C6D528 /* MealView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
-		E280FD9F2A52AF6100C6D528 /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
-		E280FDA12A52AF6100C6D528 /* FoodsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsViewCell.swift; sourceTree = "<group>"; };
-		E280FDA22A52AF6100C6D528 /* FoodsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsView.swift; sourceTree = "<group>"; };
-		E280FDA42A52AF6100C6D528 /* ItemFormFoodLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFormFoodLabel.swift; sourceTree = "<group>"; };
-		E280FDA52A52AF6100C6D528 /* ItemModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
-		E280FDA62A52AF6100C6D528 /* ItemForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemForm.swift; sourceTree = "<group>"; };
-		E280FDA82A52AF6100C6D528 /* ServingField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServingField.swift; sourceTree = "<group>"; };
-		E280FDA92A52AF6100C6D528 /* SizesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizesList.swift; sourceTree = "<group>"; };
-		E280FDAA2A52AF6100C6D528 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
-		E280FDAB2A52AF6100C6D528 /* NutrientsForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientsForm.swift; sourceTree = "<group>"; };
-		E280FDAC2A52AF6100C6D528 /* NutrientFieldModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientFieldModel.swift; sourceTree = "<group>"; };
-		E280FDAD2A52AF6100C6D528 /* LabelExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelExtractor.swift; sourceTree = "<group>"; };
-		E280FDAE2A52AF6100C6D528 /* MicroPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicroPicker.swift; sourceTree = "<group>"; };
-		E280FDAF2A52AF6100C6D528 /* FoodForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodForm.swift; sourceTree = "<group>"; };
-		E280FDB02A52AF6100C6D528 /* NutrientField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientField.swift; sourceTree = "<group>"; };
-		E280FDB12A52AF6100C6D528 /* SizeForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeForm.swift; sourceTree = "<group>"; };
-		E280FDB32A52AF6100C6D528 /* ItemFormAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFormAction.swift; sourceTree = "<group>"; };
-		E280FDB42A52AF6100C6D528 /* AnimatableMealItemQuantityModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableMealItemQuantityModifier.swift; sourceTree = "<group>"; };
-		E280FDB62A52AF6100C6D528 /* SearchStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStore.swift; sourceTree = "<group>"; };
-		E280FDB72A52AF6100C6D528 /* MealStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealStore.swift; sourceTree = "<group>"; };
-		E280FDB82A52AF6100C6D528 /* Database.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		E280FDB92A52AF6100C6D528 /* FoodItemStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItemStore.swift; sourceTree = "<group>"; };
-		E280FDBB2A52AF6100C6D528 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
-		E280FDBC2A52AF6100C6D528 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
-		E280FDBD2A52AF6100C6D528 /* FoodItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
-		E280FDBE2A52AF6100C6D528 /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
-		E280FDC02A52AF6100C6D528 /* MealEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
-		E280FDC12A52AF6100C6D528 /* FoodEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodEntity.swift; sourceTree = "<group>"; };
-		E280FDC22A52AF6100C6D528 /* FoodItemEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItemEntity.swift; sourceTree = "<group>"; };
-		E280FDC32A52AF6100C6D528 /* DayEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayEntity.swift; sourceTree = "<group>"; };
-		E280FDC52A52AF6100C6D528 /* sources.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = sources.md; sourceTree = "<group>"; };
-		E280FDC62A52AF6100C6D528 /* days.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = days.json; sourceTree = "<group>"; };
-		E280FDC72A52AF6100C6D528 /* meals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = meals.json; sourceTree = "<group>"; };
-		E280FDC82A52AF6100C6D528 /* presetFoods.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = presetFoods.json; sourceTree = "<group>"; };
-		E280FDC92A52AF6100C6D528 /* foodItems.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = foodItems.json; sourceTree = "<group>"; };
-		E280FDCA2A52AF6100C6D528 /* emojis-by-group.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "emojis-by-group.json"; sourceTree = "<group>"; };
-		E280FDCB2A52AF6100C6D528 /* emoji-keywords.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "emoji-keywords.json"; sourceTree = "<group>"; };
-		E280FDCC2A52AF6100C6D528 /* foods.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = foods.json; sourceTree = "<group>"; };
-		E280FDCF2A52AF6100C6D528 /* click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click2.wav; sourceTree = "<group>"; };
-		E280FDD02A52AF6100C6D528 /* letterpress_click2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_click2.wav; sourceTree = "<group>"; };
-		E280FDD12A52AF6100C6D528 /* octave_tap-simple.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "octave_tap-simple.wav"; sourceTree = "<group>"; };
-		E280FDD22A52AF6100C6D528 /* click3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click3.wav; sourceTree = "<group>"; };
-		E280FDD32A52AF6100C6D528 /* popOpen2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popOpen2.wav; sourceTree = "<group>"; };
-		E280FDD42A52AF6100C6D528 /* wellDone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wellDone.wav; sourceTree = "<group>"; };
-		E280FDD52A52AF6100C6D528 /* letterpress_click1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_click1.wav; sourceTree = "<group>"; };
-		E280FDD62A52AF6100C6D528 /* calcbot_down.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calcbot_down.wav; sourceTree = "<group>"; };
-		E280FDD72A52AF6100C6D528 /* clear_DragPickup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_DragPickup.wav; sourceTree = "<group>"; };
-		E280FDD82A52AF6100C6D528 /* tweetbot-swipe_fail.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-swipe_fail.wav"; sourceTree = "<group>"; };
-		E280FDD92A52AF6100C6D528 /* clear_swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_swoosh.wav; sourceTree = "<group>"; };
-		E280FDDA2A52AF6100C6D528 /* tweetbot-swipe.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-swipe.wav"; sourceTree = "<group>"; };
-		E280FDDB2A52AF6100C6D528 /* click4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click4.wav; sourceTree = "<group>"; };
-		E280FDDC2A52AF6100C6D528 /* calcbot_clear.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calcbot_clear.wav; sourceTree = "<group>"; };
-		E280FDDD2A52AF6100C6D528 /* click5.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click5.wav; sourceTree = "<group>"; };
-		E280FDDE2A52AF6100C6D528 /* clear_swooshTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_swooshTap.wav; sourceTree = "<group>"; };
-		E280FDDF2A52AF6100C6D528 /* popCloseLong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popCloseLong.wav; sourceTree = "<group>"; };
-		E280FDE02A52AF6100C6D528 /* octave_slide-paper.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "octave_slide-paper.wav"; sourceTree = "<group>"; };
-		E280FDE12A52AF6100C6D528 /* tweetbot-cell_swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-cell_swoosh.wav"; sourceTree = "<group>"; };
-		E280FDE22A52AF6100C6D528 /* letterpress_swoosh2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_swoosh2.wav; sourceTree = "<group>"; };
-		E280FDE32A52AF6100C6D528 /* letterpress_swoosh1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_swoosh1.wav; sourceTree = "<group>"; };
-		E280FDE42A52AF6100C6D528 /* popClose2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popClose2.wav; sourceTree = "<group>"; };
-		E280FDE52A52AF6100C6D528 /* octave_slide-scissors.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "octave_slide-scissors.wav"; sourceTree = "<group>"; };
-		E280FDE62A52AF6100C6D528 /* clear_tap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_tap.wav; sourceTree = "<group>"; };
-		E280FDE72A52AF6100C6D528 /* tweetbot-bubble_pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-bubble_pop.wav"; sourceTree = "<group>"; };
-		E280FDE82A52AF6100C6D528 /* overlayOff2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = overlayOff2.wav; sourceTree = "<group>"; };
-		E280FDE92A52AF6100C6D528 /* tweetbot-swoosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-swoosh.wav"; sourceTree = "<group>"; };
-		E280FDEA2A52AF6100C6D528 /* popOpen.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popOpen.wav; sourceTree = "<group>"; };
-		E280FDEB2A52AF6100C6D528 /* overlayOn2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = overlayOn2.wav; sourceTree = "<group>"; };
-		E280FDEC2A52AF6100C6D528 /* clear_DragPutdown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clear_DragPutdown.wav; sourceTree = "<group>"; };
-		E280FDED2A52AF6100C6D528 /* emptyTrash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = emptyTrash.wav; sourceTree = "<group>"; };
-		E280FDEE2A52AF6100C6D528 /* popClose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = popClose.wav; sourceTree = "<group>"; };
-		E280FDEF2A52AF6100C6D528 /* tweetbot-button_click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tweetbot-button_click.wav"; sourceTree = "<group>"; };
-		E280FDF02A52AF6100C6D528 /* button_touchDown.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = button_touchDown.wav; sourceTree = "<group>"; };
-		E280FDF12A52AF6100C6D528 /* octave_tap-smallest.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "octave_tap-smallest.wav"; sourceTree = "<group>"; };
-		E280FDF22A52AF6100C6D528 /* letterpress_bip1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_bip1.wav; sourceTree = "<group>"; };
-		E280FDF32A52AF6100C6D528 /* letterpress_delete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_delete.wav; sourceTree = "<group>"; };
-		E280FDF42A52AF6100C6D528 /* letterpress_bip2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = letterpress_bip2.wav; sourceTree = "<group>"; };
-		E280FDF52A52AF6100C6D528 /* calcbot_up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calcbot_up.wav; sourceTree = "<group>"; };
-		E280FDF62A52AF6100C6D528 /* calcbot_equals.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = calcbot_equals.wav; sourceTree = "<group>"; };
-		E280FDF72A52AF6100C6D528 /* chord.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chord.wav; sourceTree = "<group>"; };
-		E280FDF82A52AF6100C6D528 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
-		E280FDFB2A52AF6100C6D528 /* FoodModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodModel.swift; sourceTree = "<group>"; };
-		E280FDFC2A52AF6100C6D528 /* FoodModel+Scan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FoodModel+Scan.swift"; sourceTree = "<group>"; };
-		E280FDFD2A52AF6100C6D528 /* MealModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealModel.swift; sourceTree = "<group>"; };
-		E280FDFF2A52AF6100C6D528 /* FormSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSize.swift; sourceTree = "<group>"; };
-		E280FE002A52AF6100C6D528 /* Micro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Micro.swift; sourceTree = "<group>"; };
-		E280FE012A52AF6100C6D528 /* VolumeUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeUnit.swift; sourceTree = "<group>"; };
-		E280FE022A52AF6100C6D528 /* FoodFormRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodFormRoute.swift; sourceTree = "<group>"; };
-		E280FE032A52AF6100C6D528 /* VolumeUnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeUnitType.swift; sourceTree = "<group>"; };
-		E280FE042A52AF6100C6D528 /* UnitType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitType.swift; sourceTree = "<group>"; };
-		E280FE052A52AF6100C6D528 /* Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
-		E280FE062A52AF6100C6D528 /* FoodLabelValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodLabelValue.swift; sourceTree = "<group>"; };
-		E280FE072A52AF6100C6D528 /* Macro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Macro.swift; sourceTree = "<group>"; };
-		E280FE082A52AF6100C6D528 /* FoodType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodType.swift; sourceTree = "<group>"; };
-		E280FE092A52AF6100C6D528 /* WeightUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightUnit.swift; sourceTree = "<group>"; };
-		E280FE0A2A52AF6100C6D528 /* NutrientMeterComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientMeterComponent.swift; sourceTree = "<group>"; };
-		E280FE0B2A52AF6100C6D528 /* EnergyUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnergyUnit.swift; sourceTree = "<group>"; };
-		E280FE0C2A52AF6100C6D528 /* PublishStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PublishStatus.swift; sourceTree = "<group>"; };
-		E280FE0D2A52AF6100C6D528 /* Tab.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
-		E280FE0E2A52AF6100C6D528 /* MicronutrientGroup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicronutrientGroup.swift; sourceTree = "<group>"; };
-		E280FE0F2A52AF6100C6D528 /* Nutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nutrient.swift; sourceTree = "<group>"; };
-		E280FE102A52AF6100C6D528 /* NutrientUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientUnit.swift; sourceTree = "<group>"; };
-		E280FE112A52AF6100C6D528 /* FormUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUnit.swift; sourceTree = "<group>"; };
-		E280FE122A52AF6100C6D528 /* FoodDataset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDataset.swift; sourceTree = "<group>"; };
-		E280FE142A52AF6100C6D528 /* FoodResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodResult.swift; sourceTree = "<group>"; };
-		E280FE152A52AF6100C6D528 /* FoodNutrients.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodNutrients.swift; sourceTree = "<group>"; };
-		E280FE162A52AF6100C6D528 /* FoodValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodValue.swift; sourceTree = "<group>"; };
-		E280FE172A52AF6100C6D528 /* FoodNutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodNutrient.swift; sourceTree = "<group>"; };
-		E280FE192A52AF6100C6D528 /* WeightQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightQuantity.swift; sourceTree = "<group>"; };
-		E280FE1B2A52AF6100C6D528 /* FoodQuantity.Unit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodQuantity.Unit.swift; sourceTree = "<group>"; };
-		E280FE1C2A52AF6100C6D528 /* Food+NutrientScaleFactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Food+NutrientScaleFactor.swift"; sourceTree = "<group>"; };
-		E280FE1D2A52AF6100C6D528 /* FoodQuantity.Size.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodQuantity.Size.swift; sourceTree = "<group>"; };
-		E280FE1E2A52AF6100C6D528 /* FoodQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodQuantity.swift; sourceTree = "<group>"; };
-		E280FE1F2A52AF6100C6D528 /* FoodUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodUnit.swift; sourceTree = "<group>"; };
-		E280FE202A52AF6100C6D528 /* FoodQuantity+EquivalentQuantities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FoodQuantity+EquivalentQuantities.swift"; sourceTree = "<group>"; };
-		E280FE212A52AF6100C6D528 /* FoodQuantity+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FoodQuantity+Convert.swift"; sourceTree = "<group>"; };
-		E280FE222A52AF6100C6D528 /* VolumeQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeQuantity.swift; sourceTree = "<group>"; };
-		E280FE232A52AF6100C6D528 /* SizeQuantity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeQuantity.swift; sourceTree = "<group>"; };
-		E280FE242A52AF6100C6D528 /* FormValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValue.swift; sourceTree = "<group>"; };
-		E280FE252A52AF6100C6D528 /* MacroValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacroValue.swift; sourceTree = "<group>"; };
-		E280FE262A52AF6100C6D528 /* FoodSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSize.swift; sourceTree = "<group>"; };
-		E280FE272A52AF6100C6D528 /* FoodDensity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDensity.swift; sourceTree = "<group>"; };
-		E280FE282A52AF6100C6D528 /* VolumeUnits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeUnits.swift; sourceTree = "<group>"; };
-		E280FE292A52AF6100C6D528 /* NutrientValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientValue.swift; sourceTree = "<group>"; };
-		E280FEBB2A52AF6B00C6D528 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = ../../../wip/Prep/Prep/App/Constants.swift; sourceTree = "<group>"; };
-		E280FEBC2A52AF6B00C6D528 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Import.swift; path = ../../../wip/Prep/Prep/App/Import.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,6 +354,313 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E28001582A52B84300C6D528 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E28001592A52B84300C6D528 /* Legacy */,
+				E28001632A52B84300C6D528 /* Food2.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E28001592A52B84300C6D528 /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				E280015A2A52B84300C6D528 /* Day.swift */,
+				E280015B2A52B84300C6D528 /* Meal.swift */,
+				E280015C2A52B84300C6D528 /* FoodItem.swift */,
+				E280015D2A52B84300C6D528 /* Food.swift */,
+				E280015E2A52B84300C6D528 /* Entities */,
+			);
+			path = Legacy;
+			sourceTree = "<group>";
+		};
+		E280015E2A52B84300C6D528 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				E280015F2A52B84300C6D528 /* MealEntity.swift */,
+				E28001602A52B84300C6D528 /* FoodEntity.swift */,
+				E28001612A52B84300C6D528 /* FoodItemEntity.swift */,
+				E28001622A52B84300C6D528 /* DayEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		E28001642A52B84300C6D528 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E28001652A52B84300C6D528 /* Sound Files */,
+				E280018F2A52B84300C6D528 /* SoundPlayer.swift */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		E28001652A52B84300C6D528 /* Sound Files */ = {
+			isa = PBXGroup;
+			children = (
+				E28001662A52B84300C6D528 /* click2.wav */,
+				E28001672A52B84300C6D528 /* letterpress_click2.wav */,
+				E28001682A52B84300C6D528 /* octave_tap-simple.wav */,
+				E28001692A52B84300C6D528 /* click3.wav */,
+				E280016A2A52B84300C6D528 /* popOpen2.wav */,
+				E280016B2A52B84300C6D528 /* wellDone.wav */,
+				E280016C2A52B84300C6D528 /* letterpress_click1.wav */,
+				E280016D2A52B84300C6D528 /* calcbot_down.wav */,
+				E280016E2A52B84300C6D528 /* clear_DragPickup.wav */,
+				E280016F2A52B84300C6D528 /* tweetbot-swipe_fail.wav */,
+				E28001702A52B84300C6D528 /* clear_swoosh.wav */,
+				E28001712A52B84300C6D528 /* tweetbot-swipe.wav */,
+				E28001722A52B84300C6D528 /* click4.wav */,
+				E28001732A52B84300C6D528 /* calcbot_clear.wav */,
+				E28001742A52B84300C6D528 /* click5.wav */,
+				E28001752A52B84300C6D528 /* clear_swooshTap.wav */,
+				E28001762A52B84300C6D528 /* popCloseLong.wav */,
+				E28001772A52B84300C6D528 /* octave_slide-paper.wav */,
+				E28001782A52B84300C6D528 /* tweetbot-cell_swoosh.wav */,
+				E28001792A52B84300C6D528 /* letterpress_swoosh2.wav */,
+				E280017A2A52B84300C6D528 /* letterpress_swoosh1.wav */,
+				E280017B2A52B84300C6D528 /* popClose2.wav */,
+				E280017C2A52B84300C6D528 /* octave_slide-scissors.wav */,
+				E280017D2A52B84300C6D528 /* clear_tap.wav */,
+				E280017E2A52B84300C6D528 /* tweetbot-bubble_pop.wav */,
+				E280017F2A52B84300C6D528 /* overlayOff2.wav */,
+				E28001802A52B84300C6D528 /* tweetbot-swoosh.wav */,
+				E28001812A52B84300C6D528 /* popOpen.wav */,
+				E28001822A52B84300C6D528 /* overlayOn2.wav */,
+				E28001832A52B84300C6D528 /* clear_DragPutdown.wav */,
+				E28001842A52B84300C6D528 /* emptyTrash.wav */,
+				E28001852A52B84300C6D528 /* popClose.wav */,
+				E28001862A52B84300C6D528 /* tweetbot-button_click.wav */,
+				E28001872A52B84300C6D528 /* button_touchDown.wav */,
+				E28001882A52B84300C6D528 /* octave_tap-smallest.wav */,
+				E28001892A52B84300C6D528 /* letterpress_bip1.wav */,
+				E280018A2A52B84300C6D528 /* letterpress_delete.wav */,
+				E280018B2A52B84300C6D528 /* letterpress_bip2.wav */,
+				E280018C2A52B84300C6D528 /* calcbot_up.wav */,
+				E280018D2A52B84300C6D528 /* calcbot_equals.wav */,
+				E280018E2A52B84300C6D528 /* chord.wav */,
+			);
+			path = "Sound Files";
+			sourceTree = "<group>";
+		};
+		E28001902A52B84300C6D528 /* Data Types */ = {
+			isa = PBXGroup;
+			children = (
+				E28001912A52B84300C6D528 /* View Models */,
+				E28001952A52B84300C6D528 /* Enums */,
+				E28001AA2A52B84300C6D528 /* Structs */,
+			);
+			path = "Data Types";
+			sourceTree = "<group>";
+		};
+		E28001912A52B84300C6D528 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E28001922A52B84300C6D528 /* FoodModel.swift */,
+				E28001932A52B84300C6D528 /* FoodModel+Scan.swift */,
+				E28001942A52B84300C6D528 /* MealModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		E28001952A52B84300C6D528 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				E28001962A52B84300C6D528 /* FormSize.swift */,
+				E28001972A52B84300C6D528 /* Micro.swift */,
+				E28001982A52B84300C6D528 /* VolumeUnit.swift */,
+				E28001992A52B84300C6D528 /* FoodFormRoute.swift */,
+				E280019A2A52B84300C6D528 /* VolumeUnitType.swift */,
+				E280019B2A52B84300C6D528 /* UnitType.swift */,
+				E280019C2A52B84300C6D528 /* Unit.swift */,
+				E280019D2A52B84300C6D528 /* FoodLabelValue.swift */,
+				E280019E2A52B84300C6D528 /* Macro.swift */,
+				E280019F2A52B84300C6D528 /* FoodType.swift */,
+				E28001A02A52B84300C6D528 /* WeightUnit.swift */,
+				E28001A12A52B84300C6D528 /* NutrientMeterComponent.swift */,
+				E28001A22A52B84300C6D528 /* EnergyUnit.swift */,
+				E28001A32A52B84300C6D528 /* PublishStatus.swift */,
+				E28001A42A52B84300C6D528 /* Tab.swift */,
+				E28001A52A52B84300C6D528 /* MicronutrientGroup.swift */,
+				E28001A62A52B84300C6D528 /* Nutrient.swift */,
+				E28001A72A52B84300C6D528 /* NutrientUnit.swift */,
+				E28001A82A52B84300C6D528 /* FormUnit.swift */,
+				E28001A92A52B84300C6D528 /* FoodDataset.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		E28001AA2A52B84300C6D528 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				E28001AB2A52B84300C6D528 /* FoodResult.swift */,
+				E28001AC2A52B84300C6D528 /* FoodNutrients.swift */,
+				E28001AD2A52B84300C6D528 /* FoodValue.swift */,
+				E28001AE2A52B84300C6D528 /* FoodNutrient.swift */,
+				E28001AF2A52B84300C6D528 /* Quantities */,
+				E28001BB2A52B84300C6D528 /* FormValue.swift */,
+				E28001BC2A52B84300C6D528 /* MacroValue.swift */,
+				E28001BD2A52B84300C6D528 /* FoodSize.swift */,
+				E28001BE2A52B84300C6D528 /* FoodDensity.swift */,
+				E28001BF2A52B84300C6D528 /* VolumeUnits.swift */,
+				E28001C02A52B84300C6D528 /* NutrientValue.swift */,
+			);
+			path = Structs;
+			sourceTree = "<group>";
+		};
+		E28001AF2A52B84300C6D528 /* Quantities */ = {
+			isa = PBXGroup;
+			children = (
+				E28001B02A52B84300C6D528 /* WeightQuantity.swift */,
+				E28001B12A52B84300C6D528 /* FoodQuantity */,
+				E28001B92A52B84300C6D528 /* VolumeQuantity.swift */,
+				E28001BA2A52B84300C6D528 /* SizeQuantity.swift */,
+			);
+			path = Quantities;
+			sourceTree = "<group>";
+		};
+		E28001B12A52B84300C6D528 /* FoodQuantity */ = {
+			isa = PBXGroup;
+			children = (
+				E28001B22A52B84300C6D528 /* FoodQuantity.Unit.swift */,
+				E28001B32A52B84300C6D528 /* Food+NutrientScaleFactor.swift */,
+				E28001B42A52B84300C6D528 /* FoodQuantity.Size.swift */,
+				E28001B52A52B84300C6D528 /* FoodQuantity.swift */,
+				E28001B62A52B84300C6D528 /* FoodUnit.swift */,
+				E28001B72A52B84300C6D528 /* FoodQuantity+EquivalentQuantities.swift */,
+				E28001B82A52B84300C6D528 /* FoodQuantity+Convert.swift */,
+			);
+			path = FoodQuantity;
+			sourceTree = "<group>";
+		};
+		E28001C12A52B84300C6D528 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E28001C22A52B84300C6D528 /* Fond.Weight.swift */,
+				E28001C32A52B84300C6D528 /* Date.swift */,
+				E28001C42A52B84300C6D528 /* PhotosPickerItem.swift */,
+				E28001C52A52B84300C6D528 /* Notification.swift */,
+				E28001C62A52B84300C6D528 /* String.swift */,
+				E28001C72A52B84300C6D528 /* ScanResult.swift */,
+				E28001C82A52B84300C6D528 /* Double.swift */,
+				E28001C92A52B84300C6D528 /* UIFont.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E28001CB2A52B84300C6D528 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E28001CC2A52B84300C6D528 /* sources.md */,
+				E28001CD2A52B84300C6D528 /* days.json */,
+				E28001CE2A52B84300C6D528 /* meals.json */,
+				E28001CF2A52B84300C6D528 /* presetFoods.json */,
+				E28001D02A52B84300C6D528 /* foodItems.json */,
+				E28001D12A52B84300C6D528 /* emojis-by-group.json */,
+				E28001D22A52B84300C6D528 /* emoji-keywords.json */,
+				E28001D32A52B84300C6D528 /* foods.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E28001D42A52B84300C6D528 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				E28001D52A52B84300C6D528 /* SearchStore.swift */,
+				E28001D62A52B84300C6D528 /* MealStore.swift */,
+				E28001D72A52B84300C6D528 /* Database.swift */,
+				E28001D82A52B84300C6D528 /* FoodItemStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		E28001D92A52B84300C6D528 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E28001DA2A52B84300C6D528 /* ItemForm2.swift */,
+				E28001DB2A52B84300C6D528 /* HomeView.swift */,
+				E28001DC2A52B84300C6D528 /* Components */,
+				E28001E22A52B84300C6D528 /* Log */,
+				E28001EB2A52B84300C6D528 /* Foods */,
+				E28001EE2A52B84300C6D528 /* MealItemForm */,
+				E28001F22A52B84300C6D528 /* FoodForm */,
+				E28001FD2A52B84300C6D528 /* ItemForm */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E28001DC2A52B84300C6D528 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E28001DD2A52B84300C6D528 /* FoodBadge.swift */,
+				E28001DE2A52B84300C6D528 /* Shimmer.swift */,
+				E28001DF2A52B84300C6D528 /* TimeSlider.swift */,
+				E28001E02A52B84300C6D528 /* EmojiPicker.swift */,
+				E28001E12A52B84300C6D528 /* FoodCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		E28001E22A52B84300C6D528 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				E28001E32A52B84300C6D528 /* FoodPicker.swift */,
+				E28001E42A52B84300C6D528 /* MealForm.swift */,
+				E28001E52A52B84300C6D528 /* FoodPickerModel.swift */,
+				E28001E62A52B84300C6D528 /* DayView.AddFoodCell.swift */,
+				E28001E72A52B84300C6D528 /* LogView.swift */,
+				E28001E82A52B84300C6D528 /* MealItemCell.swift */,
+				E28001E92A52B84300C6D528 /* MealView.swift */,
+				E28001EA2A52B84300C6D528 /* DayView.swift */,
+			);
+			path = Log;
+			sourceTree = "<group>";
+		};
+		E28001EB2A52B84300C6D528 /* Foods */ = {
+			isa = PBXGroup;
+			children = (
+				E28001EC2A52B84300C6D528 /* FoodsViewCell.swift */,
+				E28001ED2A52B84300C6D528 /* FoodsView.swift */,
+			);
+			path = Foods;
+			sourceTree = "<group>";
+		};
+		E28001EE2A52B84300C6D528 /* MealItemForm */ = {
+			isa = PBXGroup;
+			children = (
+				E28001EF2A52B84300C6D528 /* ItemFormFoodLabel.swift */,
+				E28001F02A52B84300C6D528 /* ItemModel.swift */,
+				E28001F12A52B84300C6D528 /* ItemForm.swift */,
+			);
+			path = MealItemForm;
+			sourceTree = "<group>";
+		};
+		E28001F22A52B84300C6D528 /* FoodForm */ = {
+			isa = PBXGroup;
+			children = (
+				E28001F32A52B84300C6D528 /* ServingField.swift */,
+				E28001F42A52B84300C6D528 /* SizesList.swift */,
+				E28001F52A52B84300C6D528 /* ImageManager.swift */,
+				E28001F62A52B84300C6D528 /* NutrientsForm.swift */,
+				E28001F72A52B84300C6D528 /* NutrientFieldModel.swift */,
+				E28001F82A52B84300C6D528 /* LabelExtractor.swift */,
+				E28001F92A52B84300C6D528 /* MicroPicker.swift */,
+				E28001FA2A52B84300C6D528 /* FoodForm.swift */,
+				E28001FB2A52B84300C6D528 /* NutrientField.swift */,
+				E28001FC2A52B84300C6D528 /* SizeForm.swift */,
+			);
+			path = FoodForm;
+			sourceTree = "<group>";
+		};
+		E28001FD2A52B84300C6D528 /* ItemForm */ = {
+			isa = PBXGroup;
+			children = (
+				E28001FE2A52B84300C6D528 /* ItemFormAction.swift */,
+				E28001FF2A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift */,
+			);
+			path = ItemForm;
+			sourceTree = "<group>";
+		};
 		E280FC092A529E3D00C6D528 = {
 			isa = PBXGroup;
 			children = (
@@ -371,18 +680,18 @@
 		E280FC142A529E3D00C6D528 /* Prep */ = {
 			isa = PBXGroup;
 			children = (
-				E280FEBB2A52AF6B00C6D528 /* Constants.swift */,
-				E280FEBC2A52AF6B00C6D528 /* Import.swift */,
-				E280FDC42A52AF6100C6D528 /* Data */,
-				E280FDF92A52AF6100C6D528 /* Data Types */,
-				E280FD852A52AF6100C6D528 /* Extensions */,
-				E280FDBA2A52AF6100C6D528 /* Models */,
-				E280FDCD2A52AF6100C6D528 /* Sounds */,
-				E280FDB52A52AF6100C6D528 /* Stores */,
-				E280FD8E2A52AF6100C6D528 /* Views */,
 				E280FC152A529E3D00C6D528 /* PrepApp.swift */,
 				E280FC172A529E3D00C6D528 /* Persistence.swift */,
 				E280FC1C2A529E3D00C6D528 /* ContentView.swift */,
+				E28001CA2A52B84300C6D528 /* Constants.swift */,
+				E28001CB2A52B84300C6D528 /* Data */,
+				E28001902A52B84300C6D528 /* Data Types */,
+				E28001C12A52B84300C6D528 /* Extensions */,
+				E28001572A52B84300C6D528 /* Import.swift */,
+				E28001582A52B84300C6D528 /* Models */,
+				E28001642A52B84300C6D528 /* Sounds */,
+				E28001D42A52B84300C6D528 /* Stores */,
+				E28001D92A52B84300C6D528 /* Views */,
 				E280FC1E2A529E3E00C6D528 /* Assets.xcassets */,
 				E280FC202A529E3E00C6D528 /* Prep.entitlements */,
 				E280FC242A529E3E00C6D528 /* Info.plist */,
@@ -398,311 +707,6 @@
 				E280FC222A529E3E00C6D528 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		E280FD852A52AF6100C6D528 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E280FD862A52AF6100C6D528 /* Fond.Weight.swift */,
-				E280FD872A52AF6100C6D528 /* Date.swift */,
-				E280FD882A52AF6100C6D528 /* PhotosPickerItem.swift */,
-				E280FD892A52AF6100C6D528 /* Notification.swift */,
-				E280FD8A2A52AF6100C6D528 /* String.swift */,
-				E280FD8B2A52AF6100C6D528 /* ScanResult.swift */,
-				E280FD8C2A52AF6100C6D528 /* Double.swift */,
-				E280FD8D2A52AF6100C6D528 /* UIFont.swift */,
-			);
-			name = Extensions;
-			path = ../../../wip/Prep/Prep/Extensions;
-			sourceTree = "<group>";
-		};
-		E280FD8E2A52AF6100C6D528 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				E280FD8F2A52AF6100C6D528 /* ItemForm2.swift */,
-				E280FD902A52AF6100C6D528 /* HomeView.swift */,
-				E280FD912A52AF6100C6D528 /* Components */,
-				E280FD972A52AF6100C6D528 /* Log */,
-				E280FDA02A52AF6100C6D528 /* Foods */,
-				E280FDA32A52AF6100C6D528 /* MealItemForm */,
-				E280FDA72A52AF6100C6D528 /* FoodForm */,
-				E280FDB22A52AF6100C6D528 /* ItemForm */,
-			);
-			name = Views;
-			path = ../../../wip/Prep/Prep/Views;
-			sourceTree = "<group>";
-		};
-		E280FD912A52AF6100C6D528 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				E280FD922A52AF6100C6D528 /* FoodBadge.swift */,
-				E280FD932A52AF6100C6D528 /* Shimmer.swift */,
-				E280FD942A52AF6100C6D528 /* TimeSlider.swift */,
-				E280FD952A52AF6100C6D528 /* EmojiPicker.swift */,
-				E280FD962A52AF6100C6D528 /* FoodCell.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		E280FD972A52AF6100C6D528 /* Log */ = {
-			isa = PBXGroup;
-			children = (
-				E280FD982A52AF6100C6D528 /* FoodPicker.swift */,
-				E280FD992A52AF6100C6D528 /* MealForm.swift */,
-				E280FD9A2A52AF6100C6D528 /* FoodPickerModel.swift */,
-				E280FD9B2A52AF6100C6D528 /* DayView.AddFoodCell.swift */,
-				E280FD9C2A52AF6100C6D528 /* LogView.swift */,
-				E280FD9D2A52AF6100C6D528 /* MealItemCell.swift */,
-				E280FD9E2A52AF6100C6D528 /* MealView.swift */,
-				E280FD9F2A52AF6100C6D528 /* DayView.swift */,
-			);
-			path = Log;
-			sourceTree = "<group>";
-		};
-		E280FDA02A52AF6100C6D528 /* Foods */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDA12A52AF6100C6D528 /* FoodsViewCell.swift */,
-				E280FDA22A52AF6100C6D528 /* FoodsView.swift */,
-			);
-			path = Foods;
-			sourceTree = "<group>";
-		};
-		E280FDA32A52AF6100C6D528 /* MealItemForm */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDA42A52AF6100C6D528 /* ItemFormFoodLabel.swift */,
-				E280FDA52A52AF6100C6D528 /* ItemModel.swift */,
-				E280FDA62A52AF6100C6D528 /* ItemForm.swift */,
-			);
-			path = MealItemForm;
-			sourceTree = "<group>";
-		};
-		E280FDA72A52AF6100C6D528 /* FoodForm */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDA82A52AF6100C6D528 /* ServingField.swift */,
-				E280FDA92A52AF6100C6D528 /* SizesList.swift */,
-				E280FDAA2A52AF6100C6D528 /* ImageManager.swift */,
-				E280FDAB2A52AF6100C6D528 /* NutrientsForm.swift */,
-				E280FDAC2A52AF6100C6D528 /* NutrientFieldModel.swift */,
-				E280FDAD2A52AF6100C6D528 /* LabelExtractor.swift */,
-				E280FDAE2A52AF6100C6D528 /* MicroPicker.swift */,
-				E280FDAF2A52AF6100C6D528 /* FoodForm.swift */,
-				E280FDB02A52AF6100C6D528 /* NutrientField.swift */,
-				E280FDB12A52AF6100C6D528 /* SizeForm.swift */,
-			);
-			path = FoodForm;
-			sourceTree = "<group>";
-		};
-		E280FDB22A52AF6100C6D528 /* ItemForm */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDB32A52AF6100C6D528 /* ItemFormAction.swift */,
-				E280FDB42A52AF6100C6D528 /* AnimatableMealItemQuantityModifier.swift */,
-			);
-			path = ItemForm;
-			sourceTree = "<group>";
-		};
-		E280FDB52A52AF6100C6D528 /* Stores */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDB62A52AF6100C6D528 /* SearchStore.swift */,
-				E280FDB72A52AF6100C6D528 /* MealStore.swift */,
-				E280FDB82A52AF6100C6D528 /* Database.swift */,
-				E280FDB92A52AF6100C6D528 /* FoodItemStore.swift */,
-			);
-			name = Stores;
-			path = ../../../wip/Prep/Prep/Stores;
-			sourceTree = "<group>";
-		};
-		E280FDBA2A52AF6100C6D528 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDBB2A52AF6100C6D528 /* Day.swift */,
-				E280FDBC2A52AF6100C6D528 /* Meal.swift */,
-				E280FDBD2A52AF6100C6D528 /* FoodItem.swift */,
-				E280FDBE2A52AF6100C6D528 /* Food.swift */,
-				E280FDBF2A52AF6100C6D528 /* Entities */,
-			);
-			name = Models;
-			path = ../../../wip/Prep/Prep/Models;
-			sourceTree = "<group>";
-		};
-		E280FDBF2A52AF6100C6D528 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDC02A52AF6100C6D528 /* MealEntity.swift */,
-				E280FDC12A52AF6100C6D528 /* FoodEntity.swift */,
-				E280FDC22A52AF6100C6D528 /* FoodItemEntity.swift */,
-				E280FDC32A52AF6100C6D528 /* DayEntity.swift */,
-			);
-			path = Entities;
-			sourceTree = "<group>";
-		};
-		E280FDC42A52AF6100C6D528 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDC52A52AF6100C6D528 /* sources.md */,
-				E280FDC62A52AF6100C6D528 /* days.json */,
-				E280FDC72A52AF6100C6D528 /* meals.json */,
-				E280FDC82A52AF6100C6D528 /* presetFoods.json */,
-				E280FDC92A52AF6100C6D528 /* foodItems.json */,
-				E280FDCA2A52AF6100C6D528 /* emojis-by-group.json */,
-				E280FDCB2A52AF6100C6D528 /* emoji-keywords.json */,
-				E280FDCC2A52AF6100C6D528 /* foods.json */,
-			);
-			name = Data;
-			path = ../../../wip/Prep/Prep/Data;
-			sourceTree = "<group>";
-		};
-		E280FDCD2A52AF6100C6D528 /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDCE2A52AF6100C6D528 /* Sound Files */,
-				E280FDF82A52AF6100C6D528 /* SoundPlayer.swift */,
-			);
-			name = Sounds;
-			path = ../../../wip/Prep/Prep/Sounds;
-			sourceTree = "<group>";
-		};
-		E280FDCE2A52AF6100C6D528 /* Sound Files */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDCF2A52AF6100C6D528 /* click2.wav */,
-				E280FDD02A52AF6100C6D528 /* letterpress_click2.wav */,
-				E280FDD12A52AF6100C6D528 /* octave_tap-simple.wav */,
-				E280FDD22A52AF6100C6D528 /* click3.wav */,
-				E280FDD32A52AF6100C6D528 /* popOpen2.wav */,
-				E280FDD42A52AF6100C6D528 /* wellDone.wav */,
-				E280FDD52A52AF6100C6D528 /* letterpress_click1.wav */,
-				E280FDD62A52AF6100C6D528 /* calcbot_down.wav */,
-				E280FDD72A52AF6100C6D528 /* clear_DragPickup.wav */,
-				E280FDD82A52AF6100C6D528 /* tweetbot-swipe_fail.wav */,
-				E280FDD92A52AF6100C6D528 /* clear_swoosh.wav */,
-				E280FDDA2A52AF6100C6D528 /* tweetbot-swipe.wav */,
-				E280FDDB2A52AF6100C6D528 /* click4.wav */,
-				E280FDDC2A52AF6100C6D528 /* calcbot_clear.wav */,
-				E280FDDD2A52AF6100C6D528 /* click5.wav */,
-				E280FDDE2A52AF6100C6D528 /* clear_swooshTap.wav */,
-				E280FDDF2A52AF6100C6D528 /* popCloseLong.wav */,
-				E280FDE02A52AF6100C6D528 /* octave_slide-paper.wav */,
-				E280FDE12A52AF6100C6D528 /* tweetbot-cell_swoosh.wav */,
-				E280FDE22A52AF6100C6D528 /* letterpress_swoosh2.wav */,
-				E280FDE32A52AF6100C6D528 /* letterpress_swoosh1.wav */,
-				E280FDE42A52AF6100C6D528 /* popClose2.wav */,
-				E280FDE52A52AF6100C6D528 /* octave_slide-scissors.wav */,
-				E280FDE62A52AF6100C6D528 /* clear_tap.wav */,
-				E280FDE72A52AF6100C6D528 /* tweetbot-bubble_pop.wav */,
-				E280FDE82A52AF6100C6D528 /* overlayOff2.wav */,
-				E280FDE92A52AF6100C6D528 /* tweetbot-swoosh.wav */,
-				E280FDEA2A52AF6100C6D528 /* popOpen.wav */,
-				E280FDEB2A52AF6100C6D528 /* overlayOn2.wav */,
-				E280FDEC2A52AF6100C6D528 /* clear_DragPutdown.wav */,
-				E280FDED2A52AF6100C6D528 /* emptyTrash.wav */,
-				E280FDEE2A52AF6100C6D528 /* popClose.wav */,
-				E280FDEF2A52AF6100C6D528 /* tweetbot-button_click.wav */,
-				E280FDF02A52AF6100C6D528 /* button_touchDown.wav */,
-				E280FDF12A52AF6100C6D528 /* octave_tap-smallest.wav */,
-				E280FDF22A52AF6100C6D528 /* letterpress_bip1.wav */,
-				E280FDF32A52AF6100C6D528 /* letterpress_delete.wav */,
-				E280FDF42A52AF6100C6D528 /* letterpress_bip2.wav */,
-				E280FDF52A52AF6100C6D528 /* calcbot_up.wav */,
-				E280FDF62A52AF6100C6D528 /* calcbot_equals.wav */,
-				E280FDF72A52AF6100C6D528 /* chord.wav */,
-			);
-			path = "Sound Files";
-			sourceTree = "<group>";
-		};
-		E280FDF92A52AF6100C6D528 /* Data Types */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDFA2A52AF6100C6D528 /* View Models */,
-				E280FDFE2A52AF6100C6D528 /* Enums */,
-				E280FE132A52AF6100C6D528 /* Structs */,
-			);
-			name = "Data Types";
-			path = "../../../wip/Prep/Prep/Data Types";
-			sourceTree = "<group>";
-		};
-		E280FDFA2A52AF6100C6D528 /* View Models */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDFB2A52AF6100C6D528 /* FoodModel.swift */,
-				E280FDFC2A52AF6100C6D528 /* FoodModel+Scan.swift */,
-				E280FDFD2A52AF6100C6D528 /* MealModel.swift */,
-			);
-			path = "View Models";
-			sourceTree = "<group>";
-		};
-		E280FDFE2A52AF6100C6D528 /* Enums */ = {
-			isa = PBXGroup;
-			children = (
-				E280FDFF2A52AF6100C6D528 /* FormSize.swift */,
-				E280FE002A52AF6100C6D528 /* Micro.swift */,
-				E280FE012A52AF6100C6D528 /* VolumeUnit.swift */,
-				E280FE022A52AF6100C6D528 /* FoodFormRoute.swift */,
-				E280FE032A52AF6100C6D528 /* VolumeUnitType.swift */,
-				E280FE042A52AF6100C6D528 /* UnitType.swift */,
-				E280FE052A52AF6100C6D528 /* Unit.swift */,
-				E280FE062A52AF6100C6D528 /* FoodLabelValue.swift */,
-				E280FE072A52AF6100C6D528 /* Macro.swift */,
-				E280FE082A52AF6100C6D528 /* FoodType.swift */,
-				E280FE092A52AF6100C6D528 /* WeightUnit.swift */,
-				E280FE0A2A52AF6100C6D528 /* NutrientMeterComponent.swift */,
-				E280FE0B2A52AF6100C6D528 /* EnergyUnit.swift */,
-				E280FE0C2A52AF6100C6D528 /* PublishStatus.swift */,
-				E280FE0D2A52AF6100C6D528 /* Tab.swift */,
-				E280FE0E2A52AF6100C6D528 /* MicronutrientGroup.swift */,
-				E280FE0F2A52AF6100C6D528 /* Nutrient.swift */,
-				E280FE102A52AF6100C6D528 /* NutrientUnit.swift */,
-				E280FE112A52AF6100C6D528 /* FormUnit.swift */,
-				E280FE122A52AF6100C6D528 /* FoodDataset.swift */,
-			);
-			path = Enums;
-			sourceTree = "<group>";
-		};
-		E280FE132A52AF6100C6D528 /* Structs */ = {
-			isa = PBXGroup;
-			children = (
-				E280FE142A52AF6100C6D528 /* FoodResult.swift */,
-				E280FE152A52AF6100C6D528 /* FoodNutrients.swift */,
-				E280FE162A52AF6100C6D528 /* FoodValue.swift */,
-				E280FE172A52AF6100C6D528 /* FoodNutrient.swift */,
-				E280FE182A52AF6100C6D528 /* Quantities */,
-				E280FE242A52AF6100C6D528 /* FormValue.swift */,
-				E280FE252A52AF6100C6D528 /* MacroValue.swift */,
-				E280FE262A52AF6100C6D528 /* FoodSize.swift */,
-				E280FE272A52AF6100C6D528 /* FoodDensity.swift */,
-				E280FE282A52AF6100C6D528 /* VolumeUnits.swift */,
-				E280FE292A52AF6100C6D528 /* NutrientValue.swift */,
-			);
-			path = Structs;
-			sourceTree = "<group>";
-		};
-		E280FE182A52AF6100C6D528 /* Quantities */ = {
-			isa = PBXGroup;
-			children = (
-				E280FE192A52AF6100C6D528 /* WeightQuantity.swift */,
-				E280FE1A2A52AF6100C6D528 /* FoodQuantity */,
-				E280FE222A52AF6100C6D528 /* VolumeQuantity.swift */,
-				E280FE232A52AF6100C6D528 /* SizeQuantity.swift */,
-			);
-			path = Quantities;
-			sourceTree = "<group>";
-		};
-		E280FE1A2A52AF6100C6D528 /* FoodQuantity */ = {
-			isa = PBXGroup;
-			children = (
-				E280FE1B2A52AF6100C6D528 /* FoodQuantity.Unit.swift */,
-				E280FE1C2A52AF6100C6D528 /* Food+NutrientScaleFactor.swift */,
-				E280FE1D2A52AF6100C6D528 /* FoodQuantity.Size.swift */,
-				E280FE1E2A52AF6100C6D528 /* FoodQuantity.swift */,
-				E280FE1F2A52AF6100C6D528 /* FoodUnit.swift */,
-				E280FE202A52AF6100C6D528 /* FoodQuantity+EquivalentQuantities.swift */,
-				E280FE212A52AF6100C6D528 /* FoodQuantity+Convert.swift */,
-			);
-			path = FoodQuantity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -787,57 +791,57 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E280FE8A2A52AF6200C6D528 /* letterpress_delete.wav in Resources */,
-				E280FE7B2A52AF6200C6D528 /* popClose2.wav in Resources */,
-				E280FE882A52AF6200C6D528 /* octave_tap-smallest.wav in Resources */,
-				E280FE722A52AF6200C6D528 /* click4.wav in Resources */,
-				E280FE8D2A52AF6200C6D528 /* calcbot_equals.wav in Resources */,
-				E280FE5E2A52AF6200C6D528 /* sources.md in Resources */,
-				E280FE702A52AF6200C6D528 /* clear_swoosh.wav in Resources */,
-				E280FE732A52AF6200C6D528 /* calcbot_clear.wav in Resources */,
-				E280FE6E2A52AF6200C6D528 /* clear_DragPickup.wav in Resources */,
-				E280FE8C2A52AF6200C6D528 /* calcbot_up.wav in Resources */,
-				E280FE622A52AF6200C6D528 /* foodItems.json in Resources */,
-				E280FE8B2A52AF6200C6D528 /* letterpress_bip2.wav in Resources */,
-				E280FE6B2A52AF6200C6D528 /* wellDone.wav in Resources */,
-				E280FE672A52AF6200C6D528 /* letterpress_click2.wav in Resources */,
-				E280FE7E2A52AF6200C6D528 /* tweetbot-bubble_pop.wav in Resources */,
-				E280FE692A52AF6200C6D528 /* click3.wav in Resources */,
-				E280FE892A52AF6200C6D528 /* letterpress_bip1.wav in Resources */,
-				E280FE742A52AF6200C6D528 /* click5.wav in Resources */,
-				E280FE8E2A52AF6200C6D528 /* chord.wav in Resources */,
-				E280FE6D2A52AF6200C6D528 /* calcbot_down.wav in Resources */,
-				E280FE7C2A52AF6200C6D528 /* octave_slide-scissors.wav in Resources */,
-				E280FE832A52AF6200C6D528 /* clear_DragPutdown.wav in Resources */,
-				E280FE6A2A52AF6200C6D528 /* popOpen2.wav in Resources */,
-				E280FE792A52AF6200C6D528 /* letterpress_swoosh2.wav in Resources */,
-				E280FE602A52AF6200C6D528 /* meals.json in Resources */,
-				E280FE7D2A52AF6200C6D528 /* clear_tap.wav in Resources */,
-				E280FE822A52AF6200C6D528 /* overlayOn2.wav in Resources */,
-				E280FE752A52AF6200C6D528 /* clear_swooshTap.wav in Resources */,
-				E280FE862A52AF6200C6D528 /* tweetbot-button_click.wav in Resources */,
-				E280FE802A52AF6200C6D528 /* tweetbot-swoosh.wav in Resources */,
-				E280FE6F2A52AF6200C6D528 /* tweetbot-swipe_fail.wav in Resources */,
-				E280FE682A52AF6200C6D528 /* octave_tap-simple.wav in Resources */,
-				E280FE662A52AF6200C6D528 /* click2.wav in Resources */,
-				E280FE772A52AF6200C6D528 /* octave_slide-paper.wav in Resources */,
-				E280FE642A52AF6200C6D528 /* emoji-keywords.json in Resources */,
-				E280FE6C2A52AF6200C6D528 /* letterpress_click1.wav in Resources */,
-				E280FE812A52AF6200C6D528 /* popOpen.wav in Resources */,
-				E280FE852A52AF6200C6D528 /* popClose.wav in Resources */,
-				E280FE612A52AF6200C6D528 /* presetFoods.json in Resources */,
-				E280FE7F2A52AF6200C6D528 /* overlayOff2.wav in Resources */,
-				E280FE762A52AF6200C6D528 /* popCloseLong.wav in Resources */,
-				E280FE842A52AF6200C6D528 /* emptyTrash.wav in Resources */,
+				E280020A2A52B84300C6D528 /* click2.wav in Resources */,
+				E28002122A52B84300C6D528 /* clear_DragPickup.wav in Resources */,
+				E280022D2A52B84300C6D528 /* letterpress_bip1.wav in Resources */,
+				E28002252A52B84300C6D528 /* popOpen.wav in Resources */,
+				E28002212A52B84300C6D528 /* clear_tap.wav in Resources */,
+				E28002682A52B84300C6D528 /* sources.md in Resources */,
+				E280026E2A52B84300C6D528 /* emoji-keywords.json in Resources */,
+				E28002222A52B84300C6D528 /* tweetbot-bubble_pop.wav in Resources */,
 				E280FC232A529E3E00C6D528 /* Preview Assets.xcassets in Resources */,
-				E280FE712A52AF6200C6D528 /* tweetbot-swipe.wav in Resources */,
-				E280FE782A52AF6200C6D528 /* tweetbot-cell_swoosh.wav in Resources */,
-				E280FE872A52AF6200C6D528 /* button_touchDown.wav in Resources */,
-				E280FE632A52AF6200C6D528 /* emojis-by-group.json in Resources */,
-				E280FE7A2A52AF6200C6D528 /* letterpress_swoosh1.wav in Resources */,
-				E280FE5F2A52AF6200C6D528 /* days.json in Resources */,
+				E28002272A52B84300C6D528 /* clear_DragPutdown.wav in Resources */,
+				E28002312A52B84300C6D528 /* calcbot_equals.wav in Resources */,
+				E28002292A52B84300C6D528 /* popClose.wav in Resources */,
+				E280022F2A52B84300C6D528 /* letterpress_bip2.wav in Resources */,
+				E280026A2A52B84300C6D528 /* meals.json in Resources */,
+				E280020F2A52B84300C6D528 /* wellDone.wav in Resources */,
+				E280021A2A52B84300C6D528 /* popCloseLong.wav in Resources */,
+				E280022A2A52B84300C6D528 /* tweetbot-button_click.wav in Resources */,
+				E280026C2A52B84300C6D528 /* foodItems.json in Resources */,
+				E28002162A52B84300C6D528 /* click4.wav in Resources */,
+				E28002142A52B84300C6D528 /* clear_swoosh.wav in Resources */,
+				E280022C2A52B84300C6D528 /* octave_tap-smallest.wav in Resources */,
+				E28002202A52B84300C6D528 /* octave_slide-scissors.wav in Resources */,
+				E28002152A52B84300C6D528 /* tweetbot-swipe.wav in Resources */,
+				E28002102A52B84300C6D528 /* letterpress_click1.wav in Resources */,
+				E280021C2A52B84300C6D528 /* tweetbot-cell_swoosh.wav in Resources */,
+				E28002282A52B84300C6D528 /* emptyTrash.wav in Resources */,
+				E280021B2A52B84300C6D528 /* octave_slide-paper.wav in Resources */,
+				E280026B2A52B84300C6D528 /* presetFoods.json in Resources */,
+				E280022E2A52B84300C6D528 /* letterpress_delete.wav in Resources */,
+				E28002132A52B84300C6D528 /* tweetbot-swipe_fail.wav in Resources */,
+				E28002182A52B84300C6D528 /* click5.wav in Resources */,
+				E280020C2A52B84300C6D528 /* octave_tap-simple.wav in Resources */,
+				E280022B2A52B84300C6D528 /* button_touchDown.wav in Resources */,
+				E280026F2A52B84300C6D528 /* foods.json in Resources */,
+				E28002112A52B84300C6D528 /* calcbot_down.wav in Resources */,
+				E28002172A52B84300C6D528 /* calcbot_clear.wav in Resources */,
+				E28002302A52B84300C6D528 /* calcbot_up.wav in Resources */,
+				E280021F2A52B84300C6D528 /* popClose2.wav in Resources */,
+				E28002192A52B84300C6D528 /* clear_swooshTap.wav in Resources */,
+				E280020B2A52B84300C6D528 /* letterpress_click2.wav in Resources */,
+				E28002232A52B84300C6D528 /* overlayOff2.wav in Resources */,
+				E28002262A52B84300C6D528 /* overlayOn2.wav in Resources */,
+				E280021E2A52B84300C6D528 /* letterpress_swoosh1.wav in Resources */,
+				E28002322A52B84300C6D528 /* chord.wav in Resources */,
+				E280026D2A52B84300C6D528 /* emojis-by-group.json in Resources */,
 				E280FC1F2A529E3E00C6D528 /* Assets.xcassets in Resources */,
-				E280FE652A52AF6200C6D528 /* foods.json in Resources */,
+				E280020E2A52B84300C6D528 /* popOpen2.wav in Resources */,
+				E280021D2A52B84300C6D528 /* letterpress_swoosh2.wav in Resources */,
+				E280020D2A52B84300C6D528 /* click3.wav in Resources */,
+				E28002692A52B84300C6D528 /* days.json in Resources */,
+				E28002242A52B84300C6D528 /* tweetbot-swoosh.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,108 +852,109 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E280FEBE2A52AF6B00C6D528 /* Import.swift in Sources */,
-				E280FE442A52AF6200C6D528 /* ItemModel.swift in Sources */,
-				E280FE5C2A52AF6200C6D528 /* FoodItemEntity.swift in Sources */,
+				E28002032A52B84300C6D528 /* FoodItem.swift in Sources */,
+				E280025F2A52B84300C6D528 /* Fond.Weight.swift in Sources */,
+				E28002732A52B84300C6D528 /* FoodItemStore.swift in Sources */,
+				E28002542A52B84300C6D528 /* FoodUnit.swift in Sources */,
+				E280028B2A52B84300C6D528 /* NutrientsForm.swift in Sources */,
+				E28002062A52B84300C6D528 /* FoodEntity.swift in Sources */,
+				E28002482A52B84300C6D528 /* NutrientUnit.swift in Sources */,
+				E28002502A52B84300C6D528 /* FoodQuantity.Unit.swift in Sources */,
+				E28002742A52B84300C6D528 /* ItemForm2.swift in Sources */,
+				E28002082A52B84300C6D528 /* DayEntity.swift in Sources */,
+				E28002342A52B84300C6D528 /* FoodModel.swift in Sources */,
+				E28002912A52B84300C6D528 /* SizeForm.swift in Sources */,
+				E28002922A52B84300C6D528 /* ItemFormAction.swift in Sources */,
+				E28002052A52B84300C6D528 /* MealEntity.swift in Sources */,
+				E28002712A52B84300C6D528 /* MealStore.swift in Sources */,
+				E28002672A52B84300C6D528 /* Constants.swift in Sources */,
+				E28002092A52B84300C6D528 /* Food2.swift in Sources */,
+				E28002352A52B84300C6D528 /* FoodModel+Scan.swift in Sources */,
+				E28002072A52B84300C6D528 /* FoodItemEntity.swift in Sources */,
+				E280023E2A52B84300C6D528 /* FoodLabelValue.swift in Sources */,
+				E28002872A52B84300C6D528 /* ItemForm.swift in Sources */,
+				E28002532A52B84300C6D528 /* FoodQuantity.swift in Sources */,
+				E28002702A52B84300C6D528 /* SearchStore.swift in Sources */,
+				E28002552A52B84300C6D528 /* FoodQuantity+EquivalentQuantities.swift in Sources */,
+				E28002442A52B84300C6D528 /* PublishStatus.swift in Sources */,
+				E28002382A52B84300C6D528 /* Micro.swift in Sources */,
+				E280024B2A52B84300C6D528 /* FoodResult.swift in Sources */,
+				E28002472A52B84300C6D528 /* Nutrient.swift in Sources */,
+				E280025B2A52B84300C6D528 /* FoodSize.swift in Sources */,
+				E28002572A52B84300C6D528 /* VolumeQuantity.swift in Sources */,
 				E280FC1B2A529E3D00C6D528 /* Prep.xcdatamodeld in Sources */,
-				E280FE932A52AF6200C6D528 /* FormSize.swift in Sources */,
-				E280FE4F2A52AF6200C6D528 /* SizeForm.swift in Sources */,
-				E280FE9C2A52AF6200C6D528 /* FoodType.swift in Sources */,
-				E280FE492A52AF6200C6D528 /* NutrientsForm.swift in Sources */,
-				E280FE502A52AF6200C6D528 /* ItemFormAction.swift in Sources */,
-				E280FE392A52AF6200C6D528 /* FoodPicker.swift in Sources */,
-				E280FEA72A52AF6200C6D528 /* FoodResult.swift in Sources */,
-				E280FE972A52AF6200C6D528 /* VolumeUnitType.swift in Sources */,
-				E280FE8F2A52AF6200C6D528 /* SoundPlayer.swift in Sources */,
-				E280FEA32A52AF6200C6D528 /* Nutrient.swift in Sources */,
-				E280FEA52A52AF6200C6D528 /* FormUnit.swift in Sources */,
-				E280FE4A2A52AF6200C6D528 /* NutrientFieldModel.swift in Sources */,
-				E280FE332A52AF6200C6D528 /* HomeView.swift in Sources */,
-				E280FE922A52AF6200C6D528 /* MealModel.swift in Sources */,
-				E280FE472A52AF6200C6D528 /* SizesList.swift in Sources */,
-				E280FEAE2A52AF6200C6D528 /* FoodQuantity.Size.swift in Sources */,
-				E280FE592A52AF6200C6D528 /* Food.swift in Sources */,
-				E280FEAC2A52AF6200C6D528 /* FoodQuantity.Unit.swift in Sources */,
-				E280FE432A52AF6200C6D528 /* ItemFormFoodLabel.swift in Sources */,
-				E280FE9A2A52AF6200C6D528 /* FoodLabelValue.swift in Sources */,
-				E280FEB72A52AF6200C6D528 /* FoodSize.swift in Sources */,
-				E280FEAD2A52AF6200C6D528 /* Food+NutrientScaleFactor.swift in Sources */,
-				E280FE2B2A52AF6200C6D528 /* Date.swift in Sources */,
-				E280FE402A52AF6200C6D528 /* DayView.swift in Sources */,
-				E280FEB62A52AF6200C6D528 /* MacroValue.swift in Sources */,
-				E280FEB82A52AF6200C6D528 /* FoodDensity.swift in Sources */,
-				E280FEB52A52AF6200C6D528 /* FormValue.swift in Sources */,
-				E280FE322A52AF6200C6D528 /* ItemForm2.swift in Sources */,
-				E280FE982A52AF6200C6D528 /* UnitType.swift in Sources */,
-				E280FE4B2A52AF6200C6D528 /* LabelExtractor.swift in Sources */,
-				E280FE522A52AF6200C6D528 /* SearchStore.swift in Sources */,
-				E280FEA62A52AF6200C6D528 /* FoodDataset.swift in Sources */,
-				E280FE9E2A52AF6200C6D528 /* NutrientMeterComponent.swift in Sources */,
-				E280FE5A2A52AF6200C6D528 /* MealEntity.swift in Sources */,
-				E280FE372A52AF6200C6D528 /* EmojiPicker.swift in Sources */,
-				E280FE942A52AF6200C6D528 /* Micro.swift in Sources */,
-				E280FE362A52AF6200C6D528 /* TimeSlider.swift in Sources */,
-				E280FEBA2A52AF6200C6D528 /* NutrientValue.swift in Sources */,
+				E28002522A52B84300C6D528 /* FoodQuantity.Size.swift in Sources */,
+				E280027E2A52B84300C6D528 /* DayView.AddFoodCell.swift in Sources */,
+				E28002812A52B84300C6D528 /* MealView.swift in Sources */,
+				E280028E2A52B84300C6D528 /* MicroPicker.swift in Sources */,
+				E28002862A52B84300C6D528 /* ItemModel.swift in Sources */,
+				E280028C2A52B84300C6D528 /* NutrientFieldModel.swift in Sources */,
+				E28002772A52B84300C6D528 /* Shimmer.swift in Sources */,
 				E280FC162A529E3D00C6D528 /* PrepApp.swift in Sources */,
-				E280FEB42A52AF6200C6D528 /* SizeQuantity.swift in Sources */,
-				E280FEB02A52AF6200C6D528 /* FoodUnit.swift in Sources */,
-				E280FE962A52AF6200C6D528 /* FoodFormRoute.swift in Sources */,
-				E280FE512A52AF6200C6D528 /* AnimatableMealItemQuantityModifier.swift in Sources */,
-				E280FE2E2A52AF6200C6D528 /* String.swift in Sources */,
-				E280FE452A52AF6200C6D528 /* ItemForm.swift in Sources */,
-				E280FE562A52AF6200C6D528 /* Day.swift in Sources */,
-				E280FE382A52AF6200C6D528 /* FoodCell.swift in Sources */,
-				E280FE4E2A52AF6200C6D528 /* NutrientField.swift in Sources */,
-				E280FEA42A52AF6200C6D528 /* NutrientUnit.swift in Sources */,
-				E280FE4C2A52AF6200C6D528 /* MicroPicker.swift in Sources */,
-				E280FE952A52AF6200C6D528 /* VolumeUnit.swift in Sources */,
-				E280FEA92A52AF6200C6D528 /* FoodValue.swift in Sources */,
-				E280FE2A2A52AF6200C6D528 /* Fond.Weight.swift in Sources */,
-				E280FE482A52AF6200C6D528 /* ImageManager.swift in Sources */,
-				E280FE2F2A52AF6200C6D528 /* ScanResult.swift in Sources */,
-				E280FEB22A52AF6200C6D528 /* FoodQuantity+Convert.swift in Sources */,
-				E280FEAF2A52AF6200C6D528 /* FoodQuantity.swift in Sources */,
-				E280FE2D2A52AF6200C6D528 /* Notification.swift in Sources */,
-				E280FE3F2A52AF6200C6D528 /* MealView.swift in Sources */,
-				E280FE5B2A52AF6200C6D528 /* FoodEntity.swift in Sources */,
-				E280FE572A52AF6200C6D528 /* Meal.swift in Sources */,
-				E280FE3D2A52AF6200C6D528 /* LogView.swift in Sources */,
-				E280FE2C2A52AF6200C6D528 /* PhotosPickerItem.swift in Sources */,
-				E280FE462A52AF6200C6D528 /* ServingField.swift in Sources */,
-				E280FEB92A52AF6200C6D528 /* VolumeUnits.swift in Sources */,
-				E280FEAB2A52AF6200C6D528 /* WeightQuantity.swift in Sources */,
-				E280FE902A52AF6200C6D528 /* FoodModel.swift in Sources */,
-				E280FE582A52AF6200C6D528 /* FoodItem.swift in Sources */,
-				E280FE532A52AF6200C6D528 /* MealStore.swift in Sources */,
-				E280FE3C2A52AF6200C6D528 /* DayView.AddFoodCell.swift in Sources */,
-				E280FE552A52AF6200C6D528 /* FoodItemStore.swift in Sources */,
-				E280FE422A52AF6200C6D528 /* FoodsView.swift in Sources */,
-				E280FEA82A52AF6200C6D528 /* FoodNutrients.swift in Sources */,
-				E280FE3E2A52AF6200C6D528 /* MealItemCell.swift in Sources */,
-				E280FE312A52AF6200C6D528 /* UIFont.swift in Sources */,
-				E280FEA12A52AF6200C6D528 /* Tab.swift in Sources */,
+				E28002392A52B84300C6D528 /* VolumeUnit.swift in Sources */,
+				E28002582A52B84300C6D528 /* SizeQuantity.swift in Sources */,
+				E28002902A52B84300C6D528 /* NutrientField.swift in Sources */,
+				E280023B2A52B84300C6D528 /* VolumeUnitType.swift in Sources */,
+				E28002512A52B84300C6D528 /* Food+NutrientScaleFactor.swift in Sources */,
+				E280024C2A52B84300C6D528 /* FoodNutrients.swift in Sources */,
+				E28002882A52B84300C6D528 /* ServingField.swift in Sources */,
+				E28002892A52B84300C6D528 /* SizesList.swift in Sources */,
+				E280025C2A52B84300C6D528 /* FoodDensity.swift in Sources */,
+				E28002022A52B84300C6D528 /* Meal.swift in Sources */,
+				E28002602A52B84300C6D528 /* Date.swift in Sources */,
+				E280023A2A52B84300C6D528 /* FoodFormRoute.swift in Sources */,
+				E28002852A52B84300C6D528 /* ItemFormFoodLabel.swift in Sources */,
+				E28002592A52B84300C6D528 /* FormValue.swift in Sources */,
+				E280023F2A52B84300C6D528 /* Macro.swift in Sources */,
+				E280027B2A52B84300C6D528 /* FoodPicker.swift in Sources */,
+				E28002792A52B84300C6D528 /* EmojiPicker.swift in Sources */,
+				E280025D2A52B84300C6D528 /* VolumeUnits.swift in Sources */,
+				E280027A2A52B84300C6D528 /* FoodCell.swift in Sources */,
+				E280023D2A52B84300C6D528 /* Unit.swift in Sources */,
+				E28002462A52B84300C6D528 /* MicronutrientGroup.swift in Sources */,
+				E28002562A52B84300C6D528 /* FoodQuantity+Convert.swift in Sources */,
+				E28002632A52B84300C6D528 /* String.swift in Sources */,
+				E28002012A52B84300C6D528 /* Day.swift in Sources */,
+				E28002832A52B84300C6D528 /* FoodsViewCell.swift in Sources */,
+				E28002402A52B84300C6D528 /* FoodType.swift in Sources */,
+				E28002822A52B84300C6D528 /* DayView.swift in Sources */,
+				E280028D2A52B84300C6D528 /* LabelExtractor.swift in Sources */,
+				E280024F2A52B84300C6D528 /* WeightQuantity.swift in Sources */,
+				E28002842A52B84300C6D528 /* FoodsView.swift in Sources */,
+				E28002652A52B84300C6D528 /* Double.swift in Sources */,
+				E28002332A52B84300C6D528 /* SoundPlayer.swift in Sources */,
+				E280025A2A52B84300C6D528 /* MacroValue.swift in Sources */,
+				E280024D2A52B84300C6D528 /* FoodValue.swift in Sources */,
+				E28002042A52B84300C6D528 /* Food.swift in Sources */,
+				E280027F2A52B84300C6D528 /* LogView.swift in Sources */,
+				E28002642A52B84300C6D528 /* ScanResult.swift in Sources */,
+				E280024A2A52B84300C6D528 /* FoodDataset.swift in Sources */,
+				E280027D2A52B84300C6D528 /* FoodPickerModel.swift in Sources */,
+				E28002662A52B84300C6D528 /* UIFont.swift in Sources */,
+				E280027C2A52B84300C6D528 /* MealForm.swift in Sources */,
+				E28002782A52B84300C6D528 /* TimeSlider.swift in Sources */,
 				E280FC1D2A529E3D00C6D528 /* ContentView.swift in Sources */,
-				E280FE9D2A52AF6200C6D528 /* WeightUnit.swift in Sources */,
-				E280FE3A2A52AF6200C6D528 /* MealForm.swift in Sources */,
-				E280FE9F2A52AF6200C6D528 /* EnergyUnit.swift in Sources */,
-				E280FE302A52AF6200C6D528 /* Double.swift in Sources */,
-				E280FE912A52AF6200C6D528 /* FoodModel+Scan.swift in Sources */,
-				E280FEA02A52AF6200C6D528 /* PublishStatus.swift in Sources */,
-				E280FE542A52AF6200C6D528 /* Database.swift in Sources */,
-				E280FE352A52AF6200C6D528 /* Shimmer.swift in Sources */,
-				E280FEAA2A52AF6200C6D528 /* FoodNutrient.swift in Sources */,
-				E280FE9B2A52AF6200C6D528 /* Macro.swift in Sources */,
-				E280FEBD2A52AF6B00C6D528 /* Constants.swift in Sources */,
-				E280FE412A52AF6200C6D528 /* FoodsViewCell.swift in Sources */,
-				E280FEB12A52AF6200C6D528 /* FoodQuantity+EquivalentQuantities.swift in Sources */,
-				E280FE3B2A52AF6200C6D528 /* FoodPickerModel.swift in Sources */,
-				E280FE4D2A52AF6200C6D528 /* FoodForm.swift in Sources */,
-				E280FEB32A52AF6200C6D528 /* VolumeQuantity.swift in Sources */,
-				E280FE5D2A52AF6200C6D528 /* DayEntity.swift in Sources */,
+				E28002412A52B84300C6D528 /* WeightUnit.swift in Sources */,
+				E280024E2A52B84300C6D528 /* FoodNutrient.swift in Sources */,
+				E280025E2A52B84300C6D528 /* NutrientValue.swift in Sources */,
+				E28002432A52B84300C6D528 /* EnergyUnit.swift in Sources */,
+				E28002932A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift in Sources */,
+				E28002422A52B84300C6D528 /* NutrientMeterComponent.swift in Sources */,
+				E28002802A52B84300C6D528 /* MealItemCell.swift in Sources */,
+				E28002452A52B84300C6D528 /* Tab.swift in Sources */,
+				E280028F2A52B84300C6D528 /* FoodForm.swift in Sources */,
+				E280023C2A52B84300C6D528 /* UnitType.swift in Sources */,
+				E28002752A52B84300C6D528 /* HomeView.swift in Sources */,
+				E28002762A52B84300C6D528 /* FoodBadge.swift in Sources */,
+				E28002612A52B84300C6D528 /* PhotosPickerItem.swift in Sources */,
+				E28002492A52B84300C6D528 /* FormUnit.swift in Sources */,
 				E280FC182A529E3D00C6D528 /* Persistence.swift in Sources */,
-				E280FE992A52AF6200C6D528 /* Unit.swift in Sources */,
-				E280FE342A52AF6200C6D528 /* FoodBadge.swift in Sources */,
-				E280FEA22A52AF6200C6D528 /* MicronutrientGroup.swift in Sources */,
+				E28002362A52B84300C6D528 /* MealModel.swift in Sources */,
+				E280028A2A52B84300C6D528 /* ImageManager.swift in Sources */,
+				E28002372A52B84300C6D528 /* FormSize.swift in Sources */,
+				E28002622A52B84300C6D528 /* Notification.swift in Sources */,
+				E28002722A52B84300C6D528 /* Database.swift in Sources */,
+				E28002002A52B84300C6D528 /* Import.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

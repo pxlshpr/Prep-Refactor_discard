@@ -119,23 +119,23 @@ struct ItemForm: View {
     }
     
     func tappedSave() {
-        guard let mealID = meal?.id, let food else { return }
-        
-        Haptics.successFeedback()
-        isPresented = false
-//        dismiss()
-        
-        if let foodItem {
-            /// Update
-        } else {
-            
-            var foodItem = FoodItem()
-            foodItem.amount = model.foodValue
-            foodItem.food = food
-            foodItem.mealID = mealID
-            
+//        guard let mealID = meal?.id, let food else { return }
+//        
+//        Haptics.successFeedback()
+//        isPresented = false
+////        dismiss()
+//        
+//        if let foodItem {
+//            /// Update
+//        } else {
+//            
+//            var foodItem = FoodItem()
+//            foodItem.amount = model.foodValue
+//            foodItem.food = food
+//            foodItem.mealID = mealID
+//            
 //            FoodItemStore.create(foodItem: foodItem)
-        }
+//        }
     }
     var form: some View {
         Form {
