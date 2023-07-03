@@ -25,7 +25,8 @@ struct FoodItem: Identifiable {
         self.sortPosition = entity.sortPosition
         self.badgeWidth = entity.badgeWidth
         self.updatedDate = entity.updatedDate
-        self.food = foodEntity.food
+//        self.food = foodEntity.food
+        self.food = Food()
         self.mealID = entity.mealID
     }
 }

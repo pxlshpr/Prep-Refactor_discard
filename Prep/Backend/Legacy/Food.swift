@@ -73,11 +73,11 @@ struct Food: Identifiable, Hashable {
     }
 }
 
-extension FoodEntity {
-    var food: Food {
-        Food(self)
-    }
-}
+//extension FoodEntity {
+//    var food: Food {
+//        Food(self)
+//    }
+//}
 
 extension Food2 {
     var isPublished: Bool {
