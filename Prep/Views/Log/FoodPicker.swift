@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 import OSLog
 
 import SwiftSugar
@@ -23,11 +22,11 @@ struct FoodPicker: View {
     @Binding var isPresented: Bool
     @State var hasAppeared = false
     
-    let meal: Meal?
+    let meal: Meal2?
     
     init(
         isPresented: Binding<Bool>,
-        meal: Meal? = nil
+        meal: Meal2? = nil
     ) {
         _isPresented = isPresented
         self.meal = meal

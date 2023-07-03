@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E23652402A52DC630049C199 /* Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236523F2A52DC630049C199 /* Populate.swift */; };
+		E23652452A5317400049C199 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652442A5317400049C199 /* DataManager.swift */; };
+		E23652472A53175E0049C199 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652462A53175E0049C199 /* CoreDataManager.swift */; };
+		E23652492A5317A30049C199 /* MealsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652482A5317A30049C199 /* MealsStore.swift */; };
+		E236524D2A5318420049C199 /* Fetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236524C2A5318420049C199 /* Fetchable.swift */; };
+		E236524F2A5318470049C199 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236524E2A5318470049C199 /* Entity.swift */; };
 		E2672C7D2A52C1B00002E95C /* FoodItemEntity2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity2.swift */; };
 		E2672C802A52C3F90002E95C /* MealEntity2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity2.swift */; };
 		E28002002A52B84300C6D528 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001572A52B84300C6D528 /* Import.swift */; };
@@ -181,9 +187,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E236523F2A52DC630049C199 /* Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Populate.swift; sourceTree = "<group>"; };
+		E23652442A5317400049C199 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		E23652462A53175E0049C199 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		E23652482A5317A30049C199 /* MealsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsStore.swift; sourceTree = "<group>"; };
+		E236524C2A5318420049C199 /* Fetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetchable.swift; sourceTree = "<group>"; };
+		E236524E2A5318470049C199 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		E2672C7C2A52C1B00002E95C /* FoodItemEntity2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemEntity2.swift; sourceTree = "<group>"; };
 		E2672C7F2A52C3F90002E95C /* MealEntity2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity2.swift; sourceTree = "<group>"; };
-		E28001572A52B84300C6D528 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Import.swift; sourceTree = "<group>"; };
+		E28001572A52B84300C6D528 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Import.swift; path = ../Import.swift; sourceTree = "<group>"; };
 		E280015A2A52B84300C6D528 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		E280015B2A52B84300C6D528 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		E280015C2A52B84300C6D528 /* FoodItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
@@ -368,6 +380,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E23652412A52DCAA0049C199 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E28001632A52B84300C6D528 /* Food2.swift */,
+				E28002942A52B99C00C6D528 /* Meal2.swift */,
+				E28002962A52B9A000C6D528 /* Day2.swift */,
+				E28002982A52B9A600C6D528 /* FoodItem2.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E23652422A53170E0049C199 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				E23652442A5317400049C199 /* DataManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		E23652432A5317320049C199 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				E23652462A53175E0049C199 /* CoreDataManager.swift */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
+		E236524A2A5317C80049C199 /* Stores */ = {
+			isa = PBXGroup;
+			children = (
+				E23652482A5317A30049C199 /* MealsStore.swift */,
+			);
+			path = Stores;
+			sourceTree = "<group>";
+		};
+		E236524B2A53183C0049C199 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E236524C2A5318420049C199 /* Fetchable.swift */,
+				E236524E2A5318470049C199 /* Entity.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		E2672C7E2A52C3E80002E95C /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,17 +435,20 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		E28001582A52B84300C6D528 /* Models */ = {
+		E28001582A52B84300C6D528 /* Backend */ = {
 			isa = PBXGroup;
 			children = (
+				E236524B2A53183C0049C199 /* Protocols */,
+				E236524A2A5317C80049C199 /* Stores */,
+				E23652432A5317320049C199 /* CoreDataManager */,
+				E23652422A53170E0049C199 /* DataManager */,
+				E28001572A52B84300C6D528 /* Import.swift */,
+				E236523F2A52DC630049C199 /* Populate.swift */,
 				E2672C7E2A52C3E80002E95C /* Entities */,
 				E28001592A52B84300C6D528 /* Legacy */,
-				E28001632A52B84300C6D528 /* Food2.swift */,
-				E28002942A52B99C00C6D528 /* Meal2.swift */,
-				E28002962A52B9A000C6D528 /* Day2.swift */,
-				E28002982A52B9A600C6D528 /* FoodItem2.swift */,
+				E23652412A52DCAA0049C199 /* Models */,
 			);
-			path = Models;
+			path = Backend;
 			sourceTree = "<group>";
 		};
 		E28001592A52B84300C6D528 /* Legacy */ = {
@@ -716,8 +775,7 @@
 				E28001CB2A52B84300C6D528 /* Data */,
 				E28001902A52B84300C6D528 /* Data Types */,
 				E28001C12A52B84300C6D528 /* Extensions */,
-				E28001572A52B84300C6D528 /* Import.swift */,
-				E28001582A52B84300C6D528 /* Models */,
+				E28001582A52B84300C6D528 /* Backend */,
 				E28001642A52B84300C6D528 /* Sounds */,
 				E28001D42A52B84300C6D528 /* Stores */,
 				E28001D92A52B84300C6D528 /* Views */,
@@ -898,8 +956,10 @@
 				E28002712A52B84300C6D528 /* MealStore.swift in Sources */,
 				E28002672A52B84300C6D528 /* Constants.swift in Sources */,
 				E28002092A52B84300C6D528 /* Food2.swift in Sources */,
+				E23652452A5317400049C199 /* DataManager.swift in Sources */,
 				E28002352A52B84300C6D528 /* FoodModel+Scan.swift in Sources */,
 				E2672C7D2A52C1B00002E95C /* FoodItemEntity2.swift in Sources */,
+				E23652492A5317A30049C199 /* MealsStore.swift in Sources */,
 				E28002072A52B84300C6D528 /* FoodItemEntity.swift in Sources */,
 				E280023E2A52B84300C6D528 /* FoodLabelValue.swift in Sources */,
 				E28002872A52B84300C6D528 /* ItemForm.swift in Sources */,
@@ -917,12 +977,14 @@
 				E28002522A52B84300C6D528 /* FoodQuantity.Size.swift in Sources */,
 				E280027E2A52B84300C6D528 /* DayView.AddFoodCell.swift in Sources */,
 				E28002812A52B84300C6D528 /* MealView.swift in Sources */,
+				E236524D2A5318420049C199 /* Fetchable.swift in Sources */,
 				E280028E2A52B84300C6D528 /* MicroPicker.swift in Sources */,
 				E28002862A52B84300C6D528 /* ItemModel.swift in Sources */,
 				E280028C2A52B84300C6D528 /* NutrientFieldModel.swift in Sources */,
 				E28002772A52B84300C6D528 /* Shimmer.swift in Sources */,
 				E280FC162A529E3D00C6D528 /* PrepApp.swift in Sources */,
 				E28002952A52B99C00C6D528 /* Meal2.swift in Sources */,
+				E23652402A52DC630049C199 /* Populate.swift in Sources */,
 				E28002392A52B84300C6D528 /* VolumeUnit.swift in Sources */,
 				E28002582A52B84300C6D528 /* SizeQuantity.swift in Sources */,
 				E28002992A52B9A600C6D528 /* FoodItem2.swift in Sources */,
@@ -956,6 +1018,7 @@
 				E280024F2A52B84300C6D528 /* WeightQuantity.swift in Sources */,
 				E28002842A52B84300C6D528 /* FoodsView.swift in Sources */,
 				E28002652A52B84300C6D528 /* Double.swift in Sources */,
+				E23652472A53175E0049C199 /* CoreDataManager.swift in Sources */,
 				E28002332A52B84300C6D528 /* SoundPlayer.swift in Sources */,
 				E280025A2A52B84300C6D528 /* MacroValue.swift in Sources */,
 				E280024D2A52B84300C6D528 /* FoodValue.swift in Sources */,
@@ -964,6 +1027,7 @@
 				E28002642A52B84300C6D528 /* ScanResult.swift in Sources */,
 				E280024A2A52B84300C6D528 /* FoodDataset.swift in Sources */,
 				E280027D2A52B84300C6D528 /* FoodPickerModel.swift in Sources */,
+				E236524F2A5318470049C199 /* Entity.swift in Sources */,
 				E280029B2A52BC0100C6D528 /* DayEntity2.swift in Sources */,
 				E28002662A52B84300C6D528 /* UIFont.swift in Sources */,
 				E280027C2A52B84300C6D528 /* MealForm.swift in Sources */,

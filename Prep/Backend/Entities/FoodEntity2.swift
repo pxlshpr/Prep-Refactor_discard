@@ -3,7 +3,7 @@ import CoreData
 
 import FoodDataTypes
 
-extension FoodEntity2 {
+extension FoodEntity2: Entity {
     
     convenience init(context: NSManagedObjectContext, food: Food2) {
         self.init(context: context)
@@ -31,8 +31,66 @@ extension FoodEntity2 {
         self.type = food.type
         self.publishStatus = food.publishStatus
         self.dataset = food.dataset
+        self.lastUsedAt = food.lastUsedAt
         self.updatedAt = food.updatedAt
         self.createdAt = food.createdAt
+    }
+    
+    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyPresetFood) {
+        self.init(context: context)
+        self.id = UUID(uuidString: legacy.id)
+        self.emoji = legacy.emoji
+        self.name = legacy.name
+        self.detail = legacy.detail
+        self.brand = legacy.brand
+        self.amount = legacy.amount.foodValue
+        self.serving = legacy.serving?.foodValue
+        self.energy = legacy.nutrients.energyInKcal
+        self.energyUnit = .kcal
+        self.carb = legacy.nutrients.carb
+        self.protein = legacy.nutrients.protein
+        self.fat = legacy.nutrients.fat
+        self.micros = legacy.nutrients.micros.map { FoodNutrient($0) }
+        self.sizes = legacy.sizes.map { FoodSize(legacy: $0) }
+        self.density = legacy.density?.density
+        self.url = nil
+        self.imageIDs = []
+        self.barcodes = []
+        self.type = .food
+        self.publishStatus = nil
+        self.dataset = legacy.dataset
+        self.updatedAt = Date(timeIntervalSince1970: legacy.updatedAt)
+        self.createdAt = Date(timeIntervalSince1970: legacy.createdAt)
+    }
+    
+    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyUserFood) {
+        self.init(context: context)
+        self.id = UUID(uuidString: legacy.id)!
+        self.emoji = legacy.emoji
+        self.name = legacy.name
+        self.detail = legacy.detail
+        self.brand = legacy.brand
+        self.amount = legacy.info.amount.foodValue
+        self.serving = legacy.info.serving?.foodValue
+        self.energy = legacy.info.nutrients.energyInKcal
+        self.energyUnit = .kcal
+        self.carb = legacy.info.nutrients.carb
+        self.protein = legacy.info.nutrients.protein
+        self.fat = legacy.info.nutrients.fat
+        self.micros = legacy.info.nutrients.micros.map { FoodNutrient($0) }
+        self.sizes = legacy.info.sizes.map { FoodSize(legacy: $0) }
+        self.density = legacy.info.density?.density
+        self.url = nil
+        self.imageIDs = []
+        self.barcodes = []
+        self.type = .food
+        self.publishStatus = nil
+        self.dataset = legacy.dataset
+        if let lastUsedAt = legacy.lastUsedAt {
+            self.lastUsedAt = Date(timeIntervalSince1970: lastUsedAt)
+        }
+        self.updatedAt = Date(timeIntervalSince1970: legacy.updatedAt)
+        self.createdAt = Date(timeIntervalSince1970: legacy.updatedAt)
     }
 }
 

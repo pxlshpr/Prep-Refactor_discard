@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22158.8" systemVersion="23A5276g" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="DayEntity2" representedClassName="DayEntity2" syncable="YES" codeGenerationType="class">
-        <attribute name="dateString" optional="YES" attributeType="String"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="dateString" attributeType="String" defaultValueString=""/>
         <relationship name="mealEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntity2" inverseName="dayEntity" inverseEntity="MealEntity2"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="dateString"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="FoodEntity2" representedClassName="FoodEntity2" syncable="YES" codeGenerationType="class">
         <attribute name="amountData" optional="YES" attributeType="Binary"/>
@@ -20,6 +24,7 @@
         <attribute name="fat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="imageIDsString" optional="YES" attributeType="String"/>
+        <attribute name="lastUsedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="microsData" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="protein" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -30,6 +35,11 @@
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="url" optional="YES" attributeType="String"/>
         <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity2" inverseName="foodEntity" inverseEntity="FoodItemEntity2"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="FoodItemEntity2" representedClassName="FoodItemEntity2" syncable="YES" codeGenerationType="class">
         <attribute name="amountData" optional="YES" attributeType="Binary"/>
@@ -41,6 +51,11 @@
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="foodEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodEntity2" inverseName="foodItemEntities" inverseEntity="FoodEntity2"/>
         <relationship name="mealEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealEntity2" inverseName="foodItemEntities" inverseEntity="MealEntity2"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -51,5 +66,13 @@
         <attribute name="timeString" optional="YES" attributeType="String"/>
         <relationship name="dayEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity2" inverseName="mealEntities" inverseEntity="DayEntity2"/>
         <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity2" inverseName="mealEntity" inverseEntity="FoodItemEntity2"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="SettingsEntity" representedClassName="SettingsEntity" syncable="YES" codeGenerationType="class">
+        <attribute name="hasPopulated" optional="YES" attributeType="Boolean"/>
     </entity>
 </model>

@@ -93,9 +93,9 @@ func importJSON(modelContext: ModelContext) {
     
     for presetFood in presetFoods {
         
-        importLogger.debug("Adding \(presetFood.emoji, privacy: .public) \(presetFood.name, privacy: .public) (\(presetFood.id?.uuidString ?? "", privacy: .public))")
+        importLogger.debug("Adding \(presetFood.emoji, privacy: .public) \(presetFood.name, privacy: .public) (\(presetFood.id, privacy: .public))")
         
-        guard let id = presetFood.id?.uuidString else { fatalError() }
+        let id = presetFood.id
         
         let food = FoodEntity(
             uuid: id,
@@ -200,7 +200,7 @@ struct LegacyMeal: Identifiable, Hashable, Codable {
 }
 
 struct LegacyPresetFood: Codable {
-    var id: UUID?
+    var id: String
     var createdAt: Double
     var updatedAt: Double
     var deletedAt: Double?
@@ -220,6 +220,10 @@ struct LegacyPresetFood: Codable {
     var datasetFoodId: String?
     
     var barcodes: [LegacyBarcode]
+    
+    var description: String {
+        "\(emoji) \(name) (\(id))"
+    }
 }
 
 struct LegacyFoodNutrients: Codable, Hashable {
@@ -301,6 +305,10 @@ struct LegacyUserFood: Identifiable, Hashable, Codable {
 //    var syncStatus: SyncStatus
     var updatedAt: Double
     var deletedAt: Double?
+    
+    var description: String {
+        "\(emoji) \(name) (\(id))"
+    }
 }
 
 struct LegacyFoodItem: Identifiable, Hashable, Codable {

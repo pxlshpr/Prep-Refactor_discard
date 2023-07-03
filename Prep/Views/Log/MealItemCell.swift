@@ -6,7 +6,7 @@ struct MealItemCell: View {
     
     @Environment(\.colorScheme) var colorScheme
 
-    let item: FoodItem
+    let item: FoodItem2
     
     var body: some View {
         content
@@ -27,7 +27,7 @@ struct MealItemCell: View {
     
     var foodBadge: some View {
         let widthBinding = Binding<CGFloat>(
-            get: { CGFloat(item.badgeWidth ?? 0) },
+            get: { CGFloat(item.badgeWidth) },
             set: { _ in }
         )
 

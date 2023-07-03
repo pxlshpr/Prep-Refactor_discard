@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 import OSLog
 
 import SwiftHaptics
@@ -8,17 +7,17 @@ struct MealView: View {
 
     @Environment(\.modelContext) var context
     
-    let meal: Meal
+    let meal: Meal2
     @Binding var leadingPadding: CGFloat
     @Binding var trailingPadding: CGFloat
 
     let title: String
-    @State var foodItems: [FoodItem]
+    @State var foodItems: [FoodItem2]
     
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
     
     init(
-        meal: Meal,
+        meal: Meal2,
         leadingPadding: Binding<CGFloat>,
         trailingPadding: Binding<CGFloat>
     ) {
@@ -43,7 +42,7 @@ struct MealView: View {
     }
     
     func didAddFoodItem(_ notification: Notification) {
-        guard let foodItem = notification.userInfo?[Notification.PrepKeys.foodItem] as? FoodItem,
+        guard let foodItem = notification.userInfo?[Notification.PrepKeys.foodItem] as? FoodItem2,
               foodItem.mealID == meal.id
         else {
             return
@@ -56,7 +55,7 @@ struct MealView: View {
         }
     }
     
-    func cell(foodItem: FoodItem) -> some View {
+    func cell(foodItem: FoodItem2) -> some View {
         Button {
             Haptics.selectionFeedback()
 //            model.foodItemBeingEdited = foodItem
@@ -71,32 +70,32 @@ struct MealView: View {
             Button(role: .destructive) {
                 Haptics.successFeedback()
                 
-                do {
-                    let logger = Logger(subsystem: "MealView", category: "delete")
-                    let id = meal.id
-                    let descriptor = FetchDescriptor<MealEntity>(predicate: #Predicate {
-                        $0.uuid == id
-                    })
-                    logger.debug("Fetching meal to delete: \(id, privacy: .public)")
-                    guard let meal = try context.fetch(descriptor).first else {
-                        logger.error("Could not find meal")
-                        return
-                    }
-                    logger.debug("Deleting meal: \(id, privacy: .public)")
-                    context.delete(meal)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        Task {
-                            logger.debug("Saving context")
-                            try context.save()
-                        }
-                    }
-                } catch {
-                    /// Getting configuration error when trying to delete a meal that can't be found
-                    fatalError(error.localizedDescription)
-                }
-
-                post(.didDeleteMeal, userInfo: [.meal: meal])
+//                do {
+//                    let logger = Logger(subsystem: "MealView", category: "delete")
+//                    let id = meal.id
+//                    let descriptor = FetchDescriptor<MealEntity>(predicate: #Predicate {
+//                        $0.uuid == id
+//                    })
+//                    logger.debug("Fetching meal to delete: \(id, privacy: .public)")
+//                    guard let meal = try context.fetch(descriptor).first else {
+//                        logger.error("Could not find meal")
+//                        return
+//                    }
+//                    logger.debug("Deleting meal: \(id, privacy: .public)")
+//                    context.delete(meal)
+//                    
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                        Task {
+//                            logger.debug("Saving context")
+//                            try context.save()
+//                        }
+//                    }
+//                } catch {
+//                    /// Getting configuration error when trying to delete a meal that can't be found
+//                    fatalError(error.localizedDescription)
+//                }
+//
+//                post(.didDeleteMeal, userInfo: [.meal: meal])
 
 //                MealStore.delete(meal)
                 
@@ -122,7 +121,7 @@ struct MealView: View {
         .frame(height: 25)
     }
     
-    func addFoodCell(_ meal: Meal) -> some View {
+    func addFoodCell(_ meal: Meal2) -> some View {
         DayView.AddFoodCell(
             meal: meal,
             leadingPadding: $leadingPadding,

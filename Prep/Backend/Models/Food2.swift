@@ -3,7 +3,7 @@ import CoreData
 
 import FoodDataTypes
 
-struct Food2 {
+struct Food2: Identifiable, Codable, Hashable {
     let id: UUID
     
     var emoji: String
@@ -34,6 +34,7 @@ struct Food2 {
     var publishStatus: PublishStatus?
     var dataset: FoodDataset?
     
+    var lastUsedAt: Date?
     var updatedAt: Date
     var createdAt: Date
     
@@ -59,6 +60,7 @@ struct Food2 {
         type: FoodType,
         publishStatus: PublishStatus? = nil,
         dataset: FoodDataset? = nil,
+        lastUsedAt: Date? = nil,
         updatedAt: Date,
         createdAt: Date
     ) {
@@ -83,6 +85,7 @@ struct Food2 {
         self.type = type
         self.publishStatus = publishStatus
         self.dataset = dataset
+        self.lastUsedAt = lastUsedAt
         self.updatedAt = updatedAt
         self.createdAt = createdAt
     }
@@ -112,6 +115,7 @@ extension Food2 {
             type: entity.type,
             publishStatus: entity.publishStatus,
             dataset: entity.dataset,
+            lastUsedAt: entity.lastUsedAt,
             updatedAt: entity.updatedAt!,
             createdAt: entity.createdAt!
         )

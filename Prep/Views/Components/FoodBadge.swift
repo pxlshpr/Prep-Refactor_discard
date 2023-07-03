@@ -27,6 +27,15 @@ struct FoodBadge: View {
         _width = width
     }
 
+    init(food: Food2,
+        width: Binding<CGFloat> = .constant(Self.DefaultWidth)
+    ) {
+        self.carb = food.carb
+        self.fat = food.fat
+        self.protein = food.protein
+        _width = width
+    }
+
     init(
         c: Double,
         f: Double,

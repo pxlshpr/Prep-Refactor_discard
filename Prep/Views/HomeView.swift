@@ -1,6 +1,5 @@
 import SwiftUI
 import OSLog
-import SwiftData
 import Observation
 
 import SwiftHaptics
@@ -9,7 +8,6 @@ import SwiftSugar
 
 struct HomeView: View {
         
-    @Environment(\.modelContext) private var context
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
@@ -47,10 +45,6 @@ struct HomeView: View {
     }
     
     func appeared(_ proxy: GeometryProxy) {
-//        let newItem = MealEntity(name: "", time: Date.now.timeIntervalSince1970)
-//        context.insert(newItem)
-//        try! context.save()
-
         if currentDate == nil {
             currentDate = Date.now.setting(year: 2023, month: 6, day: 18).startOfDay
 //            currentDate = Date.now.startOfDay

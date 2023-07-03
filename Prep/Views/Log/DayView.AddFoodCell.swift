@@ -11,7 +11,7 @@ extension DayView {
     
         @Environment(\.colorScheme) var colorScheme
         
-        let meal: Meal
+        let meal: Meal2
         @Binding var leadingPadding: CGFloat
         @Binding var trailingPadding: CGFloat
         

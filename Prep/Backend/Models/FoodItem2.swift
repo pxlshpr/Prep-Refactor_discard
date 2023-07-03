@@ -1,76 +1,69 @@
 import Foundation
-import SwiftData
 import OSLog
+private let logger = Logger(subsystem: "FoodItem", category: "")
+struct FoodItem2: Identifiable, Codable, Hashable {
+    let id: UUID
+    
+    var amount: FoodValue
+    var food: Food2
+    var mealID: UUID?
 
-@Model
-class FoodItemEntity {
-    var uuid: String
-    
-    var amountRaw: FoodValueRaw
-    
-    var markedAsEatenAt: Double?
+    var badgeWidth: CGFloat
     var sortPosition: Int
-    var badgeWidth: Double?
     
-    var updatedAt: Double
-
-    var foodID: String
-    var mealID: String?
-
-//    @Relationship var foodEntity: FoodEntity?
-//    @Relationship var mealEntity: MealEntity?
-
+    var eatenAt: Date?
+    var updatedAt: Date
+    let createdAt: Date
+    
     init(
-        uuid: String = UUID().uuidString,
-        foodEntity: FoodEntity?,
-        mealEntity: MealEntity?,
+        id: UUID,
         amount: FoodValue,
-        markedAsEatenAt: Double? = nil,
+        food: Food2,
+        mealID: UUID?,
+        badgeWidth: CGFloat,
         sortPosition: Int,
-        updatedAt: Double,
-        badgeWidth: Double? = nil
+        eatenAt: Date?,
+        updatedAt: Date,
+        createdAt: Date
     ) {
-        self.uuid = uuid
-        
-        self.mealID = mealEntity?.uuid
-        self.foodID = foodEntity?.uuid ?? ""
-        
+        self.id = id
         self.amount = amount
-        
-        self.markedAsEatenAt = markedAsEatenAt
-        self.sortPosition = sortPosition
-        self.updatedAt = updatedAt
+        self.food = food
+        self.mealID = mealID
         self.badgeWidth = badgeWidth
-        
-        let logger = Logger(subsystem: "FoodItemEntity", category: "")
-        if let mealID = self.mealID {
-            logger.debug("Creating FoodItemEntity with mealID: \(mealID, privacy: .public)")
-        } else {
-            logger.debug("Creating FoodItemEntity with mealID: nil")
+        self.sortPosition = sortPosition
+        self.eatenAt = eatenAt
+        self.updatedAt = updatedAt
+        self.createdAt = createdAt
+    }
+    
+    init?(_ entity: FoodItemEntity2) {
+        guard let food = entity.food else {
+            logger.error("Could not get food for FoodItemEntity with id: \(entity.id!, privacy: .public)")
+            return nil
         }
+        self.init(
+            id: entity.id!,
+            amount: entity.amount,
+            food: food,
+            mealID: entity.mealID,
+            badgeWidth: entity.badgeWidth,
+            sortPosition: Int(entity.sortPosition),
+            eatenAt: entity.eatenAt,
+            updatedAt: entity.updatedAt!,
+            createdAt: entity.createdAt!
+        )
     }
-    
-    var amount: FoodValue {
-        get { amountRaw.foodValue }
-        set { amountRaw = newValue.rawValue }
-    }
-    
-    var markedAsEatenDate: Date? {
-        get {
-            guard let markedAsEatenAt else { return nil }
-            return Date(timeIntervalSince1970: markedAsEatenAt)
-        }
-        set { markedAsEatenAt = newValue?.timeIntervalSince1970 }
-    }
-    
-    var updatedDate: Date {
-        get { Date(timeIntervalSince1970: updatedAt) }
-        set { updatedAt = newValue.timeIntervalSince1970 }
+}
+
+extension FoodItem2 {
+    var quantityDescription: String {
+        amount.description(with: food)
     }
 }
 
 extension FoodValue {
-    func description(with food: Food) -> String {
+    func description(with food: Food2) -> String {
         "\(value.cleanAmount) \(unitDescription(sizes: food.sizes))"
     }
     
@@ -109,7 +102,7 @@ extension FoodValue {
 
 import FoodDataTypes
 
-extension FoodItem {
+extension FoodItem2 {
     func scaledEnergyValue(in unit: EnergyUnit) -> Double {
         0
 //        guard let value = food.value(for: .energy) else { return 0 }
@@ -130,6 +123,7 @@ extension FoodItem {
     }
 }
 
+
 //import FoodLabel
 //
 //extension FoodItemEntity {
@@ -138,7 +132,7 @@ extension FoodItem {
 //        customRDAValues: [AnyNutrient : (Double, NutrientUnit)] = [:],
 //        dietName: String? = nil
 //    ) -> FoodLabelData {
-//        
+//
 //        let quantityUnit: String
 //        if let food {
 //            quantityUnit = amount.unitDescription(sizes: food.legacyFood.info.sizes)
@@ -161,17 +155,17 @@ extension FoodItem {
 //}
 //
 //extension FoodItemEntity {
-//    
+//
 //    var scaledValueForEnergyInKcal: Double {
 //        guard let food else { return 0 }
 //        return food.legacyFood.info.nutrients.energyInKcal * nutrientScaleFactor
 //    }
-//    
+//
 //    func scaledValueForMacro(_ macro: Macro) -> Double {
 //        guard let food else { return 0 }
 //        return food.legacyFood.valueForMacro(macro) * nutrientScaleFactor
 //    }
-//    
+//
 //    var microsDict: [NutrientType : FoodLabelValue] {
 //        var dict: [NutrientType : FoodLabelValue] = [:]
 //        guard let food else { return dict }

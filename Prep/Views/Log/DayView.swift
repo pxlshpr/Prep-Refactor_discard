@@ -1,6 +1,5 @@
 import SwiftUI
 import OSLog
-import SwiftData
 import Observation
 
 import SwiftSugar
@@ -11,7 +10,6 @@ struct DayView: View {
 
     let logger = Logger(subsystem: "DayView", category: "")
     
-    @Environment(\.modelContext) var context
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
@@ -33,7 +31,7 @@ struct DayView: View {
 
     @State var emojiWidth: CGFloat = 0
 
-    @State var meals: [Meal]
+    @State var meals: [Meal2]
 
     let model = Model()
     
@@ -41,7 +39,7 @@ struct DayView: View {
     let didDeleteMeal = NotificationCenter.default.publisher(for: .didDeleteMeal)
 
     @Observable class Model {
-        var foodItemBeingEdited: FoodItemEntity? = nil
+        var foodItemBeingEdited: FoodItem2? = nil
     }
 
     init(
@@ -81,7 +79,7 @@ struct DayView: View {
     
     func didAddMeal(notification: Notification) {
         DispatchQueue.main.async {
-            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
+            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal2,
                   meal.date == self.date
             else { return }
             
@@ -102,7 +100,7 @@ struct DayView: View {
 
     func didDeleteMeal(notification: Notification) {
         DispatchQueue.main.async {
-            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
+            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal2,
                   meal.date == self.date
             else { return }
             
@@ -114,21 +112,23 @@ struct DayView: View {
     }
 
     func appeared() {
-//        logger.debug("Fetching meals...")
-//        let meals = fetchMeals(on: date, context: context)
-//        self.meals = meals
-//        logger.debug("... fetched \(meals.count) meals")
-//        
-//        Task.detached {
-//            /// Doing this crashes if we then try to add a meal, getting the following error:
-//            /// "The model configuration used to open the store is incompatible with the one that was used to create the store."
-//            ///
-////            let meals = try await FetchMealStore.shared.meals(date: date)
-////            await MainActor.run {
-////                self.meals = meals
-////                logger.debug("... fetched \(meals.count) meals")
-////            }
-//        }
+        Task.detached(priority: .high) {
+            logger.debug("Fetching meals in a detached Task…")
+            let meals = await MealsStore.meals(on: date)
+            self.meals = meals
+            logger.debug("… fetched \(meals.count) meals")
+        }
+        
+        Task.detached {
+            /// Doing this crashes if we then try to add a meal, getting the following error:
+            /// "The model configuration used to open the store is incompatible with the one that was used to create the store."
+            ///
+//            let meals = try await FetchMealStore.shared.meals(date: date)
+//            await MainActor.run {
+//                self.meals = meals
+//                logger.debug("... fetched \(meals.count) meals")
+//            }
+        }
     }
     
     var list: some View {

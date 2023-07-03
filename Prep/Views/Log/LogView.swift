@@ -6,7 +6,6 @@ import SwiftSugar
 
 struct LogView: View {
     
-    @Environment(\.modelContext) private var context
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     @Binding var currentDate: Date?
