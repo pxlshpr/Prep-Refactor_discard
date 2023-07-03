@@ -42,8 +42,8 @@ extension CoreDataManager {
         
         Task {
             let start = CFAbsoluteTimeGetCurrent()
-            await run("Days", populateDays_legacy)
-            await run("Meals", populateMeals_legacy)
+            await run("Days", populateDays)
+            await run("Meals", populateMeals)
 //            await run("Preset Foods", populatePresetFoods)
             await run("Preset Foods", populatePresetFoods1)
             await run("Preset Foods", populatePresetFoods2)
@@ -52,7 +52,7 @@ extension CoreDataManager {
             await run("Preset Foods", populatePresetFoods5)
             await run("Preset Foods", populatePresetFoods6)
             await run("Preset Foods", populatePresetFoods7)
-            await run("User Foods", populateUserFoods_legacy)
+            await run("User Foods", populateUserFoods)
 //            await run("Food Items", populateFoodItems)
             await run("Food Items", populateFoodItems1)
             await run("Food Items", populateFoodItems2)
@@ -141,290 +141,6 @@ extension CoreDataManager {
     
 }
 extension CoreDataManager {
-    
-    func populateDays(_ context: NSManagedObjectContext) {
-        let url = Bundle.main.url(forResource: "days", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let legacyObjects = try! JSONDecoder().decode([LegacyDay].self, from: data)
-
-        logger.info("Prepopulating \(legacyObjects.count) days…")
-
-        /// For-Loop
-//        for legacy in legacyObjects {
-//            let entity = DayEntity(context, legacy)
-//            context.insert(entity)
-//            logger.debug("Inserted Day: \(legacy.calendarDayString, privacy: .public)")
-//        }
-        
-        func createBatchInsertRequest() -> NSBatchInsertRequest {
-            /// Create an iterator for raw data
-            var iterator = legacyObjects.makeIterator()
-            
-            let request = NSBatchInsertRequest(entity: DayEntity.entity()) { (obj: NSManagedObject) in
-                /// Stop add item when itemListIterator return nil
-                guard let legacy = iterator.next() else { return true }
-                
-                /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? DayEntity {
-                    cmo.dateString = legacy.calendarDayString
-                }
-                logger.debug("Inserted Day: \(legacy.calendarDayString, privacy: .public)")
-
-                /// Continue add item to batch insert request
-                return false
-            }
-            return request
-        }
-        
-        let request = createBatchInsertRequest()
-        try! context.execute(request)
-    }
-
-    func populateMeals(_ context: NSManagedObjectContext) {
-        let url = Bundle.main.url(forResource: "meals", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let legacyObjects = try! JSONDecoder().decode([LegacyMeal].self, from: data)
-
-        let daysURL = Bundle.main.url(forResource: "days", withExtension: "json")!
-        let daysData = try! Data(contentsOf: daysURL)
-        let legacyDays = try! JSONDecoder().decode([LegacyDay].self, from: daysData)
-
-        logger.info("Prepopulating \(legacyObjects.count) meals…")
-        
-        func createBatchInsertRequest() -> NSBatchInsertRequest {
-            /// Create an iterator for raw data
-            var iterator = legacyObjects.makeIterator()
-            
-            let request = NSBatchInsertRequest(entity: MealEntity.entity()) { (obj: NSManagedObject) in
-                /// Stop add item when itemListIterator return nil
-                guard let legacy = iterator.next() else { return true }
-                
-                guard legacy.deletedAt == nil || legacy.deletedAt == 0 else {
-                    logger.warning("Ignoring deleted Meal: \(legacy.id, privacy: .public)")
-                    return false
-                }
-                
-                /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? MealEntity {
-                    cmo.id = UUID(uuidString: legacy.id)!
-                    cmo.name = legacy.name
-                    cmo.time = Date(timeIntervalSince1970: legacy.time)
-//                    cmo.dayEntity = dayEntity
-                }
-                logger.debug("Inserted Meal: \(legacy.id, privacy: .public)")
-
-                /// Continue add item to batch insert request
-                return false
-            }
-            return request
-        }
-        
-        let request = createBatchInsertRequest()
-        try! context.execute(request)
-        
-        let meals = MealEntity.objects(in: context)
-        for meal in meals {
-            guard let legacy = legacyObjects.first(where: { $0.id == meal.id!.uuidString }) else {
-                fatalError()
-            }
-            guard let legacyDay = legacyDays.first(where: { $0.id == legacy.dayID }) else {
-                fatalError()
-            }
-            let dateString = legacyDay.calendarDayString
-            let predicate = NSPredicate(format: "dateString == %@", dateString)
-            let dayEntity = DayEntity.objects(for: predicate, in: context).first
-            
-            guard let dayEntity else {
-                logger.error("Failed to find DayEntity with id: \(legacy.dayID, privacy: .public)")
-                fatalError()
-            }
-            meal.dayEntity = dayEntity
-            logger.debug("Attached meal: \(meal.id!.uuidString, privacy: .public) to day: \(dayEntity.dateString!, privacy: .public)")
-        }
-    }
-    
-    func populatePresetFoods(_ context: NSManagedObjectContext) {
-        let url = Bundle.main.url(forResource: "presetFoods", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let legacyObjects = try! JSONDecoder().decode([LegacyPresetFood].self, from: data)
-
-        logger.info("Prepopulating \(legacyObjects.count) preset foods…")
-
-//        for legacy in legacyObjects {
-//            let entity = FoodEntity(context, legacy)
-//            context.insert(entity)
-//            logger.debug("Inserted Preset Food: \(legacy.description, privacy: .public)")
-//        }
-        
-        func createBatchInsertRequest() -> NSBatchInsertRequest {
-            /// Create an iterator for raw data
-            var iterator = legacyObjects.makeIterator()
-            
-            let request = NSBatchInsertRequest(entity: FoodEntity.entity()) { (obj: NSManagedObject) in
-                /// Stop add item when itemListIterator return nil
-                guard let legacy = iterator.next() else { return true }
-                
-                /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? FoodEntity {
-                    cmo.fill(legacy)
-                }
-                logger.debug("Inserted Preset Food: \(legacy.description, privacy: .public)")
-
-                /// Continue add item to batch insert request
-                return false
-            }
-            return request
-        }
-        
-        let request = createBatchInsertRequest()
-        try! context.execute(request)
-    }
-    
-    func populateUserFoods(_ context: NSManagedObjectContext) {
-        let url = Bundle.main.url(forResource: "foods", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let legacyObjects = try! JSONDecoder().decode([LegacyUserFood].self, from: data)
-
-        logger.info("Prepopulating \(legacyObjects.count) user foods…")
-
-//        for legacy in legacyObjects {
-//            guard legacy.deletedAt == nil || legacy.deletedAt == 0 else {
-//                logger.warning("Ignoring deleted User Food: \(legacy.description, privacy: .public)")
-//                continue
-//            }
-//            let entity = FoodEntity(context, legacy)
-//            context.insert(entity)
-//            logger.debug("Inserted User Food: \(legacy.description, privacy: .public)")
-//        }
-        
-        func createBatchInsertRequest() -> NSBatchInsertRequest {
-            /// Create an iterator for raw data
-            var iterator = legacyObjects.makeIterator()
-            
-            let request = NSBatchInsertRequest(entity: FoodEntity.entity()) { (obj: NSManagedObject) in
-                /// Stop add item when itemListIterator return nil
-                guard let legacy = iterator.next() else { return true }
-                
-                /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? FoodEntity {
-                    cmo.fill(legacy)
-                }
-                logger.debug("Inserted User Food: \(legacy.description, privacy: .public)")
-
-                /// Continue add item to batch insert request
-                return false
-            }
-            return request
-        }
-        
-        let request = createBatchInsertRequest()
-        try! context.execute(request)
-    }
-    
-    func populateFoodItems(_ context: NSManagedObjectContext) {
-        
-        let url = Bundle.main.url(forResource: "foodItems", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let legacyObjects = try! JSONDecoder().decode([LegacyFoodItem].self, from: data)
-
-        logger.info("Prepopulating \(legacyObjects.count) food items…")
-
-//        for legacy in legacyObjects {
-//
-//            /// Ensure this isn't a deleted FoodItem
-//            guard legacy.deletedAt == nil || legacy.deletedAt == 0 else {
-//                logger.warning("Ignoring deleted Food Item: \(legacy.id, privacy: .public)")
-//                continue
-//            }
-//
-//            guard let foodEntity = try! FoodEntity.object(
-//                with: UUID(uuidString: legacy.foodID)!,
-//                in: context
-//            ) else {
-//                logger.error("Failed to find FoodEntity with id: \(legacy.foodID, privacy: .public)")
-//                fatalError()
-//            }
-//
-//            guard let mealID = legacy.mealID else {
-//                logger.error("Encountered FoodItem: \(legacy.id, privacy: .public) without mealID")
-//                fatalError()
-//            }
-//            guard let mealEntity = try! MealEntity.object(
-//                with: UUID(uuidString: mealID)!,
-//                in: context
-//            ) else {
-//                logger.error("Failed to find MealEntity with id: \(mealID, privacy: .public)")
-//                fatalError()
-//            }
-//
-//            let entity = FoodItemEntity(context, legacy, foodEntity, mealEntity)
-//            context.insert(entity)
-//            
-//            logger.debug("Inserted Food Item: \(legacy.id, privacy: .public)")
-//        }
-        
-        func createBatchInsertRequest() -> NSBatchInsertRequest {
-            /// Create an iterator for raw data
-            var iterator = legacyObjects.makeIterator()
-            
-            let request = NSBatchInsertRequest(entity: FoodItemEntity.entity()) { (obj: NSManagedObject) in
-                /// Stop add item when itemListIterator return nil
-                guard let legacy = iterator.next() else { return true }
-                
-                /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? FoodItemEntity {
-                    cmo.fill(legacy)
-                }
-                logger.debug("Inserted Food Item: \(legacy.id, privacy: .public)")
-
-                /// Continue add item to batch insert request
-                return false
-            }
-            return request
-        }
-        
-        let request = createBatchInsertRequest()
-        try! context.execute(request)
-    }
-    
-    func attachFoodItems(_ context: NSManagedObjectContext) {
-        
-        let url = Bundle.main.url(forResource: "foodItems", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let legacyObjects = try! JSONDecoder().decode([LegacyFoodItem].self, from: data)
-
-        let foodItems = FoodItemEntity.objects(in: context)
-        for foodItem in foodItems {
-            guard let legacy = legacyObjects.first(where: { $0.id == foodItem.id!.uuidString }) else {
-                fatalError()
-            }
-
-            guard let foodEntity = FoodEntity.object(
-                with: UUID(uuidString: legacy.foodID)!,
-                in: context
-            ) else {
-                logger.error("Failed to find FoodEntity with id: \(legacy.foodID, privacy: .public)")
-                fatalError()
-            }
-
-            guard let mealID = legacy.mealID else {
-                logger.error("Encountered FoodItem: \(legacy.id, privacy: .public) without mealID")
-                fatalError()
-            }
-            guard let mealEntity = MealEntity.object(
-                with: UUID(uuidString: mealID)!,
-                in: context
-            ) else {
-                logger.error("Failed to find MealEntity with id: \(mealID, privacy: .public)")
-                fatalError()
-            }
-            
-            foodItem.foodEntity = foodEntity
-            foodItem.mealEntity = mealEntity
-            logger.debug("Attached food item: \(foodItem.id!.uuidString, privacy: .public)")
-        }
-    }
-
 
     func setHasPopulated(_ context: NSManagedObjectContext) {
         do {
@@ -450,7 +166,7 @@ extension CoreDataManager {
 
 extension CoreDataManager {
     
-    func populateDays_legacy(_ context: NSManagedObjectContext) {
+    func populateDays(_ context: NSManagedObjectContext) {
         let url = Bundle.main.url(forResource: "days", withExtension: "json")!
         let data = try! Data(contentsOf: url)
         let legacyObjects = try! JSONDecoder().decode([LegacyDay].self, from: data)
@@ -465,7 +181,7 @@ extension CoreDataManager {
         }
     }
     
-    func populateMeals_legacy(_ context: NSManagedObjectContext) {
+    func populateMeals(_ context: NSManagedObjectContext) {
         let url = Bundle.main.url(forResource: "meals", withExtension: "json")!
         let data = try! Data(contentsOf: url)
         let legacyObjects = try! JSONDecoder().decode([LegacyMeal].self, from: data)
@@ -503,28 +219,28 @@ extension CoreDataManager {
     }
     
     func populatePresetFoods1(_ context: NSManagedObjectContext) {
-        populatePresetFoods_legacy(context, range: 0..<1000)
+        populatePresetFoods(context, range: 0..<1000)
     }
     func populatePresetFoods2(_ context: NSManagedObjectContext) {
-        populatePresetFoods_legacy(context, range: 1000..<2000)
+        populatePresetFoods(context, range: 1000..<2000)
     }
     func populatePresetFoods3(_ context: NSManagedObjectContext) {
-        populatePresetFoods_legacy(context, range: 2000..<3000)
+        populatePresetFoods(context, range: 2000..<3000)
     }
     func populatePresetFoods4(_ context: NSManagedObjectContext) {
-        populatePresetFoods_legacy(context, range: 3000..<4000)
+        populatePresetFoods(context, range: 3000..<4000)
     }
     func populatePresetFoods5(_ context: NSManagedObjectContext) {
-        populatePresetFoods_legacy(context, range: 4000..<5000)
+        populatePresetFoods(context, range: 4000..<5000)
     }
     func populatePresetFoods6(_ context: NSManagedObjectContext) {
-        populatePresetFoods_legacy(context, range: 5000..<6000)
+        populatePresetFoods(context, range: 5000..<6000)
     }
     func populatePresetFoods7(_ context: NSManagedObjectContext) {
-        populatePresetFoods_legacy(context, range: 6000..<6775)
+        populatePresetFoods(context, range: 6000..<6775)
     }
     
-    func populatePresetFoods_legacy(_ context: NSManagedObjectContext, range: Range<Int>) {
+    func populatePresetFoods(_ context: NSManagedObjectContext, range: Range<Int>) {
         let url = Bundle.main.url(forResource: "presetFoods", withExtension: "json")!
         let data = try! Data(contentsOf: url)
         let legacyObjects = try! JSONDecoder().decode([LegacyPresetFood].self, from: data)
@@ -540,7 +256,7 @@ extension CoreDataManager {
         }
     }
     
-    func populateUserFoods_legacy(_ context: NSManagedObjectContext) {
+    func populateUserFoods(_ context: NSManagedObjectContext) {
         let url = Bundle.main.url(forResource: "foods", withExtension: "json")!
         let data = try! Data(contentsOf: url)
         let legacyObjects = try! JSONDecoder().decode([LegacyUserFood].self, from: data)
@@ -559,25 +275,25 @@ extension CoreDataManager {
     }
     
     func populateFoodItems1(_ context: NSManagedObjectContext) {
-        populateFoodItems_legacy(context, range: 0..<200)
+        populateFoodItems(context, range: 0..<200)
     }
     func populateFoodItems2(_ context: NSManagedObjectContext) {
-        populateFoodItems_legacy(context, range: 200..<400)
+        populateFoodItems(context, range: 200..<400)
     }
     func populateFoodItems3(_ context: NSManagedObjectContext) {
-        populateFoodItems_legacy(context, range: 400..<600)
+        populateFoodItems(context, range: 400..<600)
     }
     func populateFoodItems4(_ context: NSManagedObjectContext) {
-        populateFoodItems_legacy(context, range: 600..<800)
+        populateFoodItems(context, range: 600..<800)
     }
     func populateFoodItems5(_ context: NSManagedObjectContext) {
-        populateFoodItems_legacy(context, range: 800..<1000)
+        populateFoodItems(context, range: 800..<1000)
     }
     func populateFoodItems6(_ context: NSManagedObjectContext) {
-        populateFoodItems_legacy(context, range: 1000..<1279)
+        populateFoodItems(context, range: 1000..<1279)
     }
 
-    func populateFoodItems_legacy(_ context: NSManagedObjectContext, range: Range<Int>) {
+    func populateFoodItems(_ context: NSManagedObjectContext, range: Range<Int>) {
         
         let url = Bundle.main.url(forResource: "foodItems", withExtension: "json")!
         let data = try! Data(contentsOf: url)
