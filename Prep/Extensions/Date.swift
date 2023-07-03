@@ -15,7 +15,7 @@ extension Date {
     init?(fromTimeString string: String) {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy_MM_dd-hh_mm"
+        dateFormatter.dateFormat = "yyyy_MM_dd-HH_mm"
         guard let date = dateFormatter.date(from: string) else {
             return nil
         }
@@ -30,7 +30,7 @@ extension Date {
 
     var timeString: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy_MM_dd-hh_mm"
+        dateFormatter.dateFormat = "yyyy_MM_dd-HH_mm"
         return dateFormatter.string(from: self).lowercased()
     }
 
