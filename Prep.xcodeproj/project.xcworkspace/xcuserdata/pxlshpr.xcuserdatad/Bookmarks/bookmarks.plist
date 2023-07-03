@@ -660,35 +660,6 @@
 			<dict>
 				<key>focused</key>
 				<string>    }
-    
-    func fill(_ legacy: LegacyUserFood) {
-        self.id = UUID(uuidString: legacy.id)!
-        self.emoji = legacy.emoji
-        self.name = legacy.name
-        self.detail = legacy.detail
-        self.brand = legacy.brand
-        self.amount = legacy.info.amount.foodValue
-        self.serving = legacy.info.serving?.foodValue
-        self.energy = legacy.info.nutrients.energyInKcal
-        self.energyUnit = .kcal
-        self.carb = legacy.info.nutrients.carb
-        self.protein = legacy.info.nutrients.protein
-        self.fat = legacy.info.nutrients.fat
-        self.micros = legacy.info.nutrients.micros.map { FoodNutrient($0) }
-        self.sizes = legacy.info.sizes.map { FoodSize(legacy: $0) }
-        self.density = legacy.info.density?.density
-        self.url = nil
-        self.imageIDs = []
-        self.barcodes = []
-        self.type = .food
-        self.publishStatus = nil
-        self.dataset = legacy.dataset
-        if let lastUsedAt = legacy.lastUsedAt {
-            self.lastUsedAt = Date(timeIntervalSince1970: lastUsedAt)
-        }
-        self.updatedAt = Date(timeIntervalSince1970: legacy.updatedAt)
-        self.createdAt = Date(timeIntervalSince1970: legacy.updatedAt)
-    }
 </string>
 				<key>leading</key>
 				<string>        self.init(context: context)
@@ -696,8 +667,8 @@
 </string>
 				<key>trailing</key>
 				<string>    
-    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyUserFood) {
-        self.init(context: context)
+    func fill(_ legacy: LegacyUserFood) {
+        self.id = UUID(uuidString: legacy.id)!
 </string>
 			</dict>
 			<key>title</key>
@@ -842,18 +813,12 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
-					<key>EndingColumnNumber</key>
-					<string>16</string>
 					<key>EndingLineNumber</key>
 					<string>32</string>
-					<key>LocationEncoding</key>
-					<string>1</string>
-					<key>StartingColumnNumber</key>
-					<string>15</string>
 					<key>StartingLineNumber</key>
 					<string>32</string>
 					<key>Timestamp</key>
-					<string>710112716.455851</string>
+					<string>710112779.585165</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -869,15 +834,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>:</string>
+				<string>    var dataset: FoodDataset?
+</string>
 				<key>leading</key>
 				<string>    let type: FoodType
     var publishStatus: PublishStatus?
-    var dataset</string>
+</string>
 				<key>trailing</key>
-				<string> FoodDataset?
-    
+				<string>    
     var lastUsedAt: Date?
+    var lastAmount: FoodValue?
 </string>
 			</dict>
 			<key>title</key>

@@ -33,6 +33,8 @@ struct Food: Identifiable, Codable, Hashable {
     var dataset: FoodDataset?
     
     var lastUsedAt: Date?
+    var lastAmount: FoodValue?
+
     var updatedAt: Date
     var createdAt: Date
     
@@ -59,6 +61,7 @@ struct Food: Identifiable, Codable, Hashable {
         publishStatus: PublishStatus? = nil,
         dataset: FoodDataset? = nil,
         lastUsedAt: Date? = nil,
+        lastAmount: FoodValue? = nil,
         updatedAt: Date = Date.now,
         createdAt: Date = Date.now
     ) {
@@ -84,6 +87,7 @@ struct Food: Identifiable, Codable, Hashable {
         self.publishStatus = publishStatus
         self.dataset = dataset
         self.lastUsedAt = lastUsedAt
+        self.lastAmount = lastAmount
         self.updatedAt = updatedAt
         self.createdAt = createdAt
     }
@@ -114,6 +118,7 @@ extension Food {
             publishStatus: entity.publishStatus,
             dataset: entity.dataset,
             lastUsedAt: entity.lastUsedAt,
+            lastAmount: entity.lastAmount,
             updatedAt: entity.updatedAt!,
             createdAt: entity.createdAt!
         )

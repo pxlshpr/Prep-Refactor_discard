@@ -178,6 +178,22 @@ extension FoodEntity {
         }
     }
     
+    var lastAmount: FoodValue? {
+        get {
+            guard let lastAmountData else {
+                return nil
+            }
+            return try! JSONDecoder().decode(FoodValue.self, from: lastAmountData)
+        }
+        set {
+            if let newValue {
+                self.lastAmountData = try! JSONEncoder().encode(newValue)
+            } else {
+                self.lastAmountData = nil
+            }
+        }
+    }
+    
     var density: FoodDensity? {
         get {
             guard let densityData else { return nil }
