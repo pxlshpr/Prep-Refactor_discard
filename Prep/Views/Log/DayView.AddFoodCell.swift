@@ -59,13 +59,7 @@ extension DayView.AddFoodCell {
     }
     
     var foodPicker: some View {
-//        FoodPickerTest(
-        FoodPicker(
-            isPresented: $showingFoodPicker,
-            meal: meal
-        )
-        .presentationCompactAdaptation(horizontal: .popover, vertical: .popover)
-//        .presentationDetents([.medium, .fraction(0.90)])
+        FoodPicker(isPresented: $showingFoodPicker, meal: meal)
     }
     
     var stats: some View {

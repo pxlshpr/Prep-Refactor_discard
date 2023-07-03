@@ -237,10 +237,6 @@ extension CoreDataManager {
                 .sorted { $0.updatedAt > $1.updatedAt }
                 .first
 
-            if lastFoodItem != nil {
-                print("We here")
-            }
-
             let entity = FoodEntity(context, legacy, lastFoodItem)
             context.insert(entity)
             
@@ -267,10 +263,6 @@ extension CoreDataManager {
                 .sorted { $0.updatedAt > $1.updatedAt }
                 .first
             
-            if lastFoodItem != nil {
-                print("We here")
-            }
-
             let entity = FoodEntity(context, legacy, lastFoodItem)
             context.insert(entity)
             logger.debug("Inserted User Food: \(legacy.description, privacy: .public)")
