@@ -59,68 +59,18 @@ struct ItemForm: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar { toolbarContent }
         }
-        .onAppear(perform: appeared)
-    }
-    
-    func appeared() {
-        fetchFood()
     }
     
     var foodValue: FoodValue {
         FoodValue(amount, unit)
     }
-
-    func fetchFood() {
-        //TODO: Store the last used quantity in the Food itself to save ourselves a fetch
-//        guard let foodResult else { return }
-//        let descriptor = FetchDescriptor<FoodEntity>(predicate: #Predicate {
-//            $0.uuid == foodResult.uuid
-//        })
-//        do {
-//            let food = try context.fetch(descriptor).first?.food
-//            self.food = food
-//            
-//            guard let food else { return }
-//            
-//            let foodID = food.id
-//            
-//            /// Fetch last latest FoodItemEntity
-//            var itemDescriptor = FetchDescriptor<FoodItemEntity>(predicate: #Predicate {
-//                $0.foodID == foodID
-//            }, sortBy: [
-//                SortDescriptor(\FoodItemEntity.updatedAt, order: .reverse)
-//            ])
-//            itemDescriptor.fetchLimit = 1
-//            
-//            let amount: Double?
-//            let unit: FormUnit?
-//            
-//            /// Either set the latest used quantity or the default one
-//            if let lastItem = try context.fetch(itemDescriptor).first {
-//                amount = lastItem.amount.value
-//                unit = lastItem.amount.formUnit(for: food)
-//            } else {
-//                let quantity = food.defaultQuantity
-//                amount = quantity?.value
-//                unit = quantity?.unit.formUnit
-//            }
-//        
-//            guard let amount, let unit else { return }
-//            self.amount = amount
-//            self.unit = unit
-//            
-//        } catch {
-//            logger.debug("Error fetching food: \(error, privacy: .public)")
-//        }
-    }
     
     var scaleFactor: Double {
-        0
-//        guard
-//            let food,
-//            let quantity = food.quantity(for: foodValue)
-//        else { return 0 }
-//        return food.nutrientScaleFactor(for: quantity) ?? 0
+        guard
+            let food,
+            let quantity = food.quantity(for: foodValue)
+        else { return 0 }
+        return food.nutrientScaleFactor(for: quantity) ?? 0
     }
     
     var toolbarContent: some ToolbarContent {
@@ -220,12 +170,11 @@ struct ItemForm: View {
     }
     
     func valueString(for nutrient: Nutrient) -> String {
-        ""
-//        guard let nutrientValue = food?.value(for: nutrient) else {
-//            return ""
-//        }
-//        let scaled = nutrientValue.value * scaleFactor
-//        return "\(scaled.cleanAmount) \(nutrientValue.unit.abbreviation)"
+        guard let nutrientValue = food?.value(for: nutrient) else {
+            return ""
+        }
+        let scaled = nutrientValue.value * scaleFactor
+        return "\(scaled.cleanAmount) \(nutrientValue.unit.abbreviation)"
     }
     
     func nutrientsSection(_ food: Food) -> some View {
@@ -277,7 +226,7 @@ struct ItemForm: View {
                         Text(valueString(for: nutrient))
 //                            .foregroundStyle(Color(.secondaryLabel))
                             .foregroundColor(nutrient.macro!.textColor(for: colorScheme))
-//                            .bold(food?.primaryMacro == nutrient.macro)
+                            .bold(food.primaryMacro == nutrient.macro)
                     }
                 }
             }
@@ -381,12 +330,11 @@ struct ItemForm: View {
         
         @ViewBuilder
         var sizesSections: some View {
-            EmptyView()
-//            if let sizes = food?.formSizes, !sizes.isEmpty {
-//                Section("Sizes") {
-//                    sizesContent(sizes)
-//                }
-//            }
+            if let sizes = food?.formSizes, !sizes.isEmpty {
+                Section("Sizes") {
+                    sizesContent(sizes)
+                }
+            }
         }
         
         @ViewBuilder
@@ -402,14 +350,13 @@ struct ItemForm: View {
         
         @ViewBuilder
         var weightsMenu: some View {
-            EmptyView()
-//            if food?.canBeMeasuredInWeight == true {
-//                Menu {
-//                    weightsContent
-//                } label: {
-//                    Text("Weights")
-//                }
-//            }
+            if food?.canBeMeasuredInWeight == true {
+                Menu {
+                    weightsContent
+                } label: {
+                    Text("Weights")
+                }
+            }
         }
         
         var weightsContent: some View {
@@ -433,35 +380,33 @@ struct ItemForm: View {
         
         @ViewBuilder
         var volumesMenu: some View {
-            EmptyView()
-//            if food?.canBeMeasuredInVolume == true {
-//                Menu {
-//                    volumesContent
-//                } label: {
-//                    Text("Volumes")
-//                }
-//            }
+            if food?.canBeMeasuredInVolume == true {
+                Menu {
+                    volumesContent
+                } label: {
+                    Text("Volumes")
+                }
+            }
         }
         
         @ViewBuilder
         var menuContents: some View {
-            EmptyView()
-//            if let food {
-//                if food.onlySupportsWeights {
-//                    weightsContent
-//                } else if food.onlySupportsVolumes {
-//                    volumesContent
-//                } else if food.onlySupportsServing {
-//                    servingButton
-//                } else {
-//                    Section {
-//                        servingButton
-//                        weightsMenu
-//                        volumesMenu
-//                    }
-//                    sizesSections
-//                }
-//            }
+            if let food {
+                if food.onlySupportsWeights {
+                    weightsContent
+                } else if food.onlySupportsVolumes {
+                    volumesContent
+                } else if food.onlySupportsServing {
+                    servingButton
+                } else {
+                    Section {
+                        servingButton
+                        weightsMenu
+                        volumesMenu
+                    }
+                    sizesSections
+                }
+            }
         }
         
         return Menu {

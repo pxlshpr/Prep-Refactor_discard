@@ -101,7 +101,6 @@ extension DayView.AddFoodCell {
     
     var energyText: some View {
         let energy = meal.energy(in: .kcal)
-//        let energy = meal.energy(in: .kcal)
         let string = NumberFormatter.energyValue.string(for: energy) ?? ""
         return Text("\(string)")
     }
