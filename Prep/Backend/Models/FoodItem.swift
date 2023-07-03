@@ -10,6 +10,11 @@ struct FoodItem: Identifiable, Codable, Hashable {
     var food: Food
     var mealID: UUID?
 
+    var energy: Double
+    var energyUnit: EnergyUnit
+    var carb: Double
+    var fat: Double
+    var protein: Double
     var badgeWidth: CGFloat
     
     var sortPosition: Int
@@ -23,6 +28,11 @@ struct FoodItem: Identifiable, Codable, Hashable {
         amount: FoodValue,
         food: Food,
         mealID: UUID?,
+        energy: Double,
+        energyUnit: EnergyUnit,
+        carb: Double,
+        fat: Double,
+        protein: Double,
         badgeWidth: CGFloat,
         sortPosition: Int,
         eatenAt: Date?,
@@ -33,6 +43,11 @@ struct FoodItem: Identifiable, Codable, Hashable {
         self.amount = amount
         self.food = food
         self.mealID = mealID
+        self.energy = energy
+        self.energyUnit = energyUnit
+        self.carb = carb
+        self.fat = fat
+        self.protein = protein
         self.badgeWidth = badgeWidth
         self.sortPosition = sortPosition
         self.eatenAt = eatenAt
@@ -46,6 +61,11 @@ struct FoodItem: Identifiable, Codable, Hashable {
             amount: entity.amount,
             food: entity.food,
             mealID: entity.mealID,
+            energy: entity.energy,
+            energyUnit: entity.energyUnit,
+            carb: entity.carb,
+            fat: entity.fat,
+            protein: entity.protein,
             badgeWidth: entity.badgeWidth,
             sortPosition: Int(entity.sortPosition),
             eatenAt: entity.eatenAt,

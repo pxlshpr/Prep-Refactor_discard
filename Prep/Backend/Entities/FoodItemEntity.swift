@@ -70,6 +70,15 @@ extension FoodItemEntity {
 
 extension FoodItemEntity {
 
+    var energyUnit: EnergyUnit {
+        get {
+            EnergyUnit(rawValue: Int(energyUnitValue)) ?? .kcal
+        }
+        set {
+            energyUnitValue = Int16(newValue.rawValue)
+        }
+    }
+
     var amount: FoodValue {
         get {
             guard let amountData else {
