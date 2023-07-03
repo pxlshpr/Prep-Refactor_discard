@@ -64,7 +64,7 @@ extension DayView.AddFoodCell {
             isPresented: $showingFoodPicker,
             meal: meal
         )
-        .presentationCompactAdaptation(horizontal: .sheet, vertical: .popover)
+        .presentationCompactAdaptation(horizontal: .popover, vertical: .popover)
 //        .presentationDetents([.medium, .fraction(0.90)])
     }
     
