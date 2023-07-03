@@ -36,6 +36,7 @@ struct DayView: View {
     let model = Model()
     
     let didAddMeal = NotificationCenter.default.publisher(for: .didAddMeal)
+    let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
     let didDeleteMeal = NotificationCenter.default.publisher(for: .didDeleteMeal)
 
     @Observable class Model {
@@ -60,6 +61,7 @@ struct DayView: View {
             .onAppear(perform: appeared)
             .onReceive(didAddMeal, perform: didAddMeal)
             .onReceive(didDeleteMeal, perform: didDeleteMeal)
+            .onReceive(didPopulate, perform: didPopulate)
     }
     
     var content: some View {
@@ -74,6 +76,19 @@ struct DayView: View {
             } else {
                 ProgressView()
             }
+        }
+    }
+
+    func didPopulate(notification: Notification) {
+        fetchMeals()
+    }
+    
+    func fetchMeals() {
+        Task.detached(priority: .high) {
+            logger.debug("Fetching meals in a detached Task…")
+            let meals = await MealsStore.meals(on: date)
+            self.meals = meals
+            logger.debug("… fetched \(meals.count) meals")
         }
     }
     
@@ -112,23 +127,7 @@ struct DayView: View {
     }
 
     func appeared() {
-        Task.detached(priority: .high) {
-            logger.debug("Fetching meals in a detached Task…")
-            let meals = await MealsStore.meals(on: date)
-            self.meals = meals
-            logger.debug("… fetched \(meals.count) meals")
-        }
-        
-        Task.detached {
-            /// Doing this crashes if we then try to add a meal, getting the following error:
-            /// "The model configuration used to open the store is incompatible with the one that was used to create the store."
-            ///
-//            let meals = try await FetchMealStore.shared.meals(date: date)
-//            await MainActor.run {
-//                self.meals = meals
-//                logger.debug("... fetched \(meals.count) meals")
-//            }
-        }
+        fetchMeals()
     }
     
     var list: some View {

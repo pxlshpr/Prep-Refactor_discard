@@ -24,27 +24,11 @@ extension CoreDataManager {
             logger.error("\(error.localizedDescription, privacy: .public)")
         }
         
-//        guard let meal = try! MealEntity.object(with: UUID(uuidString: "F7C3C6E6-CC69-467A-82AD-066578156688")!, in: viewContext) else {
-//            fatalError()
-//        }
-//        
-//        print("We here")
-        
-        
-        
-//        guard let e = try! MealEntity.object(
-//            with: UUID(uuidString: "F7C3C6E6-CC69-467A-82AD-066578156688")!,
-//            in: viewContext
-//        ) else {
-//            logger.error("Failed to find MealEntity with id: F7C3C6E6-CC69-467A-82AD-066578156688")
-//            fatalError()
-//        }
-        
         Task {
             let start = CFAbsoluteTimeGetCurrent()
             await run("Days", populateDays)
             await run("Meals", populateMeals)
-//            await run("Preset Foods", populatePresetFoods)
+
             await run("Preset Foods", populatePresetFoods1)
             await run("Preset Foods", populatePresetFoods2)
             await run("Preset Foods", populatePresetFoods3)
@@ -52,16 +36,22 @@ extension CoreDataManager {
             await run("Preset Foods", populatePresetFoods5)
             await run("Preset Foods", populatePresetFoods6)
             await run("Preset Foods", populatePresetFoods7)
+            
             await run("User Foods", populateUserFoods)
-//            await run("Food Items", populateFoodItems)
+            
             await run("Food Items", populateFoodItems1)
             await run("Food Items", populateFoodItems2)
             await run("Food Items", populateFoodItems3)
             await run("Food Items", populateFoodItems4)
             await run("Food Items", populateFoodItems5)
             await run("Food Items", populateFoodItems6)
+            
             await run("setHasPopulated", setHasPopulated)
             logger.info("Populate took: \(CFAbsoluteTimeGetCurrent()-start)s")
+            
+            await MainActor.run {
+                post(.didPopulate)
+            }
         }
     }
 
@@ -109,7 +99,6 @@ extension CoreDataManager {
     }
     
     func didPopulate(_ name: String) {
-//        NotificationCenter.default.post(name: .didPopulate, object: nil)
         let days = DayEntity.countAll(in: viewContext)
         let meals = MealEntity.countAll(in: viewContext)
         let foods = FoodEntity.countAll(in: viewContext)
@@ -121,22 +110,6 @@ extension CoreDataManager {
         logger.info("Meals: \(meals)")
         logger.info("Foods: \(foods)")
         logger.info("FoodItems: \(foodItems)")
-    }
-    
-    func populate(_ context: NSManagedObjectContext) throws {
-
-//        let dayEntities = populateDays(context)
-//        try context.performAndWait { try context.save() }
-//
-//        let mealEntities = populateMeals(context, dayEntities)
-//        try context.performAndWait { try context.save() }
-//        
-//        var foodEntities = populatePresetFoods(context)
-//        try context.performAndWait { try context.save() }
-
-//        foodEntities += populateUserFoods(context)
-//        let _ = populateFoodItems(context, foodEntities: foodEntities, mealEntities: mealEntities)
-        try setHasPopulated(context)
     }
     
 }
