@@ -346,3 +346,14 @@ extension FoodValue {
         formSizeUnit(in: food)?.isWeightBased == true
     }
 }
+
+
+extension FoodValue {
+    func description(with food: Food) -> String {
+        "\(value.cleanAmount) \(unitDescription(sizes: food.sizes))"
+    }
+    
+//    func description(with ingredientFood: IngredientFood) -> String {
+//        "\(value.cleanAmount) \(unitDescription(sizes: ingredientFood.info.sizes))"
+//    }
+}

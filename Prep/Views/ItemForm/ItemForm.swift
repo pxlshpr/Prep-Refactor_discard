@@ -10,7 +10,7 @@ private let logger = Logger(subsystem: "ItemForm", category: "")
 let DefaultAmount: Double = 100
 let DefaultUnit: FormUnit = .weight(.g)
 
-struct ItemForm2: View {
+struct ItemForm: View {
 
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme

@@ -109,7 +109,7 @@ struct FoodPicker: View {
         List {
             ForEach(model.foodResults, id: \.self) { result in
                 NavigationLink {
-                    ItemForm2(
+                    ItemForm(
                         isPresented: $isPresented,
                         meal: meal,
                         food: result

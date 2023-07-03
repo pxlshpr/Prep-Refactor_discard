@@ -603,11 +603,11 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingLineNumber</key>
-					<string>10</string>
+					<string>12</string>
 					<key>StartingLineNumber</key>
-					<string>10</string>
+					<string>12</string>
 					<key>Timestamp</key>
-					<string>710091529.293092</string>
+					<string>710112521.857185</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -623,20 +623,13 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>    var badgeWidth: CGFloat
+				<string>
 </string>
 				<key>leading</key>
-				<string>    var mealID: UUID?
-
-</string>
+				<string></string>
 				<key>trailing</key>
-				<string>    var sortPosition: Int
-    
-    var eatenAt: Date?
-</string>
+				<string></string>
 			</dict>
-			<key>title</key>
-			<string>Store energy, carb, etc totals here so we don't have to keep recalculating when displaying</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>
@@ -750,6 +743,145 @@
         fill(legacy)
 </string>
 			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>7</string>
+					<key>EndingLineNumber</key>
+					<string>17</string>
+					<key>LocationEncoding</key>
+					<string>1</string>
+					<key>StartingColumnNumber</key>
+					<string>4</string>
+					<key>StartingLineNumber</key>
+					<string>17</string>
+					<key>Timestamp</key>
+					<string>710112663.588032</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Models/FoodItem.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>let</string>
+				<key>leading</key>
+				<string>    var eatenAt: Date?
+    var updatedAt: Date
+    </string>
+				<key>trailing</key>
+				<string> createdAt: Date
+    
+    init(
+</string>
+			</dict>
+			<key>title</key>
+			<string>Store energy, carb, etc totals here so we don't have to keep recalculating when displaying</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingLineNumber</key>
+					<string>11</string>
+					<key>StartingLineNumber</key>
+					<string>11</string>
+					<key>Timestamp</key>
+					<string>710112689.1321959</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Models/Food.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>    var amount: FoodValue
+</string>
+				<key>leading</key>
+				<string>    var brand: String?
+    
+</string>
+				<key>trailing</key>
+				<string>    var serving: FoodValue?
+    
+    var energy: Double
+</string>
+			</dict>
+			<key>title</key>
+			<string>Store last used amount here</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>16</string>
+					<key>EndingLineNumber</key>
+					<string>32</string>
+					<key>LocationEncoding</key>
+					<string>1</string>
+					<key>StartingColumnNumber</key>
+					<string>15</string>
+					<key>StartingLineNumber</key>
+					<string>32</string>
+					<key>Timestamp</key>
+					<string>710112716.455851</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Models/Food.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>:</string>
+				<key>leading</key>
+				<string>    let type: FoodType
+    var publishStatus: PublishStatus?
+    var dataset</string>
+				<key>trailing</key>
+				<string> FoodDataset?
+    
+    var lastUsedAt: Date?
+</string>
+			</dict>
+			<key>title</key>
+			<string>Add datasetID</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>

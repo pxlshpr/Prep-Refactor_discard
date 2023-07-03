@@ -1,27 +1,43 @@
 import Foundation
 
-//struct Meal: Identifiable {
-//    var id: String = ""
-//    var name: String = ""
-//    var time: Date = Date.now
-//    var date: Date = Date.now
-//    var foodItems: [FoodItem] = []
-//
-//    init() { }
-//    
-//    init(
-//        _ entity: MealEntity,
-//        dayEntity: DayEntity,
-//        foodItems: [FoodItem]
-//    ) {
-//        self.init()
-//        self.id = entity.uuid
-//        self.name = entity.name
-//        self.time = Date(timeIntervalSince1970: entity.time)
-//        self.date = dayEntity.date
-//        self.foodItems = foodItems
-//    }
-//}
+struct Meal: Identifiable, Codable, Hashable {
+    let id: UUID
+    var name: String
+    var time: Date
+    var date: Date
+    var foodItems: [FoodItem]
+    
+    init(
+        id: UUID,
+        name: String,
+        time: Date,
+        date: Date,
+        foodItems: [FoodItem]
+    ) {
+        self.id = id
+        self.name = name
+        self.time = time
+        self.date = date
+        self.foodItems = foodItems
+    }
+    
+    init(_ entity: MealEntity) {
+        self.init(
+            id: entity.id!,
+            name: entity.name!,
+            time: entity.time,
+            date: Date(fromCalendarDayString: entity.dayEntity!.dateString!)!,
+            foodItems: entity.foodItems
+        )
+    }
+}
+
+extension Meal: Comparable {
+
+    static func <(lhs: Meal, rhs: Meal) -> Bool {
+        return lhs.time < rhs.time
+    }
+}
 
 extension Meal {
     var timeString: String {
