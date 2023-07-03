@@ -5,16 +5,16 @@ import FoodDataTypes
 
 struct ItemFormFoodLabel: View {
 
-    let foodResult: FoodResult?
+    let food: Food2?
     
     var body: some View {
-        if let foodResult {
+        if let food {
             HStack {
                 HStack(alignment: .top) {
                     Text("Food")
                         .foregroundStyle(Color(.label))
                     Spacer()
-                    Text(foodResult.foodName)
+                    Text(food.foodName)
 //                        .foregroundStyle(Color(.secondaryLabel))
                         .foregroundStyle(Color(.label))
                 }
@@ -32,7 +32,7 @@ struct ItemFormEnergyLabel: View {
     
     @Environment(\.colorScheme) var colorScheme
     let string: String
-    let foodResult: FoodResult?
+    let food: Food2?
 
     var body: some View {
         HStack {
@@ -48,8 +48,8 @@ struct ItemFormEnergyLabel: View {
     
     @ViewBuilder
     var pieChart: some View {
-        if let foodResult {
-            Chart(foodResult.macrosChartData, id: \.macro) { macroValue in
+        if let food {
+            Chart(food.macrosChartData, id: \.macro) { macroValue in
                 SectorMark(
                     angle: .value("kcal", macroValue.kcal),
                     innerRadius: .ratio(0.5),

@@ -233,18 +233,12 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
-					<key>EndingColumnNumber</key>
-					<string>35</string>
 					<key>EndingLineNumber</key>
-					<string>56</string>
-					<key>LocationEncoding</key>
-					<string>1</string>
-					<key>StartingColumnNumber</key>
-					<string>31</string>
+					<string>57</string>
 					<key>StartingLineNumber</key>
-					<string>56</string>
+					<string>57</string>
 					<key>Timestamp</key>
-					<string>710088277.801403</string>
+					<string>710106049.895072</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -260,15 +254,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>else</string>
+				<string>//        let descriptor = FetchDescriptor&lt;FoodEntity&gt;(predicate: #Predicate {
+</string>
 				<key>leading</key>
-				<string>
-    func fetchFood() {
-//        guard let foodResult </string>
+				<string>        //TODO: Store the last used quantity in the Food itself to save ourselves a fetch
+//        guard let foodResult else { return }
+</string>
 				<key>trailing</key>
-				<string> { return }
-//        let descriptor = FetchDescriptor&lt;FoodEntity&gt;(predicate: #Predicate {
-//            $0.uuid == foodResult.uuid
+				<string>//            $0.uuid == foodResult.uuid
+//        })
+//        do {
 </string>
 			</dict>
 			<key>type</key>
@@ -284,7 +279,7 @@
 					<key>StartingLineNumber</key>
 					<string>100</string>
 					<key>Timestamp</key>
-					<string>710088290.651768</string>
+					<string>710106049.894762</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -320,18 +315,12 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
-					<key>EndingColumnNumber</key>
-					<string>25</string>
 					<key>EndingLineNumber</key>
 					<string>125</string>
-					<key>LocationEncoding</key>
-					<string>1</string>
-					<key>StartingColumnNumber</key>
-					<string>17</string>
 					<key>StartingLineNumber</key>
 					<string>125</string>
 					<key>Timestamp</key>
-					<string>710088311.567569</string>
+					<string>710106049.895142</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -347,15 +336,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>foodItem</string>
+				<string>//        if let foodItem {
+</string>
 				<key>leading</key>
 				<string>//        dismiss()
         
-//        if let </string>
+</string>
 				<key>trailing</key>
-				<string> {
-//            /// Update
+				<string>//            /// Update
 //        } else {
+//            
 </string>
 			</dict>
 			<key>type</key>
@@ -366,18 +356,12 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
-					<key>EndingColumnNumber</key>
-					<string>15</string>
 					<key>EndingLineNumber</key>
-					<string>205</string>
-					<key>LocationEncoding</key>
-					<string>1</string>
-					<key>StartingColumnNumber</key>
-					<string>10</string>
+					<string>206</string>
 					<key>StartingLineNumber</key>
-					<string>205</string>
+					<string>206</string>
 					<key>Timestamp</key>
-					<string>710088327.654667</string>
+					<string>710106110.679664</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -393,15 +377,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>guard</string>
+				<string>//            return ""
+</string>
 				<key>leading</key>
-				<string>    func valueString(for nutrient: Nutrient) -&gt; String {
-        ""
-//        </string>
+				<string>        ""
+//        guard let nutrientValue = food?.value(for: nutrient) else {
+</string>
 				<key>trailing</key>
-				<string> let nutrientValue = food?.value(for: nutrient) else {
-//            return ""
-//        }
+				<string>//        }
+//        let scaled = nutrientValue.value * scaleFactor
+//        return "\(scaled.cleanAmount) \(nutrientValue.unit.abbreviation)"
 </string>
 			</dict>
 			<key>type</key>
@@ -412,18 +397,12 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
-					<key>EndingColumnNumber</key>
-					<string>66</string>
 					<key>EndingLineNumber</key>
 					<string>261</string>
-					<key>LocationEncoding</key>
-					<string>1</string>
-					<key>StartingColumnNumber</key>
-					<string>58</string>
 					<key>StartingLineNumber</key>
 					<string>261</string>
 					<key>Timestamp</key>
-					<string>710088341.468292</string>
+					<string>710106110.6793979</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -439,15 +418,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>nutrient</string>
+				<string>//                            .bold(food?.primaryMacro == nutrient.macro)
+</string>
 				<key>leading</key>
 				<string>//                            .foregroundStyle(Color(.secondaryLabel))
                             .foregroundColor(nutrient.macro!.textColor(for: colorScheme))
-//                            .bold(food?.primaryMacro == </string>
+</string>
 				<key>trailing</key>
-				<string>.macro)
-                    }
+				<string>                    }
                 }
+            }
 </string>
 			</dict>
 			<key>type</key>
@@ -458,18 +438,12 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
-					<key>EndingColumnNumber</key>
-					<string>33</string>
 					<key>EndingLineNumber</key>
 					<string>366</string>
-					<key>LocationEncoding</key>
-					<string>1</string>
-					<key>StartingColumnNumber</key>
-					<string>29</string>
 					<key>StartingLineNumber</key>
 					<string>366</string>
 					<key>Timestamp</key>
-					<string>710088363.036219</string>
+					<string>710106110.679099</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -485,15 +459,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>food</string>
+				<string>//            if let sizes = food?.formSizes, !sizes.isEmpty {
+</string>
 				<key>leading</key>
 				<string>        var sizesSections: some View {
             EmptyView()
-//            if let sizes = </string>
+</string>
 				<key>trailing</key>
-				<string>?.formSizes, !sizes.isEmpty {
-//                Section("Sizes") {
+				<string>//                Section("Sizes") {
 //                    sizesContent(sizes)
+//                }
 </string>
 			</dict>
 			<key>type</key>
@@ -509,7 +484,7 @@
 					<key>StartingLineNumber</key>
 					<string>418</string>
 					<key>Timestamp</key>
-					<string>710088375.984091</string>
+					<string>710106110.679325</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -545,18 +520,12 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
-					<key>EndingColumnNumber</key>
-					<string>44</string>
 					<key>EndingLineNumber</key>
 					<string>387</string>
-					<key>LocationEncoding</key>
-					<string>1</string>
-					<key>StartingColumnNumber</key>
-					<string>23</string>
 					<key>StartingLineNumber</key>
 					<string>387</string>
 					<key>Timestamp</key>
-					<string>710088381.786026</string>
+					<string>710106110.679522</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -572,15 +541,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>canBeMeasuredInWeight</string>
+				<string>//            if food?.canBeMeasuredInWeight == true {
+</string>
 				<key>leading</key>
 				<string>        var weightsMenu: some View {
             EmptyView()
-//            if food?.</string>
+</string>
 				<key>trailing</key>
-				<string> == true {
-//                Menu {
+				<string>//                Menu {
 //                    weightsContent
+//                } label: {
 </string>
 			</dict>
 			<key>type</key>
@@ -591,18 +561,12 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
-					<key>EndingColumnNumber</key>
-					<string>25</string>
 					<key>EndingLineNumber</key>
 					<string>430</string>
-					<key>LocationEncoding</key>
-					<string>1</string>
-					<key>StartingColumnNumber</key>
-					<string>21</string>
 					<key>StartingLineNumber</key>
 					<string>430</string>
 					<key>Timestamp</key>
-					<string>710088391.986284</string>
+					<string>710106110.679461</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -618,15 +582,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>food</string>
+				<string>//            if let food {
+</string>
 				<key>leading</key>
 				<string>        var menuContents: some View {
             EmptyView()
-//            if let </string>
+</string>
 				<key>trailing</key>
-				<string> {
-//                if food.onlySupportsWeights {
+				<string>//                if food.onlySupportsWeights {
 //                    weightsContent
+//                } else if food.onlySupportsVolumes {
 </string>
 			</dict>
 			<key>type</key>

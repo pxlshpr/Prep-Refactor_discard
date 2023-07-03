@@ -4,12 +4,13 @@ import OSLog
 
 private let logger = Logger(subsystem: "Search", category: "SearchStore")
 private let NumberOfRecents = 100
+private let NumberOfSearchResults = 500
 
 class SearchStore {
 
     static let shared = SearchStore()
     
-    static func recents() async -> [FoodResult] {
+    static func recents() async -> [Food2] {
         logger.debug("Fetching recents")
         let start = CFAbsoluteTimeGetCurrent()
         let results = await DataManager.shared.recents()
@@ -47,7 +48,7 @@ class SearchStore {
 //        return Array(results)
 //    }
 //
-    static func search(_ text: String) async -> [FoodResult] {
+    static func search(_ text: String) async -> [Food2] {
         
         guard !text.isEmpty else {
             return await recents()
@@ -65,11 +66,34 @@ class SearchStore {
             let distance0 = $0.distanceOfSearchText(text)
             let distance1 = $1.distanceOfSearchText(text)
             
+            /// When distance of search text within food is equal
             if distance0 == distance1 {
-                /// When distance of search text within food is equal, prioritise the most recently used
-                return $0.lastUsedAt > $1.lastUsedAt
+                /// Check the total length of the name, brand and detail fields
+                let count0 = $0.totalCount
+                let count1 = $1.totalCount
+
+                /// When length of results are also equal
+                if count0 == count1 {
+                    
+                    /// Check the ratio of the text within the relevant field's text
+                    let ratio0 = $0.ratioOfSearchText(text)
+                    let ratio1 = $1.ratioOfSearchText(text)
+
+//                    /// When ratio is also equal
+//                    if ratio0 == ratio1 {
+//                        /// *Prioritise the latest used foods*
+//                        return $0.lastUsedAt > $1.lastUsedAt
+//                    }
+
+                    /// *Prioritise foods that have a higher ratio of the search term within the matching field*
+                    return ratio0 > ratio1
+                }
+                
+                /// *Prioritise the shorter results*
+                return count0 < count1
             }
                 
+            /// *Prioritise foods that the search term closer to the start of the matching field*
             return distance0 < distance1
         })
         
@@ -80,12 +104,12 @@ class SearchStore {
 }
 
 extension DataManager {
-    func recents() async -> [FoodResult] {
+    func recents() async -> [Food2] {
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 do {
                     try coreDataManager.recents { recents in
-                        let results = recents.map { FoodResult($0) }
+                        let results = recents.map { Food2($0) }
                         continuation.resume(returning: results)
                     }
                 } catch {
@@ -97,12 +121,12 @@ extension DataManager {
             return []
         }
     }
-    func foods(matching text: String) async -> [FoodResult] {
+    func foods(matching text: String) async -> [Food2] {
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 do {
                     try coreDataManager.foods(matching: text) { foods in
-                        let results = foods.map { FoodResult($0) }
+                        let results = foods.map { Food2($0) }
                         continuation.resume(returning: results)
                     }
                 } catch {
@@ -133,7 +157,7 @@ extension CoreDataManager {
                     ])
                     
                     request.predicate = predicate
-                    request.fetchLimit = 100
+                    request.fetchLimit = NumberOfSearchResults
                     let entities = try bgContext.fetch(request)
                     completion(entities)
                 } catch {

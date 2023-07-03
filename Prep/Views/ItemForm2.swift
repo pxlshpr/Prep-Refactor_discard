@@ -16,7 +16,6 @@ struct ItemForm2: View {
 //    var showingItem = false
     @State var amount: Double = DefaultAmount
     @State var unit: FormUnit = DefaultUnit
-    @State var foodResult: FoodResult? = nil
     @State var meal: Meal2? = nil
 //    var foodItem: FoodItem? = nil
 
@@ -28,11 +27,11 @@ struct ItemForm2: View {
     public init(
         isPresented: Binding<Bool>,
         meal: Meal2?,
-        foodResult: FoodResult
+        food: Food2
     ) {
         _isPresented = isPresented
         _meal = State(initialValue: meal)
-        _foodResult = State(initialValue: foodResult)
+        _food = State(initialValue: food)
     }
 
     var body: some View {
@@ -54,6 +53,7 @@ struct ItemForm2: View {
     }
 
     func fetchFood() {
+        //TODO: Store the last used quantity in the Food itself to save ourselves a fetch
 //        guard let foodResult else { return }
 //        let descriptor = FetchDescriptor<FoodEntity>(predicate: #Predicate {
 //            $0.uuid == foodResult.uuid
@@ -195,8 +195,8 @@ struct ItemForm2: View {
                 mealField
             }
             quantitySection
-            if let foodResult {
-                nutrientsSection(foodResult)
+            if let food {
+                nutrientsSection(food)
             }
         }
     }
@@ -210,11 +210,11 @@ struct ItemForm2: View {
 //        return "\(scaled.cleanAmount) \(nutrientValue.unit.abbreviation)"
     }
     
-    func nutrientsSection(_ foodResult: FoodResult) -> some View {
+    func nutrientsSection(_ food: Food2) -> some View {
         
         var micros: some View {
             var micros: [Micro] {
-                foodResult.micros.compactMap { $0.micro }
+                food.micros.compactMap { $0.micro }
             }
             return Group {
                 if !micros.isEmpty {
@@ -244,7 +244,7 @@ struct ItemForm2: View {
             Section {
                 ItemFormEnergyLabel(
                     string: valueString(for: .energy),
-                    foodResult: foodResult
+                    food: food
                 )
             }
         }
@@ -277,7 +277,7 @@ struct ItemForm2: View {
 //            model.reset()
             dismiss()
         } label: {
-            ItemFormFoodLabel(foodResult: foodResult)
+            ItemFormFoodLabel(food: food)
         }
     }
 
@@ -462,4 +462,8 @@ struct ItemForm2: View {
         .contentShape(Rectangle())
         .hoverEffect(.highlight)
     }
+}
+
+enum ItemFormRoute: Hashable {
+    case meal
 }

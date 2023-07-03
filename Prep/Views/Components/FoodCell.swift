@@ -39,6 +39,17 @@ struct FoodCell: View {
         _showingForm = .constant(false)
     }
 
+    init(food: Food2) {
+        self.emoji = food.emoji
+        self.name = food.name
+        self.detail = food.detail
+        self.brand = food.brand
+        self.carb = food.carb
+        self.fat = food.fat
+        self.protein = food.protein
+        _showingForm = .constant(false)
+    }
+
     var body: some View {
         HStack {
             emojiText

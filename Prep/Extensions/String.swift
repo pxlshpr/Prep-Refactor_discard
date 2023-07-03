@@ -27,4 +27,9 @@ extension String {
         }
         return nil
     }
+    
+    func ratio(of string: String) -> Double? {
+        guard self.contains(string) else { return nil }
+        return Double(string.count) / Double(count)
+    }
 }

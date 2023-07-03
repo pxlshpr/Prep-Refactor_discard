@@ -51,8 +51,8 @@ struct FoodPicker: View {
         .navigationTitle("Pick a Food")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { toolbarContent }
-//        .searchable(text: $searchText, isPresented: $searchIsActive, placement: .toolbar)
-        .searchable(text: $searchText, placement: .navigationBarDrawer)
+        .searchable(text: $searchText, isPresented: $searchIsActive, placement: .toolbar)
+//        .searchable(text: $searchText, placement: .navigationBarDrawer)
     }
     
     func appeared() {
@@ -113,10 +113,10 @@ struct FoodPicker: View {
                     ItemForm2(
                         isPresented: $isPresented,
                         meal: meal,
-                        foodResult: result
+                        food: result
                     )
                 } label: {
-                    FoodCell(foodResult: result)
+                    FoodCell(food: result)
                 }
             }
         }

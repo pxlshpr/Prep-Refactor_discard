@@ -108,7 +108,27 @@ extension FoodResult {
     }
 }
 
-extension FoodResult {
+extension Food2 {
+    
+    var foodName: String {
+        var name = "\(emoji) \(name)"
+        if let detail {
+            name += ", \(detail)"
+        }
+        if let brand {
+            name += ", \(brand)"
+        }
+        return name
+    }
+
+    var macrosChartData: [MacroValue] {
+        [
+            MacroValue(macro: .carb, value: carb),
+            MacroValue(macro: .fat, value: fat),
+            MacroValue(macro: .protein, value: protein)
+        ]
+    }
+
     func distanceOfSearchText(_ text: String) -> Int {
         
         let text = text.lowercased()
@@ -134,5 +154,35 @@ extension FoodResult {
 //        logger.debug("Distance of \(text, privacy: .public) within \(self.description, privacy: .public) = \(distance)")
         
         return distance
+    }
+    
+    func ratioOfSearchText(_ text: String) -> Double {
+        
+        let text = text.lowercased()
+        
+        var max: Double = 0
+        if let ratio = name.lowercased().ratio(of: text) {
+            max = ratio
+        }
+        
+        if let detail,
+           let ratio = detail.lowercased().ratio(of: text),
+           ratio > max {
+            max = ratio
+        }
+        if let brand,
+           let ratio = brand.lowercased().ratio(of: brand),
+           ratio > max {
+            max = ratio
+        }
+        
+        return max
+    }
+    
+    var totalCount: Int {
+        var count = name.count
+        count += detail?.count ?? 0
+        count += brand?.count ?? 0
+        return count
     }
 }

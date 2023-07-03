@@ -8,7 +8,7 @@ import SwiftSugar
     let logger = Logger(subsystem: "FoodPickerModel", category: "")
     static let shared = FoodPickerModel()
     
-    var foodResults: [FoodResult] = []
+    var foodResults: [Food2] = []
     var task: Task<Void, Error>? = nil
     
     init() {
