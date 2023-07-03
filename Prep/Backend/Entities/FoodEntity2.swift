@@ -3,7 +3,7 @@ import CoreData
 
 import FoodDataTypes
 
-extension FoodEntity2: Entity {
+extension FoodEntity: Entity {
     
     convenience init(context: NSManagedObjectContext, food: Food) {
         self.init(context: context)
@@ -102,7 +102,7 @@ extension FoodEntity2: Entity {
     }
 }
 
-extension FoodEntity2 {
+extension FoodEntity {
     
     var imageIDs: [UUID] {
         get {

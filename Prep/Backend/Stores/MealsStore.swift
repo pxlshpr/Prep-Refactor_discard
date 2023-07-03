@@ -7,13 +7,13 @@ private let logger = Logger(subsystem: "MealsStore", category: "")
 class MealsStore {
     static let shared = MealsStore()
     
-    static func meals(on date: Date) async -> [Meal2] {
+    static func meals(on date: Date) async -> [Meal] {
         await DataManager.shared.day(for: date)?.meals ?? []
     }
 }
 
 extension DataManager {
-    func day(for date: Date) async -> Day2? {
+    func day(for date: Date) async -> Day? {
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 do {
@@ -22,7 +22,7 @@ extension DataManager {
                             continuation.resume(returning: nil)
                             return
                         }
-                        let day = Day2(dayEntity)
+                        let day = Day(dayEntity)
                         continuation.resume(returning: day)
                     }
                 } catch {
@@ -37,7 +37,7 @@ extension DataManager {
 }
 
 extension CoreDataManager {
-    func dayEntity(for date: Date, completion: @escaping ((DayEntity2?) -> ())) throws {
+    func dayEntity(for date: Date, completion: @escaping ((DayEntity?) -> ())) throws {
         Task {
             let bgContext =  newBackgroundContext()
             await bgContext.perform {
@@ -45,9 +45,9 @@ extension CoreDataManager {
                     let dayString = date.calendarDayString
                     let predicate = NSPredicate(format: "dateString == %@", dayString)
 
-//                    let days = try DayEntity2.objects(for: predicate, in: bgContext)
+//                    let days = try DayEntity.objects(for: predicate, in: bgContext)
                     
-                    let request: NSFetchRequest<DayEntity2> = DayEntity2.fetchRequest()
+                    let request: NSFetchRequest<DayEntity> = DayEntity.fetchRequest()
                     request.predicate = predicate
 //                    request.relationshipKeyPathsForPrefetching = ["mealEntities.foodItemEntities.foodEntity", "mealEntities.foodItemEntities.mealEntity"]
                     let days = try bgContext.fetch(request)

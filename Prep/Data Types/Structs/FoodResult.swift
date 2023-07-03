@@ -31,7 +31,7 @@
 //        )
 //    }
 //    
-//    init(_ food: FoodEntity2) {
+//    init(_ food: FoodEntity) {
 //        self.init(
 //            uuid: food.id!.uuidString,
 //            name: food.name!,

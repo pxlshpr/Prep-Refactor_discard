@@ -31,7 +31,7 @@ struct DayView: View {
 
     @State var emojiWidth: CGFloat = 0
 
-    @State var meals: [Meal2]
+    @State var meals: [Meal]
 
     let model = Model()
     
@@ -39,7 +39,7 @@ struct DayView: View {
     let didDeleteMeal = NotificationCenter.default.publisher(for: .didDeleteMeal)
 
     @Observable class Model {
-        var foodItemBeingEdited: FoodItem2? = nil
+        var foodItemBeingEdited: FoodItem? = nil
     }
 
     init(
@@ -79,7 +79,7 @@ struct DayView: View {
     
     func didAddMeal(notification: Notification) {
         DispatchQueue.main.async {
-            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal2,
+            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
                   meal.date == self.date
             else { return }
             
@@ -100,7 +100,7 @@ struct DayView: View {
 
     func didDeleteMeal(notification: Notification) {
         DispatchQueue.main.async {
-            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal2,
+            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
                   meal.date == self.date
             else { return }
             

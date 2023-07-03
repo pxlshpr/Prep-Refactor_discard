@@ -1,7 +1,7 @@
 import Foundation
 import OSLog
 private let logger = Logger(subsystem: "FoodItem", category: "")
-struct FoodItem2: Identifiable, Codable, Hashable {
+struct FoodItem: Identifiable, Codable, Hashable {
     let id: UUID
     
     var amount: FoodValue
@@ -37,7 +37,7 @@ struct FoodItem2: Identifiable, Codable, Hashable {
         self.createdAt = createdAt
     }
     
-    init?(_ entity: FoodItemEntity2) {
+    init?(_ entity: FoodItemEntity) {
         self.init(
             id: entity.id!,
             amount: entity.amount,
@@ -52,11 +52,11 @@ struct FoodItem2: Identifiable, Codable, Hashable {
     }
 }
 
-extension FoodItem2 {
-    var quantityDescription: String {
-        amount.description(with: food)
-    }
-}
+//extension FoodItem {
+//    var quantityDescription: String {
+//        amount.description(with: food)
+//    }
+//}
 
 extension FoodValue {
     func unitDescription(sizes: [FoodSize]) -> String {
@@ -88,26 +88,26 @@ extension FoodValue {
 
 import FoodDataTypes
 
-extension FoodItem2 {
-    func scaledEnergyValue(in unit: EnergyUnit) -> Double {
-        0
-//        guard let value = food.value(for: .energy) else { return 0 }
-//        let scaledValue = value.value * nutrientScaleFactor
-//        return scaledValue
-    }
-
-    func scaledMacroValue(for macro: Macro) -> Double {
-        0
-//        guard let value = food.value(for: .macro(macro)) else { return 0 }
-//        return value.value * nutrientScaleFactor
-    }
-    
-    var nutrientScaleFactor: Double {
-        0
-//        guard let quantity = food.quantity(for: amount) else { return 0 }
-//        return food.nutrientScaleFactor(for: quantity) ?? 0
-    }
-}
+//extension FoodItem {
+//    func scaledEnergyValue(in unit: EnergyUnit) -> Double {
+//        0
+////        guard let value = food.value(for: .energy) else { return 0 }
+////        let scaledValue = value.value * nutrientScaleFactor
+////        return scaledValue
+//    }
+//
+//    func scaledMacroValue(for macro: Macro) -> Double {
+//        0
+////        guard let value = food.value(for: .macro(macro)) else { return 0 }
+////        return value.value * nutrientScaleFactor
+//    }
+//    
+//    var nutrientScaleFactor: Double {
+//        0
+////        guard let quantity = food.quantity(for: amount) else { return 0 }
+////        return food.nutrientScaleFactor(for: quantity) ?? 0
+//    }
+//}
 
 
 //import FoodLabel

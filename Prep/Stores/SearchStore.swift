@@ -142,12 +142,12 @@ extension DataManager {
 
 extension CoreDataManager {
     
-    func foods(matching text: String, completion: @escaping (([FoodEntity2]) -> ())) throws {
+    func foods(matching text: String, completion: @escaping (([FoodEntity]) -> ())) throws {
         Task {
             let bgContext =  newBackgroundContext()
             await bgContext.perform {
                 do {
-                    let request: NSFetchRequest<FoodEntity2> = FoodEntity2.fetchRequest()
+                    let request: NSFetchRequest<FoodEntity> = FoodEntity.fetchRequest()
                     
                     let name = NSPredicate(format: "name CONTAINS[cd] %@", text)
                     let detail = NSPredicate(format: "detail CONTAINS[cd] %@", text)
@@ -168,12 +168,12 @@ extension CoreDataManager {
         }
     }
     
-    func recents(completion: @escaping (([FoodEntity2]) -> ())) throws {
+    func recents(completion: @escaping (([FoodEntity]) -> ())) throws {
         Task {
             let bgContext =  newBackgroundContext()
             await bgContext.perform {
                 do {
-                    let request: NSFetchRequest<FoodEntity2> = FoodEntity2.fetchRequest()
+                    let request: NSFetchRequest<FoodEntity> = FoodEntity.fetchRequest()
                     request.sortDescriptors = [
                         NSSortDescriptor(key: "lastUsedAt", ascending: false)
                     ]

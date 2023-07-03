@@ -1,25 +1,33 @@
 import Foundation
 
-struct Meal: Identifiable {
-    var id: String = ""
-    var name: String = ""
-    var time: Date = Date.now
-    var date: Date = Date.now
-    var foodItems: [FoodItem] = []
+//struct Meal: Identifiable {
+//    var id: String = ""
+//    var name: String = ""
+//    var time: Date = Date.now
+//    var date: Date = Date.now
+//    var foodItems: [FoodItem] = []
+//
+//    init() { }
+//    
+//    init(
+//        _ entity: MealEntity,
+//        dayEntity: DayEntity,
+//        foodItems: [FoodItem]
+//    ) {
+//        self.init()
+//        self.id = entity.uuid
+//        self.name = entity.name
+//        self.time = Date(timeIntervalSince1970: entity.time)
+//        self.date = dayEntity.date
+//        self.foodItems = foodItems
+//    }
+//}
 
-    init() { }
-    
-    init(
-        _ entity: MealEntity,
-        dayEntity: DayEntity,
-        foodItems: [FoodItem]
-    ) {
-        self.init()
-        self.id = entity.uuid
-        self.name = entity.name
-        self.time = Date(timeIntervalSince1970: entity.time)
-        self.date = dayEntity.date
-        self.foodItems = foodItems
+extension Meal {
+    var timeString: String {
+        time
+            .formatted(date: .omitted, time: .shortened)
+            .lowercased()
     }
 }
 
@@ -41,9 +49,10 @@ extension Meal {
     }
     
     func total(for macro: Macro) -> Double {
-        foodItems.reduce(0) {
-            $0 + $1.scaledMacroValue(for: macro)
-        }
+        0
+//        foodItems.reduce(0) {
+//            $0 + $1.scaledMacroValue(for: macro)
+//        }
     }
     
     func energy(in unit: EnergyUnit) -> Double {

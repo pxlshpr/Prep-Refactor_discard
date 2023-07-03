@@ -1,5 +1,5 @@
 import Foundation
-import SwiftData
+//import SwiftData
 import SwiftSugar
 import OSLog
 
@@ -7,172 +7,172 @@ import FoodDataTypes
 
 let importLogger = Logger(subsystem: "Database", category: "Import")
 
-@MainActor
-func importJSON(modelContext: ModelContext) {
- 
-    //MARK: Days
-    let daysURL = Bundle.main.url(forResource: "days", withExtension: "json")!
-    let daysData = try! Data(contentsOf: daysURL)
-    let flatDays = try! JSONDecoder().decode([LegacyDay].self, from: daysData)
-    
-    var days: [DayEntity] = []
-    for flatDay in flatDays {
-        let day = DayEntity(
-            uuid: flatDay.id,
-            calendarDayString: flatDay.calendarDayString
-        )
-        days.append(day)
-        importLogger.debug("Inserted day with: \(flatDay.calendarDayString, privacy: .public)")
-        modelContext.insert(day)
-    }
-    
-    //MARK: Meals
-    let mealsURL = Bundle.main.url(forResource: "meals", withExtension: "json")!
-    let mealsData = try! Data(contentsOf: mealsURL)
-    let flatMeals = try! JSONDecoder().decode([LegacyMeal].self, from: mealsData)
-    
-    var meals: [MealEntity] = []
-    for flatMeal in flatMeals {
-        guard let day = days.first(where: { $0.uuid == flatMeal.dayID }) else {
-            fatalError()
-        }
-        let meal = MealEntity(
-            uuid: flatMeal.id,
-            dayEntity: day,
-            name: flatMeal.name,
-            time: flatMeal.time
-        )
-        meals.append(meal)
-        modelContext.insert(meal)
-    }
-    
-    
-    //MARK: Foods
-    var foods: [FoodEntity] = []
-
-    let foodsURL = Bundle.main.url(forResource: "foods", withExtension: "json")!
-    let foodsData = try! Data(contentsOf: foodsURL)
-    let legacyFoods = try! JSONDecoder().decode([LegacyUserFood].self, from: foodsData)
-    
-    for legacyFood in legacyFoods {
-
-        importLogger.debug("Adding \(legacyFood.emoji, privacy: .public) \(legacyFood.name, privacy: .public) (\(legacyFood.id, privacy: .public))")
-
-        let food = FoodEntity(
-            uuid: legacyFood.id,
-            type: legacyFood.type,
-            name: legacyFood.name,
-            emoji: legacyFood.emoji,
-            detail: legacyFood.detail,
-            brand: legacyFood.brand,
-            numberOfTimesConsumedGlobally: legacyFood.numberOfTimesConsumedGlobally,
-            numberOfTimesConsumed: legacyFood.numberOfTimesConsumed,
-            lastUsedAt: legacyFood.lastUsedAt,
-            firstUsedAt: legacyFood.firstUsedAt,
-            info: legacyFood.info,
-            publishStatus: legacyFood.publishStatus,
-            dataset: legacyFood.dataset,
-            barcodes: legacyFood.barcodes,
-            updatedAt: legacyFood.updatedAt
-        )
-
-        foods.append(food)
-        modelContext.insert(food)
-        
-        do {
-            try modelContext.save()
-        } catch {
-            importLogger.error("Error saving: \(error)")
-        }
-    }
-
-    //MARK: PresetFoods
-    let presetFoodsURL = Bundle.main.url(forResource: "presetFoods", withExtension: "json")!
-    let presetFoodsData = try! Data(contentsOf: presetFoodsURL)
-    let presetFoods = try! JSONDecoder().decode([LegacyPresetFood].self, from: presetFoodsData)
-    
-    for presetFood in presetFoods {
-        
-        importLogger.debug("Adding \(presetFood.emoji, privacy: .public) \(presetFood.name, privacy: .public) (\(presetFood.id, privacy: .public))")
-        
-        let id = presetFood.id
-        
-        let food = FoodEntity(
-            uuid: id,
-            type: .food,
-            name: presetFood.name,
-            emoji: presetFood.emoji,
-            detail: presetFood.detail,
-            brand: presetFood.brand,
-            numberOfTimesConsumedGlobally: 0,
-            numberOfTimesConsumed: 0,
-            lastUsedAt: nil,
-            firstUsedAt: nil,
-            info: LegacyFoodInfo(
-                amount: presetFood.amount,
-                serving: presetFood.serving,
-                nutrients: presetFood.nutrients,
-                sizes: presetFood.sizes,
-                density: presetFood.density,
-                barcodes: []
-            ),
-            publishStatus: .verified,
-            dataset: presetFood.dataset,
-            barcodes: [],
-            updatedAt: presetFood.updatedAt
-        )
-        
-        foods.append(food)
-        modelContext.insert(food)
-        do {
-            try modelContext.save()
-        } catch {
-            importLogger.error("Error saving: \(error)")
-        }
-    }
-    
-    //MARK: FoodItems
-    let foodItemsURL = Bundle.main.url(forResource: "foodItems", withExtension: "json")!
-    let foodItemsData = try! Data(contentsOf: foodItemsURL)
-    let legacyFoodItems = try! JSONDecoder().decode([LegacyFoodItem].self, from: foodItemsData)
-    
-    var foodItems: [FoodItemEntity] = []
-    for legacyFoodItem in legacyFoodItems {
-        
-        importLogger.debug("Adding FoodItemEntity: \(legacyFoodItem.id, privacy: .public)")
-
-        guard legacyFoodItem.deletedAt == 0 else {
-            fatalError()
-        }
-        
-        guard let food = foods.first(where: { $0.uuid == legacyFoodItem.foodID }),
-              let meal = meals.first(where: { $0.uuid == legacyFoodItem.mealID })
-        else {
-            fatalError()
-        }
-        let foodItem = FoodItemEntity(
-            uuid: legacyFoodItem.id,
-            foodEntity: food,
-            mealEntity: meal,
-            amount: legacyFoodItem.amount.foodValue,
-            sortPosition: legacyFoodItem.sortPosition,
-            updatedAt: legacyFoodItem.updatedAt,
-            badgeWidth: legacyFoodItem.badgeWidth
-        )
-        
-        foodItems.append(foodItem)
-        modelContext.insert(foodItem)
-        
-        do {
-            try modelContext.save()
-        } catch {
-            importLogger.error("Error saving: \(error)")
-        }
-
-    }
-    
-    importLogger.info("Import Completed")
-}
+//@MainActor
+//func importJSON(modelContext: ModelContext) {
+// 
+//    //MARK: Days
+//    let daysURL = Bundle.main.url(forResource: "days", withExtension: "json")!
+//    let daysData = try! Data(contentsOf: daysURL)
+//    let flatDays = try! JSONDecoder().decode([LegacyDay].self, from: daysData)
+//    
+//    var days: [DayEntity] = []
+//    for flatDay in flatDays {
+//        let day = DayEntity(
+//            uuid: flatDay.id,
+//            calendarDayString: flatDay.calendarDayString
+//        )
+//        days.append(day)
+//        importLogger.debug("Inserted day with: \(flatDay.calendarDayString, privacy: .public)")
+//        modelContext.insert(day)
+//    }
+//    
+//    //MARK: Meals
+//    let mealsURL = Bundle.main.url(forResource: "meals", withExtension: "json")!
+//    let mealsData = try! Data(contentsOf: mealsURL)
+//    let flatMeals = try! JSONDecoder().decode([LegacyMeal].self, from: mealsData)
+//    
+//    var meals: [MealEntity] = []
+//    for flatMeal in flatMeals {
+//        guard let day = days.first(where: { $0.uuid == flatMeal.dayID }) else {
+//            fatalError()
+//        }
+//        let meal = MealEntity(
+//            uuid: flatMeal.id,
+//            dayEntity: day,
+//            name: flatMeal.name,
+//            time: flatMeal.time
+//        )
+//        meals.append(meal)
+//        modelContext.insert(meal)
+//    }
+//    
+//    
+//    //MARK: Foods
+//    var foods: [FoodEntity] = []
+//
+//    let foodsURL = Bundle.main.url(forResource: "foods", withExtension: "json")!
+//    let foodsData = try! Data(contentsOf: foodsURL)
+//    let legacyFoods = try! JSONDecoder().decode([LegacyUserFood].self, from: foodsData)
+//    
+//    for legacyFood in legacyFoods {
+//
+//        importLogger.debug("Adding \(legacyFood.emoji, privacy: .public) \(legacyFood.name, privacy: .public) (\(legacyFood.id, privacy: .public))")
+//
+//        let food = FoodEntity(
+//            uuid: legacyFood.id,
+//            type: legacyFood.type,
+//            name: legacyFood.name,
+//            emoji: legacyFood.emoji,
+//            detail: legacyFood.detail,
+//            brand: legacyFood.brand,
+//            numberOfTimesConsumedGlobally: legacyFood.numberOfTimesConsumedGlobally,
+//            numberOfTimesConsumed: legacyFood.numberOfTimesConsumed,
+//            lastUsedAt: legacyFood.lastUsedAt,
+//            firstUsedAt: legacyFood.firstUsedAt,
+//            info: legacyFood.info,
+//            publishStatus: legacyFood.publishStatus,
+//            dataset: legacyFood.dataset,
+//            barcodes: legacyFood.barcodes,
+//            updatedAt: legacyFood.updatedAt
+//        )
+//
+//        foods.append(food)
+//        modelContext.insert(food)
+//        
+//        do {
+//            try modelContext.save()
+//        } catch {
+//            importLogger.error("Error saving: \(error)")
+//        }
+//    }
+//
+//    //MARK: PresetFoods
+//    let presetFoodsURL = Bundle.main.url(forResource: "presetFoods", withExtension: "json")!
+//    let presetFoodsData = try! Data(contentsOf: presetFoodsURL)
+//    let presetFoods = try! JSONDecoder().decode([LegacyPresetFood].self, from: presetFoodsData)
+//    
+//    for presetFood in presetFoods {
+//        
+//        importLogger.debug("Adding \(presetFood.emoji, privacy: .public) \(presetFood.name, privacy: .public) (\(presetFood.id, privacy: .public))")
+//        
+//        let id = presetFood.id
+//        
+//        let food = FoodEntity(
+//            uuid: id,
+//            type: .food,
+//            name: presetFood.name,
+//            emoji: presetFood.emoji,
+//            detail: presetFood.detail,
+//            brand: presetFood.brand,
+//            numberOfTimesConsumedGlobally: 0,
+//            numberOfTimesConsumed: 0,
+//            lastUsedAt: nil,
+//            firstUsedAt: nil,
+//            info: LegacyFoodInfo(
+//                amount: presetFood.amount,
+//                serving: presetFood.serving,
+//                nutrients: presetFood.nutrients,
+//                sizes: presetFood.sizes,
+//                density: presetFood.density,
+//                barcodes: []
+//            ),
+//            publishStatus: .verified,
+//            dataset: presetFood.dataset,
+//            barcodes: [],
+//            updatedAt: presetFood.updatedAt
+//        )
+//        
+//        foods.append(food)
+//        modelContext.insert(food)
+//        do {
+//            try modelContext.save()
+//        } catch {
+//            importLogger.error("Error saving: \(error)")
+//        }
+//    }
+//    
+//    //MARK: FoodItems
+//    let foodItemsURL = Bundle.main.url(forResource: "foodItems", withExtension: "json")!
+//    let foodItemsData = try! Data(contentsOf: foodItemsURL)
+//    let legacyFoodItems = try! JSONDecoder().decode([LegacyFoodItem].self, from: foodItemsData)
+//    
+//    var foodItems: [FoodItemEntity] = []
+//    for legacyFoodItem in legacyFoodItems {
+//        
+//        importLogger.debug("Adding FoodItemEntity: \(legacyFoodItem.id, privacy: .public)")
+//
+//        guard legacyFoodItem.deletedAt == 0 else {
+//            fatalError()
+//        }
+//        
+//        guard let food = foods.first(where: { $0.uuid == legacyFoodItem.foodID }),
+//              let meal = meals.first(where: { $0.uuid == legacyFoodItem.mealID })
+//        else {
+//            fatalError()
+//        }
+//        let foodItem = FoodItemEntity(
+//            uuid: legacyFoodItem.id,
+//            foodEntity: food,
+//            mealEntity: meal,
+//            amount: legacyFoodItem.amount.foodValue,
+//            sortPosition: legacyFoodItem.sortPosition,
+//            updatedAt: legacyFoodItem.updatedAt,
+//            badgeWidth: legacyFoodItem.badgeWidth
+//        )
+//        
+//        foodItems.append(foodItem)
+//        modelContext.insert(foodItem)
+//        
+//        do {
+//            try modelContext.save()
+//        } catch {
+//            importLogger.error("Error saving: \(error)")
+//        }
+//
+//    }
+//    
+//    importLogger.info("Import Completed")
+//}
 
 //MARK: - Flat Models
 

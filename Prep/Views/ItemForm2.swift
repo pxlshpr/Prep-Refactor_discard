@@ -14,22 +14,22 @@ struct ItemForm2: View {
 
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.modelContext) var context
+//    @Environment(\.modelContext) var context
     
 //    var showingItem = false
     @State var amount: Double = DefaultAmount
     @State var unit: FormUnit = DefaultUnit
-    @State var meal: Meal2? = nil
+    @State var meal: Meal? = nil
 //    var foodItem: FoodItem? = nil
 
     @State var food: Food? = nil
-    @State var foodItem: FoodItem2? = nil
+    @State var foodItem: FoodItem? = nil
 
     @Binding var isPresented: Bool
     
     public init(
         isPresented: Binding<Bool>,
-        meal: Meal2?,
+        meal: Meal?,
         food: Food
     ) {
         _isPresented = isPresented

@@ -1,16 +1,16 @@
 import Foundation
 import CoreData
 
-extension MealEntity2: Entity {
+extension MealEntity: Entity {
     
-    convenience init(context: NSManagedObjectContext, meal: Meal2) {
+    convenience init(context: NSManagedObjectContext, meal: Meal) {
         self.init(context: context)
         self.id = meal.id
         self.name = meal.name
         self.time = meal.time
     }
     
-    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyMeal, _ dayEntity: DayEntity2) {
+    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyMeal, _ dayEntity: DayEntity) {
         self.init(context: context)
         self.id = UUID(uuidString: legacy.id)!
         self.name = legacy.name
@@ -19,16 +19,16 @@ extension MealEntity2: Entity {
     }
 }
 
-extension MealEntity2 {
-    var foodItemEntitiesArray: [FoodItemEntity2] {
-        foodItemEntities?.allObjects as? [FoodItemEntity2] ?? []
+extension MealEntity {
+    var foodItemEntitiesArray: [FoodItemEntity] {
+        foodItemEntities?.allObjects as? [FoodItemEntity] ?? []
     }
-    var foodItems: [FoodItem2] {
-        foodItemEntitiesArray.compactMap { FoodItem2($0) }
+    var foodItems: [FoodItem] {
+        foodItemEntitiesArray.compactMap { FoodItem($0) }
     }
 }
 
-extension MealEntity2 {
+extension MealEntity {
     var time: Date {
         get {
             guard let timeString,

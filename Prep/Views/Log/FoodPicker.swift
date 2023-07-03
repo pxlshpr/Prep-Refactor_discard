@@ -20,11 +20,11 @@ struct FoodPicker: View {
     @Binding var isPresented: Bool
     @State var hasAppeared = false
     
-    let meal: Meal2?
+    let meal: Meal?
     
     init(
         isPresented: Binding<Bool>,
-        meal: Meal2? = nil
+        meal: Meal? = nil
     ) {
         _isPresented = isPresented
         self.meal = meal

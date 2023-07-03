@@ -1,5 +1,5 @@
 import SwiftUI
-import SwiftData
+//import SwiftData
 import OSLog
 
 import FormSugar
@@ -9,7 +9,7 @@ struct MealForm: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
-    @Environment(\.modelContext) var context
+//    @Environment(\.modelContext) var context
 
     @Bindable var model: MealModel
     
@@ -181,71 +181,71 @@ struct MealForm: View {
         Haptics.successFeedback()
         dismiss()
         
-        if let meal {
-            /// Update
-        } else {
-//            MealStore.create(
-//                name: model.name,
-//                time: model.time,
-//                date: date
-//            )
-            
-            
-            let logger = Logger(subsystem: "MealForm", category: "tappedSave")
-            do {
-                
-                let calendarDayString = date.calendarDayString
-                let descriptor = FetchDescriptor(predicate: #Predicate<DayEntity> {
-                    $0.calendarDayString == calendarDayString
-                })
-                
-                logger.debug("Fetching day with calendarDayString: \(calendarDayString)")
-                let days = try context.fetch(descriptor)
-                guard days.count <= 1 else {
-                    fatalError("Duplicate days for: \(date.calendarDayString)")
-                }
-                
-                let fetchedDay = days.first
-                let dayEntity: DayEntity
-                if let fetchedDay {
-                    logger.info("Day was fetched")
-                    dayEntity = fetchedDay
-                } else {
-                    logger.info("Day wasn't fetched, creating ...")
-                    let newDay = DayEntity(calendarDayString: date.calendarDayString)
-                    logger.debug("Inserting new DayEntity...")
-                    context.insert(newDay)
-                    dayEntity = newDay
-                }
-                
-                logger.debug("Now that we have dayEntity, creating MealEntity")
-                
-                let mealEntity = MealEntity(
-                    dayEntity: dayEntity,
-                    name: model.name,
-                    time: model.time.timeIntervalSince1970
-                )
-                logger.debug("Inserting new MealEntity with id: \(mealEntity.uuid, privacy: .public)...")
-                context.insert(mealEntity)
-                
-                logger.debug("Returning the newly created Meal")
-                let meal = Meal(
-                    mealEntity,
-                    dayEntity: dayEntity,
-                    foodItems: []
-                )
-                post(.didAddMeal, userInfo: [.meal: meal])
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    Task {
-                        logger.debug("Saving context")
-                        try context.save()
-                    }
-                }
-            } catch {
-                fatalError(error.localizedDescription)
-            }
-        }
+//        if let meal {
+//            /// Update
+//        } else {
+////            MealStore.create(
+////                name: model.name,
+////                time: model.time,
+////                date: date
+////            )
+//            
+//            
+//            let logger = Logger(subsystem: "MealForm", category: "tappedSave")
+//            do {
+//                
+//                let calendarDayString = date.calendarDayString
+//                let descriptor = FetchDescriptor(predicate: #Predicate<DayEntity> {
+//                    $0.calendarDayString == calendarDayString
+//                })
+//                
+//                logger.debug("Fetching day with calendarDayString: \(calendarDayString)")
+//                let days = try context.fetch(descriptor)
+//                guard days.count <= 1 else {
+//                    fatalError("Duplicate days for: \(date.calendarDayString)")
+//                }
+//                
+//                let fetchedDay = days.first
+//                let dayEntity: DayEntity
+//                if let fetchedDay {
+//                    logger.info("Day was fetched")
+//                    dayEntity = fetchedDay
+//                } else {
+//                    logger.info("Day wasn't fetched, creating ...")
+//                    let newDay = DayEntity(calendarDayString: date.calendarDayString)
+//                    logger.debug("Inserting new DayEntity...")
+//                    context.insert(newDay)
+//                    dayEntity = newDay
+//                }
+//                
+//                logger.debug("Now that we have dayEntity, creating MealEntity")
+//                
+//                let mealEntity = MealEntity(
+//                    dayEntity: dayEntity,
+//                    name: model.name,
+//                    time: model.time.timeIntervalSince1970
+//                )
+//                logger.debug("Inserting new MealEntity with id: \(mealEntity.uuid, privacy: .public)...")
+//                context.insert(mealEntity)
+//                
+//                logger.debug("Returning the newly created Meal")
+//                let meal = Meal(
+//                    mealEntity,
+//                    dayEntity: dayEntity,
+//                    foodItems: []
+//                )
+//                post(.didAddMeal, userInfo: [.meal: meal])
+//
+//                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                    Task {
+//                        logger.debug("Saving context")
+//                        try context.save()
+//                    }
+//                }
+//            } catch {
+//                fatalError(error.localizedDescription)
+//            }
+//        }
     }
 
     func onChangeOfTime(oldValue: Date, newValue: Date) {

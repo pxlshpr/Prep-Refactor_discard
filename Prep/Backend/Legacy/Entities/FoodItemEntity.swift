@@ -1,73 +1,73 @@
 import Foundation
-import SwiftData
+//import SwiftData
 import OSLog
 
-@Model
-class FoodItemEntity {
-    var uuid: String
-    
-    var amountRaw: FoodValueRaw
-    
-    var markedAsEatenAt: Double?
-    var sortPosition: Int
-    var badgeWidth: Double?
-    
-    var updatedAt: Double
-
-    var foodID: String
-    var mealID: String?
-
-//    @Relationship var foodEntity: FoodEntity?
-//    @Relationship var mealEntity: MealEntity?
-
-    init(
-        uuid: String = UUID().uuidString,
-        foodEntity: FoodEntity?,
-        mealEntity: MealEntity?,
-        amount: FoodValue,
-        markedAsEatenAt: Double? = nil,
-        sortPosition: Int,
-        updatedAt: Double,
-        badgeWidth: Double? = nil
-    ) {
-        self.uuid = uuid
-        
-        self.mealID = mealEntity?.uuid
-        self.foodID = foodEntity?.uuid ?? ""
-        
-        self.amount = amount
-        
-        self.markedAsEatenAt = markedAsEatenAt
-        self.sortPosition = sortPosition
-        self.updatedAt = updatedAt
-        self.badgeWidth = badgeWidth
-        
-        let logger = Logger(subsystem: "FoodItemEntity", category: "")
-        if let mealID = self.mealID {
-            logger.debug("Creating FoodItemEntity with mealID: \(mealID, privacy: .public)")
-        } else {
-            logger.debug("Creating FoodItemEntity with mealID: nil")
-        }
-    }
-    
-    var amount: FoodValue {
-        get { amountRaw.foodValue }
-        set { amountRaw = newValue.rawValue }
-    }
-    
-    var markedAsEatenDate: Date? {
-        get {
-            guard let markedAsEatenAt else { return nil }
-            return Date(timeIntervalSince1970: markedAsEatenAt)
-        }
-        set { markedAsEatenAt = newValue?.timeIntervalSince1970 }
-    }
-    
-    var updatedDate: Date {
-        get { Date(timeIntervalSince1970: updatedAt) }
-        set { updatedAt = newValue.timeIntervalSince1970 }
-    }
-}
+//@Model
+//class FoodItemEntity {
+//    var uuid: String
+//    
+//    var amountRaw: FoodValueRaw
+//    
+//    var markedAsEatenAt: Double?
+//    var sortPosition: Int
+//    var badgeWidth: Double?
+//    
+//    var updatedAt: Double
+//
+//    var foodID: String
+//    var mealID: String?
+//
+////    @Relationship var foodEntity: FoodEntity?
+////    @Relationship var mealEntity: MealEntity?
+//
+//    init(
+//        uuid: String = UUID().uuidString,
+//        foodEntity: FoodEntity?,
+//        mealEntity: MealEntity?,
+//        amount: FoodValue,
+//        markedAsEatenAt: Double? = nil,
+//        sortPosition: Int,
+//        updatedAt: Double,
+//        badgeWidth: Double? = nil
+//    ) {
+//        self.uuid = uuid
+//        
+//        self.mealID = mealEntity?.uuid
+//        self.foodID = foodEntity?.uuid ?? ""
+//        
+//        self.amount = amount
+//        
+//        self.markedAsEatenAt = markedAsEatenAt
+//        self.sortPosition = sortPosition
+//        self.updatedAt = updatedAt
+//        self.badgeWidth = badgeWidth
+//        
+//        let logger = Logger(subsystem: "FoodItemEntity", category: "")
+//        if let mealID = self.mealID {
+//            logger.debug("Creating FoodItemEntity with mealID: \(mealID, privacy: .public)")
+//        } else {
+//            logger.debug("Creating FoodItemEntity with mealID: nil")
+//        }
+//    }
+//    
+//    var amount: FoodValue {
+//        get { amountRaw.foodValue }
+//        set { amountRaw = newValue.rawValue }
+//    }
+//    
+//    var markedAsEatenDate: Date? {
+//        get {
+//            guard let markedAsEatenAt else { return nil }
+//            return Date(timeIntervalSince1970: markedAsEatenAt)
+//        }
+//        set { markedAsEatenAt = newValue?.timeIntervalSince1970 }
+//    }
+//    
+//    var updatedDate: Date {
+//        get { Date(timeIntervalSince1970: updatedAt) }
+//        set { updatedAt = newValue.timeIntervalSince1970 }
+//    }
+//}
 
 extension FoodValue {
     func description(with food: Food) -> String {

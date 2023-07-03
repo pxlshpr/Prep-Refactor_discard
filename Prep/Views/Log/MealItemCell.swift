@@ -6,7 +6,7 @@ struct MealItemCell: View {
     
     @Environment(\.colorScheme) var colorScheme
 
-    let item: FoodItem2
+    let item: FoodItem
     
     var body: some View {
         content

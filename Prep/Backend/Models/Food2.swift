@@ -92,7 +92,7 @@ struct Food: Identifiable, Codable, Hashable {
 }
 
 extension Food {
-    init(_ entity: FoodEntity2) {
+    init(_ entity: FoodEntity) {
         self.init(
             id: entity.id!,
             emoji: entity.emoji!,

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22158.8" systemVersion="23A5276g" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="DayEntity2" representedClassName="DayEntity2" syncable="YES" codeGenerationType="class">
+    <entity name="DayEntity" representedClassName="DayEntity" syncable="YES" codeGenerationType="class">
         <attribute name="dateString" attributeType="String" defaultValueString=""/>
-        <relationship name="mealEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntity2" inverseName="dayEntity" inverseEntity="MealEntity2"/>
+        <relationship name="mealEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MealEntity" inverseName="dayEntity" inverseEntity="MealEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="dateString"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="FoodEntity2" representedClassName="FoodEntity2" syncable="YES" codeGenerationType="class">
+    <entity name="FoodEntity" representedClassName="FoodEntity" syncable="YES" codeGenerationType="class">
         <attribute name="amountData" optional="YES" attributeType="Binary"/>
         <attribute name="barcodesString" optional="YES" attributeType="String"/>
         <attribute name="brand" optional="YES" attributeType="String"/>
@@ -34,14 +34,14 @@
         <attribute name="typeValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="url" optional="YES" attributeType="String"/>
-        <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity2" inverseName="foodEntity" inverseEntity="FoodItemEntity2"/>
+        <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity" inverseName="foodEntity" inverseEntity="FoodItemEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="FoodItemEntity2" representedClassName="FoodItemEntity2" syncable="YES" codeGenerationType="class">
+    <entity name="FoodItemEntity" representedClassName="FoodItemEntity" syncable="YES" codeGenerationType="class">
         <attribute name="amountData" optional="YES" attributeType="Binary"/>
         <attribute name="badgeWidth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -49,8 +49,8 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="sortPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="foodEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodEntity2" inverseName="foodItemEntities" inverseEntity="FoodEntity2"/>
-        <relationship name="mealEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealEntity2" inverseName="foodItemEntities" inverseEntity="MealEntity2"/>
+        <relationship name="foodEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodEntity" inverseName="foodItemEntities" inverseEntity="FoodEntity"/>
+        <relationship name="mealEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MealEntity" inverseName="foodItemEntities" inverseEntity="MealEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>
@@ -60,12 +60,12 @@
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
-    <entity name="MealEntity2" representedClassName="MealEntity2" syncable="YES" codeGenerationType="class">
+    <entity name="MealEntity" representedClassName="MealEntity" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="timeString" optional="YES" attributeType="String"/>
-        <relationship name="dayEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity2" inverseName="mealEntities" inverseEntity="DayEntity2"/>
-        <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity2" inverseName="mealEntity" inverseEntity="FoodItemEntity2"/>
+        <relationship name="dayEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity" inverseName="mealEntities" inverseEntity="DayEntity"/>
+        <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity" inverseName="mealEntity" inverseEntity="FoodItemEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>

@@ -5,19 +5,19 @@ import SwiftHaptics
 
 struct MealView: View {
 
-    @Environment(\.modelContext) var context
+//    @Environment(\.modelContext) var context
     
-    let meal: Meal2
+    let meal: Meal
     @Binding var leadingPadding: CGFloat
     @Binding var trailingPadding: CGFloat
 
     let title: String
-    @State var foodItems: [FoodItem2]
+    @State var foodItems: [FoodItem]
     
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
     
     init(
-        meal: Meal2,
+        meal: Meal,
         leadingPadding: Binding<CGFloat>,
         trailingPadding: Binding<CGFloat>
     ) {
@@ -42,7 +42,7 @@ struct MealView: View {
     }
     
     func didAddFoodItem(_ notification: Notification) {
-        guard let foodItem = notification.userInfo?[Notification.PrepKeys.foodItem] as? FoodItem2,
+        guard let foodItem = notification.userInfo?[Notification.PrepKeys.foodItem] as? FoodItem,
               foodItem.mealID == meal.id
         else {
             return
@@ -55,7 +55,7 @@ struct MealView: View {
         }
     }
     
-    func cell(foodItem: FoodItem2) -> some View {
+    func cell(foodItem: FoodItem) -> some View {
         Button {
             Haptics.selectionFeedback()
 //            model.foodItemBeingEdited = foodItem
@@ -121,7 +121,7 @@ struct MealView: View {
         .frame(height: 25)
     }
     
-    func addFoodCell(_ meal: Meal2) -> some View {
+    func addFoodCell(_ meal: Meal) -> some View {
         DayView.AddFoodCell(
             meal: meal,
             leadingPadding: $leadingPadding,

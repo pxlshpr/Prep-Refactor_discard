@@ -1,13 +1,13 @@
 import Foundation
 
-struct Day {
-    
-    var id: String = UUID().uuidString
-    var date: Date = Date.now
-    var meals: [Meal] = []
-    
-    init() { }
-}
+//struct Day {
+//    
+//    var id: String = UUID().uuidString
+//    var date: Date = Date.now
+//    var meals: [Meal] = []
+//    
+//    init() { }
+//}
 
 extension Day {
     var mealTimes: [Date] {
@@ -16,5 +16,9 @@ extension Day {
     
     var sortedMeals: [Meal] {
         meals.sorted(by: { $0.time < $1.time })
+    }
+    
+    var date: Date {
+        Date(fromCalendarDayString: dateString)!
     }
 }

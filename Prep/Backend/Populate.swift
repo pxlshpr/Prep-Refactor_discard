@@ -24,7 +24,7 @@ extension CoreDataManager {
             logger.error("\(error.localizedDescription, privacy: .public)")
         }
         
-//        guard let meal = try! MealEntity2.object(with: UUID(uuidString: "F7C3C6E6-CC69-467A-82AD-066578156688")!, in: viewContext) else {
+//        guard let meal = try! MealEntity.object(with: UUID(uuidString: "F7C3C6E6-CC69-467A-82AD-066578156688")!, in: viewContext) else {
 //            fatalError()
 //        }
 //        
@@ -32,7 +32,7 @@ extension CoreDataManager {
         
         
         
-//        guard let e = try! MealEntity2.object(
+//        guard let e = try! MealEntity.object(
 //            with: UUID(uuidString: "F7C3C6E6-CC69-467A-82AD-066578156688")!,
 //            in: viewContext
 //        ) else {
@@ -110,10 +110,10 @@ extension CoreDataManager {
     
     func didPopulate(_ name: String) {
 //        NotificationCenter.default.post(name: .didPopulate, object: nil)
-        let days = DayEntity2.countAll(in: viewContext)
-        let meals = MealEntity2.countAll(in: viewContext)
-        let foods = FoodEntity2.countAll(in: viewContext)
-        let foodItems = FoodItemEntity2.countAll(in: viewContext)
+        let days = DayEntity.countAll(in: viewContext)
+        let meals = MealEntity.countAll(in: viewContext)
+        let foods = FoodEntity.countAll(in: viewContext)
+        let foodItems = FoodItemEntity.countAll(in: viewContext)
 
         logger.info("Populated: \(name, privacy: .public)")
         logger.info("==================")
@@ -151,7 +151,7 @@ extension CoreDataManager {
 
         /// For-Loop
 //        for legacy in legacyObjects {
-//            let entity = DayEntity2(context, legacy)
+//            let entity = DayEntity(context, legacy)
 //            context.insert(entity)
 //            logger.debug("Inserted Day: \(legacy.calendarDayString, privacy: .public)")
 //        }
@@ -160,12 +160,12 @@ extension CoreDataManager {
             /// Create an iterator for raw data
             var iterator = legacyObjects.makeIterator()
             
-            let request = NSBatchInsertRequest(entity: DayEntity2.entity()) { (obj: NSManagedObject) in
+            let request = NSBatchInsertRequest(entity: DayEntity.entity()) { (obj: NSManagedObject) in
                 /// Stop add item when itemListIterator return nil
                 guard let legacy = iterator.next() else { return true }
                 
                 /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? DayEntity2 {
+                if let cmo = obj as? DayEntity {
                     cmo.dateString = legacy.calendarDayString
                 }
                 logger.debug("Inserted Day: \(legacy.calendarDayString, privacy: .public)")
@@ -195,7 +195,7 @@ extension CoreDataManager {
             /// Create an iterator for raw data
             var iterator = legacyObjects.makeIterator()
             
-            let request = NSBatchInsertRequest(entity: MealEntity2.entity()) { (obj: NSManagedObject) in
+            let request = NSBatchInsertRequest(entity: MealEntity.entity()) { (obj: NSManagedObject) in
                 /// Stop add item when itemListIterator return nil
                 guard let legacy = iterator.next() else { return true }
                 
@@ -205,7 +205,7 @@ extension CoreDataManager {
                 }
                 
                 /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? MealEntity2 {
+                if let cmo = obj as? MealEntity {
                     cmo.id = UUID(uuidString: legacy.id)!
                     cmo.name = legacy.name
                     cmo.time = Date(timeIntervalSince1970: legacy.time)
@@ -222,7 +222,7 @@ extension CoreDataManager {
         let request = createBatchInsertRequest()
         try! context.execute(request)
         
-        let meals = MealEntity2.objects(in: context)
+        let meals = MealEntity.objects(in: context)
         for meal in meals {
             guard let legacy = legacyObjects.first(where: { $0.id == meal.id!.uuidString }) else {
                 fatalError()
@@ -232,7 +232,7 @@ extension CoreDataManager {
             }
             let dateString = legacyDay.calendarDayString
             let predicate = NSPredicate(format: "dateString == %@", dateString)
-            let dayEntity = DayEntity2.objects(for: predicate, in: context).first
+            let dayEntity = DayEntity.objects(for: predicate, in: context).first
             
             guard let dayEntity else {
                 logger.error("Failed to find DayEntity with id: \(legacy.dayID, privacy: .public)")
@@ -251,7 +251,7 @@ extension CoreDataManager {
         logger.info("Prepopulating \(legacyObjects.count) preset foods…")
 
 //        for legacy in legacyObjects {
-//            let entity = FoodEntity2(context, legacy)
+//            let entity = FoodEntity(context, legacy)
 //            context.insert(entity)
 //            logger.debug("Inserted Preset Food: \(legacy.description, privacy: .public)")
 //        }
@@ -260,12 +260,12 @@ extension CoreDataManager {
             /// Create an iterator for raw data
             var iterator = legacyObjects.makeIterator()
             
-            let request = NSBatchInsertRequest(entity: FoodEntity2.entity()) { (obj: NSManagedObject) in
+            let request = NSBatchInsertRequest(entity: FoodEntity.entity()) { (obj: NSManagedObject) in
                 /// Stop add item when itemListIterator return nil
                 guard let legacy = iterator.next() else { return true }
                 
                 /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? FoodEntity2 {
+                if let cmo = obj as? FoodEntity {
                     cmo.fill(legacy)
                 }
                 logger.debug("Inserted Preset Food: \(legacy.description, privacy: .public)")
@@ -292,7 +292,7 @@ extension CoreDataManager {
 //                logger.warning("Ignoring deleted User Food: \(legacy.description, privacy: .public)")
 //                continue
 //            }
-//            let entity = FoodEntity2(context, legacy)
+//            let entity = FoodEntity(context, legacy)
 //            context.insert(entity)
 //            logger.debug("Inserted User Food: \(legacy.description, privacy: .public)")
 //        }
@@ -301,12 +301,12 @@ extension CoreDataManager {
             /// Create an iterator for raw data
             var iterator = legacyObjects.makeIterator()
             
-            let request = NSBatchInsertRequest(entity: FoodEntity2.entity()) { (obj: NSManagedObject) in
+            let request = NSBatchInsertRequest(entity: FoodEntity.entity()) { (obj: NSManagedObject) in
                 /// Stop add item when itemListIterator return nil
                 guard let legacy = iterator.next() else { return true }
                 
                 /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? FoodEntity2 {
+                if let cmo = obj as? FoodEntity {
                     cmo.fill(legacy)
                 }
                 logger.debug("Inserted User Food: \(legacy.description, privacy: .public)")
@@ -337,7 +337,7 @@ extension CoreDataManager {
 //                continue
 //            }
 //
-//            guard let foodEntity = try! FoodEntity2.object(
+//            guard let foodEntity = try! FoodEntity.object(
 //                with: UUID(uuidString: legacy.foodID)!,
 //                in: context
 //            ) else {
@@ -349,7 +349,7 @@ extension CoreDataManager {
 //                logger.error("Encountered FoodItem: \(legacy.id, privacy: .public) without mealID")
 //                fatalError()
 //            }
-//            guard let mealEntity = try! MealEntity2.object(
+//            guard let mealEntity = try! MealEntity.object(
 //                with: UUID(uuidString: mealID)!,
 //                in: context
 //            ) else {
@@ -357,7 +357,7 @@ extension CoreDataManager {
 //                fatalError()
 //            }
 //
-//            let entity = FoodItemEntity2(context, legacy, foodEntity, mealEntity)
+//            let entity = FoodItemEntity(context, legacy, foodEntity, mealEntity)
 //            context.insert(entity)
 //            
 //            logger.debug("Inserted Food Item: \(legacy.id, privacy: .public)")
@@ -367,12 +367,12 @@ extension CoreDataManager {
             /// Create an iterator for raw data
             var iterator = legacyObjects.makeIterator()
             
-            let request = NSBatchInsertRequest(entity: FoodItemEntity2.entity()) { (obj: NSManagedObject) in
+            let request = NSBatchInsertRequest(entity: FoodItemEntity.entity()) { (obj: NSManagedObject) in
                 /// Stop add item when itemListIterator return nil
                 guard let legacy = iterator.next() else { return true }
                 
                 /// Convert obj to DayEntity type and fill data to obj
-                if let cmo = obj as? FoodItemEntity2 {
+                if let cmo = obj as? FoodItemEntity {
                     cmo.fill(legacy)
                 }
                 logger.debug("Inserted Food Item: \(legacy.id, privacy: .public)")
@@ -393,13 +393,13 @@ extension CoreDataManager {
         let data = try! Data(contentsOf: url)
         let legacyObjects = try! JSONDecoder().decode([LegacyFoodItem].self, from: data)
 
-        let foodItems = FoodItemEntity2.objects(in: context)
+        let foodItems = FoodItemEntity.objects(in: context)
         for foodItem in foodItems {
             guard let legacy = legacyObjects.first(where: { $0.id == foodItem.id!.uuidString }) else {
                 fatalError()
             }
 
-            guard let foodEntity = FoodEntity2.object(
+            guard let foodEntity = FoodEntity.object(
                 with: UUID(uuidString: legacy.foodID)!,
                 in: context
             ) else {
@@ -411,7 +411,7 @@ extension CoreDataManager {
                 logger.error("Encountered FoodItem: \(legacy.id, privacy: .public) without mealID")
                 fatalError()
             }
-            guard let mealEntity = MealEntity2.object(
+            guard let mealEntity = MealEntity.object(
                 with: UUID(uuidString: mealID)!,
                 in: context
             ) else {
@@ -459,7 +459,7 @@ extension CoreDataManager {
 
         /// For-Loop
         for legacy in legacyObjects {
-            let entity = DayEntity2(context, legacy)
+            let entity = DayEntity(context, legacy)
             context.insert(entity)
             logger.debug("Inserted Day: \(legacy.calendarDayString, privacy: .public)")
         }
@@ -488,14 +488,14 @@ extension CoreDataManager {
             }
             let dateString = legacyDay.calendarDayString
             let predicate = NSPredicate(format: "dateString == %@", dateString)
-            let dayEntity = try! DayEntity2.objects(for: predicate, in: context).first
+            let dayEntity = try! DayEntity.objects(for: predicate, in: context).first
             
             guard let dayEntity else {
                 logger.error("Failed to find DayEntity with id: \(legacy.dayID, privacy: .public)")
                 fatalError()
             }
 
-            let entity = MealEntity2(context, legacy, dayEntity)
+            let entity = MealEntity(context, legacy, dayEntity)
             context.insert(entity)
             logger.debug("Inserted Meal: \(legacy.id, privacy: .public)")
 
@@ -533,7 +533,7 @@ extension CoreDataManager {
 
         for legacy in legacyObjects[range] {
 
-            let entity = FoodEntity2(context, legacy)
+            let entity = FoodEntity(context, legacy)
             context.insert(entity)
             
             logger.debug("Inserted Preset Food: \(legacy.description, privacy: .public)")
@@ -552,7 +552,7 @@ extension CoreDataManager {
                 logger.warning("Ignoring deleted User Food: \(legacy.description, privacy: .public)")
                 continue
             }
-            let entity = FoodEntity2(context, legacy)
+            let entity = FoodEntity(context, legacy)
             context.insert(entity)
             logger.debug("Inserted User Food: \(legacy.description, privacy: .public)")
         }
@@ -585,8 +585,8 @@ extension CoreDataManager {
 
         logger.info("Prepopulating \(legacyObjects.count) food items…")
 
-        let mealEntities = MealEntity2.objects(in: context)
-        let foodEntities = FoodEntity2.objects(in: context)
+        let mealEntities = MealEntity.objects(in: context)
+        let foodEntities = FoodEntity.objects(in: context)
         
         for legacy in legacyObjects[range] {
 
@@ -610,7 +610,7 @@ extension CoreDataManager {
                 fatalError()
             }
 
-            let entity = FoodItemEntity2(context, legacy, foodEntity, mealEntity)
+            let entity = FoodItemEntity(context, legacy, foodEntity, mealEntity)
             context.insert(entity)
             
             logger.debug("Inserted Food Item: \(legacy.id, privacy: .public)")

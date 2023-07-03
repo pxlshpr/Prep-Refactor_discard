@@ -1,5 +1,5 @@
 import Foundation
-import SwiftData
+//import SwiftData
 import OSLog
 
 private let logger = Logger(subsystem: "FoodItemStore", category: "")

@@ -1,5 +1,5 @@
 import SwiftUI
-import SwiftData
+//import SwiftData
 import OSLog
 
 import SwiftHaptics
@@ -8,7 +8,7 @@ let FoodsPageSize: Int = 100
 
 struct FoodsView: View {
     
-    @Environment(\.modelContext) var context: ModelContext
+//    @Environment(\.modelContext) var context: ModelContext
     
     var foods: [Food] = []
     

@@ -3,13 +3,13 @@ import CoreData
 
 import FoodDataTypes
 
-extension FoodItemEntity2: Entity {
+extension FoodItemEntity: Entity {
     
     convenience init(
         context: NSManagedObjectContext,
-        foodItem: FoodItem2,
-        foodEntity: FoodEntity2,
-        mealEntity: MealEntity2? = nil
+        foodItem: FoodItem,
+        foodEntity: FoodEntity,
+        mealEntity: MealEntity? = nil
     ) {
         self.init(context: context)
         self.id = foodItem.id
@@ -47,8 +47,8 @@ extension FoodItemEntity2: Entity {
     convenience init(
         _ context: NSManagedObjectContext,
         _ legacy: LegacyFoodItem,
-        _ foodEntity: FoodEntity2,
-        _ mealEntity: MealEntity2? = nil
+        _ foodEntity: FoodEntity,
+        _ mealEntity: MealEntity? = nil
     ) {
         self.init(context: context)
         self.fill(legacy)
@@ -58,7 +58,7 @@ extension FoodItemEntity2: Entity {
     }
 }
 
-extension FoodItemEntity2 {
+extension FoodItemEntity {
     var food: Food {
         Food(foodEntity!)
     }
@@ -68,7 +68,7 @@ extension FoodItemEntity2 {
     }
 }
 
-extension FoodItemEntity2 {
+extension FoodItemEntity {
 
     var amount: FoodValue {
         get {

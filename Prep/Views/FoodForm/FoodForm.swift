@@ -21,7 +21,7 @@ struct FoodForm: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.modelContext) var context
+//    @Environment(\.modelContext) var context
 
     @State var model: FoodModel = FoodModel()
 
@@ -166,7 +166,7 @@ struct FoodForm: View {
 //                let food = model.newFood
 //                context.insert(food)
 //                alertMessage = "Food added successfully."
-                try context.save()
+//                try context.save()
             } catch {
                 
             }
