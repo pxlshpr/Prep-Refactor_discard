@@ -11,6 +11,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
     var mealID: UUID?
 
     var badgeWidth: CGFloat
+    
     var sortPosition: Int
     
     var eatenAt: Date?

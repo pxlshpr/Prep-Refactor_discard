@@ -36,7 +36,7 @@ extension FoodEntity: Entity {
         self.createdAt = food.createdAt
     }
     
-    func fill(_ legacy: LegacyPresetFood) {
+    func fill(_ legacy: LegacyPresetFood, _ lastFoodItem: LegacyFoodItem?) {
         self.id = UUID(uuidString: legacy.id)
         self.emoji = legacy.emoji
         self.name = legacy.name
@@ -58,16 +58,26 @@ extension FoodEntity: Entity {
         self.type = .food
         self.publishStatus = nil
         self.dataset = legacy.dataset
+        self.lastAmount = lastFoodItem?.amount.foodValue
+        if let lastUsedAt = lastFoodItem?.updatedAt {
+            self.lastUsedAt = Date(timeIntervalSince1970: lastUsedAt)
+        } else {
+            self.lastUsedAt = nil
+        }
         self.updatedAt = Date(timeIntervalSince1970: legacy.updatedAt)
         self.createdAt = Date(timeIntervalSince1970: legacy.createdAt)
     }
     
-    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyPresetFood) {
+    convenience init(
+        _ context: NSManagedObjectContext,
+        _ legacy: LegacyPresetFood,
+        _ lastFoodItem: LegacyFoodItem?
+    ) {
         self.init(context: context)
-        fill(legacy)
+        fill(legacy, lastFoodItem)
     }
     
-    func fill(_ legacy: LegacyUserFood) {
+    func fill(_ legacy: LegacyUserFood, _ lastFoodItem: LegacyFoodItem?) {
         self.id = UUID(uuidString: legacy.id)!
         self.emoji = legacy.emoji
         self.name = legacy.name
@@ -89,16 +99,29 @@ extension FoodEntity: Entity {
         self.type = .food
         self.publishStatus = nil
         self.dataset = legacy.dataset
-        if let lastUsedAt = legacy.lastUsedAt {
-            self.lastUsedAt = Date(timeIntervalSince1970: lastUsedAt)
+        
+        self.lastAmount = lastFoodItem?.amount.foodValue
+        if let lastUsedAt = lastFoodItem?.updatedAt {
+            if let other = legacy.lastUsedAt, other > lastUsedAt {
+                self.lastUsedAt = Date(timeIntervalSince1970: other)
+            } else {
+                self.lastUsedAt = Date(timeIntervalSince1970: lastUsedAt)
+            }
+        } else {
+            self.lastUsedAt = nil
         }
+
         self.updatedAt = Date(timeIntervalSince1970: legacy.updatedAt)
         self.createdAt = Date(timeIntervalSince1970: legacy.updatedAt)
     }
     
-    convenience init(_ context: NSManagedObjectContext, _ legacy: LegacyUserFood) {
+    convenience init(
+        _ context: NSManagedObjectContext,
+        _ legacy: LegacyUserFood,
+        _ lastFoodItem: LegacyFoodItem?
+    ) {
         self.init(context: context)
-        fill(legacy)
+        fill(legacy, lastFoodItem)
     }
 }
 

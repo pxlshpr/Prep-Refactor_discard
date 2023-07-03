@@ -213,6 +213,12 @@ extension CoreDataManager {
         populatePresetFoods(context, range: 6000..<6775)
     }
     
+    var legacyFoodItems: [LegacyFoodItem] {
+        let url = Bundle.main.url(forResource: "foodItems", withExtension: "json")!
+        let data = try! Data(contentsOf: url)
+        return try! JSONDecoder().decode([LegacyFoodItem].self, from: data)
+    }
+    
     func populatePresetFoods(_ context: NSManagedObjectContext, range: Range<Int>) {
         let url = Bundle.main.url(forResource: "presetFoods", withExtension: "json")!
         let data = try! Data(contentsOf: url)
@@ -222,7 +228,16 @@ extension CoreDataManager {
 
         for legacy in legacyObjects[range] {
 
-            let entity = FoodEntity(context, legacy)
+            let lastFoodItem = legacyFoodItems
+                .filter { $0.foodID == legacy.id }
+                .sorted { $0.updatedAt > $1.updatedAt }
+                .first
+
+            if lastFoodItem != nil {
+                print("We here")
+            }
+
+            let entity = FoodEntity(context, legacy, lastFoodItem)
             context.insert(entity)
             
             logger.debug("Inserted Preset Food: \(legacy.description, privacy: .public)")
@@ -237,11 +252,22 @@ extension CoreDataManager {
         logger.info("Prepopulating \(legacyObjects.count) user foods…")
 
         for legacy in legacyObjects {
+            
             guard legacy.deletedAt == nil || legacy.deletedAt == 0 else {
                 logger.warning("Ignoring deleted User Food: \(legacy.description, privacy: .public)")
                 continue
             }
-            let entity = FoodEntity(context, legacy)
+            
+            let lastFoodItem = legacyFoodItems
+                .filter { $0.foodID == legacy.id }
+                .sorted { $0.updatedAt > $1.updatedAt }
+                .first
+            
+            if lastFoodItem != nil {
+                print("We here")
+            }
+
+            let entity = FoodEntity(context, legacy, lastFoodItem)
             context.insert(entity)
             logger.debug("Inserted User Food: \(legacy.description, privacy: .public)")
         }
@@ -268,9 +294,7 @@ extension CoreDataManager {
 
     func populateFoodItems(_ context: NSManagedObjectContext, range: Range<Int>) {
         
-        let url = Bundle.main.url(forResource: "foodItems", withExtension: "json")!
-        let data = try! Data(contentsOf: url)
-        let legacyObjects = try! JSONDecoder().decode([LegacyFoodItem].self, from: data)
+        let legacyObjects = legacyFoodItems
 
         logger.info("Prepopulating \(legacyObjects.count) food items…")
 

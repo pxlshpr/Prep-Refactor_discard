@@ -17,8 +17,8 @@ struct ItemForm: View {
 //    @Environment(\.modelContext) var context
     
 //    var showingItem = false
-    @State var amount: Double = DefaultAmount
-    @State var unit: FormUnit = DefaultUnit
+    @State var amount: Double
+    @State var unit: FormUnit
     @State var meal: Meal? = nil
 //    var foodItem: FoodItem? = nil
 
@@ -35,6 +35,21 @@ struct ItemForm: View {
         _isPresented = isPresented
         _meal = State(initialValue: meal)
         _food = State(initialValue: food)
+        
+
+        let amount: Double?
+        let unit: FormUnit?
+        /// Either set the latest used quantity or the default one
+        if let lastAmount = food.lastAmount {
+            amount = lastAmount.value
+            unit = lastAmount.formUnit(for: food)
+        } else {
+            let quantity = food.defaultQuantity
+            amount = quantity?.value
+            unit = quantity?.unit.formUnit
+        }
+        _amount = State(initialValue: amount ?? DefaultAmount)
+        _unit = State(initialValue: unit ?? DefaultUnit)
     }
 
     var body: some View {
