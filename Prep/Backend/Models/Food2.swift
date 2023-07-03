@@ -3,7 +3,7 @@ import CoreData
 
 import FoodDataTypes
 
-struct Food2: Identifiable, Codable, Hashable {
+struct Food: Identifiable, Codable, Hashable {
     let id: UUID
     
     var emoji: String
@@ -91,7 +91,7 @@ struct Food2: Identifiable, Codable, Hashable {
     }
 }
 
-extension Food2 {
+extension Food {
     init(_ entity: FoodEntity2) {
         self.init(
             id: entity.id!,
@@ -122,7 +122,7 @@ extension Food2 {
     }
 }
 
-extension Food2 {
+extension Food {
     
     var foodName: String {
         var name = "\(emoji) \(name)"

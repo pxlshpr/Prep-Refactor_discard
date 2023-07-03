@@ -1,77 +1,77 @@
 import Foundation
 import FoodDataTypes
 
-struct Food: Identifiable, Hashable {
-    
-    var id: String = UUID().uuidString
-    
-    var emoji: String = String.randomFoodEmoji
-    var name: String = ""
-    var detail: String? = nil
-    var brand: String? = nil
-    
-    var amount: FoodValue = FoodValue(100, .weight(.g))
-    var serving: FoodValue? = FoodValue(100, .weight(.g))
-    
-    var energy: Double = 0
-    var energyUnit: EnergyUnit = .kcal
-    
-    var carb: Double = 0
-    var protein: Double = 0
-    var fat: Double = 0
-    
-    var micros: [FoodNutrient] = []
-    
-    var sizes: [FoodSize] = []
-    var density: FoodDensity? = nil
-    
-    var linkURL: String? = nil
-    var imageIDs: [String] = []
-    var barcodes: [String] = []
-    
-    var numberOfTimesConsumedGlobally: Int = 0
-    var numberOfTimesConsumed: Int = 0
-    var lastUsedAt: Double? = nil
-    var firstUsedAt: Double? = nil
-    
-    var type: FoodType = .food
-    var publishStatus: PublishStatus? = nil
-    var dataset: FoodDataset? = nil
-    
-    var updatedAt: Double = 0
-    
-    init() { }
-    
-    init(_ entity: FoodEntity) {
-        self.init()
-        self.id = entity.uuid
-        self.emoji = entity.emoji
-        self.name = entity.name
-        self.detail = entity.detail
-        self.brand = entity.brand
-        self.amount = entity.amount
-        self.serving = entity.serving
-        self.energy = entity.energy
-        self.energyUnit = entity.energyUnit
-        self.carb = entity.carb
-        self.protein = entity.protein
-        self.fat = entity.fat
-        self.micros = entity.micros
-        self.sizes = entity.sizes
-        self.density = entity.density
-        self.linkURL = entity.linkURL
-        self.imageIDs = entity.imageIDs
-        self.barcodes = entity.barcodes
-        self.numberOfTimesConsumedGlobally = entity.numberOfTimesConsumedGlobally
-        self.numberOfTimesConsumed = entity.numberOfTimesConsumed
-        self.lastUsedAt = entity.lastUsedAt
-        self.firstUsedAt = entity.firstUsedAt
-        self.type = entity.type
-        self.publishStatus = entity.publishStatus
-        self.dataset = entity.dataset
-        self.updatedAt = entity.updatedAt
-    }
-}
+//struct Food: Identifiable, Hashable {
+//    
+//    var id: String = UUID().uuidString
+//    
+//    var emoji: String = String.randomFoodEmoji
+//    var name: String = ""
+//    var detail: String? = nil
+//    var brand: String? = nil
+//    
+//    var amount: FoodValue = FoodValue(100, .weight(.g))
+//    var serving: FoodValue? = FoodValue(100, .weight(.g))
+//    
+//    var energy: Double = 0
+//    var energyUnit: EnergyUnit = .kcal
+//    
+//    var carb: Double = 0
+//    var protein: Double = 0
+//    var fat: Double = 0
+//    
+//    var micros: [FoodNutrient] = []
+//    
+//    var sizes: [FoodSize] = []
+//    var density: FoodDensity? = nil
+//    
+//    var linkURL: String? = nil
+//    var imageIDs: [String] = []
+//    var barcodes: [String] = []
+//    
+//    var numberOfTimesConsumedGlobally: Int = 0
+//    var numberOfTimesConsumed: Int = 0
+//    var lastUsedAt: Double? = nil
+//    var firstUsedAt: Double? = nil
+//    
+//    var type: FoodType = .food
+//    var publishStatus: PublishStatus? = nil
+//    var dataset: FoodDataset? = nil
+//    
+//    var updatedAt: Double = 0
+//    
+//    init() { }
+//    
+//    init(_ entity: FoodEntity) {
+//        self.init()
+//        self.id = entity.uuid
+//        self.emoji = entity.emoji
+//        self.name = entity.name
+//        self.detail = entity.detail
+//        self.brand = entity.brand
+//        self.amount = entity.amount
+//        self.serving = entity.serving
+//        self.energy = entity.energy
+//        self.energyUnit = entity.energyUnit
+//        self.carb = entity.carb
+//        self.protein = entity.protein
+//        self.fat = entity.fat
+//        self.micros = entity.micros
+//        self.sizes = entity.sizes
+//        self.density = entity.density
+//        self.linkURL = entity.linkURL
+//        self.imageIDs = entity.imageIDs
+//        self.barcodes = entity.barcodes
+//        self.numberOfTimesConsumedGlobally = entity.numberOfTimesConsumedGlobally
+//        self.numberOfTimesConsumed = entity.numberOfTimesConsumed
+//        self.lastUsedAt = entity.lastUsedAt
+//        self.firstUsedAt = entity.firstUsedAt
+//        self.type = entity.type
+//        self.publishStatus = entity.publishStatus
+//        self.dataset = entity.dataset
+//        self.updatedAt = entity.updatedAt
+//    }
+//}
 
 //extension FoodEntity {
 //    var food: Food {
@@ -79,7 +79,7 @@ struct Food: Identifiable, Hashable {
 //    }
 //}
 
-extension Food2 {
+extension Food {
     var isPublished: Bool {
         switch publishStatus {
         case .hidden, .rejected, .none: false
@@ -233,15 +233,7 @@ extension Food {
             return .fat
         }
         return .protein
-    }
-    
-    var macrosChartData: [MacroValue] {
-        [
-            MacroValue(macro: .carb, value: carb),
-            MacroValue(macro: .fat, value: fat),
-            MacroValue(macro: .protein, value: protein)
-        ]
-    }
+    }    
 }
 
 extension Food {

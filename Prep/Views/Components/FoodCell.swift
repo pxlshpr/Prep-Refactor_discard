@@ -39,7 +39,7 @@ struct FoodCell: View {
 //        _showingForm = .constant(false)
 //    }
 
-    init(food: Food2, showingForm: Binding<Bool> = .constant(false)) {
+    init(food: Food, showingForm: Binding<Bool> = .constant(false)) {
         self.emoji = food.emoji
         self.name = food.name
         self.detail = food.detail

@@ -10,7 +10,7 @@ struct FoodsView: View {
     
     @Environment(\.modelContext) var context: ModelContext
     
-    var foods: [Food2] = []
+    var foods: [Food] = []
     
     @State var showingFoodForm = false
     

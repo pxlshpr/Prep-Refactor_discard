@@ -22,7 +22,7 @@ struct ItemForm2: View {
     @State var meal: Meal2? = nil
 //    var foodItem: FoodItem? = nil
 
-    @State var food: Food2? = nil
+    @State var food: Food? = nil
     @State var foodItem: FoodItem2? = nil
 
     @Binding var isPresented: Bool
@@ -30,7 +30,7 @@ struct ItemForm2: View {
     public init(
         isPresented: Binding<Bool>,
         meal: Meal2?,
-        food: Food2
+        food: Food
     ) {
         _isPresented = isPresented
         _meal = State(initialValue: meal)
@@ -213,7 +213,7 @@ struct ItemForm2: View {
 //        return "\(scaled.cleanAmount) \(nutrientValue.unit.abbreviation)"
     }
     
-    func nutrientsSection(_ food: Food2) -> some View {
+    func nutrientsSection(_ food: Food) -> some View {
         
         var micros: some View {
             var micros: [Micro] {

@@ -5,7 +5,7 @@ import FoodDataTypes
 
 extension FoodEntity2: Entity {
     
-    convenience init(context: NSManagedObjectContext, food: Food2) {
+    convenience init(context: NSManagedObjectContext, food: Food) {
         self.init(context: context)
         self.id = food.id
         

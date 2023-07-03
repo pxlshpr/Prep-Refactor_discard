@@ -2,10 +2,10 @@ import SwiftUI
 
 struct FoodsViewCell: View {
 
-    let food: Food2
+    let food: Food
     @State var showingForm = false
 
-    init(food: Food2) {
+    init(food: Food) {
         self.food = food
     }
     

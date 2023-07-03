@@ -59,8 +59,8 @@ extension FoodItemEntity2: Entity {
 }
 
 extension FoodItemEntity2 {
-    var food: Food2 {
-        Food2(foodEntity!)
+    var food: Food {
+        Food(foodEntity!)
     }
     
     var mealID: UUID? {

@@ -10,7 +10,7 @@ class SearchStore {
 
     static let shared = SearchStore()
     
-    static func recents() async -> [Food2] {
+    static func recents() async -> [Food] {
         logger.debug("Fetching recents")
         let start = CFAbsoluteTimeGetCurrent()
         let results = await DataManager.shared.recents()
@@ -48,7 +48,7 @@ class SearchStore {
 //        return Array(results)
 //    }
 //
-    static func search(_ text: String) async -> [Food2] {
+    static func search(_ text: String) async -> [Food] {
         
         guard !text.isEmpty else {
             return await recents()
@@ -104,12 +104,12 @@ class SearchStore {
 }
 
 extension DataManager {
-    func recents() async -> [Food2] {
+    func recents() async -> [Food] {
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 do {
                     try coreDataManager.recents { recents in
-                        let results = recents.map { Food2($0) }
+                        let results = recents.map { Food($0) }
                         continuation.resume(returning: results)
                     }
                 } catch {
@@ -121,12 +121,12 @@ extension DataManager {
             return []
         }
     }
-    func foods(matching text: String) async -> [Food2] {
+    func foods(matching text: String) async -> [Food] {
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 do {
                     try coreDataManager.foods(matching: text) { foods in
-                        let results = foods.map { Food2($0) }
+                        let results = foods.map { Food($0) }
                         continuation.resume(returning: results)
                     }
                 } catch {

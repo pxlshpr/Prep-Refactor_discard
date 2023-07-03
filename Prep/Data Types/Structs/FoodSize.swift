@@ -43,7 +43,7 @@ extension FoodSize {
         )
     }
     
-    func formSize(for food: Food2) -> FormSize? {
+    func formSize(for food: Food) -> FormSize? {
         guard let unit = self.value.formUnit(for: food) else {
             return nil
         }

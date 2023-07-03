@@ -5,7 +5,7 @@ import FoodDataTypes
 
 struct ItemFormFoodLabel: View {
 
-    let food: Food2?
+    let food: Food?
     
     var body: some View {
         if let food {
@@ -32,7 +32,7 @@ struct ItemFormEnergyLabel: View {
     
     @Environment(\.colorScheme) var colorScheme
     let string: String
-    let food: Food2?
+    let food: Food?
 
     var body: some View {
         HStack {

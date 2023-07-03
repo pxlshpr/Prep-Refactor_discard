@@ -5,7 +5,7 @@ struct FoodItem2: Identifiable, Codable, Hashable {
     let id: UUID
     
     var amount: FoodValue
-    var food: Food2
+    var food: Food
     var mealID: UUID?
 
     var badgeWidth: CGFloat
@@ -18,7 +18,7 @@ struct FoodItem2: Identifiable, Codable, Hashable {
     init(
         id: UUID,
         amount: FoodValue,
-        food: Food2,
+        food: Food,
         mealID: UUID?,
         badgeWidth: CGFloat,
         sortPosition: Int,
@@ -56,16 +56,6 @@ extension FoodItem2 {
     var quantityDescription: String {
         amount.description(with: food)
     }
-}
-
-extension FoodValue {
-    func description(with food: Food2) -> String {
-        "\(value.cleanAmount) \(unitDescription(sizes: food.sizes))"
-    }
-    
-//    func description(with ingredientFood: IngredientFood) -> String {
-//        "\(value.cleanAmount) \(unitDescription(sizes: ingredientFood.info.sizes))"
-//    }
 }
 
 extension FoodValue {

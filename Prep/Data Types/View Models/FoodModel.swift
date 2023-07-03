@@ -18,7 +18,7 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
 @Observable class FoodModel {
 
-    var foodBeingEdited: Food2? = nil
+    var foodBeingEdited: Food? = nil
 
     var emoji: String = ""
     var name: String = ""
@@ -151,7 +151,7 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 }
 
 extension FoodModel {
-    func resetFoodModel(for food: Food2? = nil) {
+    func resetFoodModel(for food: Food? = nil) {
         foodModelLogger.debug("Resetting FoodModel.shared")
         
 //        reset()
@@ -381,7 +381,7 @@ extension FoodModel {
         foodBeingEdited != nil
     }
     
-    func fillFood(_ food: Food2) {
+    func fillFood(_ food: Food) {
         var food = food
         food.emoji = emoji
         food.name = name
@@ -424,7 +424,7 @@ extension FoodModel {
         }
     }
     
-    var updatedFood: Food2? {
+    var updatedFood: Food? {
         guard let foodBeingEdited else { return nil }
         var food = foodBeingEdited
         fillFood(food)
@@ -440,8 +440,8 @@ extension FoodModel {
         return true
     }
     
-    var newFood: Food2 {
-        var food = Food2()
+    var newFood: Food {
+        var food = Food()
         fillFood(food)
         food.createdAt = Date.now
         food.updatedAt = Date.now
@@ -462,7 +462,7 @@ extension FoodModel {
     }
 
     
-    func hasPendingChanges(from food: Food2) -> Bool {
+    func hasPendingChanges(from food: Food) -> Bool {
         !(
             emoji == food.emoji
             && name == food.name

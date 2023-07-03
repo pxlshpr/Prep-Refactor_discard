@@ -162,7 +162,7 @@
 //        return "\(scaled.cleanAmount) \(nutrientValue.unit.abbreviation)"
 //    }
 //    
-//    func nutrientsSection(_ foodResult: Food2) -> some View {
+//    func nutrientsSection(_ foodResult: Food) -> some View {
 //        
 //        var micros: some View {
 //            var micros: [Micro] {
