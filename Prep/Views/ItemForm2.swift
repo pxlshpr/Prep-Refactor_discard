@@ -7,6 +7,9 @@ import SwiftHaptics
 
 private let logger = Logger(subsystem: "ItemForm", category: "")
 
+let DefaultAmount: Double = 100
+let DefaultUnit: FormUnit = .weight(.g)
+
 struct ItemForm2: View {
 
     @Environment(\.dismiss) var dismiss

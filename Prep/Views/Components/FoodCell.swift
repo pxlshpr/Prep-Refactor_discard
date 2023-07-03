@@ -28,16 +28,16 @@ struct FoodCell: View {
         _showingForm = showingForm
     }
 
-    init(foodResult result: FoodResult) {
-        self.emoji = result.emoji
-        self.name = result.name
-        self.detail = result.detail
-        self.brand = result.brand
-        self.carb = result.carb
-        self.fat = result.fat
-        self.protein = result.protein
-        _showingForm = .constant(false)
-    }
+//    init(foodResult result: FoodResult) {
+//        self.emoji = result.emoji
+//        self.name = result.name
+//        self.detail = result.detail
+//        self.brand = result.brand
+//        self.carb = result.carb
+//        self.fat = result.fat
+//        self.protein = result.protein
+//        _showingForm = .constant(false)
+//    }
 
     init(food: Food2) {
         self.emoji = food.emoji

@@ -14,7 +14,6 @@ struct FoodPicker: View {
     @State var searchIsActive: Bool = false
 
     @State var showingItem: Bool = false
-    @State var pickedFood: FoodResult?
 
     let model = FoodPickerModel.shared
 
