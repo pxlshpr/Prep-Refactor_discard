@@ -152,7 +152,7 @@ struct ItemForm: View {
                 
                 await MainActor.run {
                     post(.didAddFoodItem, userInfo: [
-                        .foodItem: foodItem,
+                        .foodItem: newFoodItem,
                         .day: updatedDay
                     ])
                 }

@@ -3,4 +3,54 @@
    uuid = "13DEEC67-3B5B-4F3B-90A7-308657D8CF01"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "79D19B47-3CA6-4361-BED5-FFE59ED051CE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prep/Views/Log/MealView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "didAddFoodItem(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "79D19B47-3CA6-4361-BED5-FFE59ED051CE - 69090e90b4923895"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prep.MealView.didAddFoodItem(Foundation.Notification) -&gt; ()"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Views/Log/MealView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "1008">
+               </Location>
+               <Location
+                  uuid = "79D19B47-3CA6-4361-BED5-FFE59ED051CE - 69090e90b4923895"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prep.MealView.didAddFoodItem(Foundation.Notification) -&gt; ()"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Views/Log/MealView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "1396">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
