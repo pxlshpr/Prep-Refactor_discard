@@ -8,13 +8,15 @@ extension Notification.Name {
     static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
     static var didAddFoodItem: Notification.Name { return .init("didAddFoodItem") }
     static var didAddMeal: Notification.Name { return .init("didAddMeal") }
-    
+
+    static var safeAreaDidChange: Notification.Name { return .init("safeAreaDidChange") }
 }
 
 extension Notification {
     enum PrepKeys: String {
         case meal = "meal"
         case foodItem = "foodItem"
+        case safeArea = "safeArea"
     }
 }
 

@@ -124,7 +124,7 @@ struct MealView: View {
     func addFoodCell(_ meal: Meal) -> some View {
         DayView.AddFoodCell(
             meal: meal,
-            leadingPadding: $leadingPadding,
+//            leadingPadding: $leadingPadding,
             trailingPadding: $trailingPadding
         )
     }

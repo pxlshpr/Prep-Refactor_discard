@@ -32,7 +32,9 @@ struct LogView: View {
     }
     
     var foodPicker: some View {
-        FoodPicker(isPresented: $showingFoodPicker)
+//        FoodPicker()
+//        FoodPicker(isPresented: $showingFoodPicker)
+        FoodPicker_Legacy(isPresented: $showingFoodPicker)
     }
     
     func scrollView(_ proxy: GeometryProxy) -> some View {

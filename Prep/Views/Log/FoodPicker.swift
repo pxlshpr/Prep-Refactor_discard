@@ -6,6 +6,34 @@ import SwiftHaptics
 
 struct FoodPicker: View {
     
+//    @Binding var isPresented: Bool
+//    let meal: Meal?
+
+    init(
+//        isPresented: Binding<Bool>,
+//        meal: Meal? = nil
+    ) {
+//        _isPresented = isPresented
+//        self.meal = meal
+    }
+    
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(1...10, id: \.self) { _ in
+                    NavigationLink {
+                        Color.blue
+                    } label: {
+                        Text("Hello")
+                    }
+                }
+            }
+        }
+    }
+}
+
+struct FoodPicker_Legacy: View {
+    
     @Environment(\.dismiss) var dismiss
     
     @State var showingFoodForm: Bool = false
@@ -15,7 +43,7 @@ struct FoodPicker: View {
 
     @State var showingItem: Bool = false
 
-    let model = FoodPickerModel.shared
+    @State var model = FoodPickerModel.shared
 
     @Binding var isPresented: Bool
     @State var hasAppeared = false
@@ -31,9 +59,7 @@ struct FoodPicker: View {
     }
     
     var body: some View {
-//        let _ = Self._printChanges()
-        
-        return NavigationStack {
+        NavigationStack {
             content
         }
         .onDisappear(perform: disappeared)
@@ -109,15 +135,15 @@ struct FoodPicker: View {
     
     var list: some View {
         List {
-            ForEach(model.foodResults, id: \.self) { result in
+            ForEach(model.foodResults, id: \.self) { food in
                 NavigationLink {
                     ItemForm(
                         isPresented: $isPresented,
                         meal: meal,
-                        food: result
+                        food: food
                     )
                 } label: {
-                    FoodCell(food: result)
+                    FoodCell(food: food)
                 }
             }
         }
@@ -127,5 +153,9 @@ struct FoodPicker: View {
     
     func searchTextChanged(oldValue: String, newValue: String) {
         model.search(newValue)
+    }
+    
+    enum Route: Hashable {
+        case itemForm
     }
 }

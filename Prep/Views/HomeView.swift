@@ -42,6 +42,8 @@ struct HomeView: View {
     func setSafeAreaPadding(_ proxy: GeometryProxy) {
         trailingSafeArea = proxy.safeAreaInsets.trailing
         leadingSafeArea = proxy.safeAreaInsets.leading
+        
+        post(.safeAreaDidChange, userInfo: [Notification.PrepKeys.safeArea: proxy.safeAreaInsets])
     }
     
     func appeared(_ proxy: GeometryProxy) {
