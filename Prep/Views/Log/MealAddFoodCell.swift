@@ -9,7 +9,7 @@ struct MealAddFoodCell: View {
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    @State var meal: Meal
+    @Binding var meal: Meal
     
     @State var showingFoodPicker = false
     
@@ -46,7 +46,9 @@ struct MealAddFoodCell: View {
         /// Only interested when the food item was added to a day that this meal belongs to
         guard let userInfo = notification.userInfo,
               let day = userInfo[Notification.PrepKeys.day] as? Day,
-              let updatedMeal = day.meal(with: self.meal.id)
+              let updatedMeal = day.meal(with: self.meal.id),
+              let foodItem = userInfo[Notification.PrepKeys.foodItem] as? FoodItem,
+              foodItem.mealID == meal.id
         else {
             return
         }

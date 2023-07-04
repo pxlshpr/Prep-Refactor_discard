@@ -33,7 +33,7 @@ struct MealView: View {
                     .padding(.trailing, trailingPadding)
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             }
-            addFoodCell(meal)
+            addFoodCell
         }
         .onReceive(didAddFoodItem, perform: didAddFoodItem)
         .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
@@ -65,14 +65,16 @@ struct MealView: View {
         }
         
         /// Wait a bit for the form to dismiss
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             withAnimation(.snappy) {
                 /// If the added food item belongs to this meal, insert it with an animation and play a sound
                 if foodItem.mealID == meal.id {
                     SoundPlayer.play(.octaveTapSimple)
                     self.foodItems.append(foodItem)
+//                } else {
                 }
-                self.meal = updatedMeal
+                self.foodItems = updatedMeal.foodItems
+//                self.meal = updatedMeal
             }
         }
     }
@@ -143,7 +145,8 @@ struct MealView: View {
         .frame(height: 25)
     }
     
-    func addFoodCell(_ meal: Meal) -> some View {
-        MealAddFoodCell(meal: meal)
+    var addFoodCell: some View {
+        //TODO: Find a way to have this not refresh each time we update
+        MealAddFoodCell(meal: $meal)
     }
 }
