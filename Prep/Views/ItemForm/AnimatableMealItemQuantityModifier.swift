@@ -1,54 +1,55 @@
 import SwiftUI
 
-struct AnimatableMealItemQuantityModifier: AnimatableModifier {
+import FoodDataTypes
+
+struct AnimatableItemEnergyModifier: AnimatableModifier {
     
     @Environment(\.colorScheme) var colorScheme
     
     var value: Double
-    var unitString: String
+    var energyUnit: EnergyUnit
     var isAnimating: Bool
     
-    let fontSize: CGFloat = 28
-    let fontWeight: Font.Weight = .medium
+//    let fontSize: CGFloat = 28
+//    let fontWeight: Font.Weight = .medium
     
     var animatableData: Double {
         get { value }
         set { value = newValue }
     }
     
-    var uiFont: UIFont {
-        UIFont.systemFont(ofSize: fontSize, weight: fontWeight.uiFontWeight)
-    }
-    
-    var size: CGSize {
-        uiFont.fontSize(for: value.formattedNutrient)
-    }
-    
-    let unitFontSize: CGFloat = 17
-    let unitFontWeight: Font.Weight = .semibold
-    
-    var unitUIFont: UIFont {
-        UIFont.systemFont(ofSize: unitFontSize, weight: unitFontWeight.uiFontWeight)
-    }
-    
-    var unitWidth: CGFloat {
-        unitUIFont.fontSize(for: unitString).width
-    }
+//    var uiFont: UIFont {
+//        UIFont.systemFont(ofSize: fontSize, weight: fontWeight.uiFontWeight)
+//    }
+//    
+//    var size: CGSize {
+//        uiFont.fontSize(for: value.formattedNutrient)
+//    }
+//    
+//    let unitFontSize: CGFloat = 17
+//    let unitFontWeight: Font.Weight = .semibold
+//    
+//    var unitUIFont: UIFont {
+//        UIFont.systemFont(ofSize: unitFontSize, weight: unitFontWeight.uiFontWeight)
+//    }
+//    
+//    var unitWidth: CGFloat {
+//        unitUIFont.fontSize(for: unitString).width
+//    }
     
     var amountString: String {
         if isAnimating {
-            return value.formattedMealItemAmount
+            return value.formattedEnergy
         } else {
-            return value.cleanAmount
+            return value.formattedEnergy
         }
     }
     
     func body(content: Content) -> some View {
         content
-//            .frame(width: size.width, height: size.height)
-//            .frame(width: 200 + unitWidth, height: size.height)
             .frame(maxWidth: .infinity)
-            .frame(height: size.height)
+//            .frame(height: size.height)
+            .frame(height: 44)
             .overlay(
                 HStack {
                     Spacer()
@@ -56,10 +57,11 @@ struct AnimatableMealItemQuantityModifier: AnimatableModifier {
                     HStack(alignment: .center, spacing: 4) {
                         Text(amountString)
                             .multilineTextAlignment(.leading)
+                            .font(.headline)
                             .foregroundStyle(Color(.label))
-                            .font(.system(size: fontSize, weight: fontWeight, design: .rounded))
-                        Text(unitString)
-                            .font(.system(size: unitFontSize, weight: unitFontWeight, design: .rounded))
+//                            .font(.system(size: fontSize, weight: fontWeight, design: .rounded))
+                        Text(energyUnit.abbreviation)
+//                            .font(.system(size: unitFontSize, weight: unitFontWeight, design: .rounded))
                             .lineLimit(3)
                             .minimumScaleFactor(0.5)
                             .multilineTextAlignment(.leading)
@@ -67,13 +69,13 @@ struct AnimatableMealItemQuantityModifier: AnimatableModifier {
                             .bold()
                             .foregroundStyle(Color(.secondaryLabel))
                     }
-                    .padding(.vertical, 5)
-                    .padding(.horizontal, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 7, style: .continuous)
-                            .fill(Color(.systemFill).opacity(0.5))
-                    )
-                    .hoverEffect(.highlight)
+//                    .padding(.vertical, 5)
+//                    .padding(.horizontal, 10)
+//                    .background(
+//                        RoundedRectangle(cornerRadius: 7, style: .continuous)
+//                            .fill(Color(.systemFill).opacity(0.5))
+//                    )
+//                    .hoverEffect(.highlight)
 
                 }
             )
@@ -81,7 +83,15 @@ struct AnimatableMealItemQuantityModifier: AnimatableModifier {
 }
 
 extension View {
-    func animatedMealItemQuantity(value: Double, unitString: String, isAnimating: Bool) -> some View {
-        modifier(AnimatableMealItemQuantityModifier(value: value, unitString: unitString, isAnimating: isAnimating))
+    func animatedItemEnergy(
+        value: Double,
+        energyUnit: EnergyUnit,
+        isAnimating: Bool
+    ) -> some View {
+        modifier(AnimatableItemEnergyModifier(
+            value: value,
+            energyUnit: energyUnit,
+            isAnimating: isAnimating
+        ))
     }
 }

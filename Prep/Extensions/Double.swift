@@ -15,6 +15,22 @@ extension Double {
         rounded().formattedWithCommas
     }
 
+    var formattedEnergy: String {
+//        guard self >= 1000 else {
+//            return cleanAmount
+//        }
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 0
+        let number = NSNumber(value: Int(self))
+        
+        guard let formatted = formatter.string(from: number) else {
+            return "\(Int(self))"
+        }
+        return formatted
+    }
+
 }
 
 extension Double {
@@ -23,11 +39,11 @@ extension Double {
             return cleanAmount
         }
         
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
         let number = NSNumber(value: Int(self))
         
-        guard let formatted = numberFormatter.string(from: number) else {
+        guard let formatted = formatter.string(from: number) else {
             return "\(Int(self))"
         }
         return formatted

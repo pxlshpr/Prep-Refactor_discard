@@ -16,7 +16,7 @@ struct ItemForm: View {
     @Environment(\.colorScheme) var colorScheme
     
 //    var showingItem = false
-    @State var amount: Double
+//    @State var amount: Double
     @State var unit: FormUnit
     @State var meal: Meal? = nil
 //    var foodItem: FoodItem? = nil
@@ -26,6 +26,9 @@ struct ItemForm: View {
 
     @Binding var isPresented: Bool
     
+    @State var amountString: String
+    @State var amountDouble: Double?
+
     public init(
         isPresented: Binding<Bool>,
         meal: Meal?,
@@ -47,7 +50,11 @@ struct ItemForm: View {
             amount = quantity?.value
             unit = quantity?.unit.formUnit
         }
-        _amount = State(initialValue: amount ?? DefaultAmount)
+//        _amount = State(initialValue: amount ?? DefaultAmount)
+        
+        _amountDouble = State(initialValue: amount ?? DefaultAmount)
+        _amountString = State(initialValue: (amount ?? DefaultAmount).cleanAmount)
+
         _unit = State(initialValue: unit ?? DefaultUnit)
     }
 
@@ -57,11 +64,46 @@ struct ItemForm: View {
                 .navigationTitle("New Entry")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar { toolbarContent }
+                .scrollDismissesKeyboard(.interactively)
+                .interactiveDismissDisabled()
         }
     }
     
+//    var textField_previous: some View {
+//        TextField("Required", value: $amount, formatter: NumberFormatter.foodValue)
+//            .textFieldStyle(.plain)
+//            .multilineTextAlignment(.trailing)
+//            .keyboardType(.decimalPad)
+//            .simultaneousGesture(textSelectionTapGesture)
+//    }
+    
+    var textField: some View {
+        let binding = Binding<String>(
+            get: { amountString },
+            set: { newValue in
+                guard !newValue.isEmpty else {
+                    amountDouble = nil
+                    amountString = newValue
+                    return
+                }
+                guard let double = Double(newValue) else {
+                    return
+                }
+                withAnimation(.snappy) {
+                    self.amountDouble = double
+                }
+                self.amountString = newValue
+            }
+        )
+        return TextField("Required", text: binding)
+            .textFieldStyle(.plain)
+            .multilineTextAlignment(.trailing)
+            .keyboardType(.decimalPad)
+//            .simultaneousGesture(textSelectionTapGesture)
+    }
+    
     var foodValue: FoodValue {
-        FoodValue(amount, unit)
+        FoodValue((amountDouble ?? 0), unit)
     }
     
     var scaleFactor: Double {
@@ -172,13 +214,16 @@ struct ItemForm: View {
             }
         }
     }
-    
+
+    func value(for nutrient: Nutrient) -> Double {
+        guard let nutrientValue = food?.value(for: nutrient) else { return 0 }
+        return nutrientValue.value * scaleFactor
+    }
+
     func valueString(for nutrient: Nutrient) -> String {
-        guard let nutrientValue = food?.value(for: nutrient) else {
-            return ""
-        }
-        let scaled = nutrientValue.value * scaleFactor
-        return "\(scaled.cleanAmount) \(nutrientValue.unit.abbreviation)"
+        guard let nutrientValue = food?.value(for: nutrient) else { return "" }
+        let value = value(for: nutrient)
+        return "\(value.cleanAmount) \(nutrientValue.unit.abbreviation)"
     }
     
     func nutrientsSection(_ food: Food) -> some View {
@@ -212,11 +257,45 @@ struct ItemForm: View {
         }
         
         var energy: some View {
-            Section {
-                ItemFormEnergyLabel(
-                    string: valueString(for: .energy),
-                    food: food
-                )
+            @ViewBuilder
+            var pieChart: some View {
+                Chart(food.macrosChartData, id: \.macro) { macroValue in
+                    SectorMark(
+                        angle: .value("kcal", macroValue.kcal),
+                        innerRadius: .ratio(0.5),
+                        angularInset: 0.5
+                    )
+                    .cornerRadius(3)
+                    .foregroundStyle(by: .value("Macro", macroValue.macro))
+                }
+                .chartForegroundStyleScale(Macro.chartStyleScale(colorScheme))
+                .chartLegend(.hidden)
+                .frame(width: 28, height: 28)
+            }
+            
+            var content: some View {
+                HStack {
+                    Text("Energy")
+                        .foregroundStyle(Color(.label))
+                    Spacer()
+//                    Text(valueString(for: .energy))
+//                        .font(.headline)
+//                        .foregroundStyle(Color(.label))
+                    Color.clear
+                        .animatedItemEnergy(
+                            value: value(for: .energy),
+                            energyUnit: .kcal,
+                            isAnimating: isAnimatingAmountChange
+                        )
+//                    pieChart
+                }
+            }
+            return Section {
+                content
+//                ItemFormEnergyLabel(
+//                    string: valueString(for: .energy),
+//                    food: food
+//                )
             }
         }
         
@@ -275,19 +354,7 @@ struct ItemForm: View {
             }
         }
     }
-    
-    var textField: some View {
-        var tapGesture: some Gesture {
-            textSelectionTapGesture
-        }
-        
-        return TextField("1", value: $amount, formatter: NumberFormatter.foodValue)
-            .textFieldStyle(.plain)
-            .multilineTextAlignment(.trailing)
-            .keyboardType(.decimalPad)
-            .simultaneousGesture(tapGesture)
-    }
-    
+
     var unitPicker: some View {
         
         func button(_ formUnit: FormUnit) -> some View {
@@ -429,20 +496,49 @@ struct ItemForm: View {
         .contentShape(Rectangle())
         .hoverEffect(.highlight)
     }
-}
 
-extension ItemForm {
+    var computedAmount: Double? {
+        get {
+            return amountDouble
+        }
+        set {
+            amountDouble = newValue
+            amountString = newValue?.cleanAmount ?? ""
+        }
+    }
+    
+    @State var isAnimatingAmountChange = false
+    @State var startedAnimatingAmountChangeAt: Date = Date()
 
     var stepButtons: some View {
         func stepButton(_ step: Step, _ direction: Direction) -> some View {
             
             var disabled: Bool {
-                amount + step.amount > 0
+                (amountDouble ?? 0) + step.amount(for: direction) < 0
+            }
+            
+            func tapped() {
+                Haptics.selectionFeedback()
+                let newAmount = (amountDouble ?? 0) + step.amount(for: direction)
+                isAnimatingAmountChange = true
+                startedAnimatingAmountChangeAt = Date()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    
+                    withAnimation(.snappy) {
+                        amountDouble = newAmount
+                    }
+                    amountString = newAmount.cleanAmount
+
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        guard Date().timeIntervalSince(self.startedAnimatingAmountChangeAt) >= 0.55
+                        else { return }
+                        self.isAnimatingAmountChange = false
+                    }
+                }
             }
             
             return Button {
-                Haptics.selectionFeedback()
-                amount += step.amount
+                tapped()
             } label: {
                 Image(systemName: step.image(in: direction))
             }
@@ -474,16 +570,20 @@ extension ItemForm {
                 }
             }
             
-            var imageSuffix: String {
+            func amount(for direction: Direction) -> Double {
+                direction == .forward ? amount : -amount
+            }
+            
+            func imageSuffix(for direction: Direction) -> String {
                 switch self {
-                case .small: "plus"
+                case .small: direction == .forward ? "plus" : "minus"
                 case .medium: "10"
                 case .large: "60"
                 }
             }
             
             func image(in direction: Direction) -> String {
-                "\(direction.imagePrefix).\(imageSuffix)"
+                "\(direction.imagePrefix).\(imageSuffix(for: direction))"
             }
         }
         
