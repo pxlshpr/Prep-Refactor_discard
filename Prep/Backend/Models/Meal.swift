@@ -93,12 +93,6 @@ extension Meal {
         ]
     }
     
-    func total(for macro: Macro) -> Double {
-        foodItems.reduce(0) {
-            $0 + $1.scaledMacroValue(for: macro)
-        }
-    }
-
     func energy(in unit: EnergyUnit) -> Double {
         switch unit {
         case .kJ:
@@ -117,6 +111,12 @@ extension Meal {
     func calculateEnergy(in unit: EnergyUnit) -> Double {
         foodItems.reduce(0) {
             $0 + $1.scaledEnergyValue(in: unit)
+        }
+    }
+    
+    func total(for macro: Macro) -> Double {
+        foodItems.reduce(0) {
+            $0 + $1.scaledMacroValue(for: macro)
         }
     }
 }

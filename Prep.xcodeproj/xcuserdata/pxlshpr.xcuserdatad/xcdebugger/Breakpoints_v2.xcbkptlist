@@ -3,4 +3,69 @@
    uuid = "13DEEC67-3B5B-4F3B-90A7-308657D8CF01"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8935FCCE-046F-4ED4-914A-A97317F7A2E7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prep/Backend/Stores/FoodItemsStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "assertSortPositions()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8935FCCE-046F-4ED4-914A-A97317F7A2E7 - 9979040cc7824e5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prep.MealEntity.assertSortPositions() -&gt; ()"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Backend/Stores/FoodItemsStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "8935FCCE-046F-4ED4-914A-A97317F7A2E7 - a594c7e67a5524ef"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Prep.FoodItemEntity, Prep.FoodItemEntity) -&gt; Swift.Bool in Prep.MealEntity.assertSortPositions() -&gt; ()"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Backend/Stores/FoodItemsStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "8935FCCE-046F-4ED4-914A-A97317F7A2E7 - 9979040cc7824e5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prep.MealEntity.assertSortPositions() -&gt; ()"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Backend/Stores/FoodItemsStore.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "164">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

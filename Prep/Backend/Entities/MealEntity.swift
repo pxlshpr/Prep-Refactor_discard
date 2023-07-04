@@ -40,7 +40,9 @@ extension MealEntity {
         foodItemEntities?.allObjects as? [FoodItemEntity] ?? []
     }
     var foodItems: [FoodItem] {
-        foodItemEntitiesArray.compactMap { FoodItem($0) }
+        foodItemEntitiesArray
+            .compactMap { FoodItem($0) }
+            .sorted(by: { $0.sortPosition < $1.sortPosition })
     }
 }
 

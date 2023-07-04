@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E22F3DB92A541F5600BADE4A /* FoodItemsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */; };
 		E23652402A52DC630049C199 /* Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236523F2A52DC630049C199 /* Populate.swift */; };
 		E23652452A5317400049C199 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652442A5317400049C199 /* DataManager.swift */; };
 		E23652472A53175E0049C199 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652462A53175E0049C199 /* CoreDataManager.swift */; };
@@ -153,7 +154,7 @@
 		E280028F2A52B84300C6D528 /* FoodForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FA2A52B84300C6D528 /* FoodForm.swift */; };
 		E28002902A52B84300C6D528 /* NutrientField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FB2A52B84300C6D528 /* NutrientField.swift */; };
 		E28002912A52B84300C6D528 /* SizeForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FC2A52B84300C6D528 /* SizeForm.swift */; };
-		E28002932A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FF2A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift */; };
+		E28002932A52B84300C6D528 /* AnimatableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001FF2A52B84300C6D528 /* AnimatableModifier.swift */; };
 		E280029B2A52BC0100C6D528 /* DayEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280029A2A52BC0100C6D528 /* DayEntity.swift */; };
 		E280029D2A52BC7A00C6D528 /* FoodEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280029C2A52BC7A00C6D528 /* FoodEntity.swift */; };
 		E280FC162A529E3D00C6D528 /* PrepApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280FC152A529E3D00C6D528 /* PrepApp.swift */; };
@@ -176,6 +177,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsStore.swift; sourceTree = "<group>"; };
 		E236523F2A52DC630049C199 /* Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Populate.swift; sourceTree = "<group>"; };
 		E23652442A5317400049C199 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E23652462A53175E0049C199 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -322,7 +324,7 @@
 		E28001FA2A52B84300C6D528 /* FoodForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodForm.swift; sourceTree = "<group>"; };
 		E28001FB2A52B84300C6D528 /* NutrientField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientField.swift; sourceTree = "<group>"; };
 		E28001FC2A52B84300C6D528 /* SizeForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeForm.swift; sourceTree = "<group>"; };
-		E28001FF2A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableMealItemQuantityModifier.swift; sourceTree = "<group>"; };
+		E28001FF2A52B84300C6D528 /* AnimatableModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimatableModifier.swift; sourceTree = "<group>"; };
 		E280029A2A52BC0100C6D528 /* DayEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayEntity.swift; sourceTree = "<group>"; };
 		E280029C2A52BC7A00C6D528 /* FoodEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodEntity.swift; sourceTree = "<group>"; };
 		E280FC122A529E3D00C6D528 /* Prep.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prep.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -389,6 +391,7 @@
 			isa = PBXGroup;
 			children = (
 				E23652482A5317A30049C199 /* MealsStore.swift */,
+				E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */,
 			);
 			path = Stores;
 			sourceTree = "<group>";
@@ -695,7 +698,7 @@
 			children = (
 				E293DB6F2A53742E00D8D4D2 /* ItemForm.swift */,
 				E28001EF2A52B84300C6D528 /* ItemFormFoodLabel.swift */,
-				E28001FF2A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift */,
+				E28001FF2A52B84300C6D528 /* AnimatableModifier.swift */,
 			);
 			path = ItemForm;
 			sourceTree = "<group>";
@@ -894,6 +897,7 @@
 				E280025F2A52B84300C6D528 /* Fond.Weight.swift in Sources */,
 				E28002732A52B84300C6D528 /* FoodItemStore.swift in Sources */,
 				E28002542A52B84300C6D528 /* FoodUnit.swift in Sources */,
+				E22F3DB92A541F5600BADE4A /* FoodItemsStore.swift in Sources */,
 				E280028B2A52B84300C6D528 /* NutrientsForm.swift in Sources */,
 				E28002482A52B84300C6D528 /* NutrientUnit.swift in Sources */,
 				E28002502A52B84300C6D528 /* FoodQuantity.Unit.swift in Sources */,
@@ -978,7 +982,7 @@
 				E280024E2A52B84300C6D528 /* FoodNutrient.swift in Sources */,
 				E280025E2A52B84300C6D528 /* NutrientValue.swift in Sources */,
 				E28002432A52B84300C6D528 /* EnergyUnit.swift in Sources */,
-				E28002932A52B84300C6D528 /* AnimatableMealItemQuantityModifier.swift in Sources */,
+				E28002932A52B84300C6D528 /* AnimatableModifier.swift in Sources */,
 				E28002422A52B84300C6D528 /* NutrientMeterComponent.swift in Sources */,
 				E28002802A52B84300C6D528 /* MealItemCell.swift in Sources */,
 				E28002452A52B84300C6D528 /* Tab.swift in Sources */,

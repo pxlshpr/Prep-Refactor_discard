@@ -15,7 +15,7 @@ extension Double {
         rounded().formattedWithCommas
     }
 
-    var formattedEnergy: String {
+    var formattedNutrientValue: String {
 //        guard self >= 1000 else {
 //            return cleanAmount
 //        }

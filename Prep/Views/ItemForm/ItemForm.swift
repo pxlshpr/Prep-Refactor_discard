@@ -15,11 +15,8 @@ struct ItemForm: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     
-//    var showingItem = false
-//    @State var amount: Double
     @State var unit: FormUnit
     @State var meal: Meal? = nil
-//    var foodItem: FoodItem? = nil
 
     @State var food: Food? = nil
     @State var foodItem: FoodItem? = nil
@@ -50,8 +47,6 @@ struct ItemForm: View {
             amount = quantity?.value
             unit = quantity?.unit.formUnit
         }
-//        _amount = State(initialValue: amount ?? DefaultAmount)
-        
         _amountDouble = State(initialValue: amount ?? DefaultAmount)
         _amountString = State(initialValue: (amount ?? DefaultAmount).cleanAmount)
 
@@ -68,14 +63,6 @@ struct ItemForm: View {
                 .interactiveDismissDisabled()
         }
     }
-    
-//    var textField_previous: some View {
-//        TextField("Required", value: $amount, formatter: NumberFormatter.foodValue)
-//            .textFieldStyle(.plain)
-//            .multilineTextAlignment(.trailing)
-//            .keyboardType(.decimalPad)
-//            .simultaneousGesture(textSelectionTapGesture)
-//    }
     
     var textField: some View {
         let binding = Binding<String>(
@@ -99,7 +86,7 @@ struct ItemForm: View {
             .textFieldStyle(.plain)
             .multilineTextAlignment(.trailing)
             .keyboardType(.decimalPad)
-//            .simultaneousGesture(textSelectionTapGesture)
+            .simultaneousGesture(textSelectionTapGesture)
     }
     
     var foodValue: FoodValue {
@@ -131,104 +118,51 @@ struct ItemForm: View {
     }
     
     func tappedSave() {
-        guard let mealID = meal?.id, let food else { return }
+        guard let meal, let food else { return }
         
         Haptics.successFeedback()
         isPresented = false
-//        dismiss()
-        
-//        if let foodItem {
-//            /// Update
-//        } else {
-//            
-//            var foodItem = FoodItem()
-//            foodItem.amount = foodValue
-//            foodItem.food = food
-//            foodItem.mealID = mealID
-//            
-////            FoodItemStore.create(foodItem: foodItem)
-//  
-//            do {
-//                logger.debug("Fetching food")
-//                let foodID = foodItem.food.id
-//                let foodDescriptor = FetchDescriptor<FoodEntity>(predicate: #Predicate {
-//                    $0.uuid == foodID
-//                })
-//                guard let foodEntity = try context.fetch(foodDescriptor).first else {
-//                    logger.error("Could not find food with ID: \(foodID, privacy: .public)")
-//                    throw FoodItemStoreError.couldNotFindFood
-//                }
-//                
-//                let mealEntity: MealEntity?
-//                if let mealID = foodItem.mealID {
-//                    logger.debug("Fetching Meal with ID: \(mealID, privacy: .public)...")
-//                    let mealDescriptor = FetchDescriptor<MealEntity>(predicate: #Predicate {
-//                        $0.uuid == mealID
-//                    })
-//                    guard let fetched = try context.fetch(mealDescriptor).first else {
-//                        logger.error("Could not find meal with id: \(mealID, privacy: .public)")
-//                        return
-//                    }
-//                    logger.debug("... fetched Meal")
-//                    mealEntity = fetched
-//                } else {
-//                    logger.debug("Meal is nil")
-//                    mealEntity = nil
-//                }
-//                
-//                logger.debug("Creating and inserting FoodItemEntity")
-//                let foodItemEntity = FoodItemEntity(
-//                    uuid: foodItem.id,
-//                    foodEntity: foodEntity,
-//                    mealEntity: mealEntity,
-//                    amount: foodItem.amount,
-//                    markedAsEatenAt: foodItem.markedAsEatenDate?.timeIntervalSince1970,
-//                    sortPosition: foodItem.sortPosition,
-//                    updatedAt: foodItem.updatedDate.timeIntervalSince1970,
-//                    badgeWidth: foodItem.badgeWidth
-//                )
-//                context.insert(foodItemEntity)
-//                
-//                post(.didAddFoodItem, userInfo: [.foodItem: foodItem])
-//                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                    Task {
-//                        logger.debug("Saving context")
-//                        try context.save()
-//                    }
-//                }
-//            } catch {
-//                fatalError(error.localizedDescription)
-//            }
-//        }
+        dismiss()
+        Task {
+            if let foodItem {
+                /// Update
+            } else {
+                guard let newFoodItem = await FoodItemsStore.create(food, meal: meal, amount: foodValue) else {
+                    return
+                }
+                post(.didAddFoodItem, userInfo: [.foodItem: newFoodItem])
+            }
+        }
     }
+    
     var form: some View {
         Form {
             Section {
                 foodField
                 mealField
+                quantityField
             }
-            quantitySection
             if let food {
                 nutrientsSection(food)
             }
         }
     }
 
+    func nutrientValue(for nutrient: Nutrient) -> NutrientValue {
+        food?.value(for: nutrient) ?? NutrientValue(nutrient: nutrient, value: 0, unit: .g)
+    }
+    
     func value(for nutrient: Nutrient) -> Double {
-        guard let nutrientValue = food?.value(for: nutrient) else { return 0 }
-        return nutrientValue.value * scaleFactor
+        nutrientValue(for: nutrient).value * scaleFactor
     }
 
     func valueString(for nutrient: Nutrient) -> String {
-        guard let nutrientValue = food?.value(for: nutrient) else { return "" }
-        let value = value(for: nutrient)
-        return "\(value.cleanAmount) \(nutrientValue.unit.abbreviation)"
+        "\(value(for: nutrient).cleanAmount) \(nutrientValue(for: nutrient).unit.abbreviation)"
     }
     
     func nutrientsSection(_ food: Food) -> some View {
         
-        var micros: some View {
+        var microsGroup: some View {
             var micros: [Micro] {
                 food.micros.compactMap { $0.micro }
             }
@@ -256,7 +190,7 @@ struct ItemForm: View {
             }
         }
         
-        var energy: some View {
+        var energyField: some View {
             @ViewBuilder
             var pieChart: some View {
                 Chart(food.macrosChartData, id: \.macro) { macroValue in
@@ -273,52 +207,46 @@ struct ItemForm: View {
                 .frame(width: 28, height: 28)
             }
             
-            var content: some View {
-                HStack {
-                    Text("Energy")
-                        .foregroundStyle(Color(.label))
-                    Spacer()
-//                    Text(valueString(for: .energy))
-//                        .font(.headline)
-//                        .foregroundStyle(Color(.label))
-                    Color.clear
-                        .animatedItemEnergy(
-                            value: value(for: .energy),
-                            energyUnit: .kcal,
-                            isAnimating: isAnimatingAmountChange
-                        )
-//                    pieChart
-                }
-            }
-            return Section {
-                content
-//                ItemFormEnergyLabel(
-//                    string: valueString(for: .energy),
-//                    food: food
-//                )
+            return HStack {
+                Text("Energy")
+                    .foregroundStyle(Color(.label))
+                Spacer()
+                Color.clear
+                    .animatedItemEnergy(
+                        value: value(for: .energy),
+                        energyUnit: .kcal,
+                        isAnimating: isAnimatingAmountChange
+                    )
+//                pieChart
             }
         }
         
-        var macros: some View {
-            Section {
-                ForEach(Nutrient.macros, id: \.self) { nutrient in
-                    HStack {
-                        Text(nutrient.description)
-                            .foregroundStyle(Color(.label))
-                        Spacer()
-                        Text(valueString(for: nutrient))
-//                            .foregroundStyle(Color(.secondaryLabel))
-                            .foregroundColor(nutrient.macro!.textColor(for: colorScheme))
-                            .bold(food.primaryMacro == nutrient.macro)
-                    }
+        var macroFields: some View {
+            ForEach(Nutrient.macros, id: \.self) { nutrient in
+                HStack {
+                    Text(nutrient.description)
+                        .foregroundStyle(Color(.label))
+                    Spacer()
+                    Color.clear
+                        .animatedItemMacro(
+                            value: value(for: nutrient),
+                            macro: nutrient.macro!,
+                            isPrimary: food.primaryMacro == nutrient.macro,
+                            isAnimating: isAnimatingAmountChange
+                        )
+//                        Text(valueString(for: nutrient))
+//                            .foregroundStyle(nutrient.macro!.textColor(for: colorScheme))
+//                            .bold(food.primaryMacro == nutrient.macro)
                 }
             }
         }
 
         return Group {
-            energy
-            macros
-            micros
+            Section {
+                energyField
+                macroFields
+            }
+            microsGroup
         }
     }
     
@@ -339,22 +267,21 @@ struct ItemForm: View {
                 Spacer()
                 if let meal {
                     Text(meal.title)
+                        .foregroundStyle(Color(.label))
                 }
             }
         }
     }
     
-    var quantitySection: some View {
-        Section {
-            HStack(spacing: 4) {
-                Text("Quantity")
-                    .foregroundStyle(Color(.label))
-                textField
-                unitPicker
-            }
+    var quantityField: some View {
+        HStack(spacing: 4) {
+            Text("Quantity")
+                .foregroundStyle(Color(.label))
+            textField
+            unitPicker
         }
     }
-
+    
     var unitPicker: some View {
         
         func button(_ formUnit: FormUnit) -> some View {

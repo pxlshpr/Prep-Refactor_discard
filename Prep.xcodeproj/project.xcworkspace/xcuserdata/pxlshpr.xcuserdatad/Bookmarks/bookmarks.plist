@@ -482,11 +482,11 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingLineNumber</key>
-					<string>118</string>
+					<string>112</string>
 					<key>StartingLineNumber</key>
-					<string>118</string>
+					<string>112</string>
 					<key>Timestamp</key>
-					<string>710116234.030815</string>
+					<string>710159312.90481</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -511,11 +511,54 @@
 				<key>trailing</key>
 				<string>        }
     }
-}
+    
 </string>
 			</dict>
 			<key>title</key>
 			<string>Ensure that all values are converted to unit provided</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingLineNumber</key>
+					<string>81</string>
+					<key>StartingLineNumber</key>
+					<string>81</string>
+					<key>Timestamp</key>
+					<string>710160146.485562</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Stores/FoodItemsStore.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>        entity.energyUnit = energyUnit
+</string>
+				<key>leading</key>
+				<string>        /// Set the energy unit (this is arbitrary as we can always display it in the unit we want)
+        let energyUnit: EnergyUnit = .kcal
+</string>
+				<key>trailing</key>
+				<string>        
+        /// Compute the nutrients
+        let energy = food.scaledEnergyValue(energyUnit, amount)
+</string>
+			</dict>
+			<key>title</key>
+			<string>Use User's default EnergyUnit here</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>

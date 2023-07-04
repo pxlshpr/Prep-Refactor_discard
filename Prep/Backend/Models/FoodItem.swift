@@ -219,6 +219,25 @@ extension FoodItem {
     }
 }
 
+extension Food {
+    func scaledEnergyValue(_ unit: EnergyUnit, _ amount: FoodValue) -> Double {
+        guard let value = value(for: .energy) else { return 0 }
+        let scaledValue = value.value * nutrientScaleFactor(for: amount)
+        return scaledValue
+    }
+
+    func scaledMacroValue(_ macro: Macro, _ amount: FoodValue) -> Double {
+        guard let value = value(for: .macro(macro)) else { return 0 }
+        return value.value * nutrientScaleFactor(for: amount)
+    }
+    
+    func nutrientScaleFactor(for amount: FoodValue) -> Double {
+        guard let quantity = quantity(for: amount) else { return 0 }
+        return nutrientScaleFactor(for: quantity) ?? 0
+    }
+}
+
+
 
 extension FoodItem {
     var quantityDescription: String {

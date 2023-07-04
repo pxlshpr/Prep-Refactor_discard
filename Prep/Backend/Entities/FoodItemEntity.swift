@@ -5,32 +5,6 @@ import FoodDataTypes
 
 extension FoodItemEntity: Entity {
     
-    convenience init(
-        context: NSManagedObjectContext,
-        foodItem: FoodItem,
-        foodEntity: FoodEntity,
-        mealEntity: MealEntity? = nil
-    ) {
-        self.init(context: context)
-        self.id = foodItem.id
-        self.amount = foodItem.amount
-        
-        self.foodEntity = foodEntity
-        self.mealEntity = mealEntity
-        
-        self.energy = foodItem.energy
-        self.energyUnit = foodItem.energyUnit
-        self.carb = foodItem.carb
-        self.fat = foodItem.fat
-        self.protein = foodItem.protein
-        self.badgeWidth = foodItem.badgeWidth
-        self.sortPosition = Int16(foodItem.sortPosition)
-
-        self.eatenAt = foodItem.eatenAt
-        self.updatedAt = foodItem.updatedAt
-        self.createdAt = foodItem.createdAt
-    }
-    
     func fill(_ legacy: LegacyFoodItem) {
         self.id = UUID(uuidString: legacy.id)
         self.amount = legacy.amount.foodValue
