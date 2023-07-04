@@ -55,11 +55,11 @@ struct FoodPicker: View {
     }
     
     func appeared() {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-//            withAnimation(.snappy) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            withAnimation(.snappy) {
                 hasAppeared = true
-//            }
-//        }
+            }
+        }
     }
     
     func disappeared() {

@@ -21,6 +21,7 @@ struct ItemForm: View {
     @State var food: Food? = nil
     @State var foodItem: FoodItem? = nil
 
+    @State var hasAppeared = false
     @Binding var isPresented: Bool
     
     @State var amountString: String
@@ -55,12 +56,28 @@ struct ItemForm: View {
 
     var body: some View {
         NavigationStack {
-            form
+            content
                 .navigationTitle("New Entry")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar { toolbarContent }
                 .scrollDismissesKeyboard(.interactively)
                 .interactiveDismissDisabled()
+        }
+        .onAppear(perform: appeared)
+    }
+    
+    func appeared() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            withAnimation(.snappy) {
+                hasAppeared = true
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var content: some View {
+        if hasAppeared {
+            form
         }
     }
     
