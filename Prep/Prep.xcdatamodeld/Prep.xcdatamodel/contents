@@ -45,7 +45,6 @@
     </entity>
     <entity name="FoodItemEntity" representedClassName="FoodItemEntity" syncable="YES" codeGenerationType="class">
         <attribute name="amountData" optional="YES" attributeType="Binary"/>
-        <attribute name="badgeWidth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="carb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="eatenAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -54,6 +53,7 @@
         <attribute name="fat" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="protein" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="relativeEnergy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="sortPosition" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="foodEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodEntity" inverseName="foodItemEntities" inverseEntity="FoodEntity"/>
@@ -68,7 +68,6 @@
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="MealEntity" representedClassName="MealEntity" syncable="YES" codeGenerationType="class">
-        <attribute name="badgeWidth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="carb" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="energy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="energyUnitValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -76,6 +75,7 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="protein" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="relativeEnergy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="timeString" optional="YES" attributeType="String"/>
         <relationship name="dayEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity" inverseName="mealEntities" inverseEntity="DayEntity"/>
         <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity" inverseName="mealEntity" inverseEntity="FoodItemEntity"/>

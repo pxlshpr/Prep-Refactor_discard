@@ -502,7 +502,7 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>            $0 + $1.scaledEnergyValue(in: unit)
+				<string>            $0 + $1.calculateEnergy(in: unit)
 </string>
 				<key>leading</key>
 				<string>    func calculateEnergy(in unit: EnergyUnit) -&gt; Double {
@@ -525,11 +525,11 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingLineNumber</key>
-					<string>81</string>
+					<string>67</string>
 					<key>StartingLineNumber</key>
-					<string>81</string>
+					<string>67</string>
 					<key>Timestamp</key>
-					<string>710160146.485562</string>
+					<string>710163901.1794339</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -554,7 +554,7 @@
 				<key>trailing</key>
 				<string>        
         /// Compute the nutrients
-        let energy = food.scaledEnergyValue(energyUnit, amount)
+        let energy = food.calculateEnergy(in: energyUnit, for: amount)
 </string>
 			</dict>
 			<key>title</key>

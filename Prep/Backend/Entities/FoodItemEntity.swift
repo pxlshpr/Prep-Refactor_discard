@@ -9,11 +9,11 @@ extension FoodItemEntity: Entity {
         self.id = UUID(uuidString: legacy.id)
         self.amount = legacy.amount.foodValue
         
-        if let badgeWidth = legacy.badgeWidth {
-            self.badgeWidth = badgeWidth
-        } else {
-            self.badgeWidth = 0
-        }
+//        if let badgeWidth = legacy.badgeWidth {
+//            self.badgeWidth = badgeWidth
+//        } else {
+//            self.badgeWidth = 0
+//        }
         self.sortPosition = Int16(legacy.sortPosition)
         
         if let markedAsEatenAt = legacy.markedAsEatenAt {
@@ -39,11 +39,11 @@ extension FoodItemEntity: Entity {
         guard let foodItem = FoodItem(self) else {
             fatalError()
         }
-        self.energy = foodItem.scaledEnergyValue(in: foodEntity.energyUnit)
+        self.energy = foodItem.calculateEnergy(in: foodEntity.energyUnit)
         self.energyUnit = foodEntity.energyUnit
-        self.carb = foodItem.scaledMacroValue(for: .carb)
-        self.fat = foodItem.scaledMacroValue(for: .fat)
-        self.protein = foodItem.scaledMacroValue(for: .protein)
+        self.carb = foodItem.calculateMacro(.carb)
+        self.fat = foodItem.calculateMacro(.fat)
+        self.protein = foodItem.calculateMacro(.protein)
     }
 }
 

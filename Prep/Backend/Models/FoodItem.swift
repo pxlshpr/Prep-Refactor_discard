@@ -15,7 +15,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
     var carb: Double
     var fat: Double
     var protein: Double
-    var badgeWidth: CGFloat
+    var relativeEnergy: Double
     
     var sortPosition: Int
     
@@ -33,7 +33,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
         carb: Double,
         fat: Double,
         protein: Double,
-        badgeWidth: CGFloat,
+        relativeEnergy: Double,
         sortPosition: Int,
         eatenAt: Date?,
         updatedAt: Date,
@@ -48,7 +48,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
         self.carb = carb
         self.fat = fat
         self.protein = protein
-        self.badgeWidth = badgeWidth
+        self.relativeEnergy = relativeEnergy
         self.sortPosition = sortPosition
         self.eatenAt = eatenAt
         self.updatedAt = updatedAt
@@ -66,7 +66,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
             carb: entity.carb,
             fat: entity.fat,
             protein: entity.protein,
-            badgeWidth: entity.badgeWidth,
+            relativeEnergy: entity.relativeEnergy,
             sortPosition: Int(entity.sortPosition),
             eatenAt: entity.eatenAt,
             updatedAt: entity.updatedAt!,
@@ -202,36 +202,27 @@ import FoodDataTypes
 //
 
 extension FoodItem {
-    func scaledEnergyValue(in unit: EnergyUnit) -> Double {
-        guard let value = food.value(for: .energy) else { return 0 }
-        let scaledValue = value.value * nutrientScaleFactor
-        return scaledValue
+    func calculateEnergy(in unit: EnergyUnit) -> Double {
+        food.calculateEnergy(in: unit, for: amount)
     }
 
-    func scaledMacroValue(for macro: Macro) -> Double {
-        guard let value = food.value(for: .macro(macro)) else { return 0 }
-        return value.value * nutrientScaleFactor
-    }
-    
-    var nutrientScaleFactor: Double {
-        guard let quantity = food.quantity(for: amount) else { return 0 }
-        return food.nutrientScaleFactor(for: quantity) ?? 0
-    }
+    func calculateMacro(_ macro: Macro) -> Double {
+        food.calculateMacro(macro, for: amount)
+    }    
 }
 
 extension Food {
-    func scaledEnergyValue(_ unit: EnergyUnit, _ amount: FoodValue) -> Double {
+    func calculateEnergy(in unit: EnergyUnit, for amount: FoodValue) -> Double {
         guard let value = value(for: .energy) else { return 0 }
-        let scaledValue = value.value * nutrientScaleFactor(for: amount)
-        return scaledValue
+        return value.value * nutrientScaleFactor(for: amount)
     }
 
-    func scaledMacroValue(_ macro: Macro, _ amount: FoodValue) -> Double {
+    func calculateMacro(_ macro: Macro, for amount: FoodValue) -> Double {
         guard let value = value(for: .macro(macro)) else { return 0 }
         return value.value * nutrientScaleFactor(for: amount)
     }
     
-    func nutrientScaleFactor(for amount: FoodValue) -> Double {
+    private func nutrientScaleFactor(for amount: FoodValue) -> Double {
         guard let quantity = quantity(for: amount) else { return 0 }
         return nutrientScaleFactor(for: quantity) ?? 0
     }

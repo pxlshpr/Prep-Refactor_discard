@@ -40,20 +40,6 @@ extension DataManager {
 extension CoreDataManager {
     
     func createFoodItem(_ food: Food, _ meal: Meal, _ amount: FoodValue, _ context: NSManagedObjectContext) throws -> FoodItemEntity {
-        /// Steps
-        /// [x] Fetch `FoodEntity`
-        /// [x] Fetch `MealEntity`
-        /// [x] Create the `FoodItemEntity`
-        /// [x] Compute and fill in the nutrients
-        ///     [x] Energy, EnergyUnit
-        ///     [x] Carb, Fat, Protein
-        /// [x] Compute and fill in the badge width
-        ///     [x] Get all the meals of the day
-        ///     [x] Use the total energy for the day to determine the badgeWidth
-        /// [x] Compute and fill in the sortPosition
-        ///     [x] Get the last sort position for the meal
-        ///     [x] Increment it by 1
-        ///     [x] While we're here, ensure that sortPositions are valid
 
         guard let foodEntity = FoodEntity.object(with: food.id, in: context) else {
             fatalError()
@@ -82,14 +68,14 @@ extension CoreDataManager {
         entity.energyUnit = energyUnit
         
         /// Compute the nutrients
-        let energy = food.scaledEnergyValue(energyUnit, amount)
+        let energy = food.calculateEnergy(in: energyUnit, for: amount)
         entity.energy = energy
-        entity.carb = food.scaledMacroValue(.carb, amount)
-        entity.fat = food.scaledMacroValue(.fat, amount)
-        entity.protein = food.scaledMacroValue(.protein, amount)
+        entity.carb = food.calculateMacro(.carb, for: amount)
+        entity.fat = food.calculateMacro(.fat, for: amount)
+        entity.protein = food.calculateMacro(.protein, for: amount)
 
-        /// Compute the badge width
-        entity.badgeWidth = mealEntity.calculateBadgeWidth(energy: energy, energyUnit: energyUnit)
+        /// Compute the relativeEnergy
+        entity.relativeEnergy = mealEntity.calculateRelativeEnergy(energy: energy, energyUnit)
         
         /// Get the meal entity to update its stats (nutrients and badge width)
         mealEntity.updateStats()
@@ -134,11 +120,10 @@ import FoodDataTypes
 extension DayEntity {
     
     /// Calculates badge width for a Meal.
-    func calculateBadgeWidth(energy: Double, _ energyUnit: EnergyUnit) -> Double {
-        Prep.calculateBadgeWidth(
-            for: energyUnit.convert(energy, to: .kcal),
-            within: energyValuesOfMeals(in: .kcal)
-        )
+    func calculateRelativeEnergy(energy: Double, _ energyUnit: EnergyUnit) -> Double {
+        let kcal = energyUnit.convert(energy, to: .kcal)
+        let values = energyValuesOfMeals(in: .kcal)
+        return kcal.relativeScale(in: values)
     }
     
     func energyValuesOfMeals(in unit: EnergyUnit) -> [Double] {
@@ -175,42 +160,44 @@ extension MealEntity {
         carb = total(for: .carb)
         fat = total(for: .fat)
         protein = total(for: .protein)
-        badgeWidth = calculatedBadgeWidth
+        relativeEnergy = calculatedRelativeEnergy
     }
     
     func calculateEnergy(in unit: EnergyUnit) -> Double {
         foodItems.reduce(0) {
-            $0 + $1.scaledEnergyValue(in: unit)
+            $0 + $1.calculateEnergy(in: unit)
         }
     }
     
     func total(for macro: Macro) -> Double {
         foodItems.reduce(0) {
-            $0 + $1.scaledMacroValue(for: macro)
+            $0 + $1.calculateMacro(macro)
         }
     }
 
-    var calculatedBadgeWidth: CGFloat {
-        dayEntity?.calculateBadgeWidth(energy: energy, energyUnit) ?? 0
+    var calculatedRelativeEnergy: Double {
+        dayEntity?.calculateRelativeEnergy(energy: energy, energyUnit) ?? 0
     }
 
     func energy(in unit: EnergyUnit) -> Double {
         self.energyUnit.convert(energy, to: unit)
     }
 
-    /// Calculates badge width for a FoodItem.
-    func calculateBadgeWidth(energy: Double, energyUnit: EnergyUnit) -> Double {
+    func calculateRelativeEnergy(energy: Double, _ energyUnit: EnergyUnit) -> Double {
         guard let dayEntity else { return 0 }
-        return Prep.calculateBadgeWidth(
-            for: energyUnit.convert(energy, to: .kcal),
-            within: dayEntity.energyValuesOfFoodItems(in: .kcal)
-        )
+        let kcal = energyUnit.convert(energy, to: .kcal)
+        let values = dayEntity.energyValuesOfFoodItems(in: .kcal)
+        return kcal.relativeScale(in: values)
     }
 }
 
 extension FoodItemEntity {
     func energy(in unit: EnergyUnit) -> Double {
         self.energyUnit.convert(energy, to: unit)
+    }
+    
+    var calculatedRelativeEnergy: Double {
+        mealEntity?.calculateRelativeEnergy(energy: energy, energyUnit) ?? 0
     }
 }
 extension DayEntity {

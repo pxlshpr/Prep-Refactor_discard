@@ -48,7 +48,7 @@ extension CoreDataManager {
             await run("Food Items", populateFoodItems5)
             await run("Food Items", populateFoodItems6)
 
-            await run("Meal Stats", populateMealStats)
+            await run("Stats", populateStats)
 
             await run("setHasPopulated", setHasPopulated)
             logger.info("Populate took: \(CFAbsoluteTimeGetCurrent()-start)s")
@@ -326,19 +326,40 @@ extension CoreDataManager {
         }
     }
     
-    func populateMealStats(_ context: NSManagedObjectContext) {
-    
+    func populateStats(_ context: NSManagedObjectContext) {
+
+        let energyUnit: EnergyUnit = .kcal
+
+        let foodItemEntities = FoodItemEntity.objects(in: context)
+        for entity in foodItemEntities {
+            entity.energyUnit = energyUnit
+            
+            guard let foodItem = FoodItem(entity) else {
+                fatalError()
+            }
+            entity.energy = foodItem.calculateEnergy(in: energyUnit)
+            entity.carb = foodItem.calculateMacro(.carb)
+            entity.fat = foodItem.calculateMacro(.fat)
+            entity.protein = foodItem.calculateMacro(.protein)
+            
+            entity.relativeEnergy = entity.calculatedRelativeEnergy
+            
+            print("We here")
+        }
+        
         let mealEntities = MealEntity.objects(in: context)
         for entity in mealEntities {
-            let meal = Meal(entity)
-            let energyUnit: EnergyUnit = .kcal
-            entity.energy = meal.calculateEnergy(in: energyUnit)
             entity.energyUnit = energyUnit
-            entity.carb = meal.total(for: .carb)
-            entity.fat = meal.total(for: .fat)
-            entity.protein = meal.total(for: .protein)
+            
+            let meal = Meal(entity)
+            entity.energy = meal.calculateEnergy(in: energyUnit)
+            entity.carb = meal.calculateMacro(.carb)
+            entity.fat = meal.calculateMacro(.fat)
+            entity.protein = meal.calculateMacro(.protein)
+            
+            entity.relativeEnergy = entity.calculatedRelativeEnergy
+            
+            print("We here")
         }
     }
-    
-
 }

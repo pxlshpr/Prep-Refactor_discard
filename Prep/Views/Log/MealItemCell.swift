@@ -27,7 +27,7 @@ struct MealItemCell: View {
     
     var foodBadge: some View {
         let widthBinding = Binding<CGFloat>(
-            get: { CGFloat(item.badgeWidth) },
+            get: { CGFloat(item.relativeEnergy * 140) },
             set: { _ in }
         )
 

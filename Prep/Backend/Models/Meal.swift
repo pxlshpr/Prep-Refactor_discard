@@ -11,7 +11,7 @@ struct Meal: Identifiable, Codable, Hashable {
     var carb: Double
     var fat: Double
     var protein: Double
-    var badgeWidth: CGFloat
+    var relativeEnergy: Double
 
     var foodItems: [FoodItem]
     
@@ -25,7 +25,7 @@ struct Meal: Identifiable, Codable, Hashable {
         carb: Double,
         fat: Double,
         protein: Double,
-        badgeWidth: CGFloat,
+        relativeEnergy: Double,
         foodItems: [FoodItem]
     ) {
         self.id = id
@@ -37,7 +37,7 @@ struct Meal: Identifiable, Codable, Hashable {
         self.carb = carb
         self.fat = fat
         self.protein = protein
-        self.badgeWidth = badgeWidth
+        self.relativeEnergy = relativeEnergy
         self.foodItems = foodItems
     }
     
@@ -52,7 +52,7 @@ struct Meal: Identifiable, Codable, Hashable {
             carb: entity.carb,
             fat: entity.fat,
             protein: entity.protein,
-            badgeWidth: entity.badgeWidth,
+            relativeEnergy: entity.relativeEnergy,
             foodItems: entity.foodItems
         )
     }
@@ -110,13 +110,13 @@ extension Meal {
     
     func calculateEnergy(in unit: EnergyUnit) -> Double {
         foodItems.reduce(0) {
-            $0 + $1.scaledEnergyValue(in: unit)
+            $0 + $1.calculateEnergy(in: unit)
         }
     }
     
-    func total(for macro: Macro) -> Double {
+    func calculateMacro(_ macro: Macro) -> Double {
         foodItems.reduce(0) {
-            $0 + $1.scaledMacroValue(for: macro)
+            $0 + $1.calculateMacro(macro)
         }
     }
 }

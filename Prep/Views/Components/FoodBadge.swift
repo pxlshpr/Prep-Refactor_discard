@@ -91,54 +91,54 @@ struct FoodBadge: View {
     }
 }
 
-let DefaultBadgeWidth: CGFloat = 30.0
-
-func calculateBadgeWidth(
-    for value: Double,
-    within values: [Double],
-    maxWidth: CGFloat? = nil
-) -> CGFloat {
-    let sorted = values
-        .filter { $0 > 0 }
-        .sorted { $0 > $1 }
-    guard let largest = sorted.first,
-          let smallest = sorted.last
-    else { return DefaultBadgeWidth }
-    
-    return calculateBadgeWidth(
-        for: value,
-        largest: largest,
-        smallest: smallest,
-        maxWidth: maxWidth
-    )
-}
-
-public func calculateBadgeWidth(
-    for value: Double,
-    largest: Double,
-    smallest: Double,
-    maxWidth: CGFloat? = nil
-) -> CGFloat {
-    
-    let maxWidth = maxWidth ?? (0.34883721 * 428) /// Using hardcoded width of iPhone 13 Pro Max
-
-    let min = DefaultBadgeWidth
-    let max: CGFloat = maxWidth
-    
-    guard largest > 0, smallest > 0, value <= largest, value >= smallest else {
-        return DefaultBadgeWidth
-    }
-    
-    /// First try and scale values such that smallest value gets the DefaultWidth and everything else scales accordingly
-    /// But first see if this results in the largest value crossing the MaxWidth, and if so
-    guard (largest/smallest) * min <= max else {
-        /// scale values such that largest value gets the MaxWidth and everything else scales accordingly
-        let percent = value/largest
-        let width = percent * max
-        return width
-    }
-    
-    let percent = value/smallest
-    let width = percent * min
-    return width
-}
+//let DefaultBadgeWidth: CGFloat = 30.0
+//
+//func calculateRelativeEnergy(
+//    for value: Double,
+//    within values: [Double],
+//    maxWidth: CGFloat? = nil
+//) -> CGFloat {
+//    let sorted = values
+//        .filter { $0 > 0 }
+//        .sorted { $0 > $1 }
+//    guard let largest = sorted.first,
+//          let smallest = sorted.last
+//    else { return DefaultBadgeWidth }
+//    
+//    return calculateRelativeEnergy(
+//        for: value,
+//        largest: largest,
+//        smallest: smallest,
+//        maxWidth: maxWidth
+//    )
+//}
+//
+//public func calculateRelativeEnergy(
+//    for value: Double,
+//    largest: Double,
+//    smallest: Double,
+//    maxWidth: CGFloat? = nil
+//) -> CGFloat {
+//    
+//    let maxWidth = maxWidth ?? (0.34883721 * 428) /// Using hardcoded width of iPhone 13 Pro Max
+//
+//    let min = DefaultBadgeWidth
+//    let max: CGFloat = maxWidth
+//    
+//    guard largest > 0, smallest > 0, value <= largest, value >= smallest else {
+//        return DefaultBadgeWidth
+//    }
+//    
+//    /// First try and scale values such that smallest value gets the DefaultWidth and everything else scales accordingly
+//    /// But first see if this results in the largest value crossing the MaxWidth, and if so
+//    guard (largest/smallest) * min <= max else {
+//        /// scale values such that largest value gets the MaxWidth and everything else scales accordingly
+//        let percent = value/largest
+//        let width = percent * max
+//        return width
+//    }
+//    
+//    let percent = value/smallest
+//    let width = percent * min
+//    return width
+//}
