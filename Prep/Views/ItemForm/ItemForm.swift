@@ -131,6 +131,8 @@ struct ItemForm: View {
                     return
                 }
                 await MainActor.run {
+                    //TODO: Also post that meal was updated so that footer gets new value updated
+                    //TODO: USE AN ANIMATED VALUE FOR THIS!
                     post(.didAddFoodItem, userInfo: [.foodItem: newFoodItem])
                 }
             }
