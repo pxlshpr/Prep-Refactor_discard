@@ -135,7 +135,7 @@ struct ItemForm: View {
                 
                 await MainActor.run {
                     post(.didAddFoodItem, userInfo: [.foodItem: newFoodItem])
-                    post(.didUpdateMeal, userInfo: [.meal: meal])
+                    post(.didUpdateMeal, userInfo: [.meal: updatedMeal])
                 }
             }
         }

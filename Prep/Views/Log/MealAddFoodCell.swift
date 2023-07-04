@@ -43,7 +43,9 @@ struct MealAddFoodCell: View {
     }
     
     func didUpdateMeal(notification: Notification) {
-        guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal else {
+        guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
+              self.meal.id == meal.id
+        else {
             return
         }
         withAnimation(.snappy) {
