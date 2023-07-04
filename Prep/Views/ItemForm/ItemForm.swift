@@ -307,11 +307,16 @@ struct ItemForm: View {
         }
     }
     
+    func setUnit(_ formUnit: FormUnit) {
+        withAnimation(.snappy) {
+            unit = formUnit
+        }
+    }
     var unitPicker: some View {
         
         func button(_ formUnit: FormUnit) -> some View {
             Button {
-                unit = formUnit
+                setUnit(formUnit)
             } label: {
                 Text("\(formUnit.name) (\(formUnit.abbreviation))")
             }
@@ -323,7 +328,7 @@ struct ItemForm: View {
                     Menu {
                         ForEach(VolumeUnitType.primaryUnits, id: \.self) { volumeUnit in
                             Button {
-                                unit = .size(size, volumeUnit.defaultVolumeUnit)
+                                setUnit(.size(size, volumeUnit.defaultVolumeUnit))
                             } label: {
                                 Text("\(volumeUnit.name) (\(volumeUnit.abbreviation))")
                             }
@@ -331,7 +336,7 @@ struct ItemForm: View {
                         Section("Others") {
                             ForEach(VolumeUnitType.secondaryUnits, id: \.self) { volumeUnit in
                                 Button {
-                                    unit = .size(size, volumeUnit.defaultVolumeUnit)
+                                    setUnit(.size(size, volumeUnit.defaultVolumeUnit))
                                 } label: {
                                     Text("\(volumeUnit.name) (\(volumeUnit.abbreviation))")
                                 }
@@ -342,7 +347,9 @@ struct ItemForm: View {
                     }
                 } else {
                     Button {
-                        unit = .size(size, nil)
+                        withAnimation {
+                            setUnit(.size(size, nil))
+                        }
                     } label: {
                         Text(size.name)
                     }
@@ -364,7 +371,7 @@ struct ItemForm: View {
         var servingButton: some View {
             if food?.serving != nil {
                 Button {
-                    unit = .serving
+                    setUnit(.serving)
                 } label: {
                     Text("Serving")
                 }

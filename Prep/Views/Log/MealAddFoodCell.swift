@@ -9,7 +9,7 @@ struct MealAddFoodCell: View {
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    @Binding var meal: Meal
+    @State var meal: Meal
     
     @State var showingFoodPicker = false
     
@@ -54,7 +54,7 @@ struct MealAddFoodCell: View {
         }
         
         /// Wait a bit for the form to dismiss
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) {
             withAnimation(.snappy) {
                 self.meal = updatedMeal
             }

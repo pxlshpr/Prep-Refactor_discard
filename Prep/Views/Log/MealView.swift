@@ -65,7 +65,7 @@ struct MealView: View {
         }
         
         /// Wait a bit for the form to dismiss
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             withAnimation(.snappy) {
                 /// If the added food item belongs to this meal, insert it with an animation and play a sound
                 if foodItem.mealID == meal.id {
@@ -74,7 +74,7 @@ struct MealView: View {
 //                } else {
                 }
                 self.foodItems = updatedMeal.foodItems
-//                self.meal = updatedMeal
+                self.meal = updatedMeal
             }
         }
     }
@@ -146,7 +146,6 @@ struct MealView: View {
     }
     
     var addFoodCell: some View {
-        //TODO: Find a way to have this not refresh each time we update
-        MealAddFoodCell(meal: $meal)
+        MealAddFoodCell(meal: meal)
     }
 }

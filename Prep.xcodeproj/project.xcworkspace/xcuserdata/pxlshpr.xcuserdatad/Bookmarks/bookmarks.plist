@@ -647,7 +647,7 @@
 				<key>leading</key>
 				<string>                }
                 self.foodItems = updatedMeal.foodItems
-//                self.meal = </string>
+                self.meal = </string>
 				<key>trailing</key>
 				<string>
             }
