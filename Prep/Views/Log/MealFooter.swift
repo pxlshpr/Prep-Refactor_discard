@@ -5,9 +5,10 @@ import SwiftHaptics
 import ViewSugar
 import FoodDataTypes
 
-struct MealAddFoodCell: View {
+struct MealFooter: View {
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
+    @Environment(\.colorScheme) var colorScheme
 
     @State var meal: Meal
     
@@ -23,7 +24,88 @@ struct MealAddFoodCell: View {
     }
     
     var body: some View {
-        Button {
+        content
+            .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
+            .onReceive(didAddFoodItem, perform: didAddFoodItem)
+    }
+    
+    var content: some View {
+        HStack {
+            addFoodButton
+                .popover(isPresented: $showingFoodPicker) { foodPicker }
+            Spacer()
+            if !meal.foodItems.isEmpty {
+                stats
+            }
+        }
+        .padding(.horizontal, 8)
+//        .padding(.vertical, 12)
+        
+        .padding(.leading, leadingPadding)
+        .padding(.trailing, trailingPadding)
+        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+        .listRowBackground(Color.clear)
+        .listRowSeparator(.hidden, edges: .bottom)
+    }
+
+    var addFoodButton: some View {
+        var label: some View {
+            Text("Add Food")
+                .font(.caption)
+                .bold()
+                .foregroundColor(.accentColor)
+                .padding(.horizontal, 8)
+                .frame(height: 30)
+                .background(
+                    RoundedRectangle(cornerRadius: 7, style: .continuous)
+                        .fill(Color.accentColor.opacity(
+                            colorScheme == .dark ? 0.1 : 0.15
+                        ))
+                )
+                .frame(maxHeight: .infinity)
+                .padding(.leading, 10)
+        }
+
+        var button: some View {
+            return Button {
+                tapped()
+            } label: {
+                label
+            }
+        }
+        
+        return button
+            .onTapGesture { tapped() }
+            .contentShape(Rectangle())
+            .padding(.trailing)
+            .buttonStyle(.borderless)
+    }
+    
+    func tapped() {
+        Haptics.selectionFeedback()
+        showingFoodPicker = true
+    }
+    
+    var legacyButton: some View {
+        var label: some View {
+            HStack {
+                Image(systemName: "plus")
+                    .padding(5)
+                    .background(
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundStyle(Color(.secondarySystemFill))
+                    )
+                    .padding(.leading, 5)
+                    .popover(isPresented: $showingFoodPicker) { foodPicker }
+                Text("Add Food")
+                Spacer()
+                if !meal.foodItems.isEmpty {
+                    stats
+                }
+            }
+        }
+        
+        return Button {
             Haptics.selectionFeedback()
             showingFoodPicker = true
         } label: {
@@ -37,9 +119,6 @@ struct MealAddFoodCell: View {
         .padding(.leading, leadingPadding)
         .padding(.trailing, trailingPadding)
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-        
-        .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
-        .onReceive(didAddFoodItem, perform: didAddFoodItem)
     }
     
     func didAddFoodItem(notification: Notification) {
@@ -76,24 +155,6 @@ struct MealAddFoodCell: View {
         verticalSizeClass == .compact ? safeAreaInsets.trailing : 0
     }
 
-    var label: some View {
-        HStack {
-            Image(systemName: "plus")
-                .padding(5)
-                .background(
-                    RoundedRectangle(cornerRadius: 5)
-                        .foregroundStyle(Color(.secondarySystemFill))
-                )
-                .padding(.leading, 5)
-                .popover(isPresented: $showingFoodPicker) { foodPicker }
-            Text("Add Food")
-            Spacer()
-            if !meal.foodItems.isEmpty {
-                stats
-            }
-        }
-    }
-    
     var foodPicker: some View {
         FoodPicker(isPresented: $showingFoodPicker, meal: meal)
     }

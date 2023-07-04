@@ -136,7 +136,7 @@
 		E280027B2A52B84300C6D528 /* FoodPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E32A52B84300C6D528 /* FoodPicker.swift */; };
 		E280027C2A52B84300C6D528 /* MealForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E42A52B84300C6D528 /* MealForm.swift */; };
 		E280027D2A52B84300C6D528 /* FoodPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E52A52B84300C6D528 /* FoodPickerModel.swift */; };
-		E280027E2A52B84300C6D528 /* MealAddFoodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E62A52B84300C6D528 /* MealAddFoodCell.swift */; };
+		E280027E2A52B84300C6D528 /* MealFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E62A52B84300C6D528 /* MealFooter.swift */; };
 		E280027F2A52B84300C6D528 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E72A52B84300C6D528 /* LogView.swift */; };
 		E28002802A52B84300C6D528 /* MealItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E82A52B84300C6D528 /* MealItemCell.swift */; };
 		E28002812A52B84300C6D528 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E92A52B84300C6D528 /* MealView.swift */; };
@@ -306,7 +306,7 @@
 		E28001E32A52B84300C6D528 /* FoodPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodPicker.swift; sourceTree = "<group>"; };
 		E28001E42A52B84300C6D528 /* MealForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealForm.swift; sourceTree = "<group>"; };
 		E28001E52A52B84300C6D528 /* FoodPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodPickerModel.swift; sourceTree = "<group>"; };
-		E28001E62A52B84300C6D528 /* MealAddFoodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealAddFoodCell.swift; sourceTree = "<group>"; };
+		E28001E62A52B84300C6D528 /* MealFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealFooter.swift; sourceTree = "<group>"; };
 		E28001E72A52B84300C6D528 /* LogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		E28001E82A52B84300C6D528 /* MealItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealItemCell.swift; sourceTree = "<group>"; };
 		E28001E92A52B84300C6D528 /* MealView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
@@ -651,7 +651,7 @@
 				E28001E32A52B84300C6D528 /* FoodPicker.swift */,
 				E28001E42A52B84300C6D528 /* MealForm.swift */,
 				E28001E52A52B84300C6D528 /* FoodPickerModel.swift */,
-				E28001E62A52B84300C6D528 /* MealAddFoodCell.swift */,
+				E28001E62A52B84300C6D528 /* MealFooter.swift */,
 				E28001E72A52B84300C6D528 /* LogView.swift */,
 				E28001E82A52B84300C6D528 /* MealItemCell.swift */,
 				E28001E92A52B84300C6D528 /* MealView.swift */,
@@ -921,7 +921,7 @@
 				E28002572A52B84300C6D528 /* VolumeQuantity.swift in Sources */,
 				E280FC1B2A529E3D00C6D528 /* Prep.xcdatamodeld in Sources */,
 				E28002522A52B84300C6D528 /* FoodQuantity.Size.swift in Sources */,
-				E280027E2A52B84300C6D528 /* MealAddFoodCell.swift in Sources */,
+				E280027E2A52B84300C6D528 /* MealFooter.swift in Sources */,
 				E28002812A52B84300C6D528 /* MealView.swift in Sources */,
 				E236524D2A5318420049C199 /* Fetchable.swift in Sources */,
 				E293DB702A53742E00D8D4D2 /* ItemForm.swift in Sources */,

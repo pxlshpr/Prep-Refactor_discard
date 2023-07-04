@@ -42,6 +42,19 @@ extension DataManager {
 
 extension CoreDataManager {
     
+    
+//    func updateFoodItem(
+//        _ food: Food,
+//        _ meal: Meal,
+//        _ amount: FoodValue,
+//        _ context: NSManagedObjectContext
+//    ) throws -> (updatedFoodItemEntity: FoodItemEntity, updatedDayEntity: DayEntity) {
+//    }
+//    
+//    func deleteFoodItem(
+//    ) throws -> (deletedFoodItemID: UUID, updatedDayEntity: DayEntity) {
+//    }
+    
     func createFoodItem(
         _ food: Food,
         _ meal: Meal,
@@ -56,12 +69,14 @@ extension CoreDataManager {
             fatalError()
         }
 
+        let date = Date.now
+        
         let entity = FoodItemEntity(context: context)
         entity.id = UUID()
         entity.amount = amount
         entity.eatenAt = nil
-        entity.updatedAt = Date.now
-        entity.createdAt = Date.now
+        entity.updatedAt = date
+        entity.createdAt = date
         
         /// Before attaching, get the `mealEntity` to clean up its sort positions
         mealEntity.assertSortPositions()
@@ -84,6 +99,10 @@ extension CoreDataManager {
 
         /// Compute the relativeEnergy for all
         mealEntity.triggerUpdates()
+        
+        /// Update Food's last used data
+        foodEntity.lastAmount = amount
+        foodEntity.lastUsedAt = date
         
         return (entity, dayEntity)
     }

@@ -133,10 +133,10 @@ extension Food {
     
     var foodName: String {
         var name = "\(emoji) \(name)"
-        if let detail {
+        if let detail, !detail.isEmpty {
             name += ", \(detail)"
         }
-        if let brand {
+        if let brand, !brand.isEmpty {
             name += ", \(brand)"
         }
         return name

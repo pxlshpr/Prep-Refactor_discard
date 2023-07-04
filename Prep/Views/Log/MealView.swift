@@ -33,7 +33,7 @@ struct MealView: View {
                     .padding(.trailing, trailingPadding)
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             }
-            addFoodCell
+            footer
         }
         .onReceive(didAddFoodItem, perform: didAddFoodItem)
         .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
@@ -71,8 +71,8 @@ struct MealView: View {
                 if foodItem.mealID == meal.id {
                     SoundPlayer.play(.octaveTapSimple)
                     self.foodItems.append(foodItem)
-//                } else {
                 }
+                
                 self.foodItems = updatedMeal.foodItems
                 self.meal = updatedMeal
             }
@@ -81,53 +81,28 @@ struct MealView: View {
     
     func cell(foodItem: FoodItem) -> some View {
         Button {
-            Haptics.selectionFeedback()
-//            model.foodItemBeingEdited = foodItem
-//            showingItemForm = true
+            tapped(foodItem)
         } label: {
             MealItemCell(item: foodItem)
         }
     }
 
     var header: some View {
-        Menu {
-            Button(role: .destructive) {
-                Haptics.successFeedback()
-                
-//                do {
-//                    let logger = Logger(subsystem: "MealView", category: "delete")
-//                    let id = meal.id
-//                    let descriptor = FetchDescriptor<MealEntity>(predicate: #Predicate {
-//                        $0.uuid == id
-//                    })
-//                    logger.debug("Fetching meal to delete: \(id, privacy: .public)")
-//                    guard let meal = try context.fetch(descriptor).first else {
-//                        logger.error("Could not find meal")
-//                        return
-//                    }
-//                    logger.debug("Deleting meal: \(id, privacy: .public)")
-//                    context.delete(meal)
-//                    
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                        Task {
-//                            logger.debug("Saving context")
-//                            try context.save()
-//                        }
-//                    }
-//                } catch {
-//                    /// Getting configuration error when trying to delete a meal that can't be found
-//                    fatalError(error.localizedDescription)
-//                }
-//
-//                post(.didDeleteMeal, userInfo: [.meal: meal])
-
-//                MealStore.delete(meal)
-                
-            } label: {
-                Label("Delete", systemImage: "trash")
-                    .textCase(.none)
+        
+        var label: some View {
+            HStack {
+                Text("**\(meal.timeString)**")
+                Text("•")
+                Text(meal.name)
             }
-        } label: {
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .textCase(.uppercase)
+            .font(.footnote)
+            .foregroundColor(Color(.secondaryLabel))
+        }
+
+        
+        var label_legacy: some View {
             HStack {
                 Text(title)
                     .foregroundStyle(Color(.secondaryLabel))
@@ -140,12 +115,66 @@ struct MealView: View {
                     .imageScale(.small)
             }
         }
+        
+        return Menu {
+            Button(role: .destructive) {
+                tappedDeleteMeal()
+            } label: {
+                Label("Delete", systemImage: "trash")
+                    .textCase(.none)
+            }
+        } label: {
+            label
+//            label_legacy
+        }
         .padding(.leading, leadingPadding)
         .padding(.trailing, trailingPadding)
         .frame(height: 25)
     }
     
-    var addFoodCell: some View {
-        MealAddFoodCell(meal: meal)
+    var footer: some View {
+        MealFooter(meal: meal)
+    }
+}
+
+extension MealView {
+    
+    func tapped(_ foodItem: FoodItem) {
+        Haptics.selectionFeedback()
+//        model.foodItemBeingEdited = foodItem
+//        showingItemForm = true
+    }
+    
+    func tappedDeleteMeal() {
+        Haptics.successFeedback()
+//
+//        do {
+//            let logger = Logger(subsystem: "MealView", category: "delete")
+//            let id = meal.id
+//            let descriptor = FetchDescriptor<MealEntity>(predicate: #Predicate {
+//                $0.uuid == id
+//            })
+//            logger.debug("Fetching meal to delete: \(id, privacy: .public)")
+//            guard let meal = try context.fetch(descriptor).first else {
+//                logger.error("Could not find meal")
+//                return
+//            }
+//            logger.debug("Deleting meal: \(id, privacy: .public)")
+//            context.delete(meal)
+//
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                Task {
+//                    logger.debug("Saving context")
+//                    try context.save()
+//                }
+//            }
+//        } catch {
+//            /// Getting configuration error when trying to delete a meal that can't be found
+//            fatalError(error.localizedDescription)
+//        }
+//
+//        post(.didDeleteMeal, userInfo: [.meal: meal])
+//
+//        MealStore.delete(meal)
     }
 }
