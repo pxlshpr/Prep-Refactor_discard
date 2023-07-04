@@ -130,7 +130,9 @@ struct ItemForm: View {
                 guard let newFoodItem = await FoodItemsStore.create(food, meal: meal, amount: foodValue) else {
                     return
                 }
-                post(.didAddFoodItem, userInfo: [.foodItem: newFoodItem])
+                await MainActor.run {
+                    post(.didAddFoodItem, userInfo: [.foodItem: newFoodItem])
+                }
             }
         }
     }

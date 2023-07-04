@@ -93,7 +93,7 @@ extension CoreDataManager {
         
         /// Get the meal entity to update its stats (nutrients and badge width)
         mealEntity.updateStats()
-
+        
         return entity
     }
     
@@ -102,9 +102,24 @@ extension CoreDataManager {
             let bgContext =  newBackgroundContext()
             await bgContext.perform {
                 do {
+                    
                     let entity = try self.createFoodItem(food, meal, amount, bgContext)
                     bgContext.insert(entity)
-                    completion(entity)
+                    
+                    let observer = NotificationCenter.default.addObserver(
+                        forName: .NSManagedObjectContextDidSave,
+                        object: bgContext,
+                        queue: .main
+                    ) { (notification) in
+                        self.viewContext.mergeChanges(fromContextDidSave: notification)
+                        completion(entity)
+                    }
+                    
+                    try bgContext.performAndWait {
+                        try bgContext.save()
+                    }
+                    NotificationCenter.default.removeObserver(observer)
+
                 } catch {
                     logger.error("Error: \(error.localizedDescription, privacy: .public)")
                     completion(nil)
