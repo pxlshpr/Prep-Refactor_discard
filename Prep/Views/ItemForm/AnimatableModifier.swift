@@ -2,6 +2,8 @@ import SwiftUI
 
 import FoodDataTypes
 
+//MARK: - Item Energy
+
 struct AnimatableItemEnergyModifier: AnimatableModifier {
     
     @Environment(\.colorScheme) var colorScheme
@@ -59,6 +61,8 @@ extension View {
         ))
     }
 }
+
+//MARK: - Item Macro
 
 struct AnimatableItemMacroModifier: AnimatableModifier {
     
@@ -118,6 +122,61 @@ extension View {
             macro: macro,
             isPrimary: isPrimary,
             isAnimating: isAnimating
+        ))
+    }
+}
+
+//MARK: - Meal Energy
+
+struct AnimatableMealEnergyModifier: AnimatableModifier {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    var value: Double
+    var energyUnit: EnergyUnit
+    
+    var animatableData: Double {
+        get { value }
+        set { value = newValue }
+    }
+    
+    var amountString: String {
+        value.formattedNutrientValue
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .overlay(
+                HStack {
+                    Spacer()
+                    HStack(alignment: .center, spacing: 4) {
+                        Text(amountString)
+                            .multilineTextAlignment(.leading)
+                            .font(.footnote)
+                            .monospacedDigit()
+                            .foregroundStyle(Color(.secondaryLabel))
+                        Text(energyUnit.abbreviation)
+                            .lineLimit(3)
+                            .minimumScaleFactor(0.5)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .font(.caption2)
+                            .foregroundStyle(Color(.tertiaryLabel))
+                    }
+                }
+            )
+    }
+}
+
+extension View {
+    func animatedMealEnergy(
+        value: Double,
+        energyUnit: EnergyUnit
+    ) -> some View {
+        modifier(AnimatableMealEnergyModifier(
+            value: value,
+            energyUnit: energyUnit
         ))
     }
 }

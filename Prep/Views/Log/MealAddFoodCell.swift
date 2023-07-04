@@ -9,15 +9,16 @@ struct MealAddFoodCell: View {
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
-    let meal: Meal
+    @State var meal: Meal
     
     @State var showingFoodPicker = false
     
     @State var safeAreaInsets: EdgeInsets
     let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
-    
+    let didUpdateMeal = NotificationCenter.default.publisher(for: .didUpdateMeal)
+
     init(meal: Meal) {
-        self.meal = meal
+        _meal = State(initialValue: meal)
         _safeAreaInsets = State(initialValue: currentSafeAreaInsets)
     }
     
@@ -38,6 +39,16 @@ struct MealAddFoodCell: View {
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
         
         .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
+        .onReceive(didUpdateMeal, perform: didUpdateMeal)
+    }
+    
+    func didUpdateMeal(notification: Notification) {
+        guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal else {
+            return
+        }
+        withAnimation(.snappy) {
+            self.meal = meal
+        }
     }
     
     func safeAreaDidChange(notification: Notification) {
@@ -78,17 +89,22 @@ struct MealAddFoodCell: View {
     }
     
     var stats: some View {
-        Group {
-            HStack(alignment: .firstTextBaseline, spacing: 4) {
-                energyText
-                    .font(.footnote)
-                    .monospacedDigit()
-                    .foregroundStyle(Color(.secondaryLabel))
-                Text("kcal")
-                    .font(.caption2)
-                    .foregroundStyle(Color(.tertiaryLabel))
-            }
-        }
+        Color.clear
+            .animatedMealEnergy(
+                value: meal.energy(in: .kcal),
+                energyUnit: .kcal
+            )
+//        Group {
+//            HStack(alignment: .firstTextBaseline, spacing: 4) {
+//                energyText
+//                    .font(.footnote)
+//                    .monospacedDigit()
+//                    .foregroundStyle(Color(.secondaryLabel))
+//                Text("kcal")
+//                    .font(.caption2)
+//                    .foregroundStyle(Color(.tertiaryLabel))
+//            }
+//        }
     }
     
     var energyText: some View {

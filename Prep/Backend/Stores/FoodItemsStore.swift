@@ -7,24 +7,26 @@ private let logger = Logger(subsystem: "FoodItems", category: "")
 class FoodItemsStore {
     static let shared = FoodItemsStore()
     
-    static func create(_ food: Food, meal: Meal, amount: FoodValue) async -> FoodItem? {
+    static func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Meal)? {
         await DataManager.shared.create(food, meal: meal, amount: amount)
     }
 }
 
 extension DataManager {
     
-    func create(_ food: Food, meal: Meal, amount: FoodValue) async -> FoodItem? {
+    func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Meal)? {
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 do {
-                    try coreDataManager.createFoodItem(food, meal, amount) { foodItemEntity in
-                        guard let foodItemEntity else {
+                    try coreDataManager.createFoodItem(food, meal, amount) { tuple in
+                        guard let tuple,
+                              let foodItem = FoodItem(tuple.0)
+                        else {
                             continuation.resume(returning: nil)
                             return
                         }
-                        let foodItem = FoodItem(foodItemEntity)
-                        continuation.resume(returning: foodItem)
+                        let meal = Meal(tuple.1)
+                        continuation.resume(returning: (foodItem, meal))
                     }
                 } catch {
                     continuation.resume(throwing: error)
@@ -39,7 +41,12 @@ extension DataManager {
 
 extension CoreDataManager {
     
-    func createFoodItem(_ food: Food, _ meal: Meal, _ amount: FoodValue, _ context: NSManagedObjectContext) throws -> FoodItemEntity {
+    func createFoodItem(
+        _ food: Food,
+        _ meal: Meal,
+        _ amount: FoodValue,
+        _ context: NSManagedObjectContext
+    ) throws -> (FoodItemEntity, MealEntity) {
 
         guard let foodEntity = FoodEntity.object(with: food.id, in: context) else {
             fatalError()
@@ -80,17 +87,22 @@ extension CoreDataManager {
         /// Get the meal entity to update its stats (nutrients and badge width)
         mealEntity.updateStats()
         
-        return entity
+        return (entity, mealEntity)
     }
     
-    func createFoodItem(_ food: Food, _ meal: Meal, _ amount: FoodValue, completion: @escaping ((FoodItemEntity?) -> ())) throws {
+    func createFoodItem(
+        _ food: Food,
+        _ meal: Meal,
+        _ amount: FoodValue,
+        completion: @escaping (((FoodItemEntity, MealEntity)?) -> ())
+    ) throws {
         Task {
-            let bgContext =  newBackgroundContext()
+            let bgContext = newBackgroundContext()
             await bgContext.perform {
                 do {
                     
-                    let entity = try self.createFoodItem(food, meal, amount, bgContext)
-                    bgContext.insert(entity)
+                    let (foodItemEntity, mealEntity) = try self.createFoodItem(food, meal, amount, bgContext)
+                    bgContext.insert(foodItemEntity)
                     
                     let observer = NotificationCenter.default.addObserver(
                         forName: .NSManagedObjectContextDidSave,
@@ -98,7 +110,7 @@ extension CoreDataManager {
                         queue: .main
                     ) { (notification) in
                         self.viewContext.mergeChanges(fromContextDidSave: notification)
-                        completion(entity)
+                        completion((foodItemEntity, mealEntity))
                     }
                     
                     try bgContext.performAndWait {

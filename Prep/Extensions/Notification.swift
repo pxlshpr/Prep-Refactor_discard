@@ -8,6 +8,7 @@ extension Notification.Name {
     static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
     static var didAddFoodItem: Notification.Name { return .init("didAddFoodItem") }
     static var didAddMeal: Notification.Name { return .init("didAddMeal") }
+    static var didUpdateMeal: Notification.Name { return .init("didUpdateMeal") }
 
     static var safeAreaDidChange: Notification.Name { return .init("safeAreaDidChange") }
 }
