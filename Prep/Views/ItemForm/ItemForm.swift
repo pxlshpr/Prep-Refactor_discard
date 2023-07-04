@@ -14,7 +14,6 @@ struct ItemForm: View {
 
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
-//    @Environment(\.modelContext) var context
     
 //    var showingItem = false
     @State var amount: Double
@@ -74,12 +73,17 @@ struct ItemForm: View {
     }
     
     var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .topBarTrailing) {
-            Button {
-                tappedSave()
-            } label: {
-                Text("Add")
-                    .fontWeight(.bold)
+        Group {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    tappedSave()
+                } label: {
+                    Text("Add")
+                        .fontWeight(.bold)
+                }
+            }
+            ToolbarItem(placement: .keyboard) {
+                stepButtons
             }
         }
     }
@@ -427,6 +431,74 @@ struct ItemForm: View {
     }
 }
 
+extension ItemForm {
+
+    var stepButtons: some View {
+        func stepButton(_ step: Step, _ direction: Direction) -> some View {
+            
+            var disabled: Bool {
+                amount + step.amount > 0
+            }
+            
+            return Button {
+                Haptics.selectionFeedback()
+                amount += step.amount
+            } label: {
+                Image(systemName: step.image(in: direction))
+            }
+            .disabled(disabled)
+        }
+        
+        enum Direction {
+            case forward
+            case backward
+            
+            var imagePrefix: String {
+                switch self {
+                case .backward: "gobackward"
+                case .forward: "goforward"
+                }
+            }
+        }
+        
+        enum Step {
+            case small
+            case medium
+            case large
+
+            var amount: Double {
+                switch self {
+                case .small: 1
+                case .medium: 10
+                case .large: 60
+                }
+            }
+            
+            var imageSuffix: String {
+                switch self {
+                case .small: "plus"
+                case .medium: "10"
+                case .large: "60"
+                }
+            }
+            
+            func image(in direction: Direction) -> String {
+                "\(direction.imagePrefix).\(imageSuffix)"
+            }
+        }
+        
+        return HStack {
+            stepButton(.large, .backward)
+            stepButton(.medium, .backward)
+            stepButton(.small, .backward)
+            stepButton(.small, .forward)
+            stepButton(.medium, .forward)
+            stepButton(.large, .forward)
+        }
+    }
+}
+
 enum ItemFormRoute: Hashable {
     case meal
 }
+
