@@ -343,8 +343,6 @@ extension CoreDataManager {
             entity.protein = foodItem.calculateMacro(.protein)
             
             entity.relativeEnergy = entity.calculatedRelativeEnergy
-            
-            print("We here")
         }
         
         let mealEntities = MealEntity.objects(in: context)
@@ -358,8 +356,6 @@ extension CoreDataManager {
             entity.protein = meal.calculateMacro(.protein)
             
             entity.relativeEnergy = entity.calculatedRelativeEnergy
-            
-            print("We here")
         }
     }
 }

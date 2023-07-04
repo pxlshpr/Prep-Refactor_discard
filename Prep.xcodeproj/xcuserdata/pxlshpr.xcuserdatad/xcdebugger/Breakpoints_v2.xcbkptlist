@@ -3,4 +3,70 @@
    uuid = "13DEEC67-3B5B-4F3B-90A7-308657D8CF01"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D0129388-337D-444F-8481-83F8A8DB9EC6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prep/Views/Log/MealItemCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "foodBadge"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "D0129388-337D-444F-8481-83F8A8DB9EC6 - 67a587b4d34b8cfc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; CoreGraphics.CGFloat in Prep.MealItemCell.foodBadge.getter : some"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Views/Log/MealItemCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "8">
+               </Location>
+               <Location
+                  uuid = "D0129388-337D-444F-8481-83F8A8DB9EC6 - 67a587b4d34b8c3a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; CoreGraphics.CGFloat in Prep.MealItemCell.foodBadge.getter : some"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Views/Log/MealItemCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "872">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54D82014-0B20-4EB4-BC06-23D40EBF2F0B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prep/Views/Log/MealItemCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "foodBadge"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

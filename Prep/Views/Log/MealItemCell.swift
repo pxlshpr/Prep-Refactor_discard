@@ -1,6 +1,7 @@
 import SwiftUI
 
 import SwiftHaptics
+import ViewSugar
 
 struct MealItemCell: View {
     
@@ -8,12 +9,16 @@ struct MealItemCell: View {
 
     let item: FoodItem
     
+    @State var width: CGFloat = 0
     var body: some View {
         content
             .padding(.horizontal, 8)
             .padding(.vertical, 12)
             .contentShape(Rectangle())
             .hoverEffect(.highlight)
+            .readSize {
+                self.width = $0.width
+            }
     }
 
     var content: some View {
@@ -27,7 +32,21 @@ struct MealItemCell: View {
     
     var foodBadge: some View {
         let widthBinding = Binding<CGFloat>(
-            get: { CGFloat(item.relativeEnergy * 140) },
+            get: {
+                /// Always return 0 for 0 energy items
+                guard item.energy > 0 else {
+                    print("Returning 0")
+                    return 0
+                }
+                
+                /// Otherwise have a base value that we append to the calculated one so that we have something visible for the smallest value
+                let base = width * 0.0095
+                let maxWithoutBase = width * 0.25
+                let calculated = CGFloat(item.relativeEnergy * maxWithoutBase)
+                let width = calculated + base
+                print("Returning \(width)")
+                return width
+            },
             set: { _ in }
         )
 

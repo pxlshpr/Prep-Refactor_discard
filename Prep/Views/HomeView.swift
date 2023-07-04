@@ -44,7 +44,8 @@ struct HomeView: View {
     
     func appeared(_ proxy: GeometryProxy) {
         if currentDate == nil {
-            currentDate = Date.now.setting(year: 2023, month: 6, day: 18).startOfDay
+//            currentDate = Date.now.setting(year: 2023, month: 6, day: 18).startOfDay
+            currentDate = Date.now.setting(year: 2023, month: 6, day: 11).startOfDay
 //            currentDate = Date.now.startOfDay
         }
         setSafeAreaPadding(proxy)
