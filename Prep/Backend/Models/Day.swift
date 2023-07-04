@@ -12,6 +12,10 @@ struct Day: Codable, Hashable {
     var micros: [FoodNutrient]
     
     var meals: [Meal]
+
+    init() {
+        self.init(dateString: Date.now.calendarDayString)
+    }
     
     init(
         dateString: String,
@@ -21,7 +25,7 @@ struct Day: Codable, Hashable {
         fat: Double = 0,
         protein: Double = 0,
         micros: [FoodNutrient] = [],
-        meals: [Meal]
+        meals: [Meal] = []
     ) {
         self.dateString = dateString
         self.energy = energy
@@ -36,6 +40,12 @@ struct Day: Codable, Hashable {
     init(_ entity: DayEntity) {
         self.init(
             dateString: entity.dateString!,
+            energy: entity.energy,
+            energyUnit: entity.energyUnit,
+            carb: entity.carb,
+            fat: entity.fat,
+            protein: entity.protein,
+            micros: entity.micros,
             meals: entity.meals
         )
     }
@@ -131,5 +141,13 @@ extension Day {
     func calculateMicro(_ micro: Micro, in unit: NutrientUnit? = nil) -> Double {
         let unit = unit ?? micro.defaultUnit
         return meals.reduce(0) { $0 + $1.calculateMicro(micro, in: unit) }
+    }
+    
+    func value(for macro: Macro) -> Double {
+        switch macro {
+        case .carb:     carb
+        case .fat:      fat
+        case .protein:  protein
+        }
     }
 }

@@ -113,7 +113,7 @@ struct FoodBadge: View {
 //    )
 //}
 //
-//public func calculateRelativeEnergy(
+//func calculateRelativeEnergy(
 //    for value: Double,
 //    largest: Double,
 //    smallest: Double,

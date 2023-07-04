@@ -34,7 +34,7 @@ extension DayEntity {
 
     var micros: [FoodNutrient] {
         get {
-            guard let microsData else { fatalError() }
+            guard let microsData else { return [] }
             return try! JSONDecoder().decode([FoodNutrient].self, from: microsData)
         }
         set {

@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		E22F3DB92A541F5600BADE4A /* FoodItemsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */; };
+		E22F84332A54AA5A00096909 /* LogNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84322A54AA5A00096909 /* LogNavigationBar.swift */; };
+		E22F84352A54ADAA00096909 /* NutrientMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84342A54ADAA00096909 /* NutrientMeter.swift */; };
+		E22F84372A54ADCA00096909 /* NutrientMeter.Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84362A54ADCA00096909 /* NutrientMeter.Model.swift */; };
+		E22F84392A54AE1800096909 /* GoalBoundsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84382A54AE1800096909 /* GoalBoundsType.swift */; };
+		E22F843B2A54AE3700096909 /* DottedLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F843A2A54AE3700096909 /* DottedLine.swift */; };
+		E22F843D2A54AE9F00096909 /* PercentageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F843C2A54AE9F00096909 /* PercentageType.swift */; };
+		E22F843F2A54AF1900096909 /* MetricsView+Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F843E2A54AF1900096909 /* MetricsView+Animatable.swift */; };
+		E22F84412A54B3C100096909 /* DaysStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84402A54B3C100096909 /* DaysStore.swift */; };
 		E23652402A52DC630049C199 /* Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236523F2A52DC630049C199 /* Populate.swift */; };
 		E23652452A5317400049C199 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652442A5317400049C199 /* DataManager.swift */; };
 		E23652472A53175E0049C199 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652462A53175E0049C199 /* CoreDataManager.swift */; };
@@ -178,6 +186,14 @@
 
 /* Begin PBXFileReference section */
 		E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsStore.swift; sourceTree = "<group>"; };
+		E22F84322A54AA5A00096909 /* LogNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogNavigationBar.swift; sourceTree = "<group>"; };
+		E22F84342A54ADAA00096909 /* NutrientMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientMeter.swift; sourceTree = "<group>"; };
+		E22F84362A54ADCA00096909 /* NutrientMeter.Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientMeter.Model.swift; sourceTree = "<group>"; };
+		E22F84382A54AE1800096909 /* GoalBoundsType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalBoundsType.swift; sourceTree = "<group>"; };
+		E22F843A2A54AE3700096909 /* DottedLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DottedLine.swift; sourceTree = "<group>"; };
+		E22F843C2A54AE9F00096909 /* PercentageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageType.swift; sourceTree = "<group>"; };
+		E22F843E2A54AF1900096909 /* MetricsView+Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetricsView+Animatable.swift"; sourceTree = "<group>"; };
+		E22F84402A54B3C100096909 /* DaysStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysStore.swift; sourceTree = "<group>"; };
 		E236523F2A52DC630049C199 /* Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Populate.swift; sourceTree = "<group>"; };
 		E23652442A5317400049C199 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E23652462A53175E0049C199 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -391,6 +407,7 @@
 			isa = PBXGroup;
 			children = (
 				E23652482A5317A30049C199 /* MealsStore.swift */,
+				E22F84402A54B3C100096909 /* DaysStore.swift */,
 				E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */,
 			);
 			path = Stores;
@@ -512,6 +529,8 @@
 			isa = PBXGroup;
 			children = (
 				E28001962A52B84300C6D528 /* FormSize.swift */,
+				E22F843C2A54AE9F00096909 /* PercentageType.swift */,
+				E22F84382A54AE1800096909 /* GoalBoundsType.swift */,
 				E28001972A52B84300C6D528 /* Micro.swift */,
 				E28001982A52B84300C6D528 /* VolumeUnit.swift */,
 				E28001992A52B84300C6D528 /* FoodFormRoute.swift */,
@@ -637,6 +656,9 @@
 			isa = PBXGroup;
 			children = (
 				E28001DD2A52B84300C6D528 /* FoodBadge.swift */,
+				E22F84342A54ADAA00096909 /* NutrientMeter.swift */,
+				E22F843A2A54AE3700096909 /* DottedLine.swift */,
+				E22F84362A54ADCA00096909 /* NutrientMeter.Model.swift */,
 				E28001DE2A52B84300C6D528 /* Shimmer.swift */,
 				E28001DF2A52B84300C6D528 /* TimeSlider.swift */,
 				E28001E02A52B84300C6D528 /* EmojiPicker.swift */,
@@ -653,6 +675,8 @@
 				E28001E52A52B84300C6D528 /* FoodPickerModel.swift */,
 				E28001E62A52B84300C6D528 /* MealFooter.swift */,
 				E28001E72A52B84300C6D528 /* LogView.swift */,
+				E22F84322A54AA5A00096909 /* LogNavigationBar.swift */,
+				E22F843E2A54AF1900096909 /* MetricsView+Animatable.swift */,
 				E28001E82A52B84300C6D528 /* MealItemCell.swift */,
 				E28001E92A52B84300C6D528 /* MealView.swift */,
 				E28001EA2A52B84300C6D528 /* DayView.swift */,
@@ -905,6 +929,7 @@
 				E28002912A52B84300C6D528 /* SizeForm.swift in Sources */,
 				E28002712A52B84300C6D528 /* MealStore.swift in Sources */,
 				E28002672A52B84300C6D528 /* Constants.swift in Sources */,
+				E22F843B2A54AE3700096909 /* DottedLine.swift in Sources */,
 				E23652452A5317400049C199 /* DataManager.swift in Sources */,
 				E28002352A52B84300C6D528 /* FoodModel+Scan.swift in Sources */,
 				E2672C7D2A52C1B00002E95C /* FoodItemEntity.swift in Sources */,
@@ -916,6 +941,7 @@
 				E28002442A52B84300C6D528 /* PublishStatus.swift in Sources */,
 				E28002382A52B84300C6D528 /* Micro.swift in Sources */,
 				E280024B2A52B84300C6D528 /* FoodResult.swift in Sources */,
+				E22F84372A54ADCA00096909 /* NutrientMeter.Model.swift in Sources */,
 				E28002472A52B84300C6D528 /* Nutrient.swift in Sources */,
 				E280025B2A52B84300C6D528 /* FoodSize.swift in Sources */,
 				E28002572A52B84300C6D528 /* VolumeQuantity.swift in Sources */,
@@ -925,6 +951,7 @@
 				E28002812A52B84300C6D528 /* MealView.swift in Sources */,
 				E236524D2A5318420049C199 /* Fetchable.swift in Sources */,
 				E293DB702A53742E00D8D4D2 /* ItemForm.swift in Sources */,
+				E22F84352A54ADAA00096909 /* NutrientMeter.swift in Sources */,
 				E280028E2A52B84300C6D528 /* MicroPicker.swift in Sources */,
 				E280028C2A52B84300C6D528 /* NutrientFieldModel.swift in Sources */,
 				E28002772A52B84300C6D528 /* Shimmer.swift in Sources */,
@@ -936,6 +963,7 @@
 				E280023B2A52B84300C6D528 /* VolumeUnitType.swift in Sources */,
 				E28002512A52B84300C6D528 /* Food+NutrientScaleFactor.swift in Sources */,
 				E280024C2A52B84300C6D528 /* FoodNutrients.swift in Sources */,
+				E22F84392A54AE1800096909 /* GoalBoundsType.swift in Sources */,
 				E28002882A52B84300C6D528 /* ServingField.swift in Sources */,
 				E28002892A52B84300C6D528 /* SizesList.swift in Sources */,
 				E280025C2A52B84300C6D528 /* FoodDensity.swift in Sources */,
@@ -944,6 +972,7 @@
 				E280023A2A52B84300C6D528 /* FoodFormRoute.swift in Sources */,
 				E28002852A52B84300C6D528 /* ItemFormFoodLabel.swift in Sources */,
 				E28002592A52B84300C6D528 /* FormValue.swift in Sources */,
+				E22F843F2A54AF1900096909 /* MetricsView+Animatable.swift in Sources */,
 				E280023F2A52B84300C6D528 /* Macro.swift in Sources */,
 				E280027B2A52B84300C6D528 /* FoodPicker.swift in Sources */,
 				E28002792A52B84300C6D528 /* EmojiPicker.swift in Sources */,
@@ -952,11 +981,14 @@
 				E280023D2A52B84300C6D528 /* Unit.swift in Sources */,
 				E28002462A52B84300C6D528 /* MicronutrientGroup.swift in Sources */,
 				E28002562A52B84300C6D528 /* FoodQuantity+Convert.swift in Sources */,
+				E22F84412A54B3C100096909 /* DaysStore.swift in Sources */,
+				E22F843D2A54AE9F00096909 /* PercentageType.swift in Sources */,
 				E28002632A52B84300C6D528 /* String.swift in Sources */,
 				E28002012A52B84300C6D528 /* Day.swift in Sources */,
 				E28002832A52B84300C6D528 /* FoodsViewCell.swift in Sources */,
 				E280029D2A52BC7A00C6D528 /* FoodEntity.swift in Sources */,
 				E28002402A52B84300C6D528 /* FoodType.swift in Sources */,
+				E22F84332A54AA5A00096909 /* LogNavigationBar.swift in Sources */,
 				E28002822A52B84300C6D528 /* DayView.swift in Sources */,
 				E280028D2A52B84300C6D528 /* LabelExtractor.swift in Sources */,
 				E280024F2A52B84300C6D528 /* WeightQuantity.swift in Sources */,

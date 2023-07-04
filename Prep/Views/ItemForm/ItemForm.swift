@@ -27,7 +27,7 @@ struct ItemForm: View {
     @State var amountString: String
     @State var amountDouble: Double?
 
-    public init(
+    init(
         isPresented: Binding<Bool>,
         meal: Meal?,
         food: Food

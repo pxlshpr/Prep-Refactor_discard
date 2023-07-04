@@ -104,6 +104,13 @@ extension CoreDataManager {
         foodEntity.lastAmount = amount
         foodEntity.lastUsedAt = date
         
+        let day = Day(dayEntity)
+        dayEntity.energy = day.calculateEnergy(in: energyUnit)
+        dayEntity.carb = day.calculateMacro(.carb)
+        dayEntity.fat = day.calculateMacro(.fat)
+        dayEntity.protein = day.calculateMacro(.protein)
+        dayEntity.micros = day.calculatedMicros
+
         return (entity, dayEntity)
     }
     

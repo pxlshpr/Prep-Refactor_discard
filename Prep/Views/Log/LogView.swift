@@ -16,7 +16,8 @@ struct LogView: View {
         GeometryReader { proxy in
             ZStack {
                 scrollView(proxy)
-                titleLayer(proxy)
+//                titleLayer(proxy)
+                LogNavigationBar(currentDate: $currentDate, proxy: proxy)
                 buttonsLayer
             }
         }
@@ -47,7 +48,7 @@ struct LogView: View {
     
     func dayView(_ date: Date, _ proxy: GeometryProxy) -> some View {
         var topInset: some View {
-            Spacer().frame(height: barHeight(proxy))
+            Spacer().frame(height: barHeight(proxy) + MetricsHeight)
         }
         
         var bottomInset: some View {

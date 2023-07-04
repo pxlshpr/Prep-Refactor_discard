@@ -15,7 +15,7 @@ class DataManager: ObservableObject {
         self.coreDataManager = coreDataManager
     }
     
-    public static var context: NSManagedObjectContext {
+    static var context: NSManagedObjectContext {
         shared.coreDataManager.viewContext
     }
 }
