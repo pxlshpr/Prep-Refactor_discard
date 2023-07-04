@@ -15,7 +15,7 @@ struct MealAddFoodCell: View {
     
     @State var safeAreaInsets: EdgeInsets
     let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
-    let didUpdateMeal = NotificationCenter.default.publisher(for: .didUpdateMeal)
+    let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
 
     init(meal: Meal) {
         _meal = State(initialValue: meal)
@@ -39,17 +39,23 @@ struct MealAddFoodCell: View {
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
         
         .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
-        .onReceive(didUpdateMeal, perform: didUpdateMeal)
+        .onReceive(didAddFoodItem, perform: didAddFoodItem)
     }
     
-    func didUpdateMeal(notification: Notification) {
-        guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
-              self.meal.id == meal.id
+    func didAddFoodItem(notification: Notification) {
+        /// Only interested when the food item was added to a day that this meal belongs to
+        guard let userInfo = notification.userInfo,
+              let day = userInfo[Notification.PrepKeys.day] as? Day,
+              let updatedMeal = day.meal(with: self.meal.id)
         else {
             return
         }
-        withAnimation(.snappy) {
-            self.meal = meal
+        
+        /// Wait a bit for the form to dismiss
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.snappy) {
+                self.meal = updatedMeal
+            }
         }
     }
     

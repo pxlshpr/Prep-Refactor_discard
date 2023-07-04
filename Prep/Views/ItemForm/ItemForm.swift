@@ -144,15 +144,17 @@ struct ItemForm: View {
             if let foodItem {
                 /// Update
             } else {
-                guard let (newFoodItem, updatedMeal) = await FoodItemsStore.create(
+                guard let (newFoodItem, updatedDay) = await FoodItemsStore.create(
                     food, meal: meal, amount: foodValue
                 ) else {
                     return
                 }
                 
                 await MainActor.run {
-                    post(.didAddFoodItem, userInfo: [.foodItem: newFoodItem])
-                    post(.didUpdateMeal, userInfo: [.meal: updatedMeal])
+                    post(.didAddFoodItem, userInfo: [
+                        .foodItem: foodItem,
+                        .day: updatedDay
+                    ])
                 }
             }
         }

@@ -7,14 +7,15 @@ private let logger = Logger(subsystem: "FoodItems", category: "")
 class FoodItemsStore {
     static let shared = FoodItemsStore()
     
-    static func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Meal)? {
+    /// Creates a new `FoodItem` and returns the updated `Day` (so that this may passed on in a notification for UI updates)
+    static func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Day)? {
         await DataManager.shared.create(food, meal: meal, amount: amount)
     }
 }
 
 extension DataManager {
     
-    func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Meal)? {
+    func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Day)? {
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 do {
@@ -25,8 +26,8 @@ extension DataManager {
                             continuation.resume(returning: nil)
                             return
                         }
-                        let meal = Meal(tuple.1)
-                        continuation.resume(returning: (foodItem, meal))
+                        let day = Day(tuple.1)
+                        continuation.resume(returning: (foodItem, day))
                     }
                 } catch {
                     continuation.resume(throwing: error)
@@ -46,12 +47,12 @@ extension CoreDataManager {
         _ meal: Meal,
         _ amount: FoodValue,
         _ context: NSManagedObjectContext
-    ) throws -> (FoodItemEntity, MealEntity) {
+    ) throws -> (FoodItemEntity, DayEntity) {
 
-        guard let foodEntity = FoodEntity.object(with: food.id, in: context) else {
-            fatalError()
-        }
-        guard let mealEntity = MealEntity.object(with: meal.id, in: context) else {
+        guard let foodEntity = FoodEntity.object(with: food.id, in: context),
+              let mealEntity = MealEntity.object(with: meal.id, in: context),
+              let dayEntity = mealEntity.dayEntity
+        else {
             fatalError()
         }
 
@@ -81,27 +82,24 @@ extension CoreDataManager {
         entity.fat = food.calculateMacro(.fat, for: amount)
         entity.protein = food.calculateMacro(.protein, for: amount)
 
-        /// Compute the relativeEnergy
-        entity.relativeEnergy = mealEntity.calculateRelativeEnergy(energy: energy, energyUnit)
+        /// Compute the relativeEnergy for all
+        mealEntity.triggerUpdates()
         
-        /// Get the meal entity to update its stats (nutrients and badge width)
-        mealEntity.updateStats()
-        
-        return (entity, mealEntity)
+        return (entity, dayEntity)
     }
     
     func createFoodItem(
         _ food: Food,
         _ meal: Meal,
         _ amount: FoodValue,
-        completion: @escaping (((FoodItemEntity, MealEntity)?) -> ())
+        completion: @escaping (((FoodItemEntity, DayEntity)?) -> ())
     ) throws {
         Task {
             let bgContext = newBackgroundContext()
             await bgContext.perform {
                 do {
                     
-                    let (foodItemEntity, mealEntity) = try self.createFoodItem(food, meal, amount, bgContext)
+                    let (foodItemEntity, dayEntity) = try self.createFoodItem(food, meal, amount, bgContext)
                     bgContext.insert(foodItemEntity)
                     
                     let observer = NotificationCenter.default.addObserver(
@@ -110,7 +108,7 @@ extension CoreDataManager {
                         queue: .main
                     ) { (notification) in
                         self.viewContext.mergeChanges(fromContextDidSave: notification)
-                        completion((foodItemEntity, mealEntity))
+                        completion((foodItemEntity, dayEntity))
                     }
                     
                     try bgContext.performAndWait {
@@ -165,14 +163,27 @@ extension MealEntity {
 
 extension MealEntity {
     
+    func triggerUpdates() {
+        updateNutrients()
+
+        let mealEntities = dayEntity?.mealEntitiesArray ?? []
+        for mealEntity in mealEntities {
+            
+            for foodItemEntity in mealEntity.foodItemEntitiesArray {
+                foodItemEntity.relativeEnergy = mealEntity.calculateRelativeEnergy(energy: foodItemEntity.energy, energyUnit)
+            }
+
+            mealEntity.relativeEnergy = calculatedRelativeEnergy
+        }
+    }
+    
     /// Recalculates its own badge width. Use this after inserting, deleting or updating a food item (or a meal of the same day).
-    func updateStats() {
+    func updateNutrients() {
         /// First re-calculate the energy and macro values
         energy = calculateEnergy(in: energyUnit)
-        carb = total(for: .carb)
-        fat = total(for: .fat)
-        protein = total(for: .protein)
-        relativeEnergy = calculatedRelativeEnergy
+        carb = calculateMacro(.carb)
+        fat = calculateMacro(.fat)
+        protein = calculateMacro(.protein)
     }
     
     func calculateEnergy(in unit: EnergyUnit) -> Double {
@@ -181,7 +192,7 @@ extension MealEntity {
         }
     }
     
-    func total(for macro: Macro) -> Double {
+    func calculateMacro(_ macro: Macro) -> Double {
         foodItems.reduce(0) {
             $0 + $1.calculateMacro(macro)
         }

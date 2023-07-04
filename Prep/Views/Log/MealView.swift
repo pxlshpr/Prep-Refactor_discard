@@ -7,7 +7,7 @@ struct MealView: View {
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
     
-    let meal: Meal
+    @State var meal: Meal
 
     let title: String
     @State var foodItems: [FoodItem]
@@ -18,7 +18,7 @@ struct MealView: View {
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
     
     init(meal: Meal) {
-        self.meal = meal
+        _meal = State(initialValue: meal)
         self.title = meal.title
         _foodItems = State(initialValue: meal.foodItems)
 
@@ -55,15 +55,24 @@ struct MealView: View {
     }
 
     func didAddFoodItem(_ notification: Notification) {
-        guard let foodItem = notification.userInfo?[Notification.PrepKeys.foodItem] as? FoodItem,
-              foodItem.mealID == meal.id
+        /// Only interested when the food item was added to a day that this meal belongs to
+        guard let userInfo = notification.userInfo,
+              let day = userInfo[Notification.PrepKeys.day] as? Day,
+              let foodItem = userInfo[Notification.PrepKeys.foodItem] as? FoodItem,
+              let updatedMeal = day.meal(with: self.meal.id)
         else {
             return
         }
-        SoundPlayer.play(.octaveTapSimple)
+        
+        /// Wait a bit for the form to dismiss
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             withAnimation(.snappy) {
-                self.foodItems.append(foodItem)
+                /// If the added food item belongs to this meal, insert it with an animation and play a sound
+                if foodItem.mealID == meal.id {
+                    SoundPlayer.play(.octaveTapSimple)
+                    self.foodItems.append(foodItem)
+                }
+                self.meal = updatedMeal
             }
         }
     }

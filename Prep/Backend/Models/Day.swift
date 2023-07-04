@@ -36,3 +36,14 @@ extension Day {
         Date(fromCalendarDayString: dateString)!
     }
 }
+
+extension Day {
+
+    func meal(with id: UUID) -> Meal? {
+        meals.first(where: { $0.id == id })
+    }
+
+    func contains(meal: Meal) -> Bool {
+        meals.contains(where: { $0.id == meal.id })
+    }
+}
