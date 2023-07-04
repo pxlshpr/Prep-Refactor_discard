@@ -139,8 +139,8 @@ struct ItemForm: View {
         
         Haptics.successFeedback()
         isPresented = false
-        dismiss()
-        Task {
+        
+        Task.detached {
             if let foodItem {
                 /// Update
             } else {
