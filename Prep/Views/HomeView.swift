@@ -6,13 +6,11 @@ import SwiftHaptics
 import AlertLayer
 import SwiftSugar
 
+var currentSafeAreaInsets: EdgeInsets = .init()
+
 struct HomeView: View {
         
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
     @Environment(\.verticalSizeClass) var verticalSizeClass
-
-    @State var trailingSafeArea: CGFloat = 0
-    @State var leadingSafeArea: CGFloat = 0
 
     @State var currentDate: Date? = nil
     
@@ -40,10 +38,8 @@ struct HomeView: View {
     }
 
     func setSafeAreaPadding(_ proxy: GeometryProxy) {
-        trailingSafeArea = proxy.safeAreaInsets.trailing
-        leadingSafeArea = proxy.safeAreaInsets.leading
-        
-        post(.safeAreaDidChange, userInfo: [Notification.PrepKeys.safeArea: proxy.safeAreaInsets])
+        currentSafeAreaInsets = proxy.safeAreaInsets
+        post(.safeAreaDidChange, userInfo: [.safeArea: proxy.safeAreaInsets])
     }
     
     func appeared(_ proxy: GeometryProxy) {
@@ -65,14 +61,10 @@ struct HomeView: View {
     //MARK: - Detail Views
 
     var log: some View {
-        LogView(
-            currentDate: $currentDate,
-            trailingSafeArea: $trailingSafeArea,
-            leadingSafeArea: $leadingSafeArea
-        )
-        .tabItem {
-            Label("Log", systemImage: "book.closed")
-        }
+        LogView(currentDate: $currentDate)
+            .tabItem {
+                Label("Log", systemImage: "book.closed")
+            }
     }
 
     var nutrition: some View {

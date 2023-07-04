@@ -5,27 +5,24 @@ import SwiftHaptics
 
 struct MealView: View {
 
-//    @Environment(\.modelContext) var context
+    @Environment(\.verticalSizeClass) var verticalSizeClass
     
     let meal: Meal
-    @Binding var leadingPadding: CGFloat
-    @Binding var trailingPadding: CGFloat
 
     let title: String
     @State var foodItems: [FoodItem]
     
+    @State var safeAreaInsets: EdgeInsets
+    
+    let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
     
-    init(
-        meal: Meal,
-        leadingPadding: Binding<CGFloat>,
-        trailingPadding: Binding<CGFloat>
-    ) {
+    init(meal: Meal) {
         self.meal = meal
         self.title = meal.title
         _foodItems = State(initialValue: meal.foodItems)
-        _leadingPadding = leadingPadding
-        _trailingPadding = trailingPadding
+
+        _safeAreaInsets = State(initialValue: currentSafeAreaInsets)
     }
     
     var body: some View {
@@ -39,8 +36,24 @@ struct MealView: View {
             addFoodCell(meal)
         }
         .onReceive(didAddFoodItem, perform: didAddFoodItem)
+        .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
     }
     
+    func safeAreaDidChange(notification: Notification) {
+        guard let insets = notification.userInfo?[Notification.PrepKeys.safeArea] as? EdgeInsets else {
+            fatalError()
+        }
+        self.safeAreaInsets = insets
+    }
+
+    var leadingPadding: CGFloat {
+        verticalSizeClass == .compact ? safeAreaInsets.leading : 0
+    }
+
+    var trailingPadding: CGFloat {
+        verticalSizeClass == .compact ? safeAreaInsets.trailing : 0
+    }
+
     func didAddFoodItem(_ notification: Notification) {
         guard let foodItem = notification.userInfo?[Notification.PrepKeys.foodItem] as? FoodItem,
               foodItem.mealID == meal.id
@@ -122,10 +135,6 @@ struct MealView: View {
     }
     
     func addFoodCell(_ meal: Meal) -> some View {
-        DayView.AddFoodCell(
-            meal: meal,
-//            leadingPadding: $leadingPadding,
-            trailingPadding: $trailingPadding
-        )
+        MealAddFoodCell(meal: meal)
     }
 }

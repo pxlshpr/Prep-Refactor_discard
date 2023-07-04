@@ -16,9 +16,7 @@ struct DayView: View {
     @Namespace var namespace
     
     let date: Date
-    
-    @Binding var leadingPadding: CGFloat
-    @Binding var trailingPadding: CGFloat
+    @State var safeAreaInsets: EdgeInsets
     
     @State var mealModel = MealModel()
     
@@ -31,30 +29,25 @@ struct DayView: View {
 
     @State var emojiWidth: CGFloat = 0
 
-    @State var meals: [Meal]
+    @State var meals: [Meal] = []
 
     let model = Model()
     
     let didAddMeal = NotificationCenter.default.publisher(for: .didAddMeal)
     let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
     let didDeleteMeal = NotificationCenter.default.publisher(for: .didDeleteMeal)
+    
+    let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
 
     @Observable class Model {
         var foodItemBeingEdited: FoodItem? = nil
     }
 
-    init(
-        date: Date,
-        leadingPadding: Binding<CGFloat>,
-        trailingPadding: Binding<CGFloat>
-    ) {
+    init(date: Date) {
         self.date = date
-        _leadingPadding = leadingPadding
-        _trailingPadding = trailingPadding
-        
-        _meals = State(initialValue: [])
+        _safeAreaInsets = State(initialValue: currentSafeAreaInsets)
     }
-    
+
     var body: some View {
         content
             .onDisappear(perform: disappeared)
@@ -62,6 +55,7 @@ struct DayView: View {
             .onReceive(didAddMeal, perform: didAddMeal)
             .onReceive(didDeleteMeal, perform: didDeleteMeal)
             .onReceive(didPopulate, perform: didPopulate)
+            .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
     }
     
     var content: some View {
@@ -77,6 +71,13 @@ struct DayView: View {
                 ProgressView()
             }
         }
+    }
+
+    func safeAreaDidChange(notification: Notification) {
+        guard let insets = notification.userInfo?[Notification.PrepKeys.safeArea] as? EdgeInsets else {
+            fatalError()
+        }
+        self.safeAreaInsets = insets
     }
 
     func didPopulate(notification: Notification) {
@@ -135,9 +136,9 @@ struct DayView: View {
             List {
                 ForEach(meals) { meal in
                     MealView(
-                        meal: meal,
-                        leadingPadding: $leadingPadding,
-                        trailingPadding: $trailingPadding
+                        meal: meal
+//                        leadingPadding: $leadingPadding,
+//                        trailingPadding: $trailingPadding
                     )
                 }
                 addMealCell
@@ -147,6 +148,10 @@ struct DayView: View {
             .contentMargins(.bottom, contentMarginBottom(proxy))
             .contentMargins(.bottom, scrollIndicatorMarginBottom, for: .scrollIndicators)
         }
+    }
+    
+    var trailingPadding: CGFloat {
+        verticalSizeClass == .compact ? safeAreaInsets.trailing : 0
     }
     
     func contentMarginBottom(_ proxy: GeometryProxy) -> CGFloat {

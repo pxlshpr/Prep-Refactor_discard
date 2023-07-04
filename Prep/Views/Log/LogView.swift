@@ -6,11 +6,7 @@ import SwiftSugar
 
 struct LogView: View {
     
-    @Environment(\.verticalSizeClass) var verticalSizeClass
-
     @Binding var currentDate: Date?
-    @Binding var trailingSafeArea: CGFloat
-    @Binding var leadingSafeArea: CGFloat
 
     @State var showingFoodPicker: Bool = false
     @State var showingFoodForm: Bool = false
@@ -23,7 +19,6 @@ struct LogView: View {
                 titleLayer(proxy)
                 buttonsLayer
             }
-//            .sheet(isPresented: $showingFoodPicker) { foodPicker }
         }
     }
     
@@ -32,9 +27,7 @@ struct LogView: View {
     }
     
     var foodPicker: some View {
-//        FoodPicker()
-//        FoodPicker(isPresented: $showingFoodPicker)
-        FoodPicker_Legacy(isPresented: $showingFoodPicker)
+        FoodPicker(isPresented: $showingFoodPicker)
     }
     
     func scrollView(_ proxy: GeometryProxy) -> some View {
@@ -53,18 +46,17 @@ struct LogView: View {
     }
     
     func dayView(_ date: Date, _ proxy: GeometryProxy) -> some View {
-        DayView(
-            date: date,
-//            showingMealForm: $showingMealForm,
-            leadingPadding: leadingPaddingBinding,
-            trailingPadding: $trailingSafeArea
-        )
-        .safeAreaInset(edge: .top) {
+        var topInset: some View {
             Spacer().frame(height: barHeight(proxy))
         }
-        .safeAreaInset(edge: .bottom) {
+        
+        var bottomInset: some View {
             Spacer().frame(height: HeroButton.bottom + HeroButton.size)
         }
+        
+        return DayView(date: date)
+            .safeAreaInset(edge: .top) { topInset}
+            .safeAreaInset(edge: .bottom) { bottomInset }
     }
 
     @ViewBuilder
@@ -215,18 +207,6 @@ struct LogView: View {
         .ignoresSafeArea(edges: .all)
     }
     
-    var includeHorizontalPadding: Bool {
-        verticalSizeClass == .compact
-    }
-    
-    var leadingPadding: CGFloat {
-        includeHorizontalPadding ? leadingSafeArea : 0
-    }
-
-    var trailingPadding: CGFloat {
-        includeHorizontalPadding ? trailingSafeArea : 0
-    }
-
     func barHeight(_ proxy: GeometryProxy) -> CGFloat {
         44 + proxy.safeAreaInsets.top
     }
@@ -236,13 +216,6 @@ struct LogView: View {
         let start = Date.now.startOfDay.moveDayBy(-365)
         let end = Date.now.startOfDay.moveDayBy(365)
         return Array(stride(from: start, to: end, by: dayDurationInSeconds))
-    }
-    
-    var leadingPaddingBinding: Binding<CGFloat> {
-        Binding<CGFloat>(
-            get: { leadingPadding },
-            set: { _ in }
-        )
     }
 }
 

@@ -5,29 +5,24 @@ import SwiftHaptics
 import ViewSugar
 import FoodDataTypes
 
-extension DayView {
-    
-    struct AddFoodCell: View {
-    
-//        @Environment(\.colorScheme) var colorScheme
-//        @Environment(\.horizontalSizeClass) var horizontalSizeClass
-        @Environment(\.verticalSizeClass) var verticalSizeClass
+struct MealAddFoodCell: View {
 
-        let meal: Meal
-//        @Binding var leadingPadding: CGFloat
-        @Binding var trailingPadding: CGFloat
-        
-        @State var showingFoodPicker = false
-        
-        @State var safeAreaInsets: EdgeInsets = EdgeInsets()
-        let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+
+    let meal: Meal
+    
+    @State var showingFoodPicker = false
+    
+    @State var safeAreaInsets: EdgeInsets
+    let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
+    
+    init(meal: Meal) {
+        self.meal = meal
+        _safeAreaInsets = State(initialValue: currentSafeAreaInsets)
     }
-}
-
-extension DayView.AddFoodCell {
+    
     var body: some View {
-        let _ = Self._printChanges()
-        return Button {
+        Button {
             Haptics.selectionFeedback()
             showingFoodPicker = true
         } label: {
@@ -44,6 +39,7 @@ extension DayView.AddFoodCell {
         
         .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
     }
+    
     func safeAreaDidChange(notification: Notification) {
         guard let insets = notification.userInfo?[Notification.PrepKeys.safeArea] as? EdgeInsets else {
             fatalError()
@@ -52,11 +48,13 @@ extension DayView.AddFoodCell {
     }
     
     var leadingPadding: CGFloat {
-        verticalSizeClass == .compact
-        ? safeAreaInsets.leading
-        : 0
+        verticalSizeClass == .compact ? safeAreaInsets.leading : 0
     }
-    
+
+    var trailingPadding: CGFloat {
+        verticalSizeClass == .compact ? safeAreaInsets.trailing : 0
+    }
+
     var label: some View {
         HStack {
             Image(systemName: "plus")
@@ -76,10 +74,7 @@ extension DayView.AddFoodCell {
     }
     
     var foodPicker: some View {
-//        EmptyView()
-//        FoodPicker()
-        FoodPicker_Legacy(isPresented: $showingFoodPicker, meal: meal)
-//        FoodPicker_Legacy(isPresented: $showingFoodPicker)
+        FoodPicker(isPresented: $showingFoodPicker, meal: meal)
     }
     
     var stats: some View {
@@ -95,21 +90,6 @@ extension DayView.AddFoodCell {
             }
         }
     }
-    
-//    var macrosChart: some View {
-//        Chart(meal.macrosChartData, id: \.macro) { macroValue in
-//            SectorMark(
-//                angle: .value("kcal", macroValue.kcal),
-//                innerRadius: .ratio(0.5),
-//                angularInset: 0.5
-//            )
-//            .cornerRadius(3)
-//            .foregroundStyle(by: .value("Macro", macroValue.macro))
-//        }
-//        .chartForegroundStyleScale(Macro.chartStyleScale(colorScheme))
-//        .chartLegend(.hidden)
-//        .frame(width: 28, height: 28)
-//    }
     
     var energyText: some View {
         let energy = meal.energy(in: .kcal)

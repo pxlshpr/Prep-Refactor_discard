@@ -6,34 +6,6 @@ import SwiftHaptics
 
 struct FoodPicker: View {
     
-//    @Binding var isPresented: Bool
-//    let meal: Meal?
-
-    init(
-//        isPresented: Binding<Bool>,
-//        meal: Meal? = nil
-    ) {
-//        _isPresented = isPresented
-//        self.meal = meal
-    }
-    
-    var body: some View {
-        NavigationStack {
-            List {
-                ForEach(1...10, id: \.self) { _ in
-                    NavigationLink {
-                        Color.blue
-                    } label: {
-                        Text("Hello")
-                    }
-                }
-            }
-        }
-    }
-}
-
-struct FoodPicker_Legacy: View {
-    
     @Environment(\.dismiss) var dismiss
     
     @State var showingFoodForm: Bool = false
