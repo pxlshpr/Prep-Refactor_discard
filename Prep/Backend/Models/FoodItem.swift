@@ -201,6 +201,7 @@ import FoodDataTypes
 //}
 //
 
+
 extension FoodItem {
     func calculateEnergy(in unit: EnergyUnit) -> Double {
         food.calculateEnergy(in: unit, for: amount)
@@ -208,7 +209,11 @@ extension FoodItem {
 
     func calculateMacro(_ macro: Macro) -> Double {
         food.calculateMacro(macro, for: amount)
-    }    
+    }
+    
+    func calculateMicro(_ micro: Micro, in unit: NutrientUnit) -> Double {
+        food.calculateMicro(micro, for: amount, in: unit)
+    }
 }
 
 extension Food {
@@ -221,7 +226,13 @@ extension Food {
         guard let value = value(for: .macro(macro)) else { return 0 }
         return value.value * nutrientScaleFactor(for: amount)
     }
-    
+
+    func calculateMicro(_ micro: Micro, for amount: FoodValue, in unit: NutrientUnit) -> Double {
+        guard let value = value(for: .micro(micro)) else { return 0 }
+        //TODO: Handle unit conversions
+        return value.value * nutrientScaleFactor(for: amount)
+    }
+
     private func nutrientScaleFactor(for amount: FoodValue) -> Double {
         guard let quantity = quantity(for: amount) else { return 0 }
         return nutrientScaleFactor(for: quantity) ?? 0

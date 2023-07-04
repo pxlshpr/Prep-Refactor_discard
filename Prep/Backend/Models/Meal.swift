@@ -119,6 +119,12 @@ extension Meal {
             $0 + $1.calculateMacro(macro)
         }
     }
+    
+    func calculateMicro(_ micro: Micro, in unit: NutrientUnit) -> Double {
+        foodItems.reduce(0) {
+            $0 + $1.calculateMicro(micro, in: unit)
+        }
+    }
 }
 
 extension Meal {

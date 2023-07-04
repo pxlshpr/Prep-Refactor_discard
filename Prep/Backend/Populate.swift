@@ -357,5 +357,18 @@ extension CoreDataManager {
             
             entity.relativeEnergy = entity.calculatedRelativeEnergy
         }
+        
+        let dayEntities = DayEntity.objects(in: context)
+        for entity in dayEntities {
+            entity.energyUnit = energyUnit
+            
+            let day = Day(entity)
+            entity.energy = day.calculateEnergy(in: energyUnit)
+            entity.carb = day.calculateMacro(.carb)
+            entity.fat = day.calculateMacro(.fat)
+            entity.protein = day.calculateMacro(.protein)
+            
+            entity.micros = day.calculatedMicros
+        }
     }
 }
