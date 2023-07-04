@@ -35,7 +35,6 @@ struct MealItemCell: View {
             get: {
                 /// Always return 0 for 0 energy items
                 guard item.energy > 0 else {
-                    print("Returning 0")
                     return 0
                 }
                 
@@ -44,8 +43,11 @@ struct MealItemCell: View {
                 let maxWithoutBase = width * 0.25
                 let calculated = CGFloat(item.relativeEnergy * maxWithoutBase)
                 let width = calculated + base
-                print("Returning \(width)")
-                return width
+                    
+                /// This is crucial because of an edge cases where we keep getting minutely different values
+                /// (differing at the 5+ decimal place), resulting in an infinite loop due to this 'changing'.
+                let rounded = CGFloat(Int(width))
+                return rounded
             },
             set: { _ in }
         )
