@@ -17,6 +17,7 @@ struct MealFooter: View {
     @State var safeAreaInsets: EdgeInsets
     let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
+    let didDeleteFoodItem = NotificationCenter.default.publisher(for: .didDeleteFoodItem)
 
     init(meal: Meal) {
         _meal = State(initialValue: meal)
@@ -26,7 +27,8 @@ struct MealFooter: View {
     var body: some View {
         content
             .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
-            .onReceive(didAddFoodItem, perform: didAddFoodItem)
+            .onReceive(didAddFoodItem, perform: didUpdateDay)
+            .onReceive(didDeleteFoodItem, perform: didUpdateDay)
     }
     
     var content: some View {
@@ -121,13 +123,11 @@ struct MealFooter: View {
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
     }
     
-    func didAddFoodItem(notification: Notification) {
-        /// Only interested when the food item was added to a day that this meal belongs to
+    func didUpdateDay(notification: Notification) {
+        /// Only interested when the updated day was what this meal belonged to
         guard let userInfo = notification.userInfo,
               let day = userInfo[Notification.PrepKeys.day] as? Day,
-              let updatedMeal = day.meal(with: self.meal.id),
-              let foodItem = userInfo[Notification.PrepKeys.foodItem] as? FoodItem,
-              foodItem.mealID == meal.id
+              let updatedMeal = day.meal(with: self.meal.id)
         else {
             return
         }

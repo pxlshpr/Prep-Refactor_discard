@@ -17,7 +17,8 @@ struct MealView: View {
     
     let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
-    
+    let didDeleteFoodItem = NotificationCenter.default.publisher(for: .didDeleteFoodItem)
+
     init(meal: Meal) {
         _meal = State(initialValue: meal)
         self.title = meal.title
@@ -37,6 +38,7 @@ struct MealView: View {
             footer
         }
         .onReceive(didAddFoodItem, perform: didAddFoodItem)
+        .onReceive(didDeleteFoodItem, perform: didDeleteFoodItem)
         .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
     }
     
@@ -81,22 +83,44 @@ struct MealView: View {
         }
     }
     
+    func didDeleteFoodItem(_ notification: Notification) {
+        /// Only interested when the food item was added to a day that this meal belongs to
+        guard let userInfo = notification.userInfo,
+              let day = userInfo[Notification.PrepKeys.day] as? Day,
+              day.contains(meal: meal),
+              let updatedMeal = day.meal(with: self.meal.id)
+        else {
+            return
+        }
+        
+        /// Wait a bit for the form to dismiss
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.snappy) {
+                self.meal = updatedMeal
+                self.foodItems = updatedMeal.foodItems
+            }
+        }
+    }
+    
     func cell(foodItem: FoodItem) -> some View {
         
         @ViewBuilder
         var menuItems: some View {
             Section(foodItem.food.name) {
                 Button {
+                    
                 } label: {
                     Label("Edit", systemImage: "pencil")
                 }
-                Button {
-                    
-                } label: {
-                    Label("Duplicate", systemImage: "plus.square.on.square")
-                }
-                Divider()
                 Button(role: .destructive) {
+                    Task.detached(priority: .high) {
+                        guard let updatedDay = await FoodItemsStore.delete(foodItem) else {
+                            return
+                        }
+                        await MainActor.run {
+                            post(.didDeleteFoodItem, userInfo: [.day: updatedDay])
+                        }
+                    }
                 } label: {
                     Label("Delete", systemImage: "trash")
                 }

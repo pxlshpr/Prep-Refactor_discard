@@ -9,13 +9,18 @@ class FoodItemsStore {
     
     /// Creates a new `FoodItem` and returns the updated `Day` (so that this may passed on in a notification for UI updates)
     static func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Day)? {
-        await DataManager.shared.create(food, meal: meal, amount: amount)
+        await DataManager.shared.createFoodItem(food, meal: meal, amount: amount)
+    }
+    
+    /// Deletes the passed in `FoodItem` and returns the updated `Day` (so that this may passed on in a notification for UI updates)
+    static func delete(_ foodItem: FoodItem) async -> Day? {
+        await DataManager.shared.deleteFoodItem(foodItem)
     }
 }
 
 extension DataManager {
     
-    func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Day)? {
+    func createFoodItem(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Day)? {
         do {
             return try await withCheckedThrowingContinuation { continuation in
                 do {
@@ -38,22 +43,107 @@ extension DataManager {
             return nil
         }
     }
+    
+    func deleteFoodItem(_ foodItem: FoodItem) async -> Day? {
+        do {
+            return try await withCheckedThrowingContinuation { continuation in
+                do {
+                    try coreDataManager.deleteFoodItem(foodItem) { dayEntity in
+                        guard let dayEntity else {
+                            continuation.resume(returning: nil)
+                            return
+                        }
+                        let day = Day(dayEntity)
+                        continuation.resume(returning: day)
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        } catch {
+            logger.error("Error deleting food item: error: \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+    }
 }
 
 extension CoreDataManager {
     
     
-//    func updateFoodItem(
-//        _ food: Food,
-//        _ meal: Meal,
-//        _ amount: FoodValue,
-//        _ context: NSManagedObjectContext
-//    ) throws -> (updatedFoodItemEntity: FoodItemEntity, updatedDayEntity: DayEntity) {
-//    }
-//    
-//    func deleteFoodItem(
-//    ) throws -> (deletedFoodItemID: UUID, updatedDayEntity: DayEntity) {
-//    }
+    //    func updateFoodItem(
+    //        _ food: Food,
+    //        _ meal: Meal,
+    //        _ amount: FoodValue,
+    //        _ context: NSManagedObjectContext
+    //    ) throws -> (updatedFoodItemEntity: FoodItemEntity, updatedDayEntity: DayEntity) {
+    //    }
+    //    
+    //    func deleteFoodItem(
+    //    ) throws -> (deletedFoodItemID: UUID, updatedDayEntity: DayEntity) {
+    //    }
+    
+    func deleteFoodItem(
+        _ foodItem: FoodItem,
+        _ context: NSManagedObjectContext
+    ) throws -> DayEntity {
+        guard let foodItemEntity = FoodItemEntity.object(with: foodItem.id, in: context),
+              let mealEntity = foodItemEntity.mealEntity
+        else {
+            fatalError()
+        }
+        
+        context.delete(foodItemEntity)
+        
+        try context.save()
+        guard let updatedMealEntity = MealEntity.object(with: mealEntity.id!, in: context) else {
+            fatalError()
+        }
+        
+        /// This cascades updates the meal, it's parent day, and all sibiling meals
+        updatedMealEntity.postFoodItemUpdate()
+        
+        guard let updatedDayEntity = updatedMealEntity.dayEntity else {
+            fatalError()
+        }
+        
+        return updatedDayEntity
+    }
+    
+    func deleteFoodItem(
+        _ foodItem: FoodItem,
+        completion: @escaping ((DayEntity?) -> ())
+    ) throws {
+        Task {
+            let bgContext = newBackgroundContext()
+            await bgContext.perform {
+                do {
+                    
+                    let dayEntity = try self.deleteFoodItem(foodItem, bgContext)
+                    
+                    let observer = NotificationCenter.default.addObserver(
+                        forName: .NSManagedObjectContextDidSave,
+                        object: bgContext,
+                        queue: .main
+                    ) { (notification) in
+                        self.viewContext.mergeChanges(fromContextDidSave: notification)
+                        completion(dayEntity)
+                    }
+                    
+                    try bgContext.performAndWait {
+                        try bgContext.save()
+                    }
+                    NotificationCenter.default.removeObserver(observer)
+
+                } catch {
+                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
+                    completion(nil)
+                }
+            }
+        }
+    }
+}
+
+extension CoreDataManager {
     
     func createFoodItem(
         _ food: Food,
@@ -98,19 +188,12 @@ extension CoreDataManager {
         entity.protein = food.calculateMacro(.protein, for: amount)
 
         /// Compute the relativeEnergy for all
-        mealEntity.triggerUpdates()
+        mealEntity.postFoodItemUpdate()
         
         /// Update Food's last used data
         foodEntity.lastAmount = amount
         foodEntity.lastUsedAt = date
         
-        let day = Day(dayEntity)
-        dayEntity.energy = day.calculateEnergy(in: energyUnit)
-        dayEntity.carb = day.calculateMacro(.carb)
-        dayEntity.fat = day.calculateMacro(.fat)
-        dayEntity.protein = day.calculateMacro(.protein)
-        dayEntity.micros = day.calculatedMicros
-
         return (entity, dayEntity)
     }
     
@@ -187,20 +270,36 @@ extension MealEntity {
     }
 }
 
-extension MealEntity {
-    
-    func triggerUpdates() {
-        updateNutrients()
-
-        let mealEntities = dayEntity?.mealEntitiesArray ?? []
-        for mealEntity in mealEntities {
+extension DayEntity {
+    func postFoodItemUpdate() {
+        
+        /// First update the relative energies
+        for mealEntity in mealEntitiesArray {
             
+            /// Of all Food Items
             for foodItemEntity in mealEntity.foodItemEntitiesArray {
                 foodItemEntity.relativeEnergy = mealEntity.calculateRelativeEnergy(energy: foodItemEntity.energy, energyUnit)
             }
 
-            mealEntity.relativeEnergy = calculatedRelativeEnergy
+            /// And Meals
+            mealEntity.relativeEnergy = mealEntity.calculatedRelativeEnergy
         }
+        
+        /// Now update the stats of the `Day` itself
+        let day = Day(self)
+        energy = day.calculateEnergy(in: energyUnit)
+        carb = day.calculateMacro(.carb)
+        fat = day.calculateMacro(.fat)
+        protein = day.calculateMacro(.protein)
+        micros = day.calculatedMicros
+    }
+}
+
+extension MealEntity {
+    
+    func postFoodItemUpdate() {
+        updateNutrients()
+        dayEntity?.postFoodItemUpdate()
     }
     
     /// Recalculates its own badge width. Use this after inserting, deleting or updating a food item (or a meal of the same day).

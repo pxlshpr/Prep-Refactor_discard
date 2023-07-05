@@ -14,6 +14,7 @@ struct LogNavigationBar: View {
     var proxy: GeometryProxy
     
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
+    let didDeleteFoodItem = NotificationCenter.default.publisher(for: .didDeleteFoodItem)
 
     init(
         currentDate: Binding<Date?>,
@@ -31,10 +32,11 @@ struct LogNavigationBar: View {
         .ignoresSafeArea(edges: .all)
         .onAppear(perform: appeared)
         .onChange(of: currentDate, currentDateChanged)
-        .onReceive(didAddFoodItem, perform: didAddFoodItem)
+        .onReceive(didAddFoodItem, perform: didUpdateDay)
+        .onReceive(didDeleteFoodItem, perform: didUpdateDay)
     }
     
-    func didAddFoodItem(_ notification: Notification) {
+    func didUpdateDay(_ notification: Notification) {
         guard let day = notification.userInfo?[Notification.PrepKeys.day] as? Day,
               day.dateString == self.day.dateString
         else {
