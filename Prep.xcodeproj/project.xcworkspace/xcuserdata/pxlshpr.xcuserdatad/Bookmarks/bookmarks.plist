@@ -634,16 +634,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>    var firstWeekday: Int { 2 }
+				<string>    var body: some View {
 </string>
 				<key>leading</key>
-				<string>//    let proxy: GeometryProxy
-
+				<string>    var firstWeekday: Int { 2 }
+    
 </string>
 				<key>trailing</key>
-				<string>    
-    var body: some View {
-        ZStack {
+				<string>        ZStack {
+            content
+            headerLayer
 </string>
 			</dict>
 			<key>title</key>

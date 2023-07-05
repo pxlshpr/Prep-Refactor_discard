@@ -7,6 +7,7 @@ struct LogNavigationBar: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
 
     @State var day: Day = Day()
     @Binding var currentDate: Date?
@@ -92,7 +93,7 @@ struct LogNavigationBar: View {
                 Spacer()
             }
             Color.clear
-                .frame(height: MetricsHeight)
+                .frame(height: metricsHeight)
         }
     }
     
@@ -132,7 +133,7 @@ struct LogNavigationBar: View {
             }
             .padding(.trailing, proxy.safeAreaInsets.trailing + 5)
             Color.clear
-                .frame(height: MetricsHeight)
+                .frame(height: metricsHeight)
         }
     }
     
@@ -181,13 +182,21 @@ extension LogNavigationBar {
 //                    backgroundColor
                     VStack(spacing: 10) {
                         energyRow(proxy)
-                        macros(proxy)
+                        if verticalSizeClass == .regular {
+                            macros(proxy)
+                        }
                     }
                 }
             }
         }
         .padding(.horizontal, 10)
-        .frame(height: MetricsHeight)
+        .frame(height: metricsHeight)
+        .padding(.trailing, proxy.safeAreaInsets.trailing)
+        .padding(.leading, proxy.safeAreaInsets.leading)
+    }
+    
+    var metricsHeight: CGFloat {
+        verticalSizeClass == .regular ? MetricsHeight : MetricsHeightCompact
     }
 
     var backgroundColor: Color {
@@ -365,8 +374,9 @@ extension LogNavigationBar {
     }
 
     var barHeight: CGFloat {
-        44 + proxy.safeAreaInsets.top + MetricsHeight
+        44 + proxy.safeAreaInsets.top + metricsHeight
     }
 }
 
 let MetricsHeight: CGFloat = 140
+let MetricsHeightCompact: CGFloat = 65

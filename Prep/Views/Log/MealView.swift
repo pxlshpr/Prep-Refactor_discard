@@ -47,7 +47,8 @@ struct MealView: View {
     }
 
     var leadingPadding: CGFloat {
-        verticalSizeClass == .compact ? safeAreaInsets.leading : 0
+//        verticalSizeClass == .compact ? safeAreaInsets.leading : 0
+        0
     }
 
     var trailingPadding: CGFloat {

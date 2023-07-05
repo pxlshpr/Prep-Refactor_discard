@@ -7,6 +7,7 @@ import SwiftSugar
 struct LogView: View {
 
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
 
     @Binding var currentDate: Date?
     @State var calendarPosition: String? = nil
@@ -16,15 +17,18 @@ struct LogView: View {
     @State var showingMealForm: Bool = false
 
     var body: some View {
-//        HStack(spacing: 0) {
-//            if horizontalSizeClass == .regular {
-//                CalendarView(
-//                    currentDate: $currentDate,
-//                    calendarPosition: $calendarPosition
-//                )
-//            }
+        HStack(spacing: 0) {
+            if horizontalSizeClass == .regular {
+                CalendarView(
+                    currentDate: $currentDate,
+                    calendarPosition: $calendarPosition
+                )
+                .ignoresSafeArea(edges: .horizontal)
+//                .background(.green)
+            }
             content
-//        }
+//                .background(.blue)
+        }
     }
     
     var content: some View {
@@ -72,9 +76,13 @@ struct LogView: View {
         }
     }
     
+    var metricsHeight: CGFloat {
+        verticalSizeClass == .regular ? MetricsHeight : MetricsHeightCompact
+    }
+
     func dayView(_ date: Date, _ proxy: GeometryProxy) -> some View {
         var topInset: some View {
-            Spacer().frame(height: barHeight(proxy) + MetricsHeight)
+            Spacer().frame(height: barHeight(proxy) + metricsHeight)
         }
         
         var bottomInset: some View {

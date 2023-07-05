@@ -31,7 +31,8 @@ struct CalendarView: View {
             Text(string)
                 .font(.system(.title2, design: .rounded, weight: .semibold))
                 .frame(height: 70, alignment: .bottom)
-                .frame(width: (dayWidth * 7) + 20 + 20, alignment: .leading)
+//                .frame(width: (dayWidth * 7) + 20 + 20, alignment: .leading)
+                .frame(width: (dayWidth * 7), alignment: .leading)
                 .padding(.bottom, 20)
                 .padding(.leading, 20)
                 .background(.regularMaterial)
@@ -42,7 +43,7 @@ struct CalendarView: View {
     var content: some View {
         HStack(spacing: 0) {
             scrollView
-            separator
+//            separator
         }
     }
     
@@ -54,17 +55,17 @@ struct CalendarView: View {
     
     var scrollView: some View {
         ScrollView(showsIndicators: false) {
-            topInset
-            LazyVStack {
+//            topInset
+            VStack {
                 ForEach(years, id: \.self) { year in
                     yearView(year)
                 }
             }
             .frame(width: dayWidth * 7)
         }
-        .contentMargins(.horizontal, EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20), for: .scrollContent)
+        .contentMargins(.all, EdgeInsets(top: barHeight, leading: 0, bottom: 0, trailing: 0), for: .scrollContent)
         .scrollPosition(id: $calendarPosition)
-        .scrollTargetBehavior(.viewAligned)
+//        .scrollTargetBehavior(.viewAligned)
         .onAppear {
             calendarPosition = "2023_5"
         }
@@ -105,7 +106,7 @@ struct CalendarView: View {
             }
         }
         .padding(.bottom, 10)
-        .scrollTargetLayout()
+//        .scrollTargetLayout()
     }
     
     func weekView(_ weekOfMonth: Int, _ month: Int, _ year: Int) -> some View {
