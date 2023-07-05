@@ -3,6 +3,15 @@ import SwiftUI
 import SwiftHaptics
 import FoodDataTypes
 
+let DummyEnergyUpper: Double = 1800
+let DummyEnergyLower: Double = 1300
+let DummyCarbUpper: Double = 30
+let DummyCarbLower: Double = 5
+let DummyFatUpper: Double = 150
+let DummyFatLower: Double = 50
+let DummyProteinUpper: Double = 250
+let DummyProteinLower: Double = 80
+
 struct LogNavigationBar: View {
     
     @Environment(\.colorScheme) var colorScheme
@@ -255,14 +264,14 @@ extension LogNavigationBar {
         }
     }
     
-    var energyUpper: Double { 1800 }
-    var energyLower: Double { 1300 }
-    var carbUpper: Double { 30 }
-    var carbLower: Double { 5 }
-    var fatUpper: Double { 150 }
-    var fatLower: Double { 50 }
-    var proteinUpper: Double { 250 }
-    var proteinLower: Double { 80 }
+    var energyUpper: Double { DummyEnergyUpper }
+    var energyLower: Double { DummyEnergyLower }
+    var carbUpper: Double { DummyCarbUpper }
+    var carbLower: Double { DummyCarbLower }
+    var fatUpper: Double { DummyFatUpper }
+    var fatLower: Double { DummyFatLower }
+    var proteinUpper: Double { DummyProteinUpper }
+    var proteinLower: Double { DummyProteinLower }
 
     var energyRemaining: Double {
         energyUpper - day.energy

@@ -151,3 +151,20 @@ extension Day {
         }
     }
 }
+
+extension Day {
+    
+    var hasMetAllGoals: Bool {
+        energy >= DummyEnergyLower && energy <= DummyEnergyUpper
+        && carb >= DummyCarbLower && carb <= DummyCarbUpper
+        && fat >= DummyFatLower && fat <= DummyFatUpper
+        && protein >= DummyProteinLower && protein <= DummyProteinUpper
+    }
+    
+    var hasGoalsInExcess: Bool {
+        energy >= DummyEnergyUpper
+        || carb >= DummyCarbUpper
+        || fat >= DummyFatUpper
+        || protein >= DummyProteinUpper
+    }
+}

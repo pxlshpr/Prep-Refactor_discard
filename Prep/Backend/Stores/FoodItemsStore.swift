@@ -48,6 +48,9 @@ extension DataManager {
                             return
                         }
                         let day = Day(tuple.1)
+//                        SoundPlayer.play(.clearDragPickup)
+//                        SoundPlayer.play(.letterpressBip1)
+//                        SoundPlayer.play(.clearSwoosh)
                         continuation.resume(returning: (foodItem, day))
                     }
                 } catch {
@@ -70,6 +73,7 @@ extension DataManager {
                             return
                         }
                         let day = Day(dayEntity)
+//                        SoundPlayer.play(.calcbotClear)
                         continuation.resume(returning: day)
                     }
                 } catch {
@@ -188,7 +192,7 @@ extension CoreDataManager {
         }
         
         /// This cascades updates to the meal, it's parent day, and all sibiling meals
-        updatedMealEntity.postFoodItemUpdate()
+        updatedMealEntity.postFoodItemUpdate(.delete)
         
         guard let updatedDayEntity = updatedMealEntity.dayEntity else {
             fatalError()
@@ -276,7 +280,7 @@ extension CoreDataManager {
         entity.protein = food.calculateMacro(.protein, for: amount)
 
         /// Compute the relativeEnergy for all
-        mealEntity.postFoodItemUpdate()
+        mealEntity.postFoodItemUpdate(.create)
         
         /// Update Food's last used data
         foodEntity.lastAmount = amount
@@ -358,8 +362,14 @@ extension MealEntity {
     }
 }
 
+enum ModifyAction {
+    case create
+    case delete
+    case update
+}
+
 extension DayEntity {
-    func postFoodItemUpdate() {
+    func postFoodItemUpdate(_ action: ModifyAction) {
         
         /// First update the relative energies
         for mealEntity in mealEntitiesArray {
@@ -375,19 +385,37 @@ extension DayEntity {
         
         /// Now update the stats of the `Day` itself
         let day = Day(self)
+        
+        let previousHasMetAllGoals = day.hasMetAllGoals
+        let previousHasGoalsInExcess = day.hasGoalsInExcess
+        
         energy = day.calculateEnergy(in: energyUnit)
         carb = day.calculateMacro(.carb)
         fat = day.calculateMacro(.fat)
         protein = day.calculateMacro(.protein)
         micros = day.calculatedMicros
+        
+        let updatedDay = Day(self)
+        if !previousHasGoalsInExcess && updatedDay.hasGoalsInExcess {
+            SoundPlayer.play(.chiptunesError)
+        } else if !previousHasMetAllGoals && updatedDay.hasMetAllGoals {
+            SoundPlayer.play(.chiptunesSuccess)
+        } else {
+            let sound: SoundPlayer.Sound
+            switch action {
+            case .create:   sound = .clearSwoosh
+            case .delete:   sound = .letterpressDelete
+            case .update:   sound = .clearSwoosh
+            }
+        }
     }
 }
 
 extension MealEntity {
     
-    func postFoodItemUpdate() {
+    func postFoodItemUpdate(_ action: ModifyAction) {
         updateNutrients()
-        dayEntity?.postFoodItemUpdate()
+        dayEntity?.postFoodItemUpdate(action)
     }
     
     /// Recalculates its own badge width. Use this after inserting, deleting or updating a food item (or a meal of the same day).

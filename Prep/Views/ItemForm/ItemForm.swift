@@ -92,7 +92,7 @@ struct ItemForm: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar { toolbarContent }
         }
-        .scrollDismissesKeyboard(.interactively)
+        .scrollDismissesKeyboard(.immediately)
 //        .interactiveDismissDisabled()
         .onAppear(perform: appeared)
         .frame(idealWidth: 400, idealHeight: 800)
@@ -124,9 +124,9 @@ struct ItemForm: View {
             }
         }
         Task.detached(priority: .background) {
-            let usedAmounts = await FoodItemsStore.usedAmounts(for: food)
+            let usedAmounts = await FoodItemsStore.usedAmounts(for: food).prefix(5)
             await MainActor.run {
-                var amounts = usedAmounts + food.defaultAmounts
+                var amounts = Array(usedAmounts) + food.defaultAmounts
                 amounts.removeDuplicates()
                 self.quickAmounts = amounts
             }
@@ -269,6 +269,8 @@ struct ItemForm: View {
             
             return Button {
                 Haptics.selectionFeedback()
+//                SoundPlayer.play(.clearTap)
+                SoundPlayer.play(.letterpressClick1)
                 setAmount(amount.value)
                 if let unit = amount.formUnit(for: food) {
                     self.unit = unit
@@ -606,6 +608,13 @@ struct ItemForm: View {
             case .forward: "goforward"
             }
         }
+        
+        var sound: SoundPlayer.Sound {
+            switch self {
+            case .backward: .letterpressClick2
+            case .forward: .letterpressClick1
+            }
+        }
     }
     
     enum Step {
@@ -642,6 +651,7 @@ struct ItemForm: View {
 extension ItemForm {
     func tappedStepButton(_ step: Step, _ direction: StepButtonDirection) {
         Haptics.selectionFeedback()
+        SoundPlayer.play(direction.sound)
         let newAmount = (amountDouble ?? 0) + step.amount(for: direction)
         isAnimatingAmountChange = true
         startedAnimatingAmountChangeAt = Date()

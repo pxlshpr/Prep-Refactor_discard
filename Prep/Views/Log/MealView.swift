@@ -73,7 +73,7 @@ struct MealView: View {
             withAnimation(.snappy) {
                 /// If the added food item belongs to this meal, insert it with an animation and play a sound
                 if foodItem.mealID == meal.id {
-                    SoundPlayer.play(.octaveTapSimple)
+//                    SoundPlayer.play(.octaveTapSimple)
                     /// Not needed so we removed this potentially duplicate animation (with setting the food items below)
 //                    self.foodItems.append(foodItem)
                 }
