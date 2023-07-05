@@ -9,16 +9,39 @@ struct CalendarView: View {
     
     @Binding var currentDate: Date?
     @Binding var calendarPosition: String?
-//    let proxy: GeometryProxy
+    let proxy: GeometryProxy
 
-    var firstWeekday: Int { 2 }
+    let didTapToday = NotificationCenter.default.publisher(for: .didTapToday)
     
     var body: some View {
         ZStack {
             content
             headerLayer
         }
+        .onReceive(didTapToday, perform: didTapToday)
     }
+    
+    func didTapToday(notification: Notification) {
+        scrollToToday()
+    }
+ 
+    func appeared() {
+        calendarPosition = "2010_1"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            calendarPosition = "2023_7"
+        }
+    }
+    
+    func scrollToToday() {
+        calendarPosition = "2010_1"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            withAnimation {
+                calendarPosition = "2023_7"
+            }
+        }
+    }
+    
+    var firstWeekday: Int { 2 }
     
     var headerLayer: some View {
         var string: String {
@@ -30,12 +53,11 @@ struct CalendarView: View {
         return VStack {
             Text(string)
                 .font(.system(.title2, design: .rounded, weight: .semibold))
-                .frame(height: 70, alignment: .bottom)
 //                .frame(width: (dayWidth * 7) + 20 + 20, alignment: .leading)
                 .frame(width: (dayWidth * 7), alignment: .leading)
-                .padding(.bottom, 20)
                 .padding(.leading, 20)
-                .background(.regularMaterial)
+                .frame(height: barHeight)
+                .background(.ultraThinMaterial)
             Spacer()
         }
     }
@@ -66,13 +88,12 @@ struct CalendarView: View {
         .contentMargins(.all, EdgeInsets(top: barHeight, leading: 0, bottom: 0, trailing: 0), for: .scrollContent)
         .scrollPosition(id: $calendarPosition)
 //        .scrollTargetBehavior(.viewAligned)
-        .onAppear {
-            calendarPosition = "2023_5"
-        }
+        .onAppear(perform: appeared)
     }
     
     var years: [Int] {
-        [2021, 2022, 2023, 2024]
+        Array(2010...2025)
+//        [2021, 2022, 2023, 2024]
     }
     
     func yearView(_ year: Int) -> some View {
@@ -190,8 +211,7 @@ extension CalendarView {
     }
     
     var barHeight: CGFloat {
-//        44 + proxy.safeAreaInsets.top + MetricsHeight
-        44 + 50
+        44 + proxy.safeAreaInsets.top
     }
 
     var dayWidth: CGFloat {

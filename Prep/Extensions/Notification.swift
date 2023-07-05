@@ -2,6 +2,8 @@ import Foundation
 
 extension Notification.Name {
 
+    static var didTapToday: Notification.Name { return .init("didTapToday") }
+
     static var didPopulate: Notification.Name { return .init("didPopulate") }
 
     static var didPickMeal: Notification.Name { return .init("didPickMeal") }

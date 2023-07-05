@@ -17,31 +17,29 @@ struct LogView: View {
     @State var showingMealForm: Bool = false
 
     var body: some View {
-        HStack(spacing: 0) {
-            if horizontalSizeClass == .regular {
-                CalendarView(
-                    currentDate: $currentDate,
-                    calendarPosition: $calendarPosition
-                )
-                .ignoresSafeArea(edges: .horizontal)
-//                .background(.green)
-            }
-            content
-//                .background(.blue)
+        GeometryReader { proxy in
+//            HStack(spacing: 0) {
+//                if horizontalSizeClass == .regular {
+//                    calendarView(proxy)
+//                }
+                ZStack {
+                    scrollView(proxy)
+                    LogNavigationBar(
+                        currentDate: $currentDate,
+                        proxy: proxy
+                    )
+                    buttonsLayer
+                }
+//            }
         }
     }
     
-    var content: some View {
-        GeometryReader { proxy in
-            ZStack {
-                scrollView(proxy)
-                LogNavigationBar(
-                    currentDate: $currentDate,
-                    proxy: proxy
-                )
-                buttonsLayer
-            }
-        }
+    func calendarView(_ proxy: GeometryProxy) -> some View {
+        CalendarView(
+            currentDate: $currentDate,
+            calendarPosition: $calendarPosition,
+            proxy: proxy
+        )
     }
     
     var foodForm: some View {
@@ -100,6 +98,7 @@ struct LogView: View {
             Button {
                 Haptics.selectionFeedback()
                 SoundPlayer.play(.clearSwoosh)
+                post(.didTapToday)
                 withAnimation {
                     currentDate = Date.now.startOfDay
                 }

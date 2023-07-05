@@ -144,6 +144,7 @@ struct DayView: View {
                 addMealCell
             }
             .listStyle(.grouped)
+            .scrollIndicators(.hidden)
             .contentMargins(.trailing, trailingPadding, for: .scrollIndicators)
             .contentMargins(.bottom, contentMarginBottom(proxy))
             .contentMargins(.bottom, scrollIndicatorMarginBottom, for: .scrollIndicators)

@@ -171,8 +171,12 @@ struct LogNavigationBar: View {
 }
 
 extension LogNavigationBar {
+    
+    @ViewBuilder
     var metricsView: some View {
-        energyAndMacrosPage
+        if verticalSizeClass == .regular {
+            energyAndMacrosPage
+        }
     }
     
     var energyAndMacrosPage: some View {
@@ -182,9 +186,7 @@ extension LogNavigationBar {
 //                    backgroundColor
                     VStack(spacing: 10) {
                         energyRow(proxy)
-                        if verticalSizeClass == .regular {
-                            macros(proxy)
-                        }
+                        macros(proxy)
                     }
                 }
             }
@@ -379,4 +381,4 @@ extension LogNavigationBar {
 }
 
 let MetricsHeight: CGFloat = 140
-let MetricsHeightCompact: CGFloat = 65
+let MetricsHeightCompact: CGFloat = 0

@@ -614,11 +614,11 @@
 				<key>location-parameters</key>
 				<dict>
 					<key>EndingLineNumber</key>
-					<string>15</string>
+					<string>43</string>
 					<key>StartingLineNumber</key>
-					<string>15</string>
+					<string>43</string>
 					<key>Timestamp</key>
-					<string>710231337.929643</string>
+					<string>710241706.631669</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -634,16 +634,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>    var body: some View {
+				<string>    var firstWeekday: Int { 2 }
 </string>
 				<key>leading</key>
-				<string>    var firstWeekday: Int { 2 }
+				<string>    }
     
 </string>
 				<key>trailing</key>
-				<string>        ZStack {
-            content
-            headerLayer
+				<string>    
+    var headerLayer: some View {
+        var string: String {
 </string>
 			</dict>
 			<key>title</key>
