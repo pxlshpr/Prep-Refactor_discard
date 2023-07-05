@@ -72,10 +72,10 @@ struct MealView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             withAnimation(.snappy) {
                 /// If the added food item belongs to this meal, insert it with an animation and play a sound
-                if foodItem.mealID == meal.id {
-                    SoundPlayer.play(.octaveTapSimple)
-                    self.foodItems.append(foodItem)
-                }
+//                if foodItem.mealID == meal.id {
+//                    SoundPlayer.play(.octaveTapSimple)
+//                    self.foodItems.append(foodItem)
+//                }
                 
                 self.foodItems = updatedMeal.foodItems
                 self.meal = updatedMeal

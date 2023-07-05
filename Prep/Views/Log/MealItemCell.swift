@@ -3,13 +3,30 @@ import SwiftUI
 import SwiftHaptics
 import ViewSugar
 
+import OSLog
+
+private let logger = Logger(subsystem: "MealItemCell", category: "")
+
+private var lastWidth: CGFloat = 0
+
 struct MealItemCell: View {
     
     @Environment(\.colorScheme) var colorScheme
 
     let item: FoodItem
     
-    @State var width: CGFloat = 0
+    @State var width: CGFloat
+    
+    init(item: FoodItem) {
+        self.item = item
+        
+        /// Always reuse whatever the last saved width was as the start point.
+        /// This it to mitigate a bug where newly added food items don't get their width set
+        /// by `readSize`, and therefore get a badge width of `0` assigned until a proper
+        /// view refresh. This only happens when re-inserting a food item that was just deleted.
+        _width = State(initialValue: lastWidth)
+    }
+    
     var body: some View {
         content
             .padding(.horizontal, 8)
@@ -17,6 +34,7 @@ struct MealItemCell: View {
             .contentShape(Rectangle())
             .hoverEffect(.highlight)
             .readSize {
+                lastWidth = $0.width
                 self.width = $0.width
             }
     }
@@ -42,11 +60,12 @@ struct MealItemCell: View {
                 let base = width * 0.0095
                 let maxWithoutBase = width * 0.25
                 let calculated = CGFloat(item.relativeEnergy * maxWithoutBase)
-                let width = calculated + base
+                let calculatedWidth = calculated + base
                     
                 /// This is crucial because of an edge cases where we keep getting minutely different values
                 /// (differing at the 5+ decimal place), resulting in an infinite loop due to this 'changing'.
-                let rounded = CGFloat(Int(width))
+                let rounded = CGFloat(Int(calculatedWidth))
+                
                 return rounded
             },
             set: { _ in }
