@@ -16,13 +16,23 @@ struct LogView: View {
     @State var showingMealForm: Bool = false
 
     var body: some View {
+//        HStack(spacing: 0) {
+//            if horizontalSizeClass == .regular {
+//                CalendarView(
+//                    currentDate: $currentDate,
+//                    calendarPosition: $calendarPosition
+//                )
+//            }
+            content
+//        }
+    }
+    
+    var content: some View {
         GeometryReader { proxy in
             ZStack {
                 scrollView(proxy)
-//                titleLayer(proxy)
                 LogNavigationBar(
                     currentDate: $currentDate,
-                    calendarPosition: $calendarPosition,
                     proxy: proxy
                 )
                 buttonsLayer
@@ -40,13 +50,13 @@ struct LogView: View {
     
     func scrollView(_ proxy: GeometryProxy) -> some View {
         HStack(spacing: 0) {
-            if horizontalSizeClass == .regular {
-                CalendarView(
-                    currentDate: $currentDate,
-                    calendarPosition: $calendarPosition,
-                    proxy: proxy
-                )
-            }
+//            if horizontalSizeClass == .regular {
+//                CalendarView(
+//                    currentDate: $currentDate,
+//                    calendarPosition: $calendarPosition,
+//                    proxy: proxy
+//                )
+//            }
             ScrollView(.horizontal, showsIndicators: false) {
                 LazyHStack(spacing: 0) {
                     ForEach(dates, id: \.self) { date in

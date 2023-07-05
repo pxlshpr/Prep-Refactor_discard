@@ -9,11 +9,37 @@ struct CalendarView: View {
     
     @Binding var currentDate: Date?
     @Binding var calendarPosition: String?
-    let proxy: GeometryProxy
+//    let proxy: GeometryProxy
 
     var firstWeekday: Int { 2 }
     
     var body: some View {
+        ZStack {
+            content
+            headerLayer
+        }
+    }
+    
+    var headerLayer: some View {
+        var string: String {
+            guard let calendarPosition,
+                  let year = calendarPosition.components(separatedBy: "_").first
+            else { return "" }
+            return year
+        }
+        return VStack {
+            Text(string)
+                .font(.system(.title2, design: .rounded, weight: .semibold))
+                .frame(height: 70, alignment: .bottom)
+                .frame(width: (dayWidth * 7) + 20 + 20, alignment: .leading)
+                .padding(.bottom, 20)
+                .padding(.leading, 20)
+                .background(.regularMaterial)
+            Spacer()
+        }
+    }
+    
+    var content: some View {
         HStack(spacing: 0) {
             scrollView
             separator
@@ -29,16 +55,16 @@ struct CalendarView: View {
     var scrollView: some View {
         ScrollView(showsIndicators: false) {
             topInset
-            VStack {
+            LazyVStack {
                 ForEach(years, id: \.self) { year in
                     yearView(year)
                 }
             }
-//            .scrollTargetLayout()
             .frame(width: dayWidth * 7)
         }
         .contentMargins(.horizontal, EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20), for: .scrollContent)
         .scrollPosition(id: $calendarPosition)
+        .scrollTargetBehavior(.viewAligned)
         .onAppear {
             calendarPosition = "2023_5"
         }
@@ -50,7 +76,7 @@ struct CalendarView: View {
     
     func yearView(_ year: Int) -> some View {
         LazyVStack(spacing: 0) {
-            Text("\(year)")
+            Text(String(year))
                 .font(.title)
                 .fontWeight(.bold)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -79,6 +105,7 @@ struct CalendarView: View {
             }
         }
         .padding(.bottom, 10)
+        .scrollTargetLayout()
     }
     
     func weekView(_ weekOfMonth: Int, _ month: Int, _ year: Int) -> some View {
@@ -162,7 +189,8 @@ extension CalendarView {
     }
     
     var barHeight: CGFloat {
-        44 + proxy.safeAreaInsets.top + MetricsHeight
+//        44 + proxy.safeAreaInsets.top + MetricsHeight
+        44 + 50
     }
 
     var dayWidth: CGFloat {

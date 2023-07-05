@@ -637,13 +637,13 @@
 				<string>    var firstWeekday: Int { 2 }
 </string>
 				<key>leading</key>
-				<string>    let proxy: GeometryProxy
+				<string>//    let proxy: GeometryProxy
 
 </string>
 				<key>trailing</key>
 				<string>    
     var body: some View {
-        HStack(spacing: 0) {
+        ZStack {
 </string>
 			</dict>
 			<key>title</key>
