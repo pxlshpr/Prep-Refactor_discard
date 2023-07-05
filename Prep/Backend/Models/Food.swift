@@ -372,3 +372,32 @@ extension Food {
         }
     }
 }
+
+extension Food {
+    var canBeMeasuredInServings: Bool {
+        amount.unitType == .serving
+    }
+    
+    var defaultAmounts: [FoodValue] {
+        var amounts: [FoodValue] = []
+        if canBeMeasuredInServings {
+            amounts.append(.init(1, .serving))
+        }
+        if canBeMeasuredInWeight {
+            amounts.append(.init(100, .weight(.g)))
+        }
+        if canBeMeasuredInVolume {
+            amounts.append(.init(1, .volume(.cupMetric)))
+        }
+        for size in self.formSizes {
+            let amount: FoodValue
+            if size.isVolumePrefixed, let volume = size.volumeUnit {
+                amount = .init(1, .size(size, volume))
+            } else {
+                amount = .init(1, .size(size, nil))
+            }
+            amounts.append(amount)
+        }
+        return amounts
+    }
+}

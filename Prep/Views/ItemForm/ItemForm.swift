@@ -20,7 +20,8 @@ struct ItemForm: View {
     @State var unit: FormUnit
     @State var meal: Meal? = nil
 
-    @State var food: Food? = nil
+//    @State var food: Food? = nil
+    @State var food: Food
     @State var foodItem: FoodItem? = nil
 
     @State var hasAppeared = false
@@ -31,6 +32,9 @@ struct ItemForm: View {
 
     @State var isAnimatingAmountChange = false
     @State var startedAnimatingAmountChangeAt: Date = Date()
+    
+    @State var quickAmounts: [FoodValue] = []
+    @State var showingShortcuts = false
     
     /// Creating new items
     init(
@@ -96,8 +100,6 @@ struct ItemForm: View {
         .onChange(of: isFocused, isFocusedChanged)
     }
     
-    @State var showingShortcuts = false
-    
     func isFocusedChanged(oldValue: Bool, newValue: Bool) {
         let delay = newValue == true ? 0.2 : 0
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
@@ -121,16 +123,15 @@ struct ItemForm: View {
                 hasAppeared = true
             }
         }
-        guard let food else { return }
         Task.detached(priority: .background) {
             let usedAmounts = await FoodItemsStore.usedAmounts(for: food)
-            print("We here with: \(usedAmounts.count) usedAmounts")
-            print("What now?")
-            self.quickAmounts = usedAmounts
+            await MainActor.run {
+                var amounts = usedAmounts + food.defaultAmounts
+                amounts.removeDuplicates()
+                self.quickAmounts = amounts
+            }
         }
     }
-    
-    @State var quickAmounts: [FoodValue] = []
     
     @ViewBuilder
     var content: some View {
@@ -170,10 +171,7 @@ struct ItemForm: View {
     }
     
     var scaleFactor: Double {
-        guard
-            let food,
-            let quantity = food.quantity(for: foodValue)
-        else { return 0 }
+        guard let quantity = food.quantity(for: foodValue) else { return 0 }
         return food.nutrientScaleFactor(for: quantity) ?? 0
     }
     
@@ -203,7 +201,7 @@ struct ItemForm: View {
     }
     
     func tappedSave() {
-        guard let meal, let food else { return }
+        guard let meal else { return }
         
         Haptics.successFeedback()
         isPresented = false
@@ -236,9 +234,7 @@ struct ItemForm: View {
                 quantityField
                 incrementField
             }
-            if let food {
-                nutrientsSection(food)
-            }
+            nutrientsSection
         }
         .scrollIndicators(.hidden)
     }
@@ -257,7 +253,7 @@ struct ItemForm: View {
     var quickAmountsPicker: some View {
         func button(for amount: FoodValue) -> some View {
             var string: String {
-                amount.description(with: food!)
+                amount.description(with: food)
             }
             
             var label: some View {
@@ -274,7 +270,7 @@ struct ItemForm: View {
             return Button {
                 Haptics.selectionFeedback()
                 setAmount(amount.value)
-                if let food, let unit = amount.formUnit(for: food) {
+                if let unit = amount.formUnit(for: food) {
                     self.unit = unit
                 }
             } label: {
@@ -295,7 +291,7 @@ struct ItemForm: View {
     }
 
     func nutrientValue(for nutrient: Nutrient) -> NutrientValue {
-        food?.value(for: nutrient) ?? NutrientValue(nutrient: nutrient, value: 0, unit: .g)
+        food.value(for: nutrient) ?? NutrientValue(nutrient: nutrient, value: 0, unit: .g)
     }
     
     func value(for nutrient: Nutrient) -> Double {
@@ -306,7 +302,7 @@ struct ItemForm: View {
         "\(value(for: nutrient).cleanAmount) \(nutrientValue(for: nutrient).unit.abbreviation)"
     }
     
-    func nutrientsSection(_ food: Food) -> some View {
+    var nutrientsSection: some View {
         
         var microsGroup: some View {
             var micros: [Micro] {
@@ -398,21 +394,15 @@ struct ItemForm: View {
     
     @ViewBuilder
     var foodField: some View {
-        if let food {
-            HStack {
-                HStack(alignment: .top) {
-                    Text("Food")
-                        .foregroundStyle(Color(.label))
-                    Spacer()
-                    Text(food.foodName)
-                        .foregroundStyle(Color(.label))
-                }
-                .multilineTextAlignment(.trailing)
-//                Image(systemName: "chevron.right")
-//                    .foregroundStyle(Color(.tertiaryLabel))
-//                    .imageScale(.small)
-//                    .fontWeight(.semibold)
+        HStack {
+            HStack(alignment: .top) {
+                Text("Food")
+                    .foregroundStyle(Color(.label))
+                Spacer()
+                Text(food.foodName)
+                    .foregroundStyle(Color(.label))
             }
+            .multilineTextAlignment(.trailing)
         }
     }
 
@@ -464,8 +454,8 @@ struct ItemForm: View {
             }
         }
         
-        func sizesContent(_ sizes: [FormSize]) -> some View {
-            ForEach(sizes.sorted(), id: \.self) { size in
+        var sizesContent: some View {
+            ForEach(food.formSizes.sorted(), id: \.self) { size in
                 if size.isVolumePrefixed {
                     Menu {
                         ForEach(VolumeUnitType.primaryUnits, id: \.self) { volumeUnit in
@@ -502,16 +492,16 @@ struct ItemForm: View {
         
         @ViewBuilder
         var sizesSections: some View {
-            if let sizes = food?.formSizes, !sizes.isEmpty {
+            if !food.formSizes.isEmpty {
                 Section("Sizes") {
-                    sizesContent(sizes)
+                    sizesContent
                 }
             }
         }
         
         @ViewBuilder
         var servingButton: some View {
-            if food?.serving != nil {
+            if food.canBeMeasuredInServings {
                 Button {
                     setUnit(.serving)
                 } label: {
@@ -522,7 +512,7 @@ struct ItemForm: View {
         
         @ViewBuilder
         var weightsMenu: some View {
-            if food?.canBeMeasuredInWeight == true {
+            if food.canBeMeasuredInWeight {
                 Menu {
                     weightsContent
                 } label: {
@@ -552,7 +542,7 @@ struct ItemForm: View {
         
         @ViewBuilder
         var volumesMenu: some View {
-            if food?.canBeMeasuredInVolume == true {
+            if food.canBeMeasuredInVolume {
                 Menu {
                     volumesContent
                 } label: {
@@ -563,21 +553,19 @@ struct ItemForm: View {
         
         @ViewBuilder
         var menuContents: some View {
-            if let food {
-                if food.onlySupportsWeights {
-                    weightsContent
-                } else if food.onlySupportsVolumes {
-                    volumesContent
-                } else if food.onlySupportsServing {
+            if food.onlySupportsWeights {
+                weightsContent
+            } else if food.onlySupportsVolumes {
+                volumesContent
+            } else if food.onlySupportsServing {
+                servingButton
+            } else {
+                Section {
                     servingButton
-                } else {
-                    Section {
-                        servingButton
-                        weightsMenu
-                        volumesMenu
-                    }
-                    sizesSections
+                    weightsMenu
+                    volumesMenu
                 }
+                sizesSections
             }
         }
         
