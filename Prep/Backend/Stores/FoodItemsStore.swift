@@ -407,6 +407,7 @@ extension DayEntity {
             case .delete:   sound = .letterpressDelete
             case .update:   sound = .clearSwoosh
             }
+            SoundPlayer.play(sound)
         }
     }
 }

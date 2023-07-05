@@ -46,8 +46,8 @@ class SoundPlayer {
         case tweetbotSwoosh = "tweetbot-swoosh.wav"
         case wellDone = "wellDone.wav"
         
-        case chiptunesError = "chiptunes-error.wav"
-        case chiptunesSuccess = "chiptunes-success.wav"
+        case chiptunesError = "chiptunes_error.wav"
+        case chiptunesSuccess = "chiptunes_success.wav"
     }
     
     var scanSoundEffect: AVAudioPlayer? = nil

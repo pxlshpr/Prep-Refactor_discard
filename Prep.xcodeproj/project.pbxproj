@@ -25,8 +25,8 @@
 		E236524D2A5318420049C199 /* Fetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236524C2A5318420049C199 /* Fetchable.swift */; };
 		E236524F2A5318470049C199 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236524E2A5318470049C199 /* Entity.swift */; };
 		E23B655E2A558D93003FFAC4 /* FoodLabel in Frameworks */ = {isa = PBXBuildFile; productRef = E23B655D2A558D93003FFAC4 /* FoodLabel */; };
-		E23B65612A560EEF003FFAC4 /* chiptunes-error.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B655F2A560EEF003FFAC4 /* chiptunes-error.wav */; };
-		E23B65622A560EEF003FFAC4 /* chiptunes-success.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65602A560EEF003FFAC4 /* chiptunes-success.wav */; };
+		E23B65652A5612F6003FFAC4 /* chiptunes_success.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65632A5612F6003FFAC4 /* chiptunes_success.wav */; };
+		E23B65662A5612F6003FFAC4 /* chiptunes_error.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */; };
 		E2672C7D2A52C1B00002E95C /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */; };
 		E2672C802A52C3F90002E95C /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity.swift */; };
 		E28002002A52B84300C6D528 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001572A52B84300C6D528 /* Import.swift */; };
@@ -207,8 +207,8 @@
 		E23652482A5317A30049C199 /* MealsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsStore.swift; sourceTree = "<group>"; };
 		E236524C2A5318420049C199 /* Fetchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fetchable.swift; sourceTree = "<group>"; };
 		E236524E2A5318470049C199 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
-		E23B655F2A560EEF003FFAC4 /* chiptunes-error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "chiptunes-error.wav"; sourceTree = "<group>"; };
-		E23B65602A560EEF003FFAC4 /* chiptunes-success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "chiptunes-success.wav"; sourceTree = "<group>"; };
+		E23B65632A5612F6003FFAC4 /* chiptunes_success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_success.wav; sourceTree = "<group>"; };
+		E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_error.wav; sourceTree = "<group>"; };
 		E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemEntity.swift; sourceTree = "<group>"; };
 		E2672C7F2A52C3F90002E95C /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
 		E28001572A52B84300C6D528 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Import.swift; path = ../Import.swift; sourceTree = "<group>"; };
@@ -470,8 +470,8 @@
 		E28001652A52B84300C6D528 /* Sound Files */ = {
 			isa = PBXGroup;
 			children = (
-				E23B655F2A560EEF003FFAC4 /* chiptunes-error.wav */,
-				E23B65602A560EEF003FFAC4 /* chiptunes-success.wav */,
+				E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */,
+				E23B65632A5612F6003FFAC4 /* chiptunes_success.wav */,
 				E28001662A52B84300C6D528 /* click2.wav */,
 				E28001672A52B84300C6D528 /* letterpress_click2.wav */,
 				E28001682A52B84300C6D528 /* octave_tap-simple.wav */,
@@ -881,13 +881,12 @@
 				E280026E2A52B84300C6D528 /* emoji-keywords.json in Resources */,
 				E28002222A52B84300C6D528 /* tweetbot-bubble_pop.wav in Resources */,
 				E280FC232A529E3E00C6D528 /* Preview Assets.xcassets in Resources */,
-				E23B65612A560EEF003FFAC4 /* chiptunes-error.wav in Resources */,
 				E28002272A52B84300C6D528 /* clear_DragPutdown.wav in Resources */,
 				E28002312A52B84300C6D528 /* calcbot_equals.wav in Resources */,
 				E28002292A52B84300C6D528 /* popClose.wav in Resources */,
 				E280022F2A52B84300C6D528 /* letterpress_bip2.wav in Resources */,
-				E23B65622A560EEF003FFAC4 /* chiptunes-success.wav in Resources */,
 				E280026A2A52B84300C6D528 /* meals.json in Resources */,
+				E23B65662A5612F6003FFAC4 /* chiptunes_error.wav in Resources */,
 				E280020F2A52B84300C6D528 /* wellDone.wav in Resources */,
 				E280021A2A52B84300C6D528 /* popCloseLong.wav in Resources */,
 				E280022A2A52B84300C6D528 /* tweetbot-button_click.wav in Resources */,
@@ -904,6 +903,7 @@
 				E280026B2A52B84300C6D528 /* presetFoods.json in Resources */,
 				E280022E2A52B84300C6D528 /* letterpress_delete.wav in Resources */,
 				E28002132A52B84300C6D528 /* tweetbot-swipe_fail.wav in Resources */,
+				E23B65652A5612F6003FFAC4 /* chiptunes_success.wav in Resources */,
 				E28002182A52B84300C6D528 /* click5.wav in Resources */,
 				E280020C2A52B84300C6D528 /* octave_tap-simple.wav in Resources */,
 				E280022B2A52B84300C6D528 /* button_touchDown.wav in Resources */,
