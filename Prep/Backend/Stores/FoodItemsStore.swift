@@ -16,6 +16,10 @@ class FoodItemsStore {
     static func delete(_ foodItem: FoodItem) async -> Day? {
         await DataManager.shared.deleteFoodItem(foodItem)
     }
+    
+    static func usedAmounts(for food: Food) async -> [FoodValue] {
+        await DataManager.shared.usedAmounts(for: food)
+    }
 }
 
 /// FoodItem Helpers, when we have a context available
@@ -51,7 +55,7 @@ extension DataManager {
                 }
             }
         } catch {
-            logger.error("Error creating food item: error: \(error.localizedDescription, privacy: .public)")
+            logger.error("Error creating food item: \(error.localizedDescription, privacy: .public)")
             return nil
         }
     }
@@ -73,8 +77,67 @@ extension DataManager {
                 }
             }
         } catch {
-            logger.error("Error deleting food item: error: \(error.localizedDescription, privacy: .public)")
+            logger.error("Error deleting food item: \(error.localizedDescription, privacy: .public)")
             return nil
+        }
+    }
+    
+    func usedAmounts(for food: Food) async -> [FoodValue] {
+        do {
+            return try await withCheckedThrowingContinuation { continuation in
+                do {
+                    try coreDataManager.usedAmounts(for: food) { amounts in
+                        continuation.resume(returning: amounts)
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        } catch {
+            logger.error("Error fetching used amounts for food: \(error.localizedDescription, privacy: .public)")
+            return []
+        }
+    }
+}
+
+extension CoreDataManager {
+    
+    func usedAmounts(
+        for food: Food,
+        completion: @escaping (([FoodValue]) -> ())
+    ) throws {
+        Task {
+            let bgContext = newBackgroundContext()
+            await bgContext.perform {
+                do {
+                    
+                    let amounts = FoodItemEntity.objects(
+                        for: NSPredicate(format: "foodEntity.id == %@", food.id.uuidString),
+                        sortDescriptors: [NSSortDescriptor(keyPath: \FoodItemEntity.updatedAt, ascending: false)],
+                        in: bgContext
+                    )
+                    .map { $0.amount }
+                    .removingDuplicates()
+                    
+                    let observer = NotificationCenter.default.addObserver(
+                        forName: .NSManagedObjectContextDidSave,
+                        object: bgContext,
+                        queue: .main
+                    ) { (notification) in
+                        self.viewContext.mergeChanges(fromContextDidSave: notification)
+                        completion(amounts)
+                    }
+                    
+                    try bgContext.performAndWait {
+                        try bgContext.save()
+                    }
+                    NotificationCenter.default.removeObserver(observer)
+
+                } catch {
+                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
+                    completion([])
+                }
+            }
         }
     }
 }

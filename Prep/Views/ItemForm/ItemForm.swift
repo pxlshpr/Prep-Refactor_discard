@@ -121,7 +121,16 @@ struct ItemForm: View {
                 hasAppeared = true
             }
         }
+        guard let food else { return }
+        Task.detached(priority: .background) {
+            let usedAmounts = await FoodItemsStore.usedAmounts(for: food)
+            print("We here with: \(usedAmounts.count) usedAmounts")
+            print("What now?")
+            self.quickAmounts = usedAmounts
+        }
     }
+    
+    @State var quickAmounts: [FoodValue] = []
     
     @ViewBuilder
     var content: some View {
@@ -231,36 +240,58 @@ struct ItemForm: View {
                 nutrientsSection(food)
             }
         }
+        .scrollIndicators(.hidden)
     }
     
     var incrementField: some View {
         Group {
             if showingShortcuts {
                 stepButtons
-                recentValues
             }
+                quickAmountsPicker
+                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+//            }
         }
     }
     
-    var recentValues: some View {
-        var values: [String] {
-            ["50 g", "66 g", "2 scoops", "35 g", "90 g", "1.5 scoops", "27 g", "45 g", "1 scoop"]
+    var quickAmountsPicker: some View {
+        func button(for amount: FoodValue) -> some View {
+            var string: String {
+                amount.description(with: food!)
+            }
+            
+            var label: some View {
+                Text(string)
+                    .foregroundStyle(Color(.label))
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 7)
+                            .fill(Color(.secondarySystemFill))
+                    )
+            }
+            
+            return Button {
+                Haptics.selectionFeedback()
+                setAmount(amount.value)
+                if let food, let unit = amount.formUnit(for: food) {
+                    self.unit = unit
+                }
+            } label: {
+                label
+            }
         }
         return ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack {
-                ForEach(values, id: \.self) { value in
-                    Text(value)
-                        .foregroundStyle(Color(.label))
-                        .padding(.vertical, 5)
-                        .padding(.horizontal, 8)
-                        .background(
-                            RoundedRectangle(cornerRadius: 5)
-                                .fill(Color(.secondarySystemFill))
-                        )
+                ForEach(quickAmounts, id: \.self) { amount in
+                    button(for: amount)
                 }
             }
         }
-        .padding(.vertical, 4)
+        .contentMargins(.all,
+                        EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20),
+                        for: .scrollContent
+        )
     }
 
     func nutrientValue(for nutrient: Nutrient) -> NutrientValue {
@@ -627,17 +658,20 @@ extension ItemForm {
         isAnimatingAmountChange = true
         startedAnimatingAmountChangeAt = Date()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            
-            withAnimation(.snappy) {
-                amountDouble = newAmount
-            }
-            amountString = newAmount.cleanAmount
+            setAmount(newAmount)
+        }
+    }
+    
+    func setAmount(_ amount: Double) {
+        withAnimation(.snappy) {
+            amountDouble = amount
+        }
+        amountString = amount.cleanAmount
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                guard Date().timeIntervalSince(self.startedAnimatingAmountChangeAt) >= 0.55
-                else { return }
-                self.isAnimatingAmountChange = false
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            guard Date().timeIntervalSince(self.startedAnimatingAmountChangeAt) >= 0.55
+            else { return }
+            self.isAnimatingAmountChange = false
         }
     }
 
