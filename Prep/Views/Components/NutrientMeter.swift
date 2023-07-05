@@ -17,7 +17,7 @@ extension NutrientMeter {
         GeometryReader { proxy -> AnyView in
             return AnyView(
                 capsulesPrototype(proxy)
-                    .animation(.bouncy, value: model.planned)
+                    .animation(.snappy, value: model.planned)
             )
         }
         .clipShape(

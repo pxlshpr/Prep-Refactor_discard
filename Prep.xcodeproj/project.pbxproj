@@ -16,6 +16,8 @@
 		E22F843D2A54AE9F00096909 /* PercentageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F843C2A54AE9F00096909 /* PercentageType.swift */; };
 		E22F843F2A54AF1900096909 /* MetricsView+Animatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F843E2A54AF1900096909 /* MetricsView+Animatable.swift */; };
 		E22F84412A54B3C100096909 /* DaysStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84402A54B3C100096909 /* DaysStore.swift */; };
+		E22F84432A55249700096909 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84422A55249700096909 /* CalendarView.swift */; };
+		E22F84452A55385D00096909 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84442A55385D00096909 /* Array.swift */; };
 		E23652402A52DC630049C199 /* Populate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236523F2A52DC630049C199 /* Populate.swift */; };
 		E23652452A5317400049C199 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652442A5317400049C199 /* DataManager.swift */; };
 		E23652472A53175E0049C199 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652462A53175E0049C199 /* CoreDataManager.swift */; };
@@ -194,6 +196,8 @@
 		E22F843C2A54AE9F00096909 /* PercentageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentageType.swift; sourceTree = "<group>"; };
 		E22F843E2A54AF1900096909 /* MetricsView+Animatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MetricsView+Animatable.swift"; sourceTree = "<group>"; };
 		E22F84402A54B3C100096909 /* DaysStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysStore.swift; sourceTree = "<group>"; };
+		E22F84422A55249700096909 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		E22F84442A55385D00096909 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E236523F2A52DC630049C199 /* Populate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Populate.swift; sourceTree = "<group>"; };
 		E23652442A5317400049C199 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		E23652462A53175E0049C199 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -601,6 +605,7 @@
 			isa = PBXGroup;
 			children = (
 				E28001C22A52B84300C6D528 /* Fond.Weight.swift */,
+				E22F84442A55385D00096909 /* Array.swift */,
 				E28001C32A52B84300C6D528 /* Date.swift */,
 				E28001C42A52B84300C6D528 /* PhotosPickerItem.swift */,
 				E28001C52A52B84300C6D528 /* Notification.swift */,
@@ -675,6 +680,7 @@
 				E28001E52A52B84300C6D528 /* FoodPickerModel.swift */,
 				E28001E62A52B84300C6D528 /* MealFooter.swift */,
 				E28001E72A52B84300C6D528 /* LogView.swift */,
+				E22F84422A55249700096909 /* CalendarView.swift */,
 				E22F84322A54AA5A00096909 /* LogNavigationBar.swift */,
 				E22F843E2A54AF1900096909 /* MetricsView+Animatable.swift */,
 				E28001E82A52B84300C6D528 /* MealItemCell.swift */,
@@ -942,6 +948,7 @@
 				E28002382A52B84300C6D528 /* Micro.swift in Sources */,
 				E280024B2A52B84300C6D528 /* FoodResult.swift in Sources */,
 				E22F84372A54ADCA00096909 /* NutrientMeter.Model.swift in Sources */,
+				E22F84432A55249700096909 /* CalendarView.swift in Sources */,
 				E28002472A52B84300C6D528 /* Nutrient.swift in Sources */,
 				E280025B2A52B84300C6D528 /* FoodSize.swift in Sources */,
 				E28002572A52B84300C6D528 /* VolumeQuantity.swift in Sources */,
@@ -1001,6 +1008,7 @@
 				E28002042A52B84300C6D528 /* Food.swift in Sources */,
 				E280027F2A52B84300C6D528 /* LogView.swift in Sources */,
 				E28002642A52B84300C6D528 /* ScanResult.swift in Sources */,
+				E22F84452A55385D00096909 /* Array.swift in Sources */,
 				E280024A2A52B84300C6D528 /* FoodDataset.swift in Sources */,
 				E280027D2A52B84300C6D528 /* FoodPickerModel.swift in Sources */,
 				E236524F2A5318470049C199 /* Entity.swift in Sources */,

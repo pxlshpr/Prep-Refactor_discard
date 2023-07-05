@@ -6,15 +6,22 @@ import FoodDataTypes
 struct LogNavigationBar: View {
     
     @Environment(\.colorScheme) var colorScheme
-    
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
     @State var day: Day = Day()
     @Binding var currentDate: Date?
+    @Binding var calendarPosition: String?
     var proxy: GeometryProxy
     
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
 
-    init(currentDate: Binding<Date?>, proxy: GeometryProxy) {
+    init(
+        currentDate: Binding<Date?>,
+        calendarPosition: Binding<String?>,
+        proxy: GeometryProxy
+    ) {
         _currentDate = currentDate
+        _calendarPosition = calendarPosition
         self.proxy = proxy
     }
     
@@ -93,9 +100,16 @@ struct LogNavigationBar: View {
     }
     
     var metricsViewLayer: some View {
-        VStack(spacing: 0) {
-            Spacer(minLength: 0)
-            metricsView
+        HStack(spacing: 0) {
+            if horizontalSizeClass == .regular, let calendarPosition {
+                Text(calendarPosition)
+                    .font(.largeTitle)
+                    .frame(width: (44 * 7) + 20 + 20)
+            }
+            VStack(spacing: 0) {
+                Spacer(minLength: 0)
+                metricsView
+            }
         }
     }
 

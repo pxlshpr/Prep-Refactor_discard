@@ -5,19 +5,26 @@ import SwiftHaptics
 import SwiftSugar
 
 struct LogView: View {
-    
+
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+
     @Binding var currentDate: Date?
+    @State var calendarPosition: String? = nil
 
     @State var showingFoodPicker: Bool = false
     @State var showingFoodForm: Bool = false
     @State var showingMealForm: Bool = false
-    
+
     var body: some View {
         GeometryReader { proxy in
             ZStack {
                 scrollView(proxy)
 //                titleLayer(proxy)
-                LogNavigationBar(currentDate: $currentDate, proxy: proxy)
+                LogNavigationBar(
+                    currentDate: $currentDate,
+                    calendarPosition: $calendarPosition,
+                    proxy: proxy
+                )
                 buttonsLayer
             }
         }
@@ -32,18 +39,27 @@ struct LogView: View {
     }
     
     func scrollView(_ proxy: GeometryProxy) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(spacing: 0) {
-                ForEach(dates, id: \.self) { date in
-                    dayView(date, proxy)
-                        .containerRelativeFrame(.horizontal)
-                }
+        HStack(spacing: 0) {
+            if horizontalSizeClass == .regular {
+                CalendarView(
+                    currentDate: $currentDate,
+                    calendarPosition: $calendarPosition,
+                    proxy: proxy
+                )
             }
-            .scrollTargetLayout()
+            ScrollView(.horizontal, showsIndicators: false) {
+                LazyHStack(spacing: 0) {
+                    ForEach(dates, id: \.self) { date in
+                        dayView(date, proxy)
+                            .containerRelativeFrame(.horizontal)
+                    }
+                }
+                .scrollTargetLayout()
+            }
+            .scrollTargetBehavior(.paging)
+            .scrollPosition(id: $currentDate)
+            .ignoresSafeArea(edges: .all)
         }
-        .scrollTargetBehavior(.paging)
-        .scrollPosition(id: $currentDate)
-        .ignoresSafeArea(edges: .all)
     }
     
     func dayView(_ date: Date, _ proxy: GeometryProxy) -> some View {

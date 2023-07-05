@@ -304,4 +304,91 @@ extension Date {
        let date = calendar.date(from: components)!
        return date
     }
+    
+    init(
+        year: Int? = nil,
+        month: Int? = nil,
+        day: Int = 1,
+        hour: Int = 0,
+        minute: Int = 0
+    ) {
+        let calendar = Calendar.current
+
+        var components = DateComponents()
+        components.year = year ?? Date.now.year
+        components.month = month ?? Date.now.month
+        components.day = day
+        components.hour = hour
+        components.minute = minute
+        components.second = 0
+
+        self = calendar.date(from: components)!
+    }
+    
+    static func day(index: Int, weekOfMonth: Int, month: Int, year: Int, firstWeekday: Int) -> Date? {
+        guard let range = rangeOf(weekOfMonth: weekOfMonth, year: year, month: month, firstWeekday: firstWeekday) else {
+            return nil
+        }
+        let dates = Self.dates(from: range.lowerBound, to: range.upperBound)
+        let date = dates[index]
+        guard date.month == month else {
+            return nil
+        }
+        return date
+    }
+
+    static func dates(from fromDate: Date, to toDate: Date) -> [Date] {
+        var dates: [Date] = []
+        var date = fromDate
+        
+        while date <= toDate {
+            dates.append(date)
+            guard let newDate = Calendar.current.date(byAdding: .day, value: 1, to: date) else { break }
+            date = newDate
+        }
+        return dates
+    }
+    
+    static func rangeOf(weekOfMonth: Int, year: Int, month: Int, firstWeekday: Int) -> Range<Date>? {
+        var calendar = Calendar.current
+        calendar.firstWeekday = firstWeekday
+        guard let startOfMonth = calendar.date(from: DateComponents(
+            year: year,
+            month: month))
+        else { return nil }
+        
+        var startDate = Date()
+        
+        if weekOfMonth == 1 {
+            
+            var interval = TimeInterval()
+            guard calendar.dateInterval(
+                of: .weekOfMonth,
+                start: &startDate,
+                interval: &interval,
+                for: startOfMonth
+            ) else {
+                return nil
+            }
+            
+        } else {
+            let nextComponents = DateComponents(
+                year: year,
+                month: month,
+                weekOfMonth: weekOfMonth
+            )
+            guard let weekStartDate = calendar.nextDate(
+                after: startOfMonth,
+                matching: nextComponents,
+                matchingPolicy: .nextTime
+            ) else {
+                return nil
+            }
+            startDate = weekStartDate
+        }
+        let endComponents = DateComponents(day:7, second: -1)
+        let endDate = calendar.date(byAdding: endComponents, to: startDate)!
+        return startDate..<endDate
+    }
+
 }
