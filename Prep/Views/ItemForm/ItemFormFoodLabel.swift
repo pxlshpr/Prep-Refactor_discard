@@ -3,31 +3,6 @@ import Charts
 
 import FoodDataTypes
 
-struct ItemFormFoodLabel: View {
-
-    let food: Food?
-    
-    var body: some View {
-        if let food {
-            HStack {
-                HStack(alignment: .top) {
-                    Text("Food")
-                        .foregroundStyle(Color(.label))
-                    Spacer()
-                    Text(food.foodName)
-//                        .foregroundStyle(Color(.secondaryLabel))
-                        .foregroundStyle(Color(.label))
-                }
-                .multilineTextAlignment(.trailing)
-                Image(systemName: "chevron.right")
-                    .foregroundStyle(Color(.tertiaryLabel))
-                    .imageScale(.small)
-                    .fontWeight(.semibold)
-            }
-        }
-    }
-}
-
 struct ItemFormEnergyLabel: View {
     
     @Environment(\.colorScheme) var colorScheme

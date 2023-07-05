@@ -1,9 +1,9 @@
 import SwiftUI
+import OSLog
 
 import SwiftHaptics
 import ViewSugar
-
-import OSLog
+import FoodLabel
 
 private let logger = Logger(subsystem: "MealItemCell", category: "")
 
@@ -14,11 +14,15 @@ struct MealItemCell: View {
     @Environment(\.colorScheme) var colorScheme
 
     let item: FoodItem
-    
+    let meal: Meal
+
     @State var width: CGFloat
     
-    init(item: FoodItem) {
+    @State var showingItemForm = false
+    
+    init(item: FoodItem, meal: Meal) {
         self.item = item
+        self.meal = meal
         
         /// Always reuse whatever the last saved width was as the start point.
         /// This it to mitigate a bug where newly added food items don't get their width set
@@ -28,24 +32,63 @@ struct MealItemCell: View {
     }
     
     var body: some View {
-        content
-            .padding(.horizontal, 8)
-            .padding(.vertical, 12)
-            .contentShape(Rectangle())
-            .hoverEffect(.highlight)
-            .readSize {
-                lastWidth = $0.width
-                self.width = $0.width
-            }
+        Button {
+            Haptics.selectionFeedback()
+            showingItemForm = true
+        } label: {
+            label
+                .padding(.horizontal, 8)
+                .padding(.vertical, 12)
+                .contentShape(Rectangle())
+                .hoverEffect(.highlight)
+                .readSize {
+                    lastWidth = $0.width
+                    self.width = $0.width
+                }
+        }
+        .contextMenu(menuItems: { menuItems }, preview: {
+            FoodLabel(data: .constant(item.foodLabelData))
+        })
     }
 
-    var content: some View {
+    var menuItems: some View {
+        Section(item.food.name) {
+            Button {
+                
+            } label: {
+                Label("Edit", systemImage: "pencil")
+            }
+            Button(role: .destructive) {
+                Task.detached(priority: .high) {
+                    guard let updatedDay = await FoodItemsStore.delete(item) else {
+                        return
+                    }
+                    await MainActor.run {
+                        post(.didDeleteFoodItem, userInfo: [.day: updatedDay])
+                    }
+                }
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
+    }
+    
+    var label: some View {
         HStack(spacing: 0) {
             optionalEmojiText
             nameTexts(withAmount: true)
             Spacer()
             foodBadge
         }
+        .popover(isPresented: $showingItemForm) { itemForm }
+    }
+    
+    var itemForm: some View {
+        ItemForm(
+            isPresented: $showingItemForm,
+            foodItem: item,
+            meal: meal
+        )
     }
     
     var foodBadge: some View {

@@ -37,7 +37,6 @@ struct FoodPicker: View {
         .onDisappear(perform: disappeared)
         .onAppear(perform: appeared)
         .frame(idealWidth: 400, idealHeight: 800)
-//        .presentationCompactAdaptation(horizontal: .popover, vertical: .popover)
         .presentationDetents([.medium, .fraction(0.90)])
     }
     

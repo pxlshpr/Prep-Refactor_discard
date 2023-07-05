@@ -104,38 +104,41 @@ struct MealView: View {
     }
     
     func cell(foodItem: FoodItem) -> some View {
-        
-        @ViewBuilder
-        var menuItems: some View {
-            Section(foodItem.food.name) {
-                Button {
-                    
-                } label: {
-                    Label("Edit", systemImage: "pencil")
-                }
-                Button(role: .destructive) {
-                    Task.detached(priority: .high) {
-                        guard let updatedDay = await FoodItemsStore.delete(foodItem) else {
-                            return
-                        }
-                        await MainActor.run {
-                            post(.didDeleteFoodItem, userInfo: [.day: updatedDay])
-                        }
-                    }
-                } label: {
-                    Label("Delete", systemImage: "trash")
-                }
-            }
-        }
-        
-        return Button {
-            tapped(foodItem)
-        } label: {
-            MealItemCell(item: foodItem)
-        }
-        .contextMenu(menuItems: { menuItems }, preview: {
-            FoodLabel(data: .constant(foodItem.foodLabelData))
-        })
+        MealItemCell(item: foodItem, meal: meal)
+//        @ViewBuilder
+//        var menuItems: some View {
+//            Section(foodItem.food.name) {
+//                Button {
+//                    
+//                } label: {
+//                    Label("Edit", systemImage: "pencil")
+//                }
+//                Button(role: .destructive) {
+//                    Task.detached(priority: .high) {
+//                        guard let updatedDay = await FoodItemsStore.delete(foodItem) else {
+//                            return
+//                        }
+//                        await MainActor.run {
+//                            post(.didDeleteFoodItem, userInfo: [.day: updatedDay])
+//                        }
+//                    }
+//                } label: {
+//                    Label("Delete", systemImage: "trash")
+//                }
+//            }
+//        }
+//        
+//        return Button {
+//            tapped(foodItem)
+//        } label: {
+//            MealItemCell(
+//                item: foodItem,
+//                meal: meal
+//            )
+//        }
+//        .contextMenu(menuItems: { menuItems }, preview: {
+//            FoodLabel(data: .constant(foodItem.foodLabelData))
+//        })
     }
 
     var header: some View {
@@ -190,11 +193,11 @@ struct MealView: View {
 
 extension MealView {
     
-    func tapped(_ foodItem: FoodItem) {
-        Haptics.selectionFeedback()
+//    func tapped(_ foodItem: FoodItem) {
+//        Haptics.selectionFeedback()
 //        model.foodItemBeingEdited = foodItem
 //        showingItemForm = true
-    }
+//    }
     
     func tappedDeleteMeal() {
         Haptics.successFeedback()

@@ -15,6 +15,8 @@ struct ItemForm: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
     
+    @FocusState var isFocused: Bool
+    
     @State var unit: FormUnit
     @State var meal: Meal? = nil
 
@@ -27,6 +29,10 @@ struct ItemForm: View {
     @State var amountString: String
     @State var amountDouble: Double?
 
+    @State var isAnimatingAmountChange = false
+    @State var startedAnimatingAmountChangeAt: Date = Date()
+    
+    /// Creating new items
     init(
         isPresented: Binding<Bool>,
         meal: Meal?,
@@ -54,16 +60,59 @@ struct ItemForm: View {
         _unit = State(initialValue: unit ?? DefaultUnit)
     }
 
+    /// Editing existing items
+    init(
+        isPresented: Binding<Bool>,
+        foodItem: FoodItem,
+        meal: Meal
+    ) {
+        _isPresented = isPresented
+        _meal = State(initialValue: meal)
+        _food = State(initialValue: foodItem.food)
+        _foodItem = State(initialValue: foodItem)
+        
+        _amountDouble = State(initialValue: foodItem.amount.value)
+        _amountString = State(initialValue: foodItem.amount.value.cleanAmount)
+
+        if let unit = foodItem.amount.formUnit(for: foodItem.food) {
+            _unit = State(initialValue: unit)
+        } else {
+            _unit = State(initialValue: DefaultUnit)
+        }
+    }
+
     var body: some View {
         NavigationStack {
             content
-                .navigationTitle("New Entry")
+                .navigationTitle(title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar { toolbarContent }
-                .scrollDismissesKeyboard(.interactively)
-                .interactiveDismissDisabled()
         }
+        .scrollDismissesKeyboard(.interactively)
+//        .interactiveDismissDisabled()
         .onAppear(perform: appeared)
+        .frame(idealWidth: 400, idealHeight: 800)
+        .presentationDetents([.medium, .fraction(0.90)])
+        .onChange(of: isFocused, isFocusedChanged)
+    }
+    
+    @State var showingShortcuts = false
+    
+    func isFocusedChanged(oldValue: Bool, newValue: Bool) {
+        let delay = newValue == true ? 0.2 : 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            withAnimation(.snappy) {
+                showingShortcuts = newValue
+            }
+        }
+    }
+    
+    var isEditing: Bool {
+        foodItem != nil
+    }
+    
+    var title: String {
+        isEditing ? "Edit Entry" : "New Entry"
     }
     
     func appeared() {
@@ -103,6 +152,7 @@ struct ItemForm: View {
             .textFieldStyle(.plain)
             .multilineTextAlignment(.trailing)
             .keyboardType(.decimalPad)
+            .focused($isFocused)
             .simultaneousGesture(textSelectionTapGesture)
     }
     
@@ -128,8 +178,17 @@ struct ItemForm: View {
                         .fontWeight(.bold)
                 }
             }
-            ToolbarItem(placement: .keyboard) {
-                stepButtons
+//            ToolbarItem(placement: .keyboard) {
+//                stepButtons
+//            }
+            if isEditing {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text("Cancel")
+                    }
+                }
             }
         }
     }
@@ -166,11 +225,42 @@ struct ItemForm: View {
                 foodField
                 mealField
                 quantityField
+                incrementField
             }
             if let food {
                 nutrientsSection(food)
             }
         }
+    }
+    
+    var incrementField: some View {
+        Group {
+            if showingShortcuts {
+                stepButtons
+                recentValues
+            }
+        }
+    }
+    
+    var recentValues: some View {
+        var values: [String] {
+            ["50 g", "66 g", "2 scoops", "35 g", "90 g", "1.5 scoops", "27 g", "45 g", "1 scoop"]
+        }
+        return ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack {
+                ForEach(values, id: \.self) { value in
+                    Text(value)
+                        .foregroundStyle(Color(.label))
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 8)
+                        .background(
+                            RoundedRectangle(cornerRadius: 5)
+                                .fill(Color(.secondarySystemFill))
+                        )
+                }
+            }
+        }
+        .padding(.vertical, 4)
     }
 
     func nutrientValue(for nutrient: Nutrient) -> NutrientValue {
@@ -275,17 +365,28 @@ struct ItemForm: View {
         }
     }
     
+    @ViewBuilder
     var foodField: some View {
-        Button {
-//            model.reset()
-            dismiss()
-        } label: {
-            ItemFormFoodLabel(food: food)
+        if let food {
+            HStack {
+                HStack(alignment: .top) {
+                    Text("Food")
+                        .foregroundStyle(Color(.label))
+                    Spacer()
+                    Text(food.foodName)
+                        .foregroundStyle(Color(.label))
+                }
+                .multilineTextAlignment(.trailing)
+//                Image(systemName: "chevron.right")
+//                    .foregroundStyle(Color(.tertiaryLabel))
+//                    .imageScale(.small)
+//                    .fontWeight(.semibold)
+            }
         }
     }
 
     var mealField: some View {
-        NavigationLink(value: ItemFormRoute.meal) {
+        var label: some View {
             HStack {
                 Text("Meal")
                     .foregroundStyle(Color(.label))
@@ -293,6 +394,16 @@ struct ItemForm: View {
                 if let meal {
                     Text(meal.title)
                         .foregroundStyle(Color(.label))
+                }
+            }
+        }
+        
+        return Group {
+            if isEditing {
+                label
+            } else {
+                NavigationLink(value: ItemFormRoute.meal) {
+                    label
                 }
             }
         }
@@ -466,87 +577,88 @@ struct ItemForm: View {
         }
     }
     
-    @State var isAnimatingAmountChange = false
-    @State var startedAnimatingAmountChangeAt: Date = Date()
+    enum StepButtonDirection {
+        case forward
+        case backward
+        
+        var imagePrefix: String {
+            switch self {
+            case .backward: "gobackward"
+            case .forward: "goforward"
+            }
+        }
+    }
+    
+    enum Step {
+        case small
+        case medium
+        case large
+
+        var amount: Double {
+            switch self {
+            case .small: 1
+            case .medium: 10
+            case .large: 60
+            }
+        }
+        
+        func amount(for direction: StepButtonDirection) -> Double {
+            direction == .forward ? amount : -amount
+        }
+        
+        func imageSuffix(for direction: StepButtonDirection) -> String {
+            switch self {
+            case .small: direction == .forward ? "plus" : "minus"
+            case .medium: "10"
+            case .large: "60"
+            }
+        }
+        
+        func image(in direction: StepButtonDirection) -> String {
+            "\(direction.imagePrefix).\(imageSuffix(for: direction))"
+        }
+    }
+}
+
+extension ItemForm {
+    func tappedStepButton(_ step: Step, _ direction: StepButtonDirection) {
+        Haptics.selectionFeedback()
+        let newAmount = (amountDouble ?? 0) + step.amount(for: direction)
+        isAnimatingAmountChange = true
+        startedAnimatingAmountChangeAt = Date()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            
+            withAnimation(.snappy) {
+                amountDouble = newAmount
+            }
+            amountString = newAmount.cleanAmount
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                guard Date().timeIntervalSince(self.startedAnimatingAmountChangeAt) >= 0.55
+                else { return }
+                self.isAnimatingAmountChange = false
+            }
+        }
+    }
+
+    func shouldDisableStepButton(_ step: Step, direction: StepButtonDirection) -> Bool {
+        (amountDouble ?? 0) + step.amount(for: direction) < 0
+    }
+
+    func stepButton(_ step: Step, _ direction: StepButtonDirection) -> some View {
+        Button {
+            tappedStepButton(step, direction)
+        } label: {
+            Image(systemName: step.image(in: direction))
+                .font(.system(size: 25, weight: .regular))
+                .frame(maxWidth: .infinity)
+        }
+        .disabled(shouldDisableStepButton(step, direction: direction))
+        .buttonStyle(.borderless)
+    }
 
     var stepButtons: some View {
-        func stepButton(_ step: Step, _ direction: Direction) -> some View {
-            
-            var disabled: Bool {
-                (amountDouble ?? 0) + step.amount(for: direction) < 0
-            }
-            
-            func tapped() {
-                Haptics.selectionFeedback()
-                let newAmount = (amountDouble ?? 0) + step.amount(for: direction)
-                isAnimatingAmountChange = true
-                startedAnimatingAmountChangeAt = Date()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                    
-                    withAnimation(.snappy) {
-                        amountDouble = newAmount
-                    }
-                    amountString = newAmount.cleanAmount
-
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        guard Date().timeIntervalSince(self.startedAnimatingAmountChangeAt) >= 0.55
-                        else { return }
-                        self.isAnimatingAmountChange = false
-                    }
-                }
-            }
-            
-            return Button {
-                tapped()
-            } label: {
-                Image(systemName: step.image(in: direction))
-            }
-            .disabled(disabled)
-        }
-        
-        enum Direction {
-            case forward
-            case backward
-            
-            var imagePrefix: String {
-                switch self {
-                case .backward: "gobackward"
-                case .forward: "goforward"
-                }
-            }
-        }
-        
-        enum Step {
-            case small
-            case medium
-            case large
-
-            var amount: Double {
-                switch self {
-                case .small: 1
-                case .medium: 10
-                case .large: 60
-                }
-            }
-            
-            func amount(for direction: Direction) -> Double {
-                direction == .forward ? amount : -amount
-            }
-            
-            func imageSuffix(for direction: Direction) -> String {
-                switch self {
-                case .small: direction == .forward ? "plus" : "minus"
-                case .medium: "10"
-                case .large: "60"
-                }
-            }
-            
-            func image(in direction: Direction) -> String {
-                "\(direction.imagePrefix).\(imageSuffix(for: direction))"
-            }
-        }
-        
-        return HStack {
+        HStack {
             stepButton(.large, .backward)
             stepButton(.medium, .backward)
             stepButton(.small, .backward)

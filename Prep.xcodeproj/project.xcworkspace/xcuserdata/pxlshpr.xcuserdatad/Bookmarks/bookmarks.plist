@@ -646,6 +646,49 @@
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingLineNumber</key>
+					<string>91</string>
+					<key>StartingLineNumber</key>
+					<string>91</string>
+					<key>Timestamp</key>
+					<string>710274972.718158</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Views/ItemForm/ItemForm.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>//        .interactiveDismissDisabled()
+</string>
+				<key>leading</key>
+				<string>        }
+        .scrollDismissesKeyboard(.interactively)
+</string>
+				<key>trailing</key>
+				<string>        .onAppear(perform: appeared)
+        .frame(idealWidth: 400, idealHeight: 800)
+        .presentationDetents([.medium, .fraction(0.90)])
+</string>
+			</dict>
+			<key>title</key>
+			<string>Bring this back</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
 	</array>
 </dict>
 </plist>
