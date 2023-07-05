@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pxlshpr/FoodDataTypes.git",
       "state" : {
-        "revision" : "4e8fd289756a82a8f75dda76b226e3864b4c0537",
-        "version" : "0.0.20"
+        "revision" : "d42d7aa4caa98fa1e4d877338a57d974de132b7c",
+        "version" : "0.0.23"
       }
     },
     {
@@ -52,6 +52,15 @@
       "state" : {
         "revision" : "a234645c3823f548e8cbb084755b2ce09dcb690f",
         "version" : "0.0.12"
+      }
+    },
+    {
+      "identity" : "nutritionlabel",
+      "kind" : "remoteSourceControl",
+      "location" : "http://github.com/pxlshpr/NutritionLabel",
+      "state" : {
+        "revision" : "ad204bb334f9519744fb3a48754faa9b9759791a",
+        "version" : "0.0.63"
       }
     },
     {

@@ -109,29 +109,59 @@ extension FoodValue {
     }
 }
 
+
+
 import FoodDataTypes
+import FoodLabel
 
-//extension FoodItem {
-//    func scaledEnergyValue(in unit: EnergyUnit) -> Double {
-//        0
-////        guard let value = food.value(for: .energy) else { return 0 }
-////        let scaledValue = value.value * nutrientScaleFactor
-////        return scaledValue
-//    }
-//
-//    func scaledMacroValue(for macro: Macro) -> Double {
-//        0
-////        guard let value = food.value(for: .macro(macro)) else { return 0 }
-////        return value.value * nutrientScaleFactor
-//    }
-//
-//    var nutrientScaleFactor: Double {
-//        0
-////        guard let quantity = food.quantity(for: amount) else { return 0 }
-////        return food.nutrientScaleFactor(for: quantity) ?? 0
-//    }
-//}
+extension EnergyUnit {
+    var foodLabelUnit: FoodLabelUnit {
+        switch self {
+        case .kcal: .kcal
+        case .kJ:   .kj
+        }
+    }
+}
 
+extension FoodItem {
+    var energyFoodLabelValue: FoodLabelValue {
+        FoodLabelValue(amount: energy, unit: energyUnit.foodLabelUnit)
+    }
+    
+    var foodLabelData: FoodLabelData {
+        FoodLabelData(
+            energyValue: energyFoodLabelValue,
+            carb: carb,
+            fat: fat,
+            protein: protein,
+            nutrients: microsDictForPreview,
+            quantityValue: amount.value,
+            quantityUnit: amount.unitDescription(sizes: food.sizes)
+        )
+    }
+    
+    /// Used for `FoodLabel`
+    var microsDict: [Micro : FoodLabelValue] {
+        var dict: [Micro : FoodLabelValue] = [:]
+        for nutrientValue in food.micros {
+            guard let micro = nutrientValue.micro else { continue }
+            dict[micro] = FoodLabelValue(
+                amount: calculateMicro(micro),
+                unit:
+                    nutrientValue.unit.foodLabelUnit
+                    ?? micro.defaultUnit.foodLabelUnit
+                    ?? .g
+            )
+        }
+        return dict
+    }
+    
+    var microsDictForPreview: [Micro : FoodLabelValue] {
+        microsDict
+            .filter { $0.key.isIncludedInPreview }
+    }
+
+}
 
 //import FoodLabel
 //
@@ -211,7 +241,7 @@ extension FoodItem {
         food.calculateMacro(macro, for: amount)
     }
     
-    func calculateMicro(_ micro: Micro, in unit: NutrientUnit) -> Double {
+    func calculateMicro(_ micro: Micro, in unit: NutrientUnit? = nil) -> Double {
         food.calculateMicro(micro, for: amount, in: unit)
     }
 }
@@ -227,9 +257,12 @@ extension Food {
         return value.value * nutrientScaleFactor(for: amount)
     }
 
-    func calculateMicro(_ micro: Micro, for amount: FoodValue, in unit: NutrientUnit) -> Double {
+    func calculateMicro(_ micro: Micro, for amount: FoodValue, in unit: NutrientUnit?) -> Double {
         guard let value = value(for: .micro(micro)) else { return 0 }
+        
         //TODO: Handle unit conversions
+//        let unit = unit ?? micro.defaultUnit
+        
         return value.value * nutrientScaleFactor(for: amount)
     }
 
@@ -244,5 +277,146 @@ extension Food {
 extension FoodItem {
     var quantityDescription: String {
         amount.description(with: food)
+    }
+}
+
+extension Micro {
+    var isIncludedInPreview: Bool {
+        switch self {
+        case .saturatedFat:
+            return true
+//        case .monounsaturatedFat:
+//            return true
+//        case .polyunsaturatedFat:
+//            return true
+        case .transFat:
+            return true
+        case .cholesterol:
+            return true
+        case .dietaryFiber:
+            return true
+//        case .solubleFiber:
+//            <#code#>
+//        case .insolubleFiber:
+//            <#code#>
+        case .sugars:
+            return true
+        case .addedSugars:
+            return true
+//        case .sugarAlcohols:
+//            <#code#>
+//        case .calcium:
+//            <#code#>
+//        case .chloride:
+//            <#code#>
+//        case .chromium:
+//            <#code#>
+//        case .copper:
+//            <#code#>
+//        case .iodine:
+//            <#code#>
+//        case .iron:
+//            <#code#>
+//        case .magnesium:
+//            return true
+//        case .manganese:
+//            <#code#>
+//        case .molybdenum:
+//            <#code#>
+//        case .phosphorus:
+//            <#code#>
+//        case .potassium:
+//            return true
+//        case .selenium:
+//            <#code#>
+        case .sodium:
+            return true
+//        case .zinc:
+//            <#code#>
+//        case .vitaminA:
+//            <#code#>
+//        case .vitaminB1_thiamine:
+//            <#code#>
+//        case .vitaminB2_riboflavin:
+//            <#code#>
+//        case .vitaminB3_niacin:
+//            <#code#>
+//        case .vitaminB5_pantothenicAcid:
+//            <#code#>
+//        case .vitaminB6_pyridoxine:
+//            <#code#>
+//        case .vitaminB7_biotin:
+//            <#code#>
+//        case .vitaminB9_folate:
+//            <#code#>
+//        case .vitaminB9_folicAcid:
+//            <#code#>
+//        case .vitaminB12_cobalamin:
+//            <#code#>
+//        case .vitaminC_ascorbicAcid:
+//            <#code#>
+//        case .vitaminD_calciferol:
+//            <#code#>
+//        case .vitaminE:
+//            <#code#>
+//        case .vitaminK1_phylloquinone:
+//            <#code#>
+//        case .vitaminK2_menaquinone:
+//            <#code#>
+//        case .choline:
+//            <#code#>
+//        case .caffeine:
+//            <#code#>
+//        case .ethanol:
+//            <#code#>
+//        case .taurine:
+//            <#code#>
+//        case .polyols:
+//            <#code#>
+//        case .gluten:
+//            <#code#>
+//        case .starch:
+//            <#code#>
+//        case .salt:
+//            <#code#>
+//        case .creatine:
+//            <#code#>
+//        case .energyWithoutDietaryFibre:
+//            <#code#>
+//        case .water:
+//            <#code#>
+//        case .freeSugars:
+//            <#code#>
+//        case .ash:
+//            <#code#>
+//        case .preformedVitaminARetinol:
+//            <#code#>
+//        case .betaCarotene:
+//            <#code#>
+//        case .provitaminABetaCaroteneEquivalents:
+//            <#code#>
+//        case .niacinDerivedEquivalents:
+//            <#code#>
+//        case .totalFolates:
+//            <#code#>
+//        case .dietaryFolateEquivalents:
+//            <#code#>
+//        case .alphaTocopherol:
+//            <#code#>
+//        case .tryptophan:
+//            <#code#>
+//        case .linoleicAcid:
+//            <#code#>
+//        case .alphaLinolenicAcid:
+//            <#code#>
+//        case .eicosapentaenoicAcid:
+//            <#code#>
+//        case .docosapentaenoicAcid:
+//            <#code#>
+//        case .docosahexaenoicAcid:
+//            <#code#>
+        default:
+            return false
+        }
     }
 }

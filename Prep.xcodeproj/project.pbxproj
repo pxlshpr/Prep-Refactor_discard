@@ -24,6 +24,7 @@
 		E23652492A5317A30049C199 /* MealsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E23652482A5317A30049C199 /* MealsStore.swift */; };
 		E236524D2A5318420049C199 /* Fetchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236524C2A5318420049C199 /* Fetchable.swift */; };
 		E236524F2A5318470049C199 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E236524E2A5318470049C199 /* Entity.swift */; };
+		E23B655E2A558D93003FFAC4 /* FoodLabel in Frameworks */ = {isa = PBXBuildFile; productRef = E23B655D2A558D93003FFAC4 /* FoodLabel */; };
 		E2672C7D2A52C1B00002E95C /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */; };
 		E2672C802A52C3F90002E95C /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity.swift */; };
 		E28002002A52B84300C6D528 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001572A52B84300C6D528 /* Import.swift */; };
@@ -365,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E280FED32A52B08700C6D528 /* Camera in Frameworks */,
+				E23B655E2A558D93003FFAC4 /* FoodLabel in Frameworks */,
 				E280FEC12A52B03A00C6D528 /* SwiftHaptics in Frameworks */,
 				E280FEDC2A52B0B500C6D528 /* FoodLabelScanner in Frameworks */,
 				E280FEC72A52B05000C6D528 /* ColorSugar in Frameworks */,
@@ -807,6 +809,7 @@
 				E280FED52A52B09800C6D528 /* VisionSugar */,
 				E280FED82A52B0A600C6D528 /* FoodDataTypes */,
 				E280FEDB2A52B0B500C6D528 /* FoodLabelScanner */,
+				E23B655D2A558D93003FFAC4 /* FoodLabel */,
 			);
 			productName = Prep;
 			productReference = E280FC122A529E3D00C6D528 /* Prep.app */;
@@ -847,6 +850,7 @@
 				E280FED42A52B09800C6D528 /* XCRemoteSwiftPackageReference "VisionSugar" */,
 				E280FED72A52B0A600C6D528 /* XCRemoteSwiftPackageReference "FoodDataTypes" */,
 				E280FEDA2A52B0B500C6D528 /* XCRemoteSwiftPackageReference "FoodLabelScanner" */,
+				E23B655C2A558D93003FFAC4 /* XCRemoteSwiftPackageReference "NutritionLabel" */,
 			);
 			productRefGroup = E280FC132A529E3D00C6D528 /* Products */;
 			projectDirPath = "";
@@ -1261,6 +1265,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		E23B655C2A558D93003FFAC4 /* XCRemoteSwiftPackageReference "NutritionLabel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "http://github.com/pxlshpr/NutritionLabel";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.0.63;
+			};
+		};
 		E280FEBF2A52B03A00C6D528 /* XCRemoteSwiftPackageReference "SwiftHaptics" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pxlshpr/SwiftHaptics";
@@ -1344,6 +1356,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		E23B655D2A558D93003FFAC4 /* FoodLabel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E23B655C2A558D93003FFAC4 /* XCRemoteSwiftPackageReference "NutritionLabel" */;
+			productName = FoodLabel;
+		};
 		E280FEC02A52B03A00C6D528 /* SwiftHaptics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = E280FEBF2A52B03A00C6D528 /* XCRemoteSwiftPackageReference "SwiftHaptics" */;

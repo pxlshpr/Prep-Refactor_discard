@@ -2,6 +2,7 @@ import SwiftUI
 import OSLog
 
 import SwiftHaptics
+import FoodLabel
 
 struct MealView: View {
 
@@ -81,11 +82,35 @@ struct MealView: View {
     }
     
     func cell(foodItem: FoodItem) -> some View {
-        Button {
+        
+        @ViewBuilder
+        var menuItems: some View {
+            Section(foodItem.food.name) {
+                Button {
+                } label: {
+                    Label("Edit", systemImage: "pencil")
+                }
+                Button {
+                    
+                } label: {
+                    Label("Duplicate", systemImage: "plus.square.on.square")
+                }
+                Divider()
+                Button(role: .destructive) {
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }
+            }
+        }
+        
+        return Button {
             tapped(foodItem)
         } label: {
             MealItemCell(item: foodItem)
         }
+        .contextMenu(menuItems: { menuItems }, preview: {
+            FoodLabel(data: .constant(foodItem.foodLabelData))
+        })
     }
 
     var header: some View {
