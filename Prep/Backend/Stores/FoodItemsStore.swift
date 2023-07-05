@@ -18,6 +18,18 @@ class FoodItemsStore {
     }
 }
 
+/// FoodItem Helpers, when we have a context available
+extension FoodItemsStore {
+    static func latestFoodItemEntity(foodID: UUID, context: NSManagedObjectContext) -> FoodItemEntity? {
+        FoodItemEntity.objects(
+            for: NSPredicate(format: "foodEntity.id == %@", foodID.uuidString),
+            sortDescriptors: [NSSortDescriptor(keyPath: \FoodItemEntity.updatedAt, ascending: false)],
+            fetchLimit: 1,
+            in: context
+        ).first
+    }
+}
+
 extension DataManager {
     
     func createFoodItem(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Day)? {
@@ -87,19 +99,32 @@ extension CoreDataManager {
         _ context: NSManagedObjectContext
     ) throws -> DayEntity {
         guard let foodItemEntity = FoodItemEntity.object(with: foodItem.id, in: context),
-              let mealEntity = foodItemEntity.mealEntity
+              let mealEntity = foodItemEntity.mealEntity,
+              let foodEntity = foodItemEntity.foodEntity
         else {
             fatalError()
         }
         
         context.delete(foodItemEntity)
         
+        /// Save the context and refetch the meal entity to get the updated one
         try context.save()
+        
+        /// Update Food's last used data (in case it was the deleting food item)
+    
+        if let lastFoodItem = FoodItemsStore.latestFoodItemEntity(foodID: foodEntity.id!, context: context) {
+            foodEntity.lastAmount = lastFoodItem.amount
+            foodEntity.lastUsedAt = lastFoodItem.updatedAt
+        } else {
+            foodEntity.lastAmount = nil
+            foodEntity.lastUsedAt = nil
+        }
+
         guard let updatedMealEntity = MealEntity.object(with: mealEntity.id!, in: context) else {
             fatalError()
         }
         
-        /// This cascades updates the meal, it's parent day, and all sibiling meals
+        /// This cascades updates to the meal, it's parent day, and all sibiling meals
         updatedMealEntity.postFoodItemUpdate()
         
         guard let updatedDayEntity = updatedMealEntity.dayEntity else {

@@ -13,6 +13,16 @@ import SwiftSugar
     
     init() {
         fetchRecents()
+        addObservers()
+    }
+    
+    func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didDeleteFoodItem), name: .didDeleteFoodItem, object: nil)
+    }
+    
+    @objc func didDeleteFoodItem(_ notification: Notification) {
+        /// Fetch recents again as last used info for foods might have changed
+        fetchRecents()
     }
     
     func fetchRecents() {

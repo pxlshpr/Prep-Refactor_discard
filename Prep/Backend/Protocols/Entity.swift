@@ -15,10 +15,22 @@ extension Entity {
             fatalError()
         }
     }
-    static func objects(for predicate: NSPredicate? = nil, in context: NSManagedObjectContext) -> [FetchableType] {
+    
+    static func objects(
+        for predicate: NSPredicate? = nil,
+        sortDescriptors: [NSSortDescriptor]? = nil,
+        fetchLimit: Int? = nil,
+        in context: NSManagedObjectContext
+    ) -> [FetchableType] {
         do {
             let request = NSFetchRequest<FetchableType>(entityName: entityName)
             request.predicate = predicate
+            if let fetchLimit {
+                request.fetchLimit = fetchLimit
+            }
+            if let sortDescriptors {
+                request.sortDescriptors = sortDescriptors
+            }
             return try context.fetch(request)
         } catch {
             fatalError()
