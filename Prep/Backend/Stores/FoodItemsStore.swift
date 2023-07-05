@@ -398,7 +398,7 @@ extension DayEntity {
         let updatedDay = Day(self)
         let sound: SoundPlayer.Sound
         if !previousHasGoalsInExcess && updatedDay.hasGoalsInExcess {
-            sound = .chiptunesErrorLong
+            sound = .chiptunesError
         } else if !previousHasMetAllGoals && updatedDay.hasMetAllGoals {
             sound = .chiptunesSuccessLong
         } else {
