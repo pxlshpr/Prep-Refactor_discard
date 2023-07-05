@@ -48,6 +48,8 @@ class SoundPlayer {
         
         case chiptunesError = "chiptunes_error.wav"
         case chiptunesSuccess = "chiptunes_success.wav"
+        case chiptunesErrorLong = "chiptunes_error_long.wav"
+        case chiptunesSuccessLong = "chiptunes_success_long.wav"
     }
     
     var scanSoundEffect: AVAudioPlayer? = nil

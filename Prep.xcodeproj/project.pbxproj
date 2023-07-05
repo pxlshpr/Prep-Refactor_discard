@@ -27,6 +27,8 @@
 		E23B655E2A558D93003FFAC4 /* FoodLabel in Frameworks */ = {isa = PBXBuildFile; productRef = E23B655D2A558D93003FFAC4 /* FoodLabel */; };
 		E23B65652A5612F6003FFAC4 /* chiptunes_success.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65632A5612F6003FFAC4 /* chiptunes_success.wav */; };
 		E23B65662A5612F6003FFAC4 /* chiptunes_error.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */; };
+		E23B65692A561461003FFAC4 /* chiptunes_success_long.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65672A561461003FFAC4 /* chiptunes_success_long.wav */; };
+		E23B656A2A561461003FFAC4 /* chiptunes_error_long.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */; };
 		E2672C7D2A52C1B00002E95C /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */; };
 		E2672C802A52C3F90002E95C /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity.swift */; };
 		E28002002A52B84300C6D528 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001572A52B84300C6D528 /* Import.swift */; };
@@ -209,6 +211,8 @@
 		E236524E2A5318470049C199 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		E23B65632A5612F6003FFAC4 /* chiptunes_success.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_success.wav; sourceTree = "<group>"; };
 		E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_error.wav; sourceTree = "<group>"; };
+		E23B65672A561461003FFAC4 /* chiptunes_success_long.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_success_long.wav; sourceTree = "<group>"; };
+		E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_error_long.wav; sourceTree = "<group>"; };
 		E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemEntity.swift; sourceTree = "<group>"; };
 		E2672C7F2A52C3F90002E95C /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
 		E28001572A52B84300C6D528 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Import.swift; path = ../Import.swift; sourceTree = "<group>"; };
@@ -470,6 +474,8 @@
 		E28001652A52B84300C6D528 /* Sound Files */ = {
 			isa = PBXGroup;
 			children = (
+				E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */,
+				E23B65672A561461003FFAC4 /* chiptunes_success_long.wav */,
 				E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */,
 				E23B65632A5612F6003FFAC4 /* chiptunes_success.wav */,
 				E28001662A52B84300C6D528 /* click2.wav */,
@@ -909,6 +915,7 @@
 				E280022B2A52B84300C6D528 /* button_touchDown.wav in Resources */,
 				E280026F2A52B84300C6D528 /* foods.json in Resources */,
 				E28002112A52B84300C6D528 /* calcbot_down.wav in Resources */,
+				E23B656A2A561461003FFAC4 /* chiptunes_error_long.wav in Resources */,
 				E28002172A52B84300C6D528 /* calcbot_clear.wav in Resources */,
 				E28002302A52B84300C6D528 /* calcbot_up.wav in Resources */,
 				E280021F2A52B84300C6D528 /* popClose2.wav in Resources */,
@@ -922,6 +929,7 @@
 				E280FC1F2A529E3E00C6D528 /* Assets.xcassets in Resources */,
 				E280020E2A52B84300C6D528 /* popOpen2.wav in Resources */,
 				E280021D2A52B84300C6D528 /* letterpress_swoosh2.wav in Resources */,
+				E23B65692A561461003FFAC4 /* chiptunes_success_long.wav in Resources */,
 				E280020D2A52B84300C6D528 /* click3.wav in Resources */,
 				E28002692A52B84300C6D528 /* days.json in Resources */,
 				E28002242A52B84300C6D528 /* tweetbot-swoosh.wav in Resources */,

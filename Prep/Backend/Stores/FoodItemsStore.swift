@@ -396,19 +396,19 @@ extension DayEntity {
         micros = day.calculatedMicros
         
         let updatedDay = Day(self)
+        let sound: SoundPlayer.Sound
         if !previousHasGoalsInExcess && updatedDay.hasGoalsInExcess {
-            SoundPlayer.play(.chiptunesError)
+            sound = .chiptunesErrorLong
         } else if !previousHasMetAllGoals && updatedDay.hasMetAllGoals {
-            SoundPlayer.play(.chiptunesSuccess)
+            sound = .chiptunesSuccessLong
         } else {
-            let sound: SoundPlayer.Sound
             switch action {
             case .create:   sound = .clearSwoosh
             case .delete:   sound = .letterpressDelete
             case .update:   sound = .clearSwoosh
             }
-            SoundPlayer.play(sound)
         }
+        SoundPlayer.play(sound)
     }
 }
 
