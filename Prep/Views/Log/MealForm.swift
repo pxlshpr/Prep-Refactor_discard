@@ -140,15 +140,15 @@ struct MealForm: View {
         let binding = Binding<String>(
             get: { name },
             set: { newValue in
-                self.name = name
-                delayedSetSaveDisabled()
+                self.name = newValue
+                setSaveDisabled()
             }
         )
         
         return Section {
             TextField("Name", text: binding)
                 .textFieldStyle(.plain)
-                .showClearButton($name)
+                .simultaneousGesture(textSelectionTapGesture)
         }
     }
     
@@ -197,7 +197,7 @@ struct MealForm: View {
             get: { time },
             set: { newValue in
                 self.time = newValue
-                delayedSetSaveDisabled()
+                setSaveDisabled()
             }
         )
     }
@@ -212,7 +212,6 @@ struct MealForm: View {
             )
             .datePickerStyle(.compact)
             .labelsHidden()
-//            .onChange(of: time, timeChanged)
             .id(refreshDatePicker)
         }
         
