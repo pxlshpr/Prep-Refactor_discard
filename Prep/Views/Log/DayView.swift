@@ -262,7 +262,6 @@ struct DayView: View {
 
     func showMealForm() {
         Haptics.selectionFeedback()
-        let date: Date = self.date.isToday ? Date.now : self.date.setting(hour: 12)
         showingMealForm = true
     }
     
@@ -278,7 +277,6 @@ struct DayView: View {
     }
 
     var newMealForm: some View {
-        let date = self.date.isToday ? Date.now : self.date.setting(hour: 12)
-        return MealForm(date)
+        MealForm(date)
     }
 }

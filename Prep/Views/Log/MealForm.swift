@@ -37,7 +37,8 @@ struct MealForm: View {
         _name = State(initialValue: name)
         self.initialName = name
         
-        _time = State(initialValue: date)
+        let time = Meal.defaultTime(for: date)
+        _time = State(initialValue: time)
         
         _saveDisabled = State(initialValue: false)
     }

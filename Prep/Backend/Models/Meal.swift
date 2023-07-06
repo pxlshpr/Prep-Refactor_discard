@@ -152,6 +152,11 @@ extension Meal {
         }
     }
 
+    static func defaultTime(for date: Date) -> Date {
+        date.isToday
+        ? Date.now
+        : date.setting(hour: 12)
+    }
 }
 
 extension Meal {
