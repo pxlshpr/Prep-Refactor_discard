@@ -25,6 +25,7 @@ struct LogNavigationBar: View {
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
     let didDeleteFoodItem = NotificationCenter.default.publisher(for: .didDeleteFoodItem)
     let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
+    let didModifyMeal = NotificationCenter.default.publisher(for: .didModifyMeal)
 
     init(
         currentDate: Binding<Date?>,
@@ -44,6 +45,7 @@ struct LogNavigationBar: View {
         .onChange(of: currentDate, currentDateChanged)
         .onReceive(didAddFoodItem, perform: didUpdateDay)
         .onReceive(didDeleteFoodItem, perform: didUpdateDay)
+        .onReceive(didModifyMeal, perform: didUpdateDay)
         .onReceive(didPopulate, perform: didPopulate)
     }
     

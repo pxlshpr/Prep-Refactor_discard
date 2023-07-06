@@ -37,27 +37,33 @@ extension DataManager {
 }
 
 extension CoreDataManager {
+    
+    func fetchOrCreateDay(for date: Date, in context: NSManagedObjectContext) -> DayEntity {
+        dayEntity(for: date, in: context)
+        ?? createDayEntity(for: date, in: context)
+    }
+    
+    func createDayEntity(for date: Date, in context: NSManagedObjectContext) -> DayEntity {
+        let entity = DayEntity()
+        entity.dateString = date.calendarDayString
+        context.insert(entity)
+        return entity
+    }
+    
+    func dayEntity(for date: Date, in context: NSManagedObjectContext) -> DayEntity? {
+        DayEntity.objects(
+            for: NSPredicate(format: "dateString == %@", date.calendarDayString),
+            fetchLimit: 1,
+            in: context
+        ).first
+    }
+    
     func dayEntity(for date: Date, completion: @escaping ((DayEntity?) -> ())) throws {
         Task {
             let bgContext =  newBackgroundContext()
             await bgContext.perform {
-                do {
-                    let dayString = date.calendarDayString
-                    let predicate = NSPredicate(format: "dateString == %@", dayString)
-
-//                    let days = try DayEntity.objects(for: predicate, in: bgContext)
-                    
-                    let request: NSFetchRequest<DayEntity> = DayEntity.fetchRequest()
-                    request.predicate = predicate
-//                    request.relationshipKeyPathsForPrefetching = ["mealEntities.foodItemEntities.foodEntity", "mealEntities.foodItemEntities.mealEntity"]
-                    let days = try bgContext.fetch(request)
-
-                    logger.info("Fetched day for: \(dayString, privacy: .public)")
-                    completion(days.first)
-                } catch {
-                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
-                    completion(nil)
-                }
+                let day = self.dayEntity(for: date, in: bgContext)
+                completion(day)
             }
         }
     }

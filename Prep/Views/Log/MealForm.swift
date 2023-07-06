@@ -9,28 +9,44 @@ struct MealForm: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
-//    @Environment(\.modelContext) var context
 
-    @Bindable var model: MealModel
-    
+//    @Bindable var model: MealModel
+//    @State var day: DayEntity? = nil
+        
     @State var refreshDatePicker: Bool = false
     @State var hasAppeared = false
 
-//    @State var day: DayEntity? = nil
+    @State var meal: Meal? = nil
     
-    init(model: MealModel) {
-        self.model = model
+    let date: Date
+    @State var name: String
+    @State var time: Date
+
+    @State var mealTimes: [Date] = []
+    
+    init(_ date: Date) {
+        self.date = date
+        _name = State(initialValue: Meal.defaultName(at: date))
+        _time = State(initialValue: date)
     }
     
-    var meal: Meal? { model.meal }
-    var date: Date { model.date }
+    init(_ meal: Meal) {
+        self.date = meal.date
+        _meal = State(initialValue: meal)
+        _name = State(initialValue: meal.name)
+        _time = State(initialValue: meal.time)
+    }
 
-    var mealTimes: [Date] { model.mealTimes }
-    
     @ViewBuilder
     var body: some View {
         content
             .onAppear(perform: appeared)
+            .frame(minWidth: 200, idealWidth: 450, minHeight: 250, idealHeight: 340)
+            .presentationDetents([.height(detentHeight)])
+    }
+    
+    var detentHeight: CGFloat {
+        meal == nil ? 400 : 450
     }
     
     
@@ -44,26 +60,32 @@ struct MealForm: View {
     }
     
     func appeared() {
+        fetchDay()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             withAnimation(.snappy) {
                 hasAppeared = true
             }
         }
-//        Task {
-//            let day = try await Database.shared.fetchOrCreateDay(for: date)
-//            await MainActor.run {
-//                guard let mainContextDay = context.object(with: day.objectID) as? DayEntity else {
-//                    fatalError()
-//                }
-//                self.day = mainContextDay
-//            }
-//        }
+    }
+    
+    func fetchDay() {
+        Task.detached(priority: .high) {
+            guard let day = await DaysStore.day(for: date) else {
+                return
+            }
+            self.mealTimes = day.meals
+                .filter {
+                    guard let meal else { return false }
+                    return $0.id != meal.id
+                }
+                .map { $0.time }
+        }
     }
     
     var nameTextField: some View {
-        TextField("Name", text: $model.name)
+        TextField("Name", text: $name)
             .textFieldStyle(.plain)
-            .showClearButton($model.name)
+            .showClearButton($name)
     }
     
     var form: some View {
@@ -123,7 +145,7 @@ struct MealForm: View {
         TimeSlider(
             date: date,
             existingTimeSlots: existingTimeSlots,
-            currentTime: $model.time,
+            currentTime: $time,
             currentTimeSlot: currentTimeSlot
         )
     }
@@ -132,13 +154,13 @@ struct MealForm: View {
         var picker: some View {
             DatePicker(
                 "",
-                selection: $model.time,
+                selection: $time,
                 in: dateRangeForPicker,
                 displayedComponents: [.hourAndMinute]
             )
             .datePickerStyle(.compact)
             .labelsHidden()
-            .onChange(of: model.time, onChangeOfTime)
+//            .onChange(of: time, timeChanged)
             .id(refreshDatePicker)
         }
         
@@ -153,7 +175,7 @@ struct MealForm: View {
                     RoundedRectangle(cornerRadius: 4.0, style: .continuous)
                         .fill(.yellow)
                 )
-                .opacity(model.time.startOfDay != date.startOfDay ? 1 : 0)
+                .opacity(time.startOfDay != date.startOfDay ? 1 : 0)
         }
         
         return ZStack {
@@ -180,6 +202,31 @@ struct MealForm: View {
         refreshDatePicker.toggle()
         Haptics.successFeedback()
         dismiss()
+        
+        Task.detached {
+            if let meal {
+                /// Update
+                guard let (updatedMeal, updatedDay) = await MealsStore.update(meal, name: name, time: time)
+                else { return }
+                await MainActor.run {
+                    post(.didModifyMeal, userInfo: [
+                        .meal: updatedMeal,
+                        .day: updatedDay
+                    ])
+                }
+            } else {
+                /// Create
+                guard let (newMeal, updatedDay) = await MealsStore.create(name, at: time, on: date)
+                else { return }
+                
+                await MainActor.run {
+                    post(.didModifyMeal, userInfo: [
+                        .meal: newMeal,
+                        .day: updatedDay
+                    ])
+                }
+            }
+        }
         
 //        if let meal {
 //            /// Update
@@ -248,7 +295,7 @@ struct MealForm: View {
 //        }
     }
 
-    func onChangeOfTime(oldValue: Date, newValue: Date) {
+    func timeChanged(oldValue: Date, newValue: Date) {
         /// For some reason, not having this `onChange` modifier doesn't update the `time` when we pick one using the `DatePicker`, so we're leaving it in here
     }
     
@@ -259,17 +306,17 @@ struct MealForm: View {
     }
 
     var currentTimeSlot: Int {
-        model.time.timeSlot(within: date)
+        time.timeSlot(within: date)
     }
     
     var saveIsDisabled: Bool {
-        if model.name.isEmpty {
+        if name.isEmpty {
             return true
         }
         
         if let meal {
-            if meal.name == model.name
-                && meal.time.equalsIgnoringSeconds(model.time) {
+            if meal.name == name
+                && meal.time.equalsIgnoringSeconds(time) {
                 return true
             }
         }

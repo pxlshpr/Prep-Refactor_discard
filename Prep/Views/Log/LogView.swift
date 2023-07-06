@@ -18,7 +18,10 @@ struct LogView: View {
 
     @State var meals: [Meal] = []
 
+    @State var mealToShowFoodPickerFor: Meal? = nil
+    
     let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
+    let didModifyMeal = NotificationCenter.default.publisher(for: .didModifyMeal)
 
     var body: some View {
         GeometryReader { proxy in
@@ -38,6 +41,7 @@ struct LogView: View {
         }
         .onAppear(perform: appeared)
         .onReceive(didPopulate, perform: didPopulate)
+        .onReceive(didModifyMeal, perform: didModifyMeal)
         .onChange(of: currentDate, currentDateChanged)
     }
     
@@ -46,6 +50,9 @@ struct LogView: View {
     }
     
     func didPopulate(notification: Notification) {
+        fetchMeals()
+    }
+    func didModifyMeal(notification: Notification) {
         fetchMeals()
     }
 
@@ -192,7 +199,7 @@ struct LogView: View {
                     Section("Add Food") {
                         ForEach(meals.sorted().reversed()) { meal in
                             Button(meal.title) {
-                                
+                                mealToShowFoodPickerFor = meal
                             }
                         }
                     }
@@ -209,10 +216,23 @@ struct LogView: View {
             }
         }
         
+        func foodPicker(for meal: Meal) -> some View {
+            let binding = Binding<Bool>(
+                get: { mealToShowFoodPickerFor != nil },
+                set: { newValue in
+                    if !newValue {
+                        mealToShowFoodPickerFor = nil
+                    }
+                }
+            )
+            return FoodPicker(isPresented: binding, meal: meal)
+        }
+
         var addFoodButton: some View {
 //            buttonLegacy
             button
-            .popover(isPresented: $showingFoodPicker) { foodPicker }
+//                .popover(isPresented: $showingFoodPicker) { foodPicker }
+                .popover(item: $mealToShowFoodPickerFor) { foodPicker(for: $0) }
         }
         
         return VStack {

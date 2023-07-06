@@ -33,9 +33,8 @@ struct DayView: View {
 
     let model = Model()
     
-    let didAddMeal = NotificationCenter.default.publisher(for: .didAddMeal)
+    let didModifyMeal = NotificationCenter.default.publisher(for: .didModifyMeal)
     let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
-    let didDeleteMeal = NotificationCenter.default.publisher(for: .didDeleteMeal)
     
     let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
 
@@ -52,8 +51,8 @@ struct DayView: View {
         content
             .onDisappear(perform: disappeared)
             .onAppear(perform: appeared)
-            .onReceive(didAddMeal, perform: didAddMeal)
-            .onReceive(didDeleteMeal, perform: didDeleteMeal)
+            .onReceive(didModifyMeal, perform: didModifyMeal)
+//            .onReceive(didDeleteMeal, perform: didDeleteMeal)
             .onReceive(didPopulate, perform: didPopulate)
             .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
     }
@@ -91,39 +90,40 @@ struct DayView: View {
         }
     }
     
-    func didAddMeal(notification: Notification) {
+    func didModifyMeal(notification: Notification) {
         DispatchQueue.main.async {
-            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
-                  meal.date == self.date
+            guard
+                let info = notification.userInfo,
+                let day = info[Notification.PrepKeys.day] as? Day,
+                day.date == date
             else { return }
             
-            SoundPlayer.play(.tweetbotSwoosh)
-            withAnimation {
-                self.meals.append(meal)
+            let newMeals = day.meals
+            if newMeals.count > meals.count {
+                SoundPlayer.play(.tweetbotSwoosh)
+            } else if newMeals.count < meals.count {
+                SoundPlayer.play(.letterpressDelete)
             }
             
-            /// Delaying slightly to try and avoid "The model configuration used to open the store is incompatible" error.
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                Task {
-//                    logger.debug("didAddMeal: Saving context")
-//                    try context.save()
-//                }
-//            }
+            withAnimation(.snappy) {
+                self.meals = day.meals
+//                self.meals.append(meal)
+            }
         }
     }
 
-    func didDeleteMeal(notification: Notification) {
-        DispatchQueue.main.async {
-            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
-                  meal.date == self.date
-            else { return }
-            
-            SoundPlayer.play(.letterpressDelete)
-            withAnimation {
-                self.meals.removeAll(where: { $0.id == meal.id })
-            }
-        }
-    }
+//    func didDeleteMeal(notification: Notification) {
+//        DispatchQueue.main.async {
+//            guard let meal = notification.userInfo?[Notification.PrepKeys.meal] as? Meal,
+//                  meal.date == self.date
+//            else { return }
+//            
+//            SoundPlayer.play(.letterpressDelete)
+//            withAnimation {
+//                self.meals.removeAll(where: { $0.id == meal.id })
+//            }
+//        }
+//    }
 
     func appeared() {
         fetchMeals()
@@ -281,8 +281,7 @@ struct DayView: View {
     }
 
     var newMealForm: some View {
-        MealForm(model: mealModel)
-            .frame(minWidth: 200, idealWidth: 450, minHeight: 250, idealHeight: 340)
-            .presentationDetents([.height(400)])
+        let date = self.date.isToday ? Date.now : self.date.setting(hour: 12)
+        return MealForm(date)
     }
 }

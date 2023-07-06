@@ -10,18 +10,19 @@ struct MealView: View {
     
     @State var meal: Meal
 
-    let title: String
     @State var foodItems: [FoodItem]
     
     @State var safeAreaInsets: EdgeInsets
     
+    @State var showingMealForm = false
+    
     let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
     let didDeleteFoodItem = NotificationCenter.default.publisher(for: .didDeleteFoodItem)
+    let didModifyMeal = NotificationCenter.default.publisher(for: .didModifyMeal)
 
     init(meal: Meal) {
         _meal = State(initialValue: meal)
-        self.title = meal.title
         _foodItems = State(initialValue: meal.foodItems)
 
         _safeAreaInsets = State(initialValue: currentSafeAreaInsets)
@@ -40,7 +41,22 @@ struct MealView: View {
         .onReceive(didAddFoodItem, perform: didAddFoodItem)
         .onReceive(didDeleteFoodItem, perform: didDeleteFoodItem)
         .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
+        .onReceive(didModifyMeal, perform: didModifyMeal)
     }
+    
+    func didModifyMeal(notification: Notification) {
+        DispatchQueue.main.async {
+            guard
+                let info = notification.userInfo,
+                let updatedMeal = info[Notification.PrepKeys.meal] as? Meal,
+                updatedMeal.id == self.meal.id
+            else { return }
+            withAnimation(.snappy) {
+                self.meal = updatedMeal
+            }
+        }
+    }
+    
     
     func safeAreaDidChange(notification: Notification) {
         guard let insets = notification.userInfo?[Notification.PrepKeys.safeArea] as? EdgeInsets else {
@@ -154,36 +170,21 @@ struct MealView: View {
             .font(.footnote)
             .foregroundStyle(Color(.secondaryLabel))
         }
-
         
-        var label_legacy: some View {
-            HStack {
-                Text(title)
-                    .foregroundStyle(Color(.secondaryLabel))
-                    .font(.system(.callout, design: .rounded, weight: .light))
-                    .textCase(.none)
-                Image(systemName: "chevron.down.circle.fill")
-                    .symbolRenderingMode(.palette)
-                    .fontWeight(.semibold)
-                    .foregroundStyle(Color(.secondaryLabel), Color(.secondarySystemFill))
-                    .imageScale(.small)
-            }
-        }
-        
-        return Menu {
-            Button(role: .destructive) {
-                tappedDeleteMeal()
-            } label: {
-                Label("Delete", systemImage: "trash")
-                    .textCase(.none)
-            }
+        return Button {
+            Haptics.selectionFeedback()
+            showingMealForm = true
         } label: {
             label
-//            label_legacy
         }
         .padding(.leading, leadingPadding)
         .padding(.trailing, trailingPadding)
         .frame(height: 25)
+        .popover(isPresented: $showingMealForm) { mealForm }
+    }
+    
+    var mealForm: some View {
+        MealForm(meal)
     }
     
     var footer: some View {

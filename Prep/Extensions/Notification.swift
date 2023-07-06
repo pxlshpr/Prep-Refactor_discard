@@ -7,10 +7,10 @@ extension Notification.Name {
     static var didPopulate: Notification.Name { return .init("didPopulate") }
 
     static var didPickMeal: Notification.Name { return .init("didPickMeal") }
-    static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
-    static var didAddMeal: Notification.Name { return .init("didAddMeal") }
-    
-    static var didUpdateMeal: Notification.Name { return .init("didUpdateMeal") }
+    static var didModifyMeal: Notification.Name { return .init("didModifyMeal") }
+//    static var didUpdateMeal: Notification.Name { return .init("didUpdateMeal") }
+    //    static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
+
     
     static var didAddFoodItem: Notification.Name { return .init("didAddFoodItem") }
     static var didDeleteFoodItem: Notification.Name { return .init("didDeleteFoodItem") }
