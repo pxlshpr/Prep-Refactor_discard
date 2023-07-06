@@ -352,7 +352,7 @@ extension LogNavigationBar {
                         .frame(width: 10, height: 10)
                     Text(macro.abbreviatedDescription)
                         .font(.system(.footnote, design: .rounded, weight: .regular))
-                        .foregroundColor(.secondary)
+                        .foregroundStyle(Color(.secondaryLabel))
                     Spacer()
                 }
                 meterView

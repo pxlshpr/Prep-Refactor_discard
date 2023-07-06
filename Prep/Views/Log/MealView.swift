@@ -152,7 +152,7 @@ struct MealView: View {
             .frame(maxHeight: .infinity, alignment: .bottom)
             .textCase(.uppercase)
             .font(.footnote)
-            .foregroundColor(Color(.secondaryLabel))
+            .foregroundStyle(Color(.secondaryLabel))
         }
 
         

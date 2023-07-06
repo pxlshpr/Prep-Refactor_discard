@@ -29,7 +29,7 @@ struct AnimatableMacroValue: AnimatableModifier {
                 .font(.system(.title2, design: .rounded, weight: .medium))
             Text("g")
                 .font(.system(.callout, design: .rounded, weight: .medium))
-                .foregroundColor(Color(.secondaryLabel))
+                .foregroundStyle(Color(.secondaryLabel))
         }
         .frame(maxWidth: .infinity)
         .multilineTextAlignment(.trailing)
@@ -72,7 +72,7 @@ struct AnimatableEnergyValue: AnimatableModifier {
                 .font(.system(.title, design: .rounded, weight: .semibold))
             Text("kcal")
                 .font(.system(.title3, design: .rounded, weight: .regular))
-                .foregroundColor(Color(.secondaryLabel))
+                .foregroundStyle(Color(.secondaryLabel))
         }
         .frame(maxWidth: .infinity)
         .multilineTextAlignment(.trailing)
@@ -113,10 +113,10 @@ struct AnimatableEnergyRemainingValue: AnimatableModifier {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
             Text(value.formattedEnergy)
                 .font(.system(.headline, design: .rounded, weight: .medium))
-                .foregroundColor(Color(.secondaryLabel))
+                .foregroundStyle(Color(.secondaryLabel))
             Text("kcal")
                 .font(.system(.body, design: .rounded, weight: .regular))
-                .foregroundColor(Color(.tertiaryLabel))
+                .foregroundStyle(Color(.tertiaryLabel))
         }
         .frame(maxWidth: .infinity)
         .multilineTextAlignment(.trailing)

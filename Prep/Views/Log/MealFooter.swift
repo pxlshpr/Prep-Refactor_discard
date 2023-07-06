@@ -55,7 +55,7 @@ struct MealFooter: View {
             Text("Add Food")
                 .font(.caption)
                 .bold()
-                .foregroundColor(.accentColor)
+                .foregroundStyle(.accent)
                 .padding(.horizontal, 8)
                 .frame(height: 30)
                 .background(

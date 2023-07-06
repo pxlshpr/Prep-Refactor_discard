@@ -140,9 +140,7 @@ struct CalendarView: View {
     }
     
     func weekID(year: Int, month: Int, weekOfMonth: Int) -> String {
-        let string = "\(year)_\(month)_\(weekOfMonth)"
-        print("ID for year: \(year), month: \(month), weekOfMonth: \(weekOfMonth) – \(string)")
-        return string
+        "\(year)_\(month)_\(weekOfMonth)"
     }
     
     func dayView(index: Int, weekOfMonth: Int, month: Int, year: Int) -> some View {

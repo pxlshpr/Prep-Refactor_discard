@@ -50,7 +50,7 @@ struct SizeForm: View {
         
         var footer: some View {
             Text("This will let you log this food in volumes of different densities or thicknesses, like – ‘cups shredded’, ‘cups sliced’.")
-                .foregroundColor(Color(.secondaryLabel))
+                .foregroundStyle(Color(.secondaryLabel))
         }
 
         return Section(footer: footer) {
@@ -359,7 +359,7 @@ struct SizeForm: View {
     func symbol(_ string: String) -> some View {
         Text(string)
             .font(.title3)
-            .foregroundColor(Color(.tertiaryLabel))
+            .foregroundStyle(Color(.tertiaryLabel))
     }
 
     var background: some View {

@@ -98,7 +98,7 @@ extension NutrientMeter {
                         dash: [model.lowerGoalMarkDash])
                     )
                     .frame(width: 1)
-                    .foregroundColor(model.lowerGoalMarkColor)
+                    .foregroundStyle(model.lowerGoalMarkColor)
                     .opacity(model.lowerGoalMarkOpacity)
                     .offset(x: lowerGoalMarkOffset(for: proxy))
             }
@@ -113,7 +113,7 @@ extension NutrientMeter {
                         dash: [model.upperGoalMarkDash])
                     )
                     .frame(width: 1)
-                    .foregroundColor(model.upperGoalMarkColor)
+                    .foregroundStyle(model.upperGoalMarkColor)
                     .opacity(model.upperGoalMarkOpacity)
                     .offset(x: upperGoalMarkOffset(for: proxy))
             }
