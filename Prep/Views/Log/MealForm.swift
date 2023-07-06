@@ -60,11 +60,6 @@ struct MealForm: View {
             .presentationDetents([.height(detentHeight)])
     }
     
-    var detentHeight: CGFloat {
-        meal == nil ? 400 : 450
-    }
-    
-    
     @ViewBuilder
     var content: some View {
         if hasAppeared {
@@ -72,6 +67,25 @@ struct MealForm: View {
         } else {
             Color.clear
         }
+    }
+    
+    var form: some View {
+        NavigationStack {
+            Form {
+                nameSection
+                timeSection
+                deleteSection
+            }
+            .navigationTitle(title)
+            .scrollDismissesKeyboard(.immediately)
+            .interactiveDismissDisabled(dismissDisabled)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar { toolbarContent }
+        }
+    }
+    
+    var detentHeight: CGFloat {
+        meal == nil ? 400 : 450
     }
     
     func appeared() {
@@ -97,71 +111,94 @@ struct MealForm: View {
         }
     }
     
-    var nameTextField: some View {
-        TextField("Name", text: $name)
-            .textFieldStyle(.plain)
-            .showClearButton($name)
+    var isEditing: Bool {
+        meal != nil
     }
     
-    var form: some View {
-        NavigationStack {
-            Form {
-                Section {
-                    nameTextField
+    var toolbarContent: some ToolbarContent {
+        Group {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Button {
+                    tappedSave()
+                } label: {
+                    Text(isEditing ? "Save" : "Add")
+                        .bold()
                 }
-                Section {
-                    VStack {
-                        HStack(spacing: 10) {
-                            Text("Time")
-                                .foregroundStyle(Color(.secondaryLabel))
-                            datePicker
-                        }
-                        timeSlider
-                    }
-                }
-                if meal != nil {
-                    Section {
-                        Button(role: .destructive) {
-                            
-                        } label: {
-                            Text("Delete Meal")
-                                .frame(maxWidth: .infinity)
-                        }
-                    }
-                }
+                .disabled(saveDisabled)
             }
-            .navigationTitle(title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button {
-                        tappedSave()
-                    } label: {
-                        Text("Add")
-                            .bold()
-                    }
-                }
-                ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        Text("Cancel")
-                    }
+            ToolbarItem(placement: .topBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Cancel")
                 }
             }
         }
     }
     
+    var nameSection: some View {
+        let binding = Binding<String>(
+            get: { name },
+            set: { newValue in
+                self.name = name
+                delayedSetSaveDisabled()
+            }
+        )
+        
+        return Section {
+            TextField("Name", text: binding)
+                .textFieldStyle(.plain)
+                .showClearButton($name)
+        }
+    }
+    
+    var timeSection: some View {
+        Section {
+            VStack {
+                HStack(spacing: 10) {
+                    Text("Time")
+                        .foregroundStyle(Color(.secondaryLabel))
+                    datePicker
+                }
+                timeSlider
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var deleteSection: some View {
+        if meal != nil {
+            Section {
+                Button(role: .destructive) {
+                    
+                } label: {
+                    Text("Delete Meal")
+                        .frame(maxWidth: .infinity)
+                }
+            }
+        }
+    }
+
     var title: String {
-        meal == nil ? "New Meal" : "Edit Meal"
+        isEditing ? "Edit Meal" : "New Meal"
     }
 
     var timeSlider: some View {
         TimeSlider(
             date: date,
             existingTimeSlots: existingTimeSlots,
-            currentTime: $time,
+            currentTime: timeBinding,
             currentTimeSlot: currentTimeSlot
+        )
+    }
+    
+    var timeBinding: Binding<Date> {
+        Binding<Date>(
+            get: { time },
+            set: { newValue in
+                self.time = newValue
+                delayedSetSaveDisabled()
+            }
         )
     }
     
@@ -169,7 +206,7 @@ struct MealForm: View {
         var picker: some View {
             DatePicker(
                 "",
-                selection: $time,
+                selection: timeBinding,
                 in: dateRangeForPicker,
                 displayedComponents: [.hourAndMinute]
             )
