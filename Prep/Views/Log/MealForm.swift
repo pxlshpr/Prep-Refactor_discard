@@ -15,9 +15,10 @@ struct MealForm: View {
 
     @State var meal: Meal? = nil
     
-    let initialName: String
     let date: Date
-    
+    let initialName: String
+    let initialTime: Date
+
     @State var name: String
     @State var time: Date
 
@@ -39,6 +40,7 @@ struct MealForm: View {
         
         let time = Meal.defaultTime(for: date)
         _time = State(initialValue: time)
+        self.initialTime =  time
         
         _saveDisabled = State(initialValue: false)
     }
@@ -50,6 +52,7 @@ struct MealForm: View {
         _time = State(initialValue: meal.time)
         _saveDisabled = State(initialValue: true)
         self.initialName = meal.name
+        self.initialTime = meal.time
     }
 
     @ViewBuilder
@@ -385,7 +388,7 @@ extension MealForm {
     
     var hasEnteredData: Bool {
         name != initialName
-        || time != date /// since `date` is the initial time we set this form with for a new Meal
+        || time != initialTime
     }
 }
 

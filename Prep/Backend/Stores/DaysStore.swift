@@ -49,7 +49,7 @@ extension CoreDataManager {
     }
     
     func createDayEntity(for date: Date, in context: NSManagedObjectContext) -> DayEntity {
-        let entity = DayEntity()
+        let entity = DayEntity(context: context)
         entity.dateString = date.calendarDayString
         context.insert(entity)
         return entity
