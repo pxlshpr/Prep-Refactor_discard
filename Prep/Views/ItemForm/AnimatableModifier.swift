@@ -17,12 +17,9 @@ struct AnimatableItemEnergyModifier: AnimatableModifier {
         set { value = newValue }
     }
     
-    var amountString: String {
-        if isAnimating {
-            return value.formattedNutrientValue
-        } else {
-            return value.formattedNutrientValue
-        }
+    var string: String {
+        value.formattedNutrientValue
+            .replacingLastOccurrence(of: "-", with: "")
     }
     
     func body(content: Content) -> some View {
@@ -33,7 +30,7 @@ struct AnimatableItemEnergyModifier: AnimatableModifier {
                     Spacer()
                     
                     HStack(alignment: .center, spacing: 4) {
-                        Text(amountString)
+                        Text(string)
                             .multilineTextAlignment(.leading)
                         Text(energyUnit.abbreviation)
                             .lineLimit(3)
@@ -78,12 +75,9 @@ struct AnimatableItemMacroModifier: AnimatableModifier {
         set { value = newValue }
     }
     
-    var amountString: String {
-        if isAnimating {
-            return value.formattedNutrientValue
-        } else {
-            return value.formattedNutrientValue
-        }
+    var string: String {
+        value.formattedNutrientValue
+            .replacingLastOccurrence(of: "-", with: "")
     }
     
     func body(content: Content) -> some View {
@@ -94,7 +88,7 @@ struct AnimatableItemMacroModifier: AnimatableModifier {
                     Spacer()
                     
                     HStack(alignment: .center, spacing: 4) {
-                        Text(amountString)
+                        Text(string)
                             .multilineTextAlignment(.leading)
                             .font(.headline)
                         Text("g")

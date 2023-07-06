@@ -23,9 +23,14 @@ struct AnimatableMacroValue: AnimatableModifier {
             )
     }
     
+    var string: String {
+        value.formattedMacro
+            .replacingLastOccurrence(of: "-", with: "")
+    }
+    
     var animatedLabel: some View {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
-            Text(value.formattedMacro)
+            Text(string)
                 .font(.system(.title2, design: .rounded, weight: .medium))
             Text("g")
                 .font(.system(.callout, design: .rounded, weight: .medium))
@@ -66,9 +71,14 @@ struct AnimatableEnergyValue: AnimatableModifier {
             )
     }
     
+    var string: String {
+        value.formattedEnergy
+            .replacingLastOccurrence(of: "-", with: "")
+    }
+    
     var animatedLabel: some View {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
-            Text(value.formattedEnergy)
+            Text(string)
                 .font(.system(.title, design: .rounded, weight: .semibold))
             Text("kcal")
                 .font(.system(.title3, design: .rounded, weight: .regular))
