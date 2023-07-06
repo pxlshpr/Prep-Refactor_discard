@@ -181,9 +181,10 @@ struct ItemForm: View {
                 Button {
                     tappedSave()
                 } label: {
-                    Text("Add")
+                    Text(isEditing ? "Save" : "Add")
                         .fontWeight(.bold)
                 }
+                .disabled(true)
             }
 //            ToolbarItem(placement: .keyboard) {
 //                stepButtons
@@ -406,6 +407,7 @@ struct ItemForm: View {
             }
             .multilineTextAlignment(.trailing)
         }
+        .foregroundStyle(Color(.secondaryLabel))
     }
 
     var mealField: some View {
@@ -430,6 +432,7 @@ struct ItemForm: View {
                 }
             }
         }
+        .foregroundStyle(Color(.secondaryLabel))
     }
     
     var quantityField: some View {
