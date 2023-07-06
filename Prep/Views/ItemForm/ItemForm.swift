@@ -36,6 +36,13 @@ struct ItemForm: View {
     @State var quickAmounts: [FoodValue] = []
     @State var showingShortcuts = false
     
+    @State var isDeleting = false
+    @State var saveDisabled = true
+    @State var dismissDisabled = false
+    @State var saveDisabledTask: Task<Void, Error>? = nil
+
+    let initialFoodValue: FoodValue
+    
     /// Creating new items
     init(
         isPresented: Binding<Bool>,
@@ -47,21 +54,23 @@ struct ItemForm: View {
         _food = State(initialValue: food)
         
 
-        let amount: Double?
-        let unit: FormUnit?
+        let amount: Double
+        let unit: FormUnit
         /// Either set the latest used quantity or the default one
         if let lastAmount = food.lastAmount {
             amount = lastAmount.value
-            unit = lastAmount.formUnit(for: food)
+            unit = lastAmount.formUnit(for: food) ?? DefaultUnit
         } else {
             let quantity = food.defaultQuantity
-            amount = quantity?.value
-            unit = quantity?.unit.formUnit
+            amount = quantity?.value ?? DefaultAmount
+            unit = quantity?.unit.formUnit ?? DefaultUnit
         }
-        _amountDouble = State(initialValue: amount ?? DefaultAmount)
-        _amountString = State(initialValue: (amount ?? DefaultAmount).cleanAmount)
+        _amountDouble = State(initialValue: amount)
+        _amountString = State(initialValue: amount.cleanAmount)
 
-        _unit = State(initialValue: unit ?? DefaultUnit)
+        _unit = State(initialValue: unit)
+        
+        initialFoodValue = FoodValue(amount, unit)
     }
 
     /// Editing existing items
@@ -83,6 +92,8 @@ struct ItemForm: View {
         } else {
             _unit = State(initialValue: DefaultUnit)
         }
+        
+        initialFoodValue = foodItem.amount
     }
 
     var body: some View {
@@ -93,7 +104,7 @@ struct ItemForm: View {
                 .toolbar { toolbarContent }
         }
         .scrollDismissesKeyboard(.immediately)
-//        .interactiveDismissDisabled()
+        .interactiveDismissDisabled(dismissDisabled)
         .onAppear(perform: appeared)
         .frame(idealWidth: 400, idealHeight: 800)
         .presentationDetents([.medium, .fraction(0.90)])
@@ -156,6 +167,8 @@ struct ItemForm: View {
                     self.amountDouble = double
                 }
                 self.amountString = newValue
+                
+                delayedSetSaveDisabled()
             }
         )
         return TextField("Required", text: binding)
@@ -184,7 +197,7 @@ struct ItemForm: View {
                     Text(isEditing ? "Save" : "Add")
                         .fontWeight(.bold)
                 }
-                .disabled(true)
+                .disabled(saveDisabled)
             }
 //            ToolbarItem(placement: .keyboard) {
 //                stepButtons
@@ -210,7 +223,21 @@ struct ItemForm: View {
         Task.detached {
             if let foodItem {
                 /// Update
+                guard let (updatedFoodItem, updatedDay) = await FoodItemsStore.update(foodItem, with: foodValue
+                ) else {
+                    return
+                }
+                await MainActor.run {
+                    if let updatedDay {
+                        post(.didAddFoodItem, userInfo: [
+                            .foodItem: updatedFoodItem,
+                            .day: updatedDay
+                        ])
+                    }
+                }
+                
             } else {
+                /// Create
                 guard let (newFoodItem, updatedDay) = await FoodItemsStore.create(
                     food, meal: meal, amount: foodValue
                 ) else {
@@ -276,6 +303,7 @@ struct ItemForm: View {
                 if let unit = amount.formUnit(for: food) {
                     self.unit = unit
                 }
+                delayedSetSaveDisabled()
             } label: {
                 label
             }
@@ -432,6 +460,7 @@ struct ItemForm: View {
         withAnimation(.snappy) {
             unit = formUnit
         }
+        delayedSetSaveDisabled()
     }
     var unitPicker: some View {
         
@@ -637,14 +666,19 @@ struct ItemForm: View {
 
 extension ItemForm {
     func tappedStepButton(_ step: Step, _ direction: StepButtonDirection) {
+        
         Haptics.selectionFeedback()
         SoundPlayer.play(direction.sound)
+        
         let newAmount = (amountDouble ?? 0) + step.amount(for: direction)
+        
         isAnimatingAmountChange = true
         startedAnimatingAmountChangeAt = Date()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
             setAmount(newAmount)
         }
+        
+        delayedSetSaveDisabled()
     }
     
     func setAmount(_ amount: Double) {
@@ -687,8 +721,3 @@ extension ItemForm {
         }
     }
 }
-
-enum ItemFormRoute: Hashable {
-    case meal
-}
-

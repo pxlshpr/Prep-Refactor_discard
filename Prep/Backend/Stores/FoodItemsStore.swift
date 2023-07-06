@@ -11,12 +11,17 @@ class FoodItemsStore {
     static func create(_ food: Food, meal: Meal, amount: FoodValue) async -> (FoodItem, Day)? {
         await DataManager.shared.createFoodItem(food, meal: meal, amount: amount)
     }
+
+    static func update(_ foodItem: FoodItem, with amount: FoodValue) async -> (FoodItem, Day?)? {
+        await DataManager.shared.update(foodItem, with: amount)
+    }
     
     /// Deletes the passed in `FoodItem` and returns the updated `Day` (so that this may passed on in a notification for UI updates)
     static func delete(_ foodItem: FoodItem) async -> Day? {
         await DataManager.shared.deleteFoodItem(foodItem)
     }
     
+    /// Gets previously used amounts for the provided food (for quick amount buttons)
     static func usedAmounts(for food: Food) async -> [FoodValue] {
         await DataManager.shared.usedAmounts(for: food)
     }
@@ -48,9 +53,6 @@ extension DataManager {
                             return
                         }
                         let day = Day(tuple.1)
-//                        SoundPlayer.play(.clearDragPickup)
-//                        SoundPlayer.play(.letterpressBip1)
-//                        SoundPlayer.play(.clearSwoosh)
                         continuation.resume(returning: (foodItem, day))
                     }
                 } catch {
@@ -59,6 +61,35 @@ extension DataManager {
             }
         } catch {
             logger.error("Error creating food item: \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+    }
+    
+    func update(_ foodItem: FoodItem, with amount: FoodValue) async -> (FoodItem, Day?)? {
+        do {
+            return try await withCheckedThrowingContinuation { continuation in
+                do {
+                    try coreDataManager.update(foodItem, with: amount) { tuple in
+                        guard let tuple,
+                              let foodItem = FoodItem(tuple.0)
+                        else {
+                            continuation.resume(returning: nil)
+                            return
+                        }
+                        let day: Day?
+                        if let dayEntity = tuple.1 {
+                            day = Day(dayEntity)
+                        } else {
+                            day = nil
+                        }
+                        continuation.resume(returning: (foodItem, day))
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        } catch {
+            logger.error("Error updating food item: \(error.localizedDescription, privacy: .public)")
             return nil
         }
     }
@@ -326,6 +357,97 @@ extension CoreDataManager {
     }
 }
 
+extension CoreDataManager {
+    
+    func update(
+        _ foodItem: FoodItem,
+        with amount: FoodValue,
+        context: NSManagedObjectContext
+    ) throws -> (FoodItemEntity, DayEntity?) {
+
+        guard
+            let entity = FoodItemEntity.object(with: foodItem.id, in: context),
+            let foodEntity = FoodEntity.object(with: foodItem.food.id, in: context)
+        else {
+            fatalError()
+        }
+
+        let date = Date.now
+        
+        entity.amount = amount
+        entity.updatedAt = date
+        
+        /// Set the energy unit (this is arbitrary as we can always display it in the unit we want)
+        let energyUnit: EnergyUnit = .kcal
+        entity.energyUnit = energyUnit
+        
+        /// Compute the nutrients
+        let food = foodItem.food
+        let energy = food.calculateEnergy(in: energyUnit, for: amount)
+        entity.energy = energy
+        entity.carb = food.calculateMacro(.carb, for: amount)
+        entity.fat = food.calculateMacro(.fat, for: amount)
+        entity.protein = food.calculateMacro(.protein, for: amount)
+
+        /// Update Food's last used data
+        foodEntity.lastAmount = amount
+        foodEntity.lastUsedAt = date
+ 
+        /// Save before fetching relationships again
+        try context.save()
+        
+        /// If there's an attached meal, update the stats in it and the day entity
+        if let mealID = foodItem.mealID,
+           let mealEntity = MealEntity.object(with: mealID, in: context),
+           let dayEntity = mealEntity.dayEntity
+        {
+            /// Compute the relativeEnergy for all
+            mealEntity.postFoodItemUpdate(.create)
+            
+            //TODO: Make sure we're updating the day entity properly here
+            return (entity, dayEntity)
+        }
+
+        return (entity, nil)
+    }
+    
+    func update(
+        _ foodItem: FoodItem,
+        with amount: FoodValue,
+        completion: @escaping (((FoodItemEntity, DayEntity?)?) -> ())
+    ) throws {
+        Task {
+            let bgContext = newBackgroundContext()
+            await bgContext.perform {
+                do {
+                    
+                    let (foodItemEntity, dayEntity) = try self.update(
+                        foodItem, with: amount, context: bgContext
+                    )
+                    bgContext.insert(foodItemEntity)
+                    
+                    let observer = NotificationCenter.default.addObserver(
+                        forName: .NSManagedObjectContextDidSave,
+                        object: bgContext,
+                        queue: .main
+                    ) { (notification) in
+                        self.viewContext.mergeChanges(fromContextDidSave: notification)
+                        completion((foodItemEntity, dayEntity))
+                    }
+                    
+                    try bgContext.performAndWait {
+                        try bgContext.save()
+                    }
+                    NotificationCenter.default.removeObserver(observer)
+
+                } catch {
+                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
+                    completion(nil)
+                }
+            }
+        }
+    }
+}
 import FoodDataTypes
 
 extension DayEntity {

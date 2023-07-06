@@ -60,11 +60,13 @@ let DefaultServingValue = FormValue(100, .weight(.g))
     var processingStatus: String = ""
     var alertMessage: String = ""
     var isPresentingAlert: Bool = false
+    
+    var updateSmallPieChartTask: Task<Void, Error>? = nil
+
     var isDeleting = false
     var saveDisabled = true
     var dismissDisabled = false
     var saveDisabledTask: Task<Void, Error>? = nil
-    var updateSmallPieChartTask: Task<Void, Error>? = nil
 
     var smallChartData: [MacroValue] = []
     
@@ -460,7 +462,6 @@ extension FoodModel {
         saveDisabledLogger.debug("saveDisabled set to \(String(describing: self.saveDisabled), privacy: .public)")
         saveDisabledLogger.debug("dismissDisabled set to \(String(describing: self.dismissDisabled), privacy: .public)")
     }
-
     
     func hasPendingChanges(from food: Food) -> Bool {
         !(

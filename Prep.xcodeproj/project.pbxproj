@@ -31,6 +31,7 @@
 		E23B656A2A561461003FFAC4 /* chiptunes_error_long.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */; };
 		E2672C7D2A52C1B00002E95C /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */; };
 		E2672C802A52C3F90002E95C /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity.swift */; };
+		E27CD16C2A56B36F00C1D339 /* ItemForm+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */; };
 		E28002002A52B84300C6D528 /* Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001572A52B84300C6D528 /* Import.swift */; };
 		E28002012A52B84300C6D528 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015A2A52B84300C6D528 /* Day.swift */; };
 		E28002022A52B84300C6D528 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = E280015B2A52B84300C6D528 /* Meal.swift */; };
@@ -158,7 +159,7 @@
 		E28002822A52B84300C6D528 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EA2A52B84300C6D528 /* DayView.swift */; };
 		E28002832A52B84300C6D528 /* FoodsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EC2A52B84300C6D528 /* FoodsViewCell.swift */; };
 		E28002842A52B84300C6D528 /* FoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001ED2A52B84300C6D528 /* FoodsView.swift */; };
-		E28002852A52B84300C6D528 /* ItemFormFoodLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EF2A52B84300C6D528 /* ItemFormFoodLabel.swift */; };
+		E28002852A52B84300C6D528 /* ItemFormEnergyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EF2A52B84300C6D528 /* ItemFormEnergyLabel.swift */; };
 		E28002882A52B84300C6D528 /* ServingField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F32A52B84300C6D528 /* ServingField.swift */; };
 		E28002892A52B84300C6D528 /* SizesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F42A52B84300C6D528 /* SizesList.swift */; };
 		E280028A2A52B84300C6D528 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F52A52B84300C6D528 /* ImageManager.swift */; };
@@ -215,6 +216,7 @@
 		E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_error_long.wav; sourceTree = "<group>"; };
 		E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemEntity.swift; sourceTree = "<group>"; };
 		E2672C7F2A52C3F90002E95C /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
+		E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemForm+Data.swift"; sourceTree = "<group>"; };
 		E28001572A52B84300C6D528 /* Import.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Import.swift; path = ../Import.swift; sourceTree = "<group>"; };
 		E280015A2A52B84300C6D528 /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		E280015B2A52B84300C6D528 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
@@ -342,7 +344,7 @@
 		E28001EA2A52B84300C6D528 /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		E28001EC2A52B84300C6D528 /* FoodsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsViewCell.swift; sourceTree = "<group>"; };
 		E28001ED2A52B84300C6D528 /* FoodsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsView.swift; sourceTree = "<group>"; };
-		E28001EF2A52B84300C6D528 /* ItemFormFoodLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFormFoodLabel.swift; sourceTree = "<group>"; };
+		E28001EF2A52B84300C6D528 /* ItemFormEnergyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFormEnergyLabel.swift; sourceTree = "<group>"; };
 		E28001F32A52B84300C6D528 /* ServingField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServingField.swift; sourceTree = "<group>"; };
 		E28001F42A52B84300C6D528 /* SizesList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizesList.swift; sourceTree = "<group>"; };
 		E28001F52A52B84300C6D528 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
@@ -741,7 +743,8 @@
 			isa = PBXGroup;
 			children = (
 				E293DB6F2A53742E00D8D4D2 /* ItemForm.swift */,
-				E28001EF2A52B84300C6D528 /* ItemFormFoodLabel.swift */,
+				E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */,
+				E28001EF2A52B84300C6D528 /* ItemFormEnergyLabel.swift */,
 				E28001FF2A52B84300C6D528 /* AnimatableModifier.swift */,
 			);
 			path = ItemForm;
@@ -997,7 +1000,7 @@
 				E28002022A52B84300C6D528 /* Meal.swift in Sources */,
 				E28002602A52B84300C6D528 /* Date.swift in Sources */,
 				E280023A2A52B84300C6D528 /* FoodFormRoute.swift in Sources */,
-				E28002852A52B84300C6D528 /* ItemFormFoodLabel.swift in Sources */,
+				E28002852A52B84300C6D528 /* ItemFormEnergyLabel.swift in Sources */,
 				E28002592A52B84300C6D528 /* FormValue.swift in Sources */,
 				E22F843F2A54AF1900096909 /* MetricsView+Animatable.swift in Sources */,
 				E280023F2A52B84300C6D528 /* Macro.swift in Sources */,
@@ -1007,6 +1010,7 @@
 				E280027A2A52B84300C6D528 /* FoodCell.swift in Sources */,
 				E280023D2A52B84300C6D528 /* Unit.swift in Sources */,
 				E28002462A52B84300C6D528 /* MicronutrientGroup.swift in Sources */,
+				E27CD16C2A56B36F00C1D339 /* ItemForm+Data.swift in Sources */,
 				E28002562A52B84300C6D528 /* FoodQuantity+Convert.swift in Sources */,
 				E22F84412A54B3C100096909 /* DaysStore.swift in Sources */,
 				E22F843D2A54AE9F00096909 /* PercentageType.swift in Sources */,

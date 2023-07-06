@@ -531,13 +531,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>273</string>
+					<string>304</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>272</string>
+					<string>303</string>
 					<key>Timestamp</key>
-					<string>710293631.4428591</string>
+					<string>710326713.252335</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -575,12 +575,16 @@
 			<dict>
 				<key>location-parameters</key>
 				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>263</string>
+					<string>264</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
 					<key>StartingLineNumber</key>
 					<string>263</string>
 					<key>Timestamp</key>
-					<string>710250154.031559</string>
+					<string>710325167.259482</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -655,53 +659,6 @@
 			</dict>
 			<key>title</key>
 			<string>Let user change this</string>
-			<key>type</key>
-			<string>bookmark</string>
-		</dict>
-		<dict>
-			<key>destination</key>
-			<dict>
-				<key>location-parameters</key>
-				<dict>
-					<key>EndingColumnNumber</key>
-					<string>0</string>
-					<key>EndingLineNumber</key>
-					<string>96</string>
-					<key>StartingColumnNumber</key>
-					<string>0</string>
-					<key>StartingLineNumber</key>
-					<string>95</string>
-					<key>Timestamp</key>
-					<string>710320327.642431</string>
-				</dict>
-				<key>rebasable-url</key>
-				<dict>
-					<key>base</key>
-					<string>workspace</string>
-					<key>payload</key>
-					<dict>
-						<key>relative-path</key>
-						<string>Prep/Views/ItemForm/ItemForm.swift</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>text-context</key>
-			<dict>
-				<key>focused</key>
-				<string>//        .interactiveDismissDisabled()
-</string>
-				<key>leading</key>
-				<string>        }
-        .scrollDismissesKeyboard(.immediately)
-</string>
-				<key>trailing</key>
-				<string>        .onAppear(perform: appeared)
-        .frame(idealWidth: 400, idealHeight: 800)
-        .presentationDetents([.medium, .fraction(0.90)])
-</string>
-			</dict>
-			<key>title</key>
-			<string>Bring this back</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>
