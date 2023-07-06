@@ -37,7 +37,7 @@ struct ItemForm: View {
     @State var showingShortcuts = false
     
     @State var isDeleting = false
-    @State var saveDisabled = true
+    @State var saveDisabled: Bool
     @State var dismissDisabled = false
     @State var saveDisabledTask: Task<Void, Error>? = nil
 
@@ -70,6 +70,8 @@ struct ItemForm: View {
 
         _unit = State(initialValue: unit)
         
+        _saveDisabled = State(initialValue: false)
+        
         initialFoodValue = FoodValue(amount, unit)
     }
 
@@ -93,6 +95,8 @@ struct ItemForm: View {
             _unit = State(initialValue: DefaultUnit)
         }
         
+        _saveDisabled = State(initialValue: true)
+
         initialFoodValue = foodItem.amount
     }
 

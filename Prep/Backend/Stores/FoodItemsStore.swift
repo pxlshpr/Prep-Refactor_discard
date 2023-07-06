@@ -424,7 +424,7 @@ extension CoreDataManager {
                     let (foodItemEntity, dayEntity) = try self.update(
                         foodItem, with: amount, context: bgContext
                     )
-                    bgContext.insert(foodItemEntity)
+//                    bgContext.insert(foodItemEntity)
                     
                     let observer = NotificationCenter.default.addObserver(
                         forName: .NSManagedObjectContextDidSave,
