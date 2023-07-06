@@ -10,9 +10,6 @@ struct MealForm: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.dismiss) var dismiss
 
-//    @Bindable var model: MealModel
-//    @State var day: DayEntity? = nil
-        
     @State var refreshDatePicker: Bool = false
     @State var hasAppeared = false
 

@@ -18,8 +18,6 @@ struct DayView: View {
     let date: Date
     @State var safeAreaInsets: EdgeInsets
     
-    @State var mealModel = MealModel()
-    
     @State var showingMealForm: Bool = false
 
     @State var isRefreshing = false
@@ -265,7 +263,6 @@ struct DayView: View {
     func showMealForm() {
         Haptics.selectionFeedback()
         let date: Date = self.date.isToday ? Date.now : self.date.setting(hour: 12)
-        mealModel.reset(date: date)
         showingMealForm = true
     }
     
