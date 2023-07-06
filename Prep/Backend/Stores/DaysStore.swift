@@ -34,6 +34,11 @@ extension DataManager {
             return nil
         }
     }
+    
+    func dayEntity(dateString: String, in context: NSManagedObjectContext) -> DayEntity? {
+        guard let date = Date(fromCalendarDayString: dateString) else { return nil }
+        return coreDataManager.dayEntity(for: date, in: context)
+    }
 }
 
 extension CoreDataManager {
@@ -48,6 +53,11 @@ extension CoreDataManager {
         entity.dateString = date.calendarDayString
         context.insert(entity)
         return entity
+    }
+
+    func dayEntity(dateString: String, in context: NSManagedObjectContext) -> DayEntity? {
+        guard let date = Date(fromCalendarDayString: dateString) else { return nil }
+        return dayEntity(for: date, in: context)
     }
     
     func dayEntity(for date: Date, in context: NSManagedObjectContext) -> DayEntity? {

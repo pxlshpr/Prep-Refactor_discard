@@ -84,7 +84,7 @@
         <attribute name="protein" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="timeString" optional="YES" attributeType="String"/>
         <relationship name="dayEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DayEntity" inverseName="mealEntities" inverseEntity="DayEntity"/>
-        <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItemEntity" inverseName="mealEntity" inverseEntity="FoodItemEntity"/>
+        <relationship name="foodItemEntities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="FoodItemEntity" inverseName="mealEntity" inverseEntity="FoodItemEntity"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>

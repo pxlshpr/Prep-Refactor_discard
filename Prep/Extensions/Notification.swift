@@ -9,7 +9,7 @@ extension Notification.Name {
     static var didPickMeal: Notification.Name { return .init("didPickMeal") }
     static var didModifyMeal: Notification.Name { return .init("didModifyMeal") }
 //    static var didUpdateMeal: Notification.Name { return .init("didUpdateMeal") }
-    //    static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
+//    static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
 
     
     static var didAddFoodItem: Notification.Name { return .init("didAddFoodItem") }

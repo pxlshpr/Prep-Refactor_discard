@@ -178,20 +178,7 @@ extension CoreDataManager {
 }
 
 extension CoreDataManager {
-    
-    
-    //    func updateFoodItem(
-    //        _ food: Food,
-    //        _ meal: Meal,
-    //        _ amount: FoodValue,
-    //        _ context: NSManagedObjectContext
-    //    ) throws -> (updatedFoodItemEntity: FoodItemEntity, updatedDayEntity: DayEntity) {
-    //    }
-    //    
-    //    func deleteFoodItem(
-    //    ) throws -> (deletedFoodItemID: UUID, updatedDayEntity: DayEntity) {
-    //    }
-    
+        
     func deleteFoodItem(
         _ foodItem: FoodItem,
         _ context: NSManagedObjectContext

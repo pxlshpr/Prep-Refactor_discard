@@ -531,13 +531,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>304</string>
+					<string>291</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>303</string>
+					<string>290</string>
 					<key>Timestamp</key>
-					<string>710326713.252335</string>
+					<string>710357675.990478</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -659,6 +659,51 @@
 			</dict>
 			<key>title</key>
 			<string>Let user change this</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>137</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>136</string>
+					<key>Timestamp</key>
+					<string>710360771.997298</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Stores/MealsStore.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>                fatalError()
+</string>
+				<key>leading</key>
+				<string>//            let foodID = foodItem.food.id
+//            guard let foodEntity = FoodEntity.object(with: foodID, in: context) else {
+//</string>
+				<key>trailing</key>
+				<string>//            }
+            if let lastFoodItem = FoodItemsStore.latestFoodItemEntity(
+                foodID: foodEntity.id!, context: context
+</string>
+			</dict>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>

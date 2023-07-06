@@ -7,15 +7,16 @@ import FoodLabel
 struct MealView: View {
 
     @Environment(\.verticalSizeClass) var verticalSizeClass
-    
-    @State var meal: Meal
+    @Environment(\.colorScheme) var colorScheme
 
+    @State var meal: Meal
     @State var foodItems: [FoodItem]
     
     @State var safeAreaInsets: EdgeInsets
     
     @State var showingMealForm = false
-    
+    @State var showingFoodPicker = false
+
     let safeAreaDidChange = NotificationCenter.default.publisher(for: .safeAreaDidChange)
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
     let didDeleteFoodItem = NotificationCenter.default.publisher(for: .didDeleteFoodItem)
@@ -36,6 +37,9 @@ struct MealView: View {
                     .padding(.trailing, trailingPadding)
                     .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             }
+            if foodItems.isEmpty {
+                emptyCell
+            }
             footer
         }
         .onReceive(didAddFoodItem, perform: didAddFoodItem)
@@ -43,16 +47,45 @@ struct MealView: View {
         .onReceive(safeAreaDidChange, perform: safeAreaDidChange)
         .onReceive(didModifyMeal, perform: didModifyMeal)
     }
+
+    var emptyCell: some View {
+        var label: some View {
+            Text("Empty")
+                .font(.body)
+                .fontWeight(.light)
+                .foregroundStyle(Color(.tertiaryLabel))
+                .contentShape(Rectangle())
+                .hoverEffect(.highlight)
+        }
+        
+        var button: some View {
+            Button {
+                Haptics.selectionFeedback()
+                showingFoodPicker = true
+            } label: {
+                label
+            }
+            .popover(isPresented: $showingFoodPicker) { foodPicker }
+        }
+        
+        return button
+    }
     
+    var foodPicker: some View {
+        FoodPicker(isPresented: $showingFoodPicker, meal: meal)
+    }
+
     func didModifyMeal(notification: Notification) {
         DispatchQueue.main.async {
             guard
                 let info = notification.userInfo,
-                let updatedMeal = info[Notification.PrepKeys.meal] as? Meal,
-                updatedMeal.id == self.meal.id
+                let day = info[Notification.PrepKeys.day] as? Day,
+                day.date == self.meal.date,
+                let updatedMeal = day.meal(with: self.meal.id)
             else { return }
             withAnimation(.snappy) {
                 self.meal = updatedMeal
+                self.foodItems = updatedMeal.foodItems
             }
         }
     }

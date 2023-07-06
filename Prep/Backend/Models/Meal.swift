@@ -153,3 +153,9 @@ extension Meal {
     }
 
 }
+
+extension Meal {
+    var itemsCountDescription: String {
+        "\(foodItems.count) \(foodItems.count == 1 ? "entry" : "entries")"
+    }
+}

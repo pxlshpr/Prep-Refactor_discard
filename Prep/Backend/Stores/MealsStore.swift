@@ -18,9 +18,35 @@ class MealsStore {
     static func update(_ meal: Meal, name: String, time: Date) async -> (Meal, Day)? {
         await DataManager.shared.updateMeal(meal, name, time)
     }
+    
+    static func delete(_ meal: Meal) async -> Day? {
+        await DataManager.shared.delete(meal)
+    }
 }
 
 extension DataManager {
+    
+    func delete(_ meal: Meal) async -> Day? {
+        do {
+            return try await withCheckedThrowingContinuation { continuation in
+                do {
+                    try coreDataManager.delete(meal) { dayEntity in
+                        guard let dayEntity else {
+                            continuation.resume(returning: nil)
+                            return
+                        }
+                        let day = Day(dayEntity)
+                        continuation.resume(returning: day)
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        } catch {
+            logger.error("Error deleting food item: \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+    }
 
     func updateMeal(_ meal: Meal, _ name: String, _ time: Date) async -> (Meal, Day)? {
         do {
@@ -72,6 +98,96 @@ extension DataManager {
 }
 
 extension CoreDataManager {
+    
+    func delete(
+        _ meal: Meal,
+        _ context: NSManagedObjectContext
+    ) throws -> DayEntity {
+        guard let mealEntity = MealEntity.object(with: meal.id, in: context),
+              let dayEntity = mealEntity.dayEntity,
+              let dateString = dayEntity.dateString
+        else {
+            fatalError()
+        }
+        
+        /// Debug: Saving these so we can access them after the deletion
+        let foodEntities = mealEntity.foodItemEntitiesArray
+            .compactMap { $0.foodEntity }
+            .removingDuplicates()
+        
+        let foodItems = mealEntity.foodItems
+        
+        /// This cascades deletions to all children `FoodItems`
+        context.delete(mealEntity)
+
+        try context.save()
+
+        /// Debug: Confirm that the FoodItems truly get deleted
+        for foodItem in foodItems {
+            let foodItemEntity = MealEntity.object(with: foodItem.id, in: context)
+            guard foodItemEntity == nil else {
+                fatalError()
+            }
+        }
+        
+        for foodEntity in foodEntities {
+            
+//            let foodID = foodItem.food.id
+//            guard let foodEntity = FoodEntity.object(with: foodID, in: context) else {
+//                fatalError()
+//            }
+            if let lastFoodItem = FoodItemsStore.latestFoodItemEntity(
+                foodID: foodEntity.id!, context: context
+            ) {
+                foodEntity.lastAmount = lastFoodItem.amount
+                foodEntity.lastUsedAt = lastFoodItem.updatedAt
+            } else {
+                foodEntity.lastAmount = nil
+                foodEntity.lastUsedAt = nil
+            }
+        }
+        
+        guard let updatedDayEntity = self.dayEntity(dateString: dateString, in: context) else {
+            fatalError()
+        }
+        dayEntity.postFoodItemUpdate(.delete)
+        
+        return updatedDayEntity
+    }
+
+    func delete(
+        _ meal: Meal,
+        completion: @escaping ((DayEntity?) -> ())
+    ) throws {
+        Task {
+            let bgContext = newBackgroundContext()
+            await bgContext.perform {
+                do {
+                    
+                    let dayEntity = try self.delete(meal, bgContext)
+                    
+                    let observer = NotificationCenter.default.addObserver(
+                        forName: .NSManagedObjectContextDidSave,
+                        object: bgContext,
+                        queue: .main
+                    ) { (notification) in
+                        self.viewContext.mergeChanges(fromContextDidSave: notification)
+                        completion(dayEntity)
+                    }
+                    
+                    try bgContext.performAndWait {
+                        try bgContext.save()
+                    }
+                    NotificationCenter.default.removeObserver(observer)
+
+                } catch {
+                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
+                    completion(nil)
+                }
+            }
+        }
+    }
+    
     func createMeal(
         _ name: String,
         at time: Date,

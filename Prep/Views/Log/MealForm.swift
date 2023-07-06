@@ -26,11 +26,13 @@ struct MealForm: View {
 
     @State var mealTimes: [Date] = []
     
+    @State var showingDeleteConfirmation: Bool = false
     @State var isDeleting = false
+    
     @State var saveDisabled: Bool
     @State var dismissDisabled = false
     @State var saveDisabledTask: Task<Void, Error>? = nil
-
+    
     init(_ date: Date) {
         self.date = date
         
@@ -74,7 +76,9 @@ struct MealForm: View {
             Form {
                 nameSection
                 timeSection
-                deleteSection
+                if let meal {
+                    deleteSection(meal)
+                }
             }
             .navigationTitle(title)
             .scrollDismissesKeyboard(.immediately)
@@ -165,17 +169,52 @@ struct MealForm: View {
         }
     }
     
-    @ViewBuilder
-    var deleteSection: some View {
-        if meal != nil {
-            Section {
-                Button(role: .destructive) {
+    func deleteSection(_ meal: Meal) -> some View {
+        
+        var message: some View {
+            Text("\(meal.itemsCountDescription) will also be deleted. Are you sure you want to delete this meal?")
+        }
+        
+        var actions: some View {
+            Group {
+                Button("Delete Meal", role: .destructive) {
+                    dismiss()
+                    isDeleting = true
+                    Haptics.successFeedback()
                     
-                } label: {
-                    Text("Delete Meal")
-                        .frame(maxWidth: .infinity)
+                    Task.detached(priority: .high) {
+                        guard let updatedDay = await MealsStore.delete(meal) else {
+                            return
+                        }
+                        await MainActor.run {
+                            post(.didModifyMeal, userInfo: [.day: updatedDay])
+                        }
+                    }
+
+                    
+                    /// Show Alert
+                    withAnimation(.snappy) {
+//                        alertMessage = "Food deleted successfully."
+//                        showingAlert = true
+//                        context.delete(food)
+                    }
                 }
             }
+        }
+        
+        return Section {
+            Button(role: .destructive) {
+                showingDeleteConfirmation = true
+            } label: {
+                Text("Delete Meal")
+                    .frame(maxWidth: .infinity)
+            }
+            .confirmationDialog(
+                "",
+                isPresented: $showingDeleteConfirmation,
+                actions: { actions },
+                message: { message }
+            )
         }
     }
 

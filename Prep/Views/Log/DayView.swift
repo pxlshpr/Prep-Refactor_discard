@@ -101,8 +101,8 @@ struct DayView: View {
             let newMeals = day.meals
             if newMeals.count > meals.count {
                 SoundPlayer.play(.tweetbotSwoosh)
-            } else if newMeals.count < meals.count {
-                SoundPlayer.play(.letterpressDelete)
+//            } else if newMeals.count < meals.count {
+//                SoundPlayer.play(.letterpressDelete)
             }
             
             withAnimation(.snappy) {
