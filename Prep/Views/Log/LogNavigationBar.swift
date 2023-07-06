@@ -24,6 +24,7 @@ struct LogNavigationBar: View {
     
     let didAddFoodItem = NotificationCenter.default.publisher(for: .didAddFoodItem)
     let didDeleteFoodItem = NotificationCenter.default.publisher(for: .didDeleteFoodItem)
+    let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
 
     init(
         currentDate: Binding<Date?>,
@@ -43,9 +44,10 @@ struct LogNavigationBar: View {
         .onChange(of: currentDate, currentDateChanged)
         .onReceive(didAddFoodItem, perform: didUpdateDay)
         .onReceive(didDeleteFoodItem, perform: didUpdateDay)
+        .onReceive(didPopulate, perform: didPopulate)
     }
     
-    func didUpdateDay(_ notification: Notification) {
+    func didUpdateDay(notification: Notification) {
         guard let day = notification.userInfo?[Notification.PrepKeys.day] as? Day,
               day.dateString == self.day.dateString
         else {
@@ -54,10 +56,14 @@ struct LogNavigationBar: View {
         
         /// Wait a bit for the form to dismiss
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            withAnimation(.snappy) {
+            withAnimation(.smooth) {
                 self.day = day
             }
         }
+    }
+    
+    func didPopulate(notification: Notification) {
+        fetchDay()
     }
     
     func currentDateChanged(oldValue: Date?, newValue: Date?) {
@@ -76,7 +82,7 @@ struct LogNavigationBar: View {
         Task.detached(priority: .high) {
             let day = await DaysStore.day(for: currentDate)
             await MainActor.run {
-                withAnimation(.snappy) {
+                withAnimation(.smooth) {
                     self.day = day ?? Day()
                 }
             }

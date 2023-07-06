@@ -342,7 +342,7 @@ extension CoreDataManager {
             entity.fat = foodItem.calculateMacro(.fat)
             entity.protein = foodItem.calculateMacro(.protein)
             
-            entity.relativeEnergy = entity.calculatedRelativeEnergy
+            entity.largestEnergyInKcal = entity.calculatedLargestEnergyInKcal
         }
         
         let mealEntities = MealEntity.objects(in: context)
@@ -355,7 +355,7 @@ extension CoreDataManager {
             entity.fat = meal.calculateMacro(.fat)
             entity.protein = meal.calculateMacro(.protein)
             
-            entity.relativeEnergy = entity.calculatedRelativeEnergy
+            entity.largestEnergyInKcal = entity.calculatedLargestEnergyInKcal
         }
         
         let dayEntities = DayEntity.objects(in: context)

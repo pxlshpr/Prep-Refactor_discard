@@ -484,13 +484,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>113</string>
+					<string>114</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>112</string>
+					<string>113</string>
 					<key>Timestamp</key>
-					<string>710322135.805532</string>
+					<string>710336755.580736</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -578,13 +578,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>264</string>
+					<string>265</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>263</string>
+					<string>264</string>
 					<key>Timestamp</key>
-					<string>710325167.259482</string>
+					<string>710336740.143774</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -659,6 +659,185 @@
 			</dict>
 			<key>title</key>
 			<string>Let user change this</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>34</string>
+					<key>EndingLineNumber</key>
+					<string>453</string>
+					<key>StartingColumnNumber</key>
+					<string>11</string>
+					<key>StartingLineNumber</key>
+					<string>453</string>
+					<key>Timestamp</key>
+					<string>710336808.170344</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Stores/FoodItemsStore.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>calculateRelativeEnergy</string>
+				<key>leading</key>
+				<string>    
+    /// Calculates badge width for a Meal.
+//    func </string>
+				<key>trailing</key>
+				<string>(energy: Double, _ energyUnit: EnergyUnit) -&gt; Double {
+//        let kcal = energyUnit.convert(energy, to: .kcal)
+//        let values = energyValuesOfMeals(in: .kcal)
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>11</string>
+					<key>EndingLineNumber</key>
+					<string>73</string>
+					<key>StartingColumnNumber</key>
+					<string>2</string>
+					<key>StartingLineNumber</key>
+					<string>73</string>
+					<key>Timestamp</key>
+					<string>710336812.148017</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Extensions/Double.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>extension</string>
+				<key>leading</key>
+				<string>
+
+//</string>
+				<key>trailing</key>
+				<string> Array where Element == Double {
+//    var range: ClosedRange&lt;Double&gt; {
+//        guard let smallest, let largest else {
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>34</string>
+					<key>EndingLineNumber</key>
+					<string>570</string>
+					<key>StartingColumnNumber</key>
+					<string>10</string>
+					<key>StartingLineNumber</key>
+					<string>570</string>
+					<key>Timestamp</key>
+					<string>710336825.514975</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Stores/FoodItemsStore.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>calculatedRelativeEnergy</string>
+				<key>leading</key>
+				<string>    }
+
+//    var </string>
+				<key>trailing</key>
+				<string>: Double {
+//        dayEntity?.calculateRelativeEnergy(energy: energy, energyUnit) ?? 0
+//    }
+</string>
+			</dict>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>590</string>
+					<key>StartingColumnNumber</key>
+					<string>2</string>
+					<key>StartingLineNumber</key>
+					<string>587</string>
+					<key>Timestamp</key>
+					<string>710336830.447901</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Backend/Stores/FoodItemsStore.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>    var calculatedRelativeEnergy: Double {
+//        mealEntity?.calculateRelativeEnergy(energy: energy, energyUnit) ?? 0
+//    }
+</string>
+				<key>leading</key>
+				<string>    }
+    
+//</string>
+				<key>trailing</key>
+				<string>    
+    var calculatedLargestEnergyInKcal: Double {
+        mealEntity?.calculatedLargestEnergyInKcal ?? 0
+</string>
+			</dict>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>

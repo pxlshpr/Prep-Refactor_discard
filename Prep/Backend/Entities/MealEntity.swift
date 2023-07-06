@@ -16,7 +16,7 @@ extension MealEntity: Entity {
         self.carb = meal.carb
         self.fat = meal.fat
         self.protein = meal.protein
-        self.relativeEnergy = meal.relativeEnergy
+        self.largestEnergyInKcal = meal.largestEnergyInKcal
     }
     
     convenience init(
@@ -28,8 +28,6 @@ extension MealEntity: Entity {
         self.id = UUID(uuidString: legacy.id)!
         self.name = legacy.name
         self.time = Date(timeIntervalSince1970: legacy.time)
-        
-//        self.relativeEnergy = legacy.badgeWidth ?? 0
         
         self.dayEntity = dayEntity
     }

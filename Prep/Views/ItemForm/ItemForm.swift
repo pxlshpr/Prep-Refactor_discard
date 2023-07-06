@@ -267,8 +267,44 @@ struct ItemForm: View {
                 incrementField
             }
             nutrientsSection
+            deleteSection
         }
         .scrollIndicators(.hidden)
+    }
+    
+    @ViewBuilder
+    var deleteSection: some View {
+        if let foodItem {
+            Section {
+                Button(role: .destructive) {
+                    dismiss()
+                    isDeleting = true
+                    Haptics.successFeedback()
+                    
+                    Task.detached(priority: .high) {
+                        guard let updatedDay = await FoodItemsStore.delete(foodItem) else {
+                            return
+                        }
+                        await MainActor.run {
+                            post(.didDeleteFoodItem, userInfo: [.day: updatedDay])
+                        }
+                    }
+                    
+                    withAnimation(.snappy) {
+//                        alertMessage = "Food deleted successfully."
+//                        showingAlert = true
+//                        context.delete(food)
+                    }
+                } label: {
+                    Text("Delete")
+                        .padding(.horizontal)
+                        .frame(maxHeight: .infinity)
+                        .hoverEffect(.highlight)
+                        .frame(maxWidth: .infinity)
+                        .listRowBackground(EmptyView())
+                }
+            }
+        }
     }
     
     var incrementField: some View {

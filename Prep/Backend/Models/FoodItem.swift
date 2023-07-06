@@ -15,7 +15,8 @@ struct FoodItem: Identifiable, Codable, Hashable {
     var carb: Double
     var fat: Double
     var protein: Double
-    var relativeEnergy: Double
+    
+    var largestEnergyInKcal: Double
     
     var sortPosition: Int
     
@@ -33,7 +34,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
         carb: Double,
         fat: Double,
         protein: Double,
-        relativeEnergy: Double,
+        largestEnergyInKcal: Double,
         sortPosition: Int,
         eatenAt: Date?,
         updatedAt: Date,
@@ -48,7 +49,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
         self.carb = carb
         self.fat = fat
         self.protein = protein
-        self.relativeEnergy = relativeEnergy
+        self.largestEnergyInKcal = largestEnergyInKcal
         self.sortPosition = sortPosition
         self.eatenAt = eatenAt
         self.updatedAt = updatedAt
@@ -66,7 +67,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
             carb: entity.carb,
             fat: entity.fat,
             protein: entity.protein,
-            relativeEnergy: entity.relativeEnergy,
+            largestEnergyInKcal: entity.largestEnergyInKcal,
             sortPosition: Int(entity.sortPosition),
             eatenAt: entity.eatenAt,
             updatedAt: entity.updatedAt!,

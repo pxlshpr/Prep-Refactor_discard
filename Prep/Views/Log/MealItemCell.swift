@@ -94,22 +94,8 @@ struct MealItemCell: View {
     var foodBadge: some View {
         let widthBinding = Binding<CGFloat>(
             get: {
-                /// Always return 0 for 0 energy items
-                guard item.energy > 0 else {
-                    return 0
-                }
-                
-                /// Otherwise have a base value that we append to the calculated one so that we have something visible for the smallest value
-                let base = width * 0.0095
-                let maxWithoutBase = width * 0.25
-                let calculated = CGFloat(item.relativeEnergy * maxWithoutBase)
-                let calculatedWidth = calculated + base
-                    
-                /// This is crucial because of an edge cases where we keep getting minutely different values
-                /// (differing at the 5+ decimal place), resulting in an infinite loop due to this 'changing'.
-                let rounded = CGFloat(Int(calculatedWidth))
-                
-                return rounded
+                let max = width * 0.25
+                return (item.energy * max) / item.largestEnergyInKcal
             },
             set: { _ in }
         )

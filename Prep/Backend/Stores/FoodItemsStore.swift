@@ -310,7 +310,6 @@ extension CoreDataManager {
         entity.fat = food.calculateMacro(.fat, for: amount)
         entity.protein = food.calculateMacro(.protein, for: amount)
 
-        /// Compute the relativeEnergy for all
         mealEntity.postFoodItemUpdate(.create)
         
         /// Update Food's last used data
@@ -401,7 +400,6 @@ extension CoreDataManager {
            let mealEntity = MealEntity.object(with: mealID, in: context),
            let dayEntity = mealEntity.dayEntity
         {
-            /// Compute the relativeEnergy for all
             mealEntity.postFoodItemUpdate(.create)
             
             //TODO: Make sure we're updating the day entity properly here
@@ -450,23 +448,6 @@ extension CoreDataManager {
 }
 import FoodDataTypes
 
-extension DayEntity {
-    
-    /// Calculates badge width for a Meal.
-    func calculateRelativeEnergy(energy: Double, _ energyUnit: EnergyUnit) -> Double {
-        let kcal = energyUnit.convert(energy, to: .kcal)
-        let values = energyValuesOfMeals(in: .kcal)
-        return kcal.relativeScale(in: values)
-    }
-    
-    func energyValuesOfMeals(in unit: EnergyUnit) -> [Double] {
-        mealEntitiesArray
-            .filter { !$0.foodItemEntitiesArray.isEmpty }
-            .map { $0.energy(in: .kcal) }
-    }
-
-}
-
 extension MealEntity {
     
     func assertSortPositions() {
@@ -493,16 +474,19 @@ enum ModifyAction {
 extension DayEntity {
     func postFoodItemUpdate(_ action: ModifyAction) {
         
+        /// Determine this here as it will be the same for all food items and meals
+        let largestEnergyInKcal = calculatedLargestEnergyInKcal
+        
         /// First update the relative energies
         for mealEntity in mealEntitiesArray {
             
             /// Of all Food Items
             for foodItemEntity in mealEntity.foodItemEntitiesArray {
-                foodItemEntity.relativeEnergy = mealEntity.calculateRelativeEnergy(energy: foodItemEntity.energy, energyUnit)
+                foodItemEntity.largestEnergyInKcal = largestEnergyInKcal
             }
 
             /// And Meals
-            mealEntity.relativeEnergy = mealEntity.calculatedRelativeEnergy
+            mealEntity.largestEnergyInKcal = largestEnergyInKcal
         }
         
         /// Now update the stats of the `Day` itself
@@ -562,19 +546,9 @@ extension MealEntity {
         }
     }
 
-    var calculatedRelativeEnergy: Double {
-        dayEntity?.calculateRelativeEnergy(energy: energy, energyUnit) ?? 0
-    }
-
+    
     func energy(in unit: EnergyUnit) -> Double {
         self.energyUnit.convert(energy, to: unit)
-    }
-
-    func calculateRelativeEnergy(energy: Double, _ energyUnit: EnergyUnit) -> Double {
-        guard let dayEntity else { return 0 }
-        let kcal = energyUnit.convert(energy, to: .kcal)
-        let values = dayEntity.energyValuesOfFoodItems(in: .kcal)
-        return kcal.relativeScale(in: values)
     }
 }
 
@@ -583,11 +557,29 @@ extension FoodItemEntity {
         self.energyUnit.convert(energy, to: unit)
     }
     
-    var calculatedRelativeEnergy: Double {
-        mealEntity?.calculateRelativeEnergy(energy: energy, energyUnit) ?? 0
+    var calculatedLargestEnergyInKcal: Double {
+        mealEntity?.calculatedLargestEnergyInKcal ?? 0
+    }
+    
+    var energyInKcal: Double {
+        energyUnit.convert(energy, to: .kcal)
     }
 }
+
+extension MealEntity {
+    var calculatedLargestEnergyInKcal: Double {
+        dayEntity?.calculatedLargestEnergyInKcal ?? 0
+    }
+}
+
 extension DayEntity {
+    var calculatedLargestEnergyInKcal: Double {
+        foodItemEntities
+            .map { $0.energyInKcal }
+            .sorted(by: { $0 > $1 })
+            .first ?? 0
+    }
+    
     func energyValuesOfFoodItems(in unit: EnergyUnit) -> [Double] {
         foodItemEntities.map { $0.energy(in: .kcal) }
     }
