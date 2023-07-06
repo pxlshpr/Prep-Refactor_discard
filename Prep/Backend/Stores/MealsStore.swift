@@ -131,11 +131,6 @@ extension CoreDataManager {
         }
         
         for foodEntity in foodEntities {
-            
-//            let foodID = foodItem.food.id
-//            guard let foodEntity = FoodEntity.object(with: foodID, in: context) else {
-//                fatalError()
-//            }
             if let lastFoodItem = FoodItemsStore.latestFoodItemEntity(
                 foodID: foodEntity.id!, context: context
             ) {
