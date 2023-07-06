@@ -670,13 +670,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>137</string>
+					<string>133</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>136</string>
+					<string>133</string>
 					<key>Timestamp</key>
-					<string>710360771.997298</string>
+					<string>710361201.549589</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -692,16 +692,15 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>                fatalError()
-</string>
+				<string></string>
 				<key>leading</key>
-				<string>//            let foodID = foodItem.food.id
-//            guard let foodEntity = FoodEntity.object(with: foodID, in: context) else {
-//</string>
+				<string>        
+        for foodEntity in foodEntities {
+</string>
 				<key>trailing</key>
-				<string>//            }
-            if let lastFoodItem = FoodItemsStore.latestFoodItemEntity(
+				<string>            if let lastFoodItem = FoodItemsStore.latestFoodItemEntity(
                 foodID: foodEntity.id!, context: context
+            ) {
 </string>
 			</dict>
 			<key>type</key>

@@ -194,7 +194,7 @@ struct LogView: View {
             var menu: some View {
                 Menu {
                     Button("New Meal") {
-                        
+                        showingMealForm = true
                     }
                     Section("Add Food") {
                         ForEach(meals.sorted().reversed()) { meal in
@@ -233,6 +233,14 @@ struct LogView: View {
             button
 //                .popover(isPresented: $showingFoodPicker) { foodPicker }
                 .popover(item: $mealToShowFoodPickerFor) { foodPicker(for: $0) }
+                .popover(isPresented: $showingMealForm) { mealForm }
+        }
+        
+        @ViewBuilder
+        var mealForm: some View {
+            if let currentDate {
+                MealForm(currentDate)
+            }
         }
         
         return VStack {
