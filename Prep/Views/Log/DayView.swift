@@ -85,11 +85,9 @@ struct DayView: View {
     }
     
     func fetchMeals() {
-        Task.detached(priority: .high) {
-            logger.debug("Fetching meals in a detached Task…")
+        Task.detached(priority: .userInitiated) {
             let meals = await MealsStore.meals(on: date)
             self.meals = meals
-            logger.debug("… fetched \(meals.count) meals")
         }
     }
     

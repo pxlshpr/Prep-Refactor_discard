@@ -397,42 +397,26 @@ struct ItemForm: View {
     
     @ViewBuilder
     var foodField: some View {
-        HStack {
-            HStack(alignment: .top) {
-                Text("Food")
-                    .foregroundStyle(Color(.label))
-                Spacer()
-                Text(food.foodName)
-                    .foregroundStyle(Color(.label))
-            }
-            .multilineTextAlignment(.trailing)
+        HStack(alignment: .top) {
+            Text("Food")
+                .foregroundStyle(Color(.label))
+            Spacer()
+            Text(food.foodName)
+                .foregroundStyle(Color(.secondaryLabel))
         }
-        .foregroundStyle(Color(.secondaryLabel))
+        .multilineTextAlignment(.trailing)
     }
 
     var mealField: some View {
-        var label: some View {
-            HStack {
-                Text("Meal")
-                    .foregroundStyle(Color(.label))
-                Spacer()
-                if let meal {
-                    Text(meal.title)
-                        .foregroundStyle(Color(.label))
-                }
+        HStack {
+            Text("Meal")
+                .foregroundStyle(Color(.label))
+            Spacer()
+            if let meal {
+                Text(meal.title)
+                    .foregroundStyle(Color(.secondaryLabel))
             }
         }
-        
-        return Group {
-            if isEditing {
-                label
-            } else {
-                NavigationLink(value: ItemFormRoute.meal) {
-                    label
-                }
-            }
-        }
-        .foregroundStyle(Color(.secondaryLabel))
     }
     
     var quantityField: some View {

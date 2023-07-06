@@ -16,6 +16,10 @@ struct LogView: View {
     @State var showingFoodForm: Bool = false
     @State var showingMealForm: Bool = false
 
+    @State var meals: [Meal] = []
+
+    let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
+
     var body: some View {
         GeometryReader { proxy in
 //            HStack(spacing: 0) {
@@ -31,6 +35,32 @@ struct LogView: View {
                     buttonsLayer
                 }
 //            }
+        }
+        .onAppear(perform: appeared)
+        .onReceive(didPopulate, perform: didPopulate)
+        .onChange(of: currentDate, currentDateChanged)
+    }
+    
+    func appeared() {
+        fetchMeals()
+    }
+    
+    func didPopulate(notification: Notification) {
+        fetchMeals()
+    }
+
+    func currentDateChanged(oldValue: Date?, newValue: Date?) {
+        fetchMeals(newValue)
+    }
+    
+    func fetchMeals(_ date: Date? = nil) {
+        guard let date = date ?? currentDate else {
+            meals = []
+            return
+        }
+        Task.detached(priority: .userInitiated) {
+            let meals = await MealsStore.meals(on: date)
+            self.meals = meals
         }
     }
     
@@ -114,22 +144,22 @@ struct LogView: View {
     }
     
     var buttonsLayer: some View {
-        
-        func button(_ systemImage: String, action: @escaping () -> ()) -> some View {
-             var label: some View {
-                 ZStack {
-                     Circle()
-                         .foregroundStyle(Color.accentColor.gradient)
-                         .shadow(color: Color(.black).opacity(0.1), radius: 5, x: 0, y: 3)
-                     Image(systemName: systemImage)
-                         .font(.system(size: 25))
-                         .fontWeight(.medium)
-                         .foregroundStyle(Color(.systemBackground))
-                 }
-                 .frame(width: HeroButton.size, height: HeroButton.size)
-                 .hoverEffect(.lift)
+
+        func buttonLabel(_ systemImage: String) -> some View {
+            ZStack {
+                Circle()
+                    .foregroundStyle(Color.accentColor.gradient)
+                    .shadow(color: Color(.black).opacity(0.1), radius: 5, x: 0, y: 3)
+                Image(systemName: systemImage)
+                    .font(.system(size: 25))
+                    .fontWeight(.medium)
+                    .foregroundStyle(Color(.systemBackground))
             }
-             
+            .frame(width: HeroButton.size, height: HeroButton.size)
+            .hoverEffect(.lift)
+        }
+        
+        var buttonLegacy: some View {
             var menu: some View {
                 Menu {
                     Button {
@@ -140,21 +170,48 @@ struct LogView: View {
                 } label: {
                     label
                 } primaryAction: {
-                    action()
+                    Haptics.selectionFeedback()
+                    showingFoodPicker = true
                 }
             }
-             
-             return ZStack {
-                 label
-                 menu
-             }
+
+            var label: some View { buttonLabel("carrot.fill") }
+            
+            return ZStack {
+                label
+                menu
+            }
+        }
+        
+        var button: some View {
+            var menu: some View {
+                Menu {
+                    Button("New Meal") {
+                        
+                    }
+                    Section("Add Food") {
+                        ForEach(meals.sorted().reversed()) { meal in
+                            Button(meal.title) {
+                                
+                            }
+                        }
+                    }
+                } label: {
+                    label
+                }
+            }
+            
+            var label: some View { buttonLabel("plus") }
+            
+            return ZStack {
+                label.grayscale(1)
+                menu
+            }
         }
         
         var addFoodButton: some View {
-            button("carrot.fill") {
-                Haptics.selectionFeedback()
-                showingFoodPicker = true
-            }
+//            buttonLegacy
+            button
             .popover(isPresented: $showingFoodPicker) { foodPicker }
         }
         
