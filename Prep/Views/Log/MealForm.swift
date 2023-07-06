@@ -18,16 +18,29 @@ struct MealForm: View {
 
     @State var meal: Meal? = nil
     
+    let initialName: String
     let date: Date
+    
     @State var name: String
     @State var time: Date
 
     @State var mealTimes: [Date] = []
     
+    @State var isDeleting = false
+    @State var saveDisabled: Bool
+    @State var dismissDisabled = false
+    @State var saveDisabledTask: Task<Void, Error>? = nil
+
     init(_ date: Date) {
         self.date = date
-        _name = State(initialValue: Meal.defaultName(at: date))
+        
+        let name = Meal.defaultName(at: date)
+        _name = State(initialValue: name)
+        self.initialName = name
+        
         _time = State(initialValue: date)
+        
+        _saveDisabled = State(initialValue: false)
     }
     
     init(_ meal: Meal) {
@@ -35,6 +48,8 @@ struct MealForm: View {
         _meal = State(initialValue: meal)
         _name = State(initialValue: meal.name)
         _time = State(initialValue: meal.time)
+        _saveDisabled = State(initialValue: true)
+        self.initialName = meal.name
     }
 
     @ViewBuilder
@@ -227,76 +242,6 @@ struct MealForm: View {
                 }
             }
         }
-        
-//        if let meal {
-//            /// Update
-//        } else {
-////            MealStore.create(
-////                name: model.name,
-////                time: model.time,
-////                date: date
-////            )
-//            
-//            
-//            let logger = Logger(subsystem: "MealForm", category: "tappedSave")
-//            do {
-//                
-//                let calendarDayString = date.calendarDayString
-//                let descriptor = FetchDescriptor(predicate: #Predicate<DayEntity> {
-//                    $0.calendarDayString == calendarDayString
-//                })
-//                
-//                logger.debug("Fetching day with calendarDayString: \(calendarDayString)")
-//                let days = try context.fetch(descriptor)
-//                guard days.count <= 1 else {
-//                    fatalError("Duplicate days for: \(date.calendarDayString)")
-//                }
-//                
-//                let fetchedDay = days.first
-//                let dayEntity: DayEntity
-//                if let fetchedDay {
-//                    logger.info("Day was fetched")
-//                    dayEntity = fetchedDay
-//                } else {
-//                    logger.info("Day wasn't fetched, creating ...")
-//                    let newDay = DayEntity(calendarDayString: date.calendarDayString)
-//                    logger.debug("Inserting new DayEntity...")
-//                    context.insert(newDay)
-//                    dayEntity = newDay
-//                }
-//                
-//                logger.debug("Now that we have dayEntity, creating MealEntity")
-//                
-//                let mealEntity = MealEntity(
-//                    dayEntity: dayEntity,
-//                    name: model.name,
-//                    time: model.time.timeIntervalSince1970
-//                )
-//                logger.debug("Inserting new MealEntity with id: \(mealEntity.uuid, privacy: .public)...")
-//                context.insert(mealEntity)
-//                
-//                logger.debug("Returning the newly created Meal")
-//                let meal = Meal(
-//                    mealEntity,
-//                    dayEntity: dayEntity,
-//                    foodItems: []
-//                )
-//                post(.didAddMeal, userInfo: [.meal: meal])
-//
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//                    Task {
-//                        logger.debug("Saving context")
-//                        try context.save()
-//                    }
-//                }
-//            } catch {
-//                fatalError(error.localizedDescription)
-//            }
-//        }
-    }
-
-    func timeChanged(oldValue: Date, newValue: Date) {
-        /// For some reason, not having this `onChange` modifier doesn't update the `time` when we pick one using the `DatePicker`, so we're leaving it in here
     }
     
     var existingTimeSlots: [Int] {
@@ -308,53 +253,66 @@ struct MealForm: View {
     var currentTimeSlot: Int {
         time.timeSlot(within: date)
     }
-    
-    var saveIsDisabled: Bool {
-        if name.isEmpty {
-            return true
-        }
-        
-        if let meal {
-            if meal.name == name
-                && meal.time.equalsIgnoringSeconds(time) {
-                return true
+}
+
+import SwiftSugar
+
+extension MealForm {
+    func delayedSetSaveDisabled() {
+        saveDisabledTask?.cancel()
+        saveDisabledTask = Task.detached(priority: .userInitiated) {
+            /// sleep to let the animation complete first
+            try await sleepTask(0.2)
+            try Task.checkCancellation()
+            await MainActor.run {
+                self.setSaveDisabled()
             }
         }
-        
-        return false
+    }
+
+    func setSaveDisabled() {
+        guard !isDeleting else {
+            saveDisabled = true
+            dismissDisabled = true
+            return
+        }
+        saveDisabled = shouldDisableSave
+        dismissDisabled = shouldDisableDismiss
     }
     
-    var saveButton: some View {
-        var color: Color {
-            (colorScheme == .light && saveIsDisabled)
-            ? .black
-            : .white
-        }
+    func hasPendingChanges(from meal: Meal) -> Bool {
+        name != meal.name
+        || time != meal.time
+    }
+    
+    var isValid: Bool {
+        /// Name cannot be empty
+        guard !name.isEmpty else { return false }
         
-        var opacity: CGFloat {
-            saveIsDisabled
-            ? (colorScheme == .light ? 0.2 : 0.2)
-            : 1
+        return true
+    }
+    
+    var shouldDisableSave: Bool {
+        if let meal {
+            /// Can be saved if we have pending changes
+            !hasPendingChanges(from: meal)
+        } else {
+            !isValid
         }
-        var background: some View {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundStyle(Color.accentColor.gradient)
+    }
+    
+    var shouldDisableDismiss: Bool {
+        if let meal {
+            /// Can be saved if we have pending changes
+            hasPendingChanges(from: meal)
+        } else {
+            hasEnteredData
         }
-
-        return Button {
-            tappedSave()
-        } label: {
-            Text(meal == nil ? "Add" : "Save")
-                .bold()
-                .foregroundStyle(color)
-                .frame(height: 52)
-                .frame(maxWidth: .infinity)
-                .background(background)
-        }
-        .buttonStyle(.borderless)
-        .padding(.horizontal, K.FormStyledSection.horizontalOuterPadding)
-        .disabled(saveIsDisabled)
-        .opacity(opacity)
+    }
+    
+    var hasEnteredData: Bool {
+        name != initialName
+        || time != date /// since `date` is the initial time we set this form with for a new Meal
     }
 }
 

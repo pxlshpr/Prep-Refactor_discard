@@ -1,8 +1,6 @@
 import SwiftSugar
 import OSLog
 
-private let logger = Logger(subsystem: "ItemForm", category: "Data")
-
 extension ItemForm {
     func delayedSetSaveDisabled() {
         saveDisabledTask?.cancel()
@@ -20,13 +18,10 @@ extension ItemForm {
         guard !isDeleting else {
             saveDisabled = true
             dismissDisabled = true
-            logger.debug("saveDisabled set to true")
             return
         }
         saveDisabled = shouldDisableSave
         dismissDisabled = shouldDisableDismiss
-        logger.debug("saveDisabled set to \(String(describing: self.saveDisabled), privacy: .public)")
-        logger.debug("dismissDisabled set to \(String(describing: self.dismissDisabled), privacy: .public)")
     }
     
     func hasPendingChanges(from foodItem: FoodItem) -> Bool {
