@@ -5,19 +5,27 @@ import SwiftHaptics
 
 struct FoodsView: View {
     
-    @State var showingFoodForm = false
-    @State var hasAppeared = false
-    
     let model = FoodsModel.shared
     
+    @State var showingFoodForm = false
+    @State var foodBeingEdited: Food? = nil
+
+    @State var hasAppeared = false
+    
+    let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
+
     var body: some View {
         NavigationStack {
             content
                 .onAppear(perform: appeared)
                 .navigationTitle("My Foods")
         }
+        .onReceive(didPopulate, perform: didPopulate)
     }
-   
+    
+    func didPopulate(notification: Notification) {
+        model.loadMoreContentIfNeeded()
+    }
     
     var content: some View {
         ZStack {
@@ -31,10 +39,18 @@ struct FoodsView: View {
     var list: some View {
         List {
             ForEach(model.foods, id: \.self) { food in
-                FoodsViewCell(food: food)
-                    .onAppear {
-                        model.loadMoreContentIfNeeded(currentFood: food)
-                    }
+                Button {
+                    foodBeingEdited = food
+                } label: {
+                    FoodCell(food: food)
+                }
+//                FoodsViewCell(food: food)
+                .popover(item: editedFoodBinding(for: food)) {
+                    FoodForm($0)
+                }
+                .onAppear {
+                    model.loadMoreContentIfNeeded(currentFood: food)
+                }
             }
             if model.isLoadingPage {
                 ProgressView()
@@ -60,6 +76,7 @@ struct FoodsView: View {
                 ForEach(FoodType.allCases) { foodType in
                     Button {
                         Haptics.selectionFeedback()
+                        showingFoodForm = true
                     } label: {
                         Label(foodType.description, systemImage: foodType.systemImage)
                     }
@@ -75,11 +92,27 @@ struct FoodsView: View {
                 Spacer()
                 newFoodButton
                     .popover(isPresented: $showingFoodForm) { foodForm }
+//                    .popover(item: $foodBeingEdited ) {
+//                        FoodForm($0)
+//                    }
             }
             .padding(.horizontal, 20)
             .padding(.bottom, HeroButton.bottom)
         }
         .ignoresSafeArea(.keyboard)
+    }
+    
+    func editedFoodBinding(for food: Food) -> Binding<Food?> {
+        Binding<Food?>(
+            get: {
+                if let foodBeingEdited, food.id == foodBeingEdited.id {
+                    return foodBeingEdited
+                } else {
+                    return nil
+                }
+            },
+            set: { self.foodBeingEdited = $0 }
+        )
     }
     
     var foodForm: some View {

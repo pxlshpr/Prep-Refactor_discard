@@ -17,9 +17,9 @@ struct FoodCell: View {
     let fat: Double
     let protein: Double
 
-    @Binding var showingForm: Bool
+    @Binding var foodBeingEdited: Food?
     
-    init(food: Food, showingForm: Binding<Bool> = .constant(false)) {
+    init(food: Food, foodBeingEdited: Binding<Food?> = .constant(nil)) {
         self.food = food
         
         self.emoji = food.emoji
@@ -29,15 +29,26 @@ struct FoodCell: View {
         self.carb = food.carb
         self.fat = food.fat
         self.protein = food.protein
-        _showingForm = showingForm
+        _foodBeingEdited = foodBeingEdited
+    }
+
+    var editedFoodBinding: Binding<Food?> {
+        Binding<Food?>(
+            get: {
+                if let foodBeingEdited, food.id == foodBeingEdited.id {
+                    return foodBeingEdited
+                } else {
+                    return nil
+                }
+            },
+            set: { self.foodBeingEdited = $0 }
+        )
     }
 
     var body: some View {
         HStack {
             emojiText
-                .popover(isPresented: $showingForm) {
-                    foodForm
-                }
+                .popover(item: editedFoodBinding) { FoodForm($0) }
             nameTexts
             Spacer()
 //            foodBadge
@@ -45,9 +56,9 @@ struct FoodCell: View {
         }
     }
     
-    var foodForm: some View {
-        FoodForm(food)
-    }
+//    var foodForm: some View {
+//        FoodForm(food)
+//    }
     
     var greyColor: Color { Color(hex: "6F7E88") }
 

@@ -3,17 +3,13 @@ import SwiftUI
 struct FoodsViewCell: View {
 
     let food: Food
-    @State var showingForm = false
+    @Binding var foodBeingEdited: Food?
 
-    init(food: Food) {
-        self.food = food
-    }
-    
     var body: some View {
         Button {
-            showingForm = true
+            foodBeingEdited = food
         } label: {
-            FoodCell(food: food, showingForm: $showingForm)
+            FoodCell(food: food, foodBeingEdited: $foodBeingEdited)
         }
     }
 }

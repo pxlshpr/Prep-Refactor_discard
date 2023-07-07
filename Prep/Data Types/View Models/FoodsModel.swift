@@ -15,7 +15,7 @@ let FoodPageSize: Int = 25
         loadMoreContent()
     }
     
-    func loadMoreContentIfNeeded(currentFood food: Food?) {
+    func loadMoreContentIfNeeded(currentFood food: Food? = nil) {
         guard let food else {
             loadMoreContent()
             return
