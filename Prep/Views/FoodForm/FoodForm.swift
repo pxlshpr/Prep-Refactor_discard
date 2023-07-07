@@ -91,7 +91,7 @@ struct FoodForm: View {
                         Color.clear
                     }
                 }
-                .navigationTitle("New Food")
+                .navigationTitle(title)
                 .navigationDestination(for: FoodFormRoute.self, destination: destination)
                 .toolbar { toolbarContent }
             }
@@ -100,6 +100,10 @@ struct FoodForm: View {
 //                isPresented: $model.isPresentingAlert
 //            )
         }
+    }
+    
+    var title: String {
+        model.isEditing ? "Edit Food" : "New Food"
     }
     
     var toolbarContent: some ToolbarContent {

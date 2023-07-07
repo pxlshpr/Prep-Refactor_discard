@@ -36,7 +36,7 @@ struct FoodPicker: View {
         }
         .onDisappear(perform: disappeared)
         .onAppear(perform: appeared)
-        .frame(idealWidth: 400, idealHeight: 800)
+        .frame(idealWidth: IdealItemFormWidth, idealHeight: IdealItemFormHeight)
         .presentationDetents([.medium, .fraction(0.90)])
     }
     

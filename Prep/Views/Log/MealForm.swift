@@ -59,8 +59,12 @@ struct MealForm: View {
     var body: some View {
         content
             .onAppear(perform: appeared)
-            .frame(minWidth: 200, idealWidth: 450, minHeight: 250, idealHeight: 340)
+            .frame(minWidth: 200, idealWidth: 450, minHeight: 250, idealHeight: idealHeight)
             .presentationDetents([.height(detentHeight)])
+    }
+    
+    var idealHeight: CGFloat {
+        isEditing ? 390 : 340
     }
     
     @ViewBuilder
@@ -90,7 +94,7 @@ struct MealForm: View {
     }
     
     var detentHeight: CGFloat {
-        meal == nil ? 400 : 450
+        isEditing ? 450 : 400
     }
     
     func appeared() {

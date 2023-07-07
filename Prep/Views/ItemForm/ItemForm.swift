@@ -110,7 +110,7 @@ struct ItemForm: View {
         .scrollDismissesKeyboard(.immediately)
         .interactiveDismissDisabled(dismissDisabled)
         .onAppear(perform: appeared)
-        .frame(idealWidth: 400, idealHeight: 800)
+        .frame(idealWidth: IdealItemFormWidth, idealHeight: IdealItemFormHeight)
         .presentationDetents([.medium, .fraction(0.90)])
         .onChange(of: isFocused, isFocusedChanged)
     }
@@ -373,34 +373,48 @@ struct ItemForm: View {
         "\(value(for: nutrient).cleanAmount) \(nutrientValue(for: nutrient).unit.abbreviation)"
     }
     
+    @State var showingMicros = false
+    
     var nutrientsSection: some View {
+
+        var micros: [Micro] {
+            food.micros.compactMap { $0.micro }
+        }
         
         var microsGroup: some View {
-            var micros: [Micro] {
-                food.micros.compactMap { $0.micro }
-            }
-            return Group {
-                if !micros.isEmpty {
-                    DisclosureGroup {
-                        ForEach(micros, id: \.self) { micro in
-                            HStack {
-                                Text(micro.name)
-                                    .foregroundStyle(Color(.label))
-                                Spacer()
-                                Text(valueString(for: .micro(micro)))
-                                    .foregroundStyle(Color(.secondaryLabel))
-                            }
-                        }
-                    } label: {
-                        HStack {
-                            Text("Micronutrients")
-                            Spacer()
-                            Text("\(micros.count)")
-                        }
-                        .foregroundStyle(Color(.label))
+            var rows: some View {
+                ForEach(micros, id: \.self) { micro in
+                    HStack {
+                        Text(micro.name)
+                            .foregroundStyle(Color(.label))
+                        Spacer()
+                        Text(valueString(for: .micro(micro)))
+                            .foregroundStyle(Color(.secondaryLabel))
                     }
                 }
             }
+
+            var disclosureGroup: some View {
+                DisclosureGroup {
+                    rows
+                } label: {
+                    HStack {
+                        Text("Micronutrients")
+                        Spacer()
+                        Text("\(micros.count)")
+                    }
+                    .foregroundStyle(Color(.label))
+                }
+            }
+            
+            var section: some View {
+                Section("Micronutrients", isExpanded: $showingMicros) {
+                    rows
+                }
+            }
+            
+            return disclosureGroup
+//            return section
         }
         
         var energyField: some View {
@@ -459,7 +473,9 @@ struct ItemForm: View {
                 energyField
                 macroFields
             }
-            microsGroup
+            if !micros.isEmpty {
+                microsGroup
+            }
         }
     }
     
