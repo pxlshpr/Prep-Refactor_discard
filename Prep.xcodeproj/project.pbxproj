@@ -673,7 +673,6 @@
 				E28001DC2A52B84300C6D528 /* Components */,
 				E28001E22A52B84300C6D528 /* Log */,
 				E28001EB2A52B84300C6D528 /* Foods */,
-				E28001EE2A52B84300C6D528 /* MealItemForm */,
 				E28001F22A52B84300C6D528 /* FoodForm */,
 				E28001FD2A52B84300C6D528 /* ItemForm */,
 			);
@@ -722,13 +721,6 @@
 				E28001ED2A52B84300C6D528 /* FoodsView.swift */,
 			);
 			path = Foods;
-			sourceTree = "<group>";
-		};
-		E28001EE2A52B84300C6D528 /* MealItemForm */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MealItemForm;
 			sourceTree = "<group>";
 		};
 		E28001F22A52B84300C6D528 /* FoodForm */ = {

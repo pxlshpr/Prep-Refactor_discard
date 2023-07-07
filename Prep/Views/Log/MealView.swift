@@ -54,6 +54,11 @@ struct MealView: View {
                 .font(.body)
                 .fontWeight(.light)
                 .foregroundStyle(Color(.tertiaryLabel))
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+                .padding(.leading, 5)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 12)
                 .contentShape(Rectangle())
                 .hoverEffect(.highlight)
         }
@@ -65,10 +70,15 @@ struct MealView: View {
             } label: {
                 label
             }
-            .popover(isPresented: $showingFoodPicker) { foodPicker }
+            .popover(isPresented: $showingFoodPicker, attachmentAnchor: CellPopoverAnchor) {
+                foodPicker
+            }
         }
         
         return button
+            .padding(.leading, leadingPadding)
+            .padding(.trailing, trailingPadding)
+            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
     }
     
     var foodPicker: some View {

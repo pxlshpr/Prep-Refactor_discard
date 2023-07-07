@@ -80,7 +80,9 @@ struct MealItemCell: View {
             Spacer()
             foodBadge
         }
-        .popover(isPresented: $showingItemForm) { itemForm }
+        .popover(isPresented: $showingItemForm, attachmentAnchor: CellPopoverAnchor) {
+            itemForm
+        }
     }
     
     var itemForm: some View {

@@ -10,20 +10,12 @@ import FoodDataTypes
 
 let foodModelLogger = Logger(subsystem: "FoodModel", category: "")
 
-enum FoodFormSource {
-    case logNew
-    case logChoose
-    case foodsNew
-    case foodsEdit
-}
-
 struct FoodForm: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
 
-//    @Bindable var model: FoodModel
-    @State var model: FoodModel = FoodModel.shared
+    @State var model: FoodModel
 
     @State var path: [FoodFormRoute] = []
     @State var showingCancelConfirmation = false
@@ -39,13 +31,13 @@ struct FoodForm: View {
     
     @State var hasAppeared = false
     
-//    init(_ food: Food) {
-//        _model = State(initialValue: FoodModel(food))
-//    }
+    init(_ food: Food) {
+        _model = State(initialValue: FoodModel(food))
+    }
     
-//    init() {
-//        _model = State(initialValue: FoodModel())
-//    }
+    init() {
+        _model = State(initialValue: FoodModel())
+    }
     
     var body: some View {
         let _ = Self._printChanges()
