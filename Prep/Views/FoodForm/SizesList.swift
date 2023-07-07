@@ -179,6 +179,7 @@ extension SizesList {
             Button("Add Unit Conversion") {
                 withAnimation(.snappy) {
                     foodModel.hasDensity = true
+                    foodModel.setSaveDisabled()
                 }
             }
         }
@@ -187,6 +188,7 @@ extension SizesList {
             Button {
                 withAnimation(.snappy) {
                     foodModel.hasDensity = false
+                    foodModel.setSaveDisabled()
                 }
             } label: {
                 Text("Remove")
