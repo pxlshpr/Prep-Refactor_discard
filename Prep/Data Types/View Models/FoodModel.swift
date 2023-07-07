@@ -18,8 +18,6 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
 @Observable class FoodModel {
 
-    static let shared = FoodModel()
-    
     var foodBeingEdited: Food? = nil
 
     var emoji: String = ""
@@ -55,15 +53,28 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
     var imageIDs: [UUID] = []
 
-    var images: [UIImage] = [] /// Not stored
-    var presentedImageIndex: Int = 0 /// Not stored
-
     /// Not stored
+    var path: [FoodFormRoute] = []
+    var images: [UIImage] = []
+    var presentedImageIndex: Int = 0
+    var showingImageViewer = false
+
+    var showingCancelConfirmation = false
+    var showingDeleteConfirmation = false
+    var showingDensityForm = false
+    var showingBarcodeScanner = false
+    var showingPhotosPicker = false
+    var showingCamera = false
+    var showingColumnConfirmation = false
+    var hasAppeared = false
+    var selectedPhotos: [PhotosPickerItem] = []
+
+    
     var isProcessingImage = false
     var processingStatus: String = ""
     var alertMessage: String = ""
     var isPresentingAlert: Bool = false
-    
+
     var updateSmallPieChartTask: Task<Void, Error>? = nil
 
     var isDeleting = false

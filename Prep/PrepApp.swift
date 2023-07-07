@@ -3,8 +3,6 @@ import SwiftUI
 @main
 struct PrepApp: App {
     
-    @State var foodModel = FoodModel.shared
-    
     init() {
         DataManager.populateIfNeeded()
     }
@@ -12,7 +10,6 @@ struct PrepApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .environment(foodModel)
         }
     }
 }

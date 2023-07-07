@@ -5,10 +5,12 @@ import SwiftHaptics
 
 struct FoodsView: View {
 
-    @Environment(FoodModel.self) var foodModel: FoodModel
+//    @Environment(FoodModel.self) var foodModel: FoodModel
+    @State var foodModel = FoodModel()
 
-    let model = FoodsModel.shared
-    
+//    let model = FoodsModel.shared
+    @State var model = FoodsModel()
+
     @State var showingFoodForm = false
     @State var foodBeingEdited: Food? = nil
 

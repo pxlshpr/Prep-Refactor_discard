@@ -4,7 +4,7 @@ let FoodPageSize: Int = 25
 
 @Observable class FoodsModel {
     
-    static let shared = FoodsModel()
+//    static let shared = FoodsModel()
     
     var foods: [Food] = []
     var isLoadingPage = false

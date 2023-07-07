@@ -18,22 +18,6 @@ struct FoodForm: View {
 //    @State var model: FoodModel
     @Bindable var model: FoodModel
 
-    @State var path: [FoodFormRoute] = []
-    @State var showingCancelConfirmation = false
-    @State var showingDeleteConfirmation = false
-    @State var showingDensityForm = false
-    @State var showingBarcodeScanner = false
-    
-    @State var showingPhotosPicker = false
-    @State var showingCamera = false
-    
-    @State var showingColumnConfirmation = false
-    @State var selectedPhotos: [PhotosPickerItem] = []
-    
-    @State var hasAppeared = false
-
-    @State var showingImageViewer = false
-
 //    init(_ food: Food) {
 //        _model = State(initialValue: FoodModel(food))
 //    }
@@ -50,21 +34,21 @@ struct FoodForm: View {
             .interactiveDismissDisabled(model.dismissDisabled)
             
             .photosPicker(
-                isPresented: $showingPhotosPicker,
-                selection: $selectedPhotos,
+                isPresented: $model.showingPhotosPicker,
+                selection: $model.selectedPhotos,
                 maxSelectionCount: 1,
                 matching: .images
             )
-            .onChange(of: selectedPhotos, selectedPhotosChanged)
-            .sheet(isPresented: $showingImageViewer) { FoodImageViewer(model) }
+            .onChange(of: model.selectedPhotos, selectedPhotosChanged)
+            .sheet(isPresented: $model.showingImageViewer) { FoodImageViewer(model) }
     }
     
     func appeared() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            withAnimation(.snappy) {
-                hasAppeared = true
-            }
-        }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+//            withAnimation(.snappy) {
+//                hasAppeared = true
+//            }
+//        }
     }
 
     func selectedPhotosChanged(oldValue: [PhotosPickerItem], newValue: [PhotosPickerItem]) {
@@ -74,22 +58,22 @@ struct FoodForm: View {
             await MainActor.run {
                 withAnimation(.snappy) {
                     model.startProcessing(image) {
-                        showingColumnConfirmation = true
+                        model.showingColumnConfirmation = true
                     }
                 }
-                selectedPhotos = []
+                model.selectedPhotos = []
             }
         }
     }
     var content: some View {
         ZStack {
-            NavigationStack(path: $path) {
+            NavigationStack(path: $model.path) {
                 Group {
-                    if hasAppeared {
+//                    if hasAppeared {
                         form
-                    } else {
-                        Color.clear
-                    }
+//                    } else {
+//                        Color.clear
+//                    }
                 }
                 .navigationTitle(title)
                 .navigationDestination(for: FoodFormRoute.self, destination: destination)
@@ -134,14 +118,14 @@ struct FoodForm: View {
                 Button("Cancel") {
                     Haptics.selectionFeedback()
                     if model.dismissDisabled {
-                        showingCancelConfirmation = true
+                        model.showingCancelConfirmation = true
                     } else {
                         dismiss()
                     }
                 }
                 .confirmationDialog(
                     "",
-                    isPresented: $showingCancelConfirmation,
+                    isPresented: $model.showingCancelConfirmation,
                     actions: { cancelActions },
                     message: { cancelMessage }
                 )
@@ -205,7 +189,7 @@ struct FoodForm: View {
         ) { emoji in
             Haptics.selectionFeedback()
             model.emoji = emoji
-            path = []
+            model.path = []
         }
     }
     
@@ -236,10 +220,10 @@ struct FoodForm: View {
                 showTorchButton: true,
                 showCaptureAnimation: false
             ) { image in
-                showingCamera = false
+                model.showingCamera = false
                 withAnimation(.snappy) {
                     model.startProcessing(image) {
-                        showingColumnConfirmation = true
+                        model.showingColumnConfirmation = true
                     }
                 }
             }
@@ -249,12 +233,12 @@ struct FoodForm: View {
         var addMenu: some View {
             Menu {
                 Button {
-                    showingCamera = true
+                    model.showingCamera = true
                 } label: {
                     Label("Take Photo", systemImage: "camera")
                 }
                 Button {
-                    showingPhotosPicker = true
+                    model.showingPhotosPicker = true
                 } label: {
                     Label("Photo Library", systemImage: "photo.on.rectangle")
                 }
@@ -263,7 +247,7 @@ struct FoodForm: View {
             }
             .listRowSeparator(.hidden)
             .disabled(model.isProcessingImage)
-            .popover(isPresented: $showingCamera) { camera }
+            .popover(isPresented: $model.showingCamera) { camera }
         }
         
         func removeImages(at offsets: IndexSet) {
@@ -289,7 +273,7 @@ struct FoodForm: View {
                         ProgressView()
                             .confirmationDialog(
                                 "",
-                                isPresented: $showingColumnConfirmation,
+                                isPresented: $model.showingColumnConfirmation,
                                 actions: { model.columnActions },
                                 message: { model.columnMessage }
                             )
@@ -299,7 +283,7 @@ struct FoodForm: View {
             
             return Button {
                 model.presentedImageIndex = index
-                showingImageViewer = true
+                model.showingImageViewer = true
             } label: {
                 label
             }
@@ -409,7 +393,7 @@ struct FoodForm: View {
         
         var scannerButton: some View {
             Button {
-                showingBarcodeScanner = true
+                model.showingBarcodeScanner = true
             } label: {
                 Image(systemName: "barcode.viewfinder")
             }
@@ -420,7 +404,7 @@ struct FoodForm: View {
                 textField
                 Spacer()
                 scannerButton
-                    .popover(isPresented: $showingBarcodeScanner) { barcodeScanner }
+                    .popover(isPresented: $model.showingBarcodeScanner) { barcodeScanner }
             }
         }
     }
@@ -455,7 +439,7 @@ struct FoodForm: View {
             if model.canBeDeleted {
                 Section {
                     Button(role: .destructive) {
-                        showingDeleteConfirmation = true
+                        model.showingDeleteConfirmation = true
                     } label: {
                         Text("Delete Food")
                             .padding(.horizontal)
@@ -466,7 +450,7 @@ struct FoodForm: View {
                     }
                     .confirmationDialog(
                         "",
-                        isPresented: $showingDeleteConfirmation,
+                        isPresented: $model.showingDeleteConfirmation,
                         actions: { actions },
                         message: { message }
                     )
