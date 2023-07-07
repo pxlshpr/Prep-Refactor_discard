@@ -385,8 +385,13 @@ extension FoodModel {
             saveDisabledLogger.debug("saveDisabled set to true")
             return
         }
+        
+        //TODO: For both of these consider validity of food
+        /// [ ] Density values cannot be 0
+        /// [ ] Check any other stuff we won't allow
         saveDisabled = shouldDisableSave
         dismissDisabled = shouldDisableDismiss
+        
         saveDisabledLogger.debug("saveDisabled set to \(String(describing: self.saveDisabled), privacy: .public)")
         saveDisabledLogger.debug("dismissDisabled set to \(String(describing: self.dismissDisabled), privacy: .public)")
     }
@@ -589,6 +594,7 @@ extension FoodModel {
         }
         newSize = FormSize()
         sizeBeingEdited = nil
+        setSaveDisabled()
     }
 }
 

@@ -14,6 +14,7 @@ struct SizesList: View {
                 }
                 .onDelete { offsets in
                     foodModel.removeSizes(at: offsets)
+                    foodModel.setSaveDisabled()
                 }
                 addSizeButton
             }
@@ -25,7 +26,7 @@ struct SizesList: View {
     
     @ViewBuilder
     var addSizeButton: some View {
-        if foodModel.sizes.isEmpty {
+//        if foodModel.sizes.isEmpty {
             Button {
                 foodModel.newSize = FormSize()
                 showingFormOnCell = true
@@ -33,7 +34,7 @@ struct SizesList: View {
                 Text("New Size")
             }
             .popover(isPresented: $showingFormOnCell) { sizeForm }
-        }
+//        }
     }
     
     var footer: some View {

@@ -158,6 +158,7 @@ struct NutrientsForm: View {
                 .compactMap { $0.micro }
             withAnimation {
                 foodModel.remove(micros)
+                foodModel.setSaveDisabled()
             }
         }
         

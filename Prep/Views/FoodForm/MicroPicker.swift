@@ -60,6 +60,7 @@ struct MicroPicker: View {
                 Button {
                     withAnimation {
                         foodModel.add(selectedMicros)
+                        foodModel.setSaveDisabled()
                     }
                     dismiss()
                 } label: {

@@ -171,6 +171,11 @@ struct FoodForm: View {
                 
             }
         } else {
+            
+            //TODO: Pre-save validations
+            /// [ ] Make sure micros values are 0 if empty
+            /// [ ] Clean up URL if need be
+            
             do {
 //                let food = model.newFood
 //                context.insert(food)
