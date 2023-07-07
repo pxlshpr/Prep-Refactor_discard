@@ -13,6 +13,9 @@ struct ServingField: View {
 
     var foodModel: FoodModel
 
+    @State var showingNewSizeAlert: Bool = false
+    @State var newSizeName: String = ""
+
     init(foodModel: FoodModel) {
         self.foodModel = foodModel
     }
@@ -31,17 +34,25 @@ struct ServingField: View {
                 addButton
             }
         }
+        .alert("Enter a name", isPresented: $showingNewSizeAlert) {
+            TextField("Enter a name", text: $newSizeName)
+            Button("OK", action: addNewSize)
+        } message: {
+            Text("Give this size a name.")
+        }
     }
     
     var addButton: some View {
         Button("Add") {
-            
+            foodModel.servingValue = DefaultServingValue.amount
+            foodModel.servingUnit = DefaultServingValue.unit
         }
     }
     
     var removeButton: some View {
         Button(role: .destructive) {
-            
+            foodModel.servingValue = nil
+            foodModel.servingUnit = nil
         } label: {
             Image(systemName: "minus.circle")
         }
@@ -143,6 +154,13 @@ struct ServingField: View {
                 } label: {
                     Text("Volumes")
                 }
+                Divider()
+                Button {
+                    showingNewSizeAlert = true
+                } label: {
+                    Text("New Size…")
+                }
+                Divider()
             }
             sizesSections
         } label: {
@@ -157,5 +175,10 @@ struct ServingField: View {
         .padding(.vertical, 3)
         .contentShape(Rectangle())
         .hoverEffect(.highlight)
+    }
+    
+    func addNewSize() {
+        foodModel.addServingBasedSize(newSizeName)
+        newSizeName = ""
     }
 }

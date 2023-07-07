@@ -11,23 +11,28 @@ struct AmountField: View {
 
     var foodModel: FoodModel
 
+    @State var showingNewSizeAlert: Bool = false
+    @State var newSizeName: String = ""
+    
     init(foodModel: FoodModel) {
         self.foodModel = foodModel
     }
     
-    var title: String {
-        "Nutrients Per"
-    }
-    
     var body: some View {
         HStack(spacing: 4) {
-            Text(title)
+            Text("Nutrients Per")
                 .layoutPriority(1)
             Spacer()
             
             textField
             unitPicker
                 .layoutPriority(1)
+        }
+        .alert("Enter a name", isPresented: $showingNewSizeAlert) {
+            TextField("Enter a name", text: $newSizeName)
+            Button("OK", action: addNewSize)
+        } message: {
+            Text("Give this size a name.")
         }
     }
     
@@ -104,11 +109,6 @@ struct AmountField: View {
         
         return Menu {
             Section {
-                Button {
-                    binding.wrappedValue = .serving
-                } label: {
-                    Text("Serving")
-                }
                 Menu {
                     ForEach(WeightUnit.allCases, id: \.self) { weightUnit in
                         button(.weight(weightUnit))
@@ -128,6 +128,17 @@ struct AmountField: View {
                 } label: {
                     Text("Volumes")
                 }
+                Divider()
+                Button {
+                    binding.wrappedValue = .serving
+                } label: {
+                    Text("Serving")
+                }
+                Button {
+                    showingNewSizeAlert = true
+                } label: {
+                    Text("New Size…")
+                }
             }
             sizesSections
         } label: {
@@ -142,6 +153,11 @@ struct AmountField: View {
         .padding(.vertical, 3)
         .contentShape(Rectangle())
         .hoverEffect(.highlight)
+    }
+    
+    func addNewSize() {
+        foodModel.addServingBasedSize(newSizeName)
+        newSizeName = ""
     }
 }
 

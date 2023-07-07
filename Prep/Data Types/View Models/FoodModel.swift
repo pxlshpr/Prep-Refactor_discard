@@ -572,8 +572,8 @@ extension FoodModel {
         
         /// If we're moving from the initial amount to `serving`, set the amount to `1` as it's the most likely value we'd be using.
         if amountUnit == DefaultAmountValue.unit,
-           amountValue == DefaultAmountValue.amount
-           newUnit == .serving,
+           amountValue == DefaultAmountValue.amount,
+           newUnit == .serving
         {
             amountValue = 1
         }
@@ -611,6 +611,7 @@ extension FoodModel {
         sizes.remove(at: index)
         sizes.insert(newSize, at: index)
     }
+    
     func saveSize() {
         if let sizeBeingEdited,
            let index = sizes.firstIndex(where: { $0.id == sizeBeingEdited.id })
@@ -621,6 +622,18 @@ extension FoodModel {
         }
         newSize = FormSize()
         sizeBeingEdited = nil
+        setSaveDisabled()
+    }
+    
+    func addServingBasedSize(_ name: String) {
+        let newSize = FormSize(
+            quantity: 1,
+            volumeUnit: nil,
+            name: name,
+            amount: 1,
+            unit: .serving
+        )
+        sizes.append(newSize)
         setSaveDisabled()
     }
 }
