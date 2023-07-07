@@ -226,7 +226,7 @@ struct FoodForm: View {
                     }
                 }
             }
-            .frame(idealWidth: 400, idealHeight: 500)
+            .frame(idealWidth: IdealCameraWidth, idealHeight: IdealCameraHeight)
         }
 
         var addMenu: some View {
@@ -375,7 +375,7 @@ struct FoodForm: View {
                     model.addImage(image)
                 }
             }
-            .frame(idealWidth: 400, idealHeight: 500)
+            .frame(idealWidth: IdealCameraWidth, idealHeight: IdealCameraHeight)
         }
         
         var textField: some View {

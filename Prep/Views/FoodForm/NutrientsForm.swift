@@ -250,7 +250,7 @@ struct NutrientsForm: View {
                 showingColumnConfirmation = true
             }
         }
-        .frame(idealWidth: 400, idealHeight: 500)
+        .frame(idealWidth: IdealCameraWidth, idealHeight: IdealCameraHeight)
     }
     
 }
