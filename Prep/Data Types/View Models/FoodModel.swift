@@ -635,6 +635,11 @@ extension FoodModel {
         )
         sizes.append(newSize)
 
+        if amountUnit == DefaultAmountValue.unit,
+           amountValue == DefaultAmountValue.amount
+        {
+            amountValue = 1
+        }
         amountUnit = .serving
         if servingValue == nil {
             servingValue = 1
