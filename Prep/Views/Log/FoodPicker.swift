@@ -8,6 +8,8 @@ struct FoodPicker: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @State var foodModel = FoodModel()
+    
     @State var showingFoodForm: Bool = false
 
     @State var searchText: String = ""
@@ -86,11 +88,12 @@ struct FoodPicker: View {
             ToolbarItemGroup(placement: .bottomBar) {
                 Spacer()
                 Button {
+                    foodModel.reset()
                     showingFoodForm = true
                 } label: {
                     Image(systemName: "plus")
                 }
-                .popover(isPresented: $showingFoodForm) { foodForm }
+                .popover(isPresented: $showingFoodForm) { newFoodForm }
             }
             ToolbarItemGroup(placement: .topBarLeading) {
                 Button("Cancel") {
@@ -100,9 +103,8 @@ struct FoodPicker: View {
         }
     }
     
-    var foodForm: some View {
-        EmptyView()
-//        FoodForm()
+    var newFoodForm: some View {
+        FoodForm(model: foodModel)
     }
     
     var list: some View {

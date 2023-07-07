@@ -149,7 +149,6 @@
 		E28002802A52B84300C6D528 /* MealItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E82A52B84300C6D528 /* MealItemCell.swift */; };
 		E28002812A52B84300C6D528 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E92A52B84300C6D528 /* MealView.swift */; };
 		E28002822A52B84300C6D528 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EA2A52B84300C6D528 /* DayView.swift */; };
-		E28002832A52B84300C6D528 /* FoodsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EC2A52B84300C6D528 /* FoodsViewCell.swift */; };
 		E28002842A52B84300C6D528 /* FoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001ED2A52B84300C6D528 /* FoodsView.swift */; };
 		E28002852A52B84300C6D528 /* ItemFormEnergyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EF2A52B84300C6D528 /* ItemFormEnergyLabel.swift */; };
 		E28002882A52B84300C6D528 /* ServingField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001F32A52B84300C6D528 /* ServingField.swift */; };
@@ -536,7 +535,6 @@
 		E28001E82A52B84300C6D528 /* MealItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealItemCell.swift; sourceTree = "<group>"; };
 		E28001E92A52B84300C6D528 /* MealView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
 		E28001EA2A52B84300C6D528 /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
-		E28001EC2A52B84300C6D528 /* FoodsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsViewCell.swift; sourceTree = "<group>"; };
 		E28001ED2A52B84300C6D528 /* FoodsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsView.swift; sourceTree = "<group>"; };
 		E28001EF2A52B84300C6D528 /* ItemFormEnergyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemFormEnergyLabel.swift; sourceTree = "<group>"; };
 		E28001F32A52B84300C6D528 /* ServingField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServingField.swift; sourceTree = "<group>"; };
@@ -1110,7 +1108,6 @@
 		E28001EB2A52B84300C6D528 /* Foods */ = {
 			isa = PBXGroup;
 			children = (
-				E28001EC2A52B84300C6D528 /* FoodsViewCell.swift */,
 				E28001ED2A52B84300C6D528 /* FoodsView.swift */,
 			);
 			path = Foods;
@@ -1839,7 +1836,6 @@
 				E2E1A0322A57E11E00A01D45 /* HeroButtonLabel.swift in Sources */,
 				E28002632A52B84300C6D528 /* String.swift in Sources */,
 				E28002012A52B84300C6D528 /* Day.swift in Sources */,
-				E28002832A52B84300C6D528 /* FoodsViewCell.swift in Sources */,
 				E280029D2A52BC7A00C6D528 /* FoodEntity.swift in Sources */,
 				E28002402A52B84300C6D528 /* FoodType.swift in Sources */,
 				E22F84332A54AA5A00096909 /* LogNavigationBar.swift in Sources */,
