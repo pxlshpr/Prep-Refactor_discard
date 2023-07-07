@@ -18,6 +18,7 @@ extension Food {
          
          solve for y, and the scaleFactor is y / 1
          */
+        guard converted.value > 0 else { return 0 } /// guard against division by 0
         let y = (quantity.value * amountQuantity.value) / converted.value
         return y/amountQuantity.value
     }

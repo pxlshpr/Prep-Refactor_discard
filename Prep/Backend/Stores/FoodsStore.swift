@@ -15,6 +15,10 @@ class FoodsStore {
     static func create(_ food: Food) async -> Food? {
         await DataManager.shared.createFood(food)
     }
+    
+    static func update(_ food: Food) async -> Food? {
+        await DataManager.shared.updateFood(food)
+    }
 }
 
 extension DataManager {
@@ -36,6 +40,28 @@ extension DataManager {
             }
         } catch {
             logger.error("Error creating food: \(error.localizedDescription, privacy: .public)")
+            return nil
+        }
+    }
+    
+    func updateFood(_ food: Food) async -> Food? {
+        do {
+            return try await withCheckedThrowingContinuation { continuation in
+                do {
+                    try coreDataManager.updateFood(food) { foodEntity in
+                        guard let foodEntity else {
+                            continuation.resume(returning: nil)
+                            return
+                        }
+                        let food = Food(foodEntity)
+                        continuation.resume(returning: food)
+                    }
+                } catch {
+                    continuation.resume(throwing: error)
+                }
+            }
+        } catch {
+            logger.error("Error updating food: \(error.localizedDescription, privacy: .public)")
             return nil
         }
     }
@@ -97,6 +123,40 @@ extension CoreDataManager {
         }
     }
     
+    func updateFood(
+        _ food: Food,
+        completion: @escaping ((FoodEntity?) -> ())
+    ) throws {
+        Task {
+            let bgContext = newBackgroundContext()
+            await bgContext.perform {
+                do {
+                    guard let foodEntity = FoodEntity.object(with: food.id, in: bgContext) else {
+                        fatalError()
+                    }
+                    foodEntity.fill(with: food)
+                    
+                    let observer = NotificationCenter.default.addObserver(
+                        forName: .NSManagedObjectContextDidSave,
+                        object: bgContext,
+                        queue: .main
+                    ) { (notification) in
+                        self.viewContext.mergeChanges(fromContextDidSave: notification)
+                        completion(foodEntity)
+                    }
+                    
+                    try bgContext.performAndWait {
+                        try bgContext.save()
+                    }
+                    NotificationCenter.default.removeObserver(observer)
+
+                } catch {
+                    logger.error("Error: \(error.localizedDescription, privacy: .public)")
+                    completion(nil)
+                }
+            }
+        }
+    }
     func userFoodEntities(page: Int, completion: @escaping (([FoodEntity]) -> ())) throws {
         Task {
             let bgContext = newBackgroundContext()

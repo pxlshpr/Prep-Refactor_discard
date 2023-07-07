@@ -286,7 +286,7 @@ struct SizeForm: View {
         var allOptions: some View {
             Group {
                 Section {
-                    if foodModel.hasServing {
+                    if foodModel.amountUnit == .serving {
                         Button {
                             foodModel.newSize.unit = .serving
                         } label: {

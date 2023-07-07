@@ -137,19 +137,25 @@ struct FoodForm: View {
     }
     
     func save() {
+        //TODO: Pre-save validations
+        /// [ ] Make sure micros values are 0 if empty
+        /// [ ] Clean up URL if need be
+        /// [ ] Short alerts
+
         if let updatedFood = model.updatedFood {
-            do {
-//                context.insert(updatedFood)
-//                alertMessage = "Food updated successfully."
-//                try context.save()
-            } catch {
-                
+            
+            Task.detached(priority: .userInitiated) {
+                guard let updatedFood = await FoodsStore.update(updatedFood) else {
+                    return
+                }
+                await MainActor.run {
+                    post(.didUpdateFood, userInfo: [.food: updatedFood])
+                }
             }
+//            alertMessage = "Food updated successfully."
+
         } else {
             
-            //TODO: Pre-save validations
-            /// [ ] Make sure micros values are 0 if empty
-            /// [ ] Clean up URL if need be
             let food = model.newFood
             Task.detached(priority: .userInitiated) {
                 guard let newFood = await FoodsStore.create(food) else {
@@ -162,7 +168,6 @@ struct FoodForm: View {
 //            alertMessage = "Food added successfully."
         }
         model.reset()
-//        model.resetFoodModel()
 //        showingAlert = true
     }
     
@@ -183,6 +188,7 @@ struct FoodForm: View {
             Haptics.selectionFeedback()
             model.emoji = emoji
             model.path = []
+            model.setSaveDisabled()
         }
     }
     

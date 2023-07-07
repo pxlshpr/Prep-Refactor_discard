@@ -18,6 +18,7 @@ struct FoodsView: View {
 
     let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
     let didAddFood = NotificationCenter.default.publisher(for: .didAddFood)
+    let didUpdateFood = NotificationCenter.default.publisher(for: .didUpdateFood)
 
     var body: some View {
         NavigationStack {
@@ -27,6 +28,7 @@ struct FoodsView: View {
         }
         .onReceive(didPopulate, perform: didPopulate)
         .onReceive(didAddFood, perform: didAddFood)
+        .onReceive(didUpdateFood, perform: didUpdateFood)
     }
 
     func didAddFood(notification: Notification) {
@@ -34,6 +36,13 @@ struct FoodsView: View {
             return
         }
         model.insertNewFood(food)
+    }
+    
+    func didUpdateFood(notification: Notification) {
+        guard let food = notification.userInfo?[Notification.PrepKeys.food] as? Food else {
+            return
+        }
+        model.updateFood(food)
     }
     
     func didPopulate(notification: Notification) {

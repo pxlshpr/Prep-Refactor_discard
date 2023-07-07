@@ -3,9 +3,7 @@ import OSLog
 
 import SwiftHaptics
 
-let foodFormLogger = Logger(subsystem: "FoodForm", category: "")
-
-struct ServingField: View {
+struct AmountField: View {
     
     @Environment(\.colorScheme) var colorScheme
 
@@ -17,48 +15,32 @@ struct ServingField: View {
         self.foodModel = foodModel
     }
     
+    var title: String {
+        "Nutrients Per"
+    }
+    
     var body: some View {
         HStack(spacing: 4) {
-            Text("Serving Size")
+            Text(title)
                 .layoutPriority(1)
             Spacer()
-            if foodModel.hasServing {
-                textField
-                unitPicker
-                    .layoutPriority(1)
-                removeButton
-            } else {
-                addButton
-            }
-        }
-    }
-    
-    var addButton: some View {
-        Button("Add") {
             
-        }
-    }
-    
-    var removeButton: some View {
-        Button(role: .destructive) {
-            
-        } label: {
-            Image(systemName: "minus.circle")
+            textField
+            unitPicker
+                .layoutPriority(1)
         }
     }
     
     var textField: some View {
         let binding = Binding<Double>(
-            get: {
-                foodModel.servingValue ?? DefaultServingValue.amount
-            },
+            get: { foodModel.amountValue },
             set: { newValue in
-                foodModel.servingValue = newValue
+                foodModel.amountValue = newValue
                 foodModel.setSaveDisabled()
             }
         )
 
-        return TextField("", value: binding, formatter: NumberFormatter.foodValue)
+        return TextField("Required", value: binding, formatter: NumberFormatter.foodValue)
             .textFieldStyle(.plain)
             .multilineTextAlignment(.trailing)
             .keyboardType(.decimalPad)
@@ -68,12 +50,10 @@ struct ServingField: View {
     var unitPicker: some View {
         
         let binding = Binding<FormUnit>(
-            get: {
-                foodModel.servingUnit ?? DefaultServingValue.unit
-            },
+            get: { foodModel.amountUnit },
             set: { newValue in
                 withAnimation(.snappy) {
-                    foodModel.servingUnit = newValue
+                    foodModel.setAmountUnit(newValue)
                     foodModel.setSaveDisabled()
                 }
             }
@@ -124,6 +104,11 @@ struct ServingField: View {
         
         return Menu {
             Section {
+                Button {
+                    binding.wrappedValue = .serving
+                } label: {
+                    Text("Serving")
+                }
                 Menu {
                     ForEach(WeightUnit.allCases, id: \.self) { weightUnit in
                         button(.weight(weightUnit))
@@ -159,3 +144,4 @@ struct ServingField: View {
         .hoverEffect(.highlight)
     }
 }
+

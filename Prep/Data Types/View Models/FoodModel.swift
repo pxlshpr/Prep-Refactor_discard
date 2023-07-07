@@ -27,8 +27,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
     
     var amountValue: Double = DefaultAmountValue.amount
     var amountUnit: FormUnit = DefaultAmountValue.unit
-    var servingValue: Double = DefaultServingValue.amount
-    var servingUnit: FormUnit = DefaultServingValue.unit
+    var servingValue: Double? = nil
+    var servingUnit: FormUnit? = nil
 
     var energy = NutrientValue(value: 0, energyUnit: .kcal)
     var carb = NutrientValue(macro: .carb)
@@ -106,8 +106,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
             self.amountValue = food.amount.value
             self.amountUnit = food.amount.formUnit(for: food) ?? .weight(.g)
-            self.servingValue = food.serving?.value ?? 0
-            self.servingUnit = food.serving?.formUnit(for: food) ?? .weight(.g)
+            self.servingValue = food.serving?.value
+            self.servingUnit = food.serving?.formUnit(for: food)
 
             self.micros = food.micros.compactMap { NutrientValue($0) }
 
@@ -146,8 +146,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
             
             amountValue = DefaultAmountValue.amount
             amountUnit = DefaultAmountValue.unit
-            servingValue = DefaultServingValue.amount
-            servingUnit = DefaultServingValue.unit
+            servingValue = nil
+            servingUnit = nil
             
             energy = NutrientValue(value: 0, energyUnit: .kcal)
             carb = NutrientValue(macro: .carb)
@@ -200,11 +200,7 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
 import SwiftSugar
 
-extension FoodModel {
-    var hasServing: Bool {
-        amountUnit == .serving
-    }
-    
+extension FoodModel {    
     func delayedSetSaveDisabled() {
         saveDisabledTask?.cancel()
         saveDisabledTask = Task.detached(priority: .userInitiated) {
@@ -260,7 +256,7 @@ extension FoodModel {
     }
     
     var isWeightBased: Bool {
-        amountUnit.isWeightBased || servingUnit.isWeightBased
+        amountUnit.isWeightBased || servingUnit?.isWeightBased == true
     }
 
     var canSaveNewSize: Bool {
@@ -423,15 +419,27 @@ extension FoodModel {
         && barcode == food.barcodes.first
         && urlString == ""
 
+        let servingsAreEqual = if let serving = food.serving {
+            if let servingValue, let servingUnit {
+                servingValue.roughlyMatches(serving.value)
+                && servingUnit == serving.formUnit(for: food) ?? .weight(.g)
+            } else {
+                false
+            }
+        } else {
+            servingValue == nil
+            && servingUnit == nil
+        }
+        
         let numbersAreEqual = amountValue.roughlyMatches(food.amount.value)
-        && servingValue.roughlyMatches(food.serving?.value ?? 0)
+//        && servingValue.roughlyMatches(food.serving?.value ?? 0)
         && energy.value.roughlyMatches(food.energy)
         && carb.value.roughlyMatches(food.carb)
         && fat.value.roughlyMatches(food.fat)
         && protein.value.roughlyMatches(food.protein)
         
         let unitsAreEqual = amountUnit == food.amount.formUnit(for: food) ?? .weight(.g)
-        && servingUnit == food.serving?.formUnit(for: food) ?? .weight(.g)
+//        && servingUnit == food.serving?.formUnit(for: food) ?? .weight(.g)
         && energy.unit == food.energyUnit.nutrientUnit
         
         let arraysAreEqual = imageIDs == food.imageIDs
@@ -442,6 +450,7 @@ extension FoodModel {
             textsAreEqual
             && numbersAreEqual
             && unitsAreEqual
+            && servingsAreEqual
             && densityIsEqual
             && arraysAreEqual
             && isPublished == food.isPublished
@@ -497,8 +506,8 @@ extension FoodModel {
             && brand == ""
             && amountValue == DefaultAmountValue.amount
             && amountUnit == DefaultAmountValue.unit
-            && servingValue == DefaultServingValue.amount
-            && servingUnit == DefaultServingValue.unit
+            && servingValue == nil
+            && servingUnit == nil
             && energy == NutrientValue(value: 0, energyUnit: .kcal)
             && carb == NutrientValue(macro: .carb)
             && fat == NutrientValue(macro: .fat)
@@ -537,7 +546,7 @@ extension FoodModel {
         if amountUnit.sizeID == sizeToRemove.id {
             amountUnit = sizeToRemove.replacementUnit
         }
-        if servingUnit.sizeID == sizeToRemove.id {
+        if servingUnit?.sizeID == sizeToRemove.id {
             servingUnit = sizeToRemove.replacementUnit
         }
         return cascades
@@ -559,6 +568,14 @@ extension FoodModel {
                 self.amountUnit = .weight(.g)
                 return
             }
+        }
+        
+        /// If we're moving from the initial amount to `serving`, set the amount to `1` as it's the most likely value we'd be using.
+        if amountUnit == DefaultAmountValue.unit,
+           amountValue == DefaultAmountValue.amount
+           newUnit == .serving,
+        {
+            amountValue = 1
         }
         
         self.amountUnit = newUnit
@@ -588,8 +605,8 @@ extension FoodModel {
         if amountUnit.sizeID == oldSize.id {
             amountUnit = .size(newSize, amountUnit.sizeVolumeUnit)
         }
-        if servingUnit.sizeID == oldSize.id {
-            servingUnit = .size(newSize, servingUnit.sizeVolumeUnit)
+        if let servingUnit, servingUnit.sizeID == oldSize.id {
+            self.servingUnit = .size(newSize, servingUnit.sizeVolumeUnit)
         }
         sizes.remove(at: index)
         sizes.insert(newSize, at: index)
@@ -725,9 +742,21 @@ extension FoodModel {
             MacroValue(macro: .protein, value: protein.value)
         ]
     }
+    
+    var servingFoodValue: FoodValue? {
+        guard let servingValue, let servingUnit else {
+            return nil
+        }
+        return FoodValue(servingValue, servingUnit)
+    }
+    
+    var hasServing: Bool {
+        servingFoodValue != nil
+    }
 }
 
 extension Food {
+    
     mutating func fill(with model: FoodModel) {
         emoji = model.emoji
         name = model.name
@@ -735,8 +764,8 @@ extension Food {
         brand = model.brand
         
         amount = FoodValue(model.amountValue, model.amountUnit)
-        if model.amountUnit == .serving {
-            serving = FoodValue(model.servingValue, model.servingUnit)
+        if model.amountUnit == .serving, let servingFoodValue = model.servingFoodValue {
+            serving = servingFoodValue
         } else {
             serving = nil
         }

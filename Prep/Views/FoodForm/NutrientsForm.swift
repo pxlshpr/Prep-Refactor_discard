@@ -64,9 +64,9 @@ struct NutrientsForm: View {
     
     var amountAndServingSection: some View {
         Section {
-            ServingField(foodModel: foodModel)
+            AmountField(foodModel: foodModel)
             if foodModel.amountUnit == .serving {
-                ServingField(isServing: true, foodModel: foodModel)
+                ServingField(foodModel: foodModel)
             }
         }
     }

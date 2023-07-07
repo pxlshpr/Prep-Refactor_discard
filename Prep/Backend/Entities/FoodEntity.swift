@@ -5,8 +5,7 @@ import FoodDataTypes
 
 extension FoodEntity: Entity {
     
-    convenience init(context: NSManagedObjectContext, food: Food) {
-        self.init(context: context)
+    func fill(with food: Food) {
         self.id = food.id
         
         self.emoji = food.emoji
@@ -39,6 +38,11 @@ extension FoodEntity: Entity {
         self.lastUsedAt = food.lastUsedAt
         self.updatedAt = food.updatedAt
         self.createdAt = food.createdAt
+    }
+    
+    convenience init(context: NSManagedObjectContext, food: Food) {
+        self.init(context: context)
+        self.fill(with: food)
     }
     
     func fill(_ legacy: LegacyPresetFood, _ lastFoodItem: LegacyFoodItem?) {

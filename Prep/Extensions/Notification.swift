@@ -11,7 +11,8 @@ extension Notification.Name {
 //    static var didUpdateMeal: Notification.Name { return .init("didUpdateMeal") }
 //    static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
     static var didAddFood: Notification.Name { return .init("didAddFood") }
-    
+    static var didUpdateFood: Notification.Name { return .init("didUpdateFood") }
+
     static var didAddFoodItem: Notification.Name { return .init("didAddFoodItem") }
     static var didDeleteFoodItem: Notification.Name { return .init("didDeleteFoodItem") }
 

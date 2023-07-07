@@ -24,6 +24,13 @@ let FoodPageSize: Int = 25
         }
     }
     
+    func updateFood(_ food: Food) {
+        guard let index = foods.firstIndex(where: { $0.id == food.id }) else {
+            return
+        }
+        foods[index] = food
+    }
+    
     func loadMoreContentIfNeeded(currentFood food: Food? = nil) {
         guard let food else {
             loadMoreContent()

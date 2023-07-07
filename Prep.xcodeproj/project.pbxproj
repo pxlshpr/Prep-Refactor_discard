@@ -31,6 +31,7 @@
 		E23B656A2A561461003FFAC4 /* chiptunes_error_long.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */; };
 		E250E4A62A5867C0002613A4 /* FoodImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E250E4A52A5867C0002613A4 /* FoodImageViewer.swift */; };
 		E256839E2A5888A200581FA2 /* chiptunes_scan.wav in Resources */ = {isa = PBXBuildFile; fileRef = E256839D2A5888A100581FA2 /* chiptunes_scan.wav */; };
+		E25683A02A58A0B700581FA2 /* AmountField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E256839F2A58A0B700581FA2 /* AmountField.swift */; };
 		E2672C7D2A52C1B00002E95C /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */; };
 		E2672C802A52C3F90002E95C /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity.swift */; };
 		E27CD16C2A56B36F00C1D339 /* ItemForm+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */; };
@@ -418,6 +419,7 @@
 		E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_error_long.wav; sourceTree = "<group>"; };
 		E250E4A52A5867C0002613A4 /* FoodImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodImageViewer.swift; sourceTree = "<group>"; };
 		E256839D2A5888A100581FA2 /* chiptunes_scan.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_scan.wav; sourceTree = "<group>"; };
+		E256839F2A58A0B700581FA2 /* AmountField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountField.swift; sourceTree = "<group>"; };
 		E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemEntity.swift; sourceTree = "<group>"; };
 		E2672C7F2A52C3F90002E95C /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
 		E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemForm+Data.swift"; sourceTree = "<group>"; };
@@ -1130,6 +1132,7 @@
 				E28001F32A52B84300C6D528 /* ServingField.swift */,
 				E28001FC2A52B84300C6D528 /* SizeForm.swift */,
 				E28001F42A52B84300C6D528 /* SizesList.swift */,
+				E256839F2A58A0B700581FA2 /* AmountField.swift */,
 			);
 			path = FoodForm;
 			sourceTree = "<group>";
@@ -1835,6 +1838,7 @@
 				E28002462A52B84300C6D528 /* MicronutrientGroup.swift in Sources */,
 				E27CD16C2A56B36F00C1D339 /* ItemForm+Data.swift in Sources */,
 				E28002562A52B84300C6D528 /* FoodQuantity+Convert.swift in Sources */,
+				E25683A02A58A0B700581FA2 /* AmountField.swift in Sources */,
 				E22F84412A54B3C100096909 /* DaysStore.swift in Sources */,
 				E22F843D2A54AE9F00096909 /* PercentageType.swift in Sources */,
 				E2E1A0322A57E11E00A01D45 /* HeroButtonLabel.swift in Sources */,
