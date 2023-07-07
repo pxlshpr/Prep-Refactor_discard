@@ -15,5 +15,5 @@ struct FoodsViewCell: View {
         } label: {
             FoodCell(food: food, showingForm: $showingForm)
         }
-    }    
+    }
 }

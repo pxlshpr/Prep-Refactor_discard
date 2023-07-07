@@ -1,4 +1,3 @@
-import Foundation
 import SwiftUI
 
 let FoodPageSize: Int = 25
@@ -34,7 +33,7 @@ let FoodPageSize: Int = 25
         isLoadingPage = true
         
         Task.detached(priority: .userInitiated) {
-            let foods = await FoodsStore.foods(page: self.currentPage)
+            let foods = await FoodsStore.userFoods(page: self.currentPage)
             
             await MainActor.run {
                 self.canLoadMorePages = foods.count == FoodPageSize

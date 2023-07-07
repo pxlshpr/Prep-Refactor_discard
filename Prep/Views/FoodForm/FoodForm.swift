@@ -21,9 +21,8 @@ struct FoodForm: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
-//    @Environment(\.modelContext) var context
 
-    @State var model: FoodModel = FoodModel()
+    @State var model: FoodModel
 
     @State var path: [FoodFormRoute] = []
     @State var showingCancelConfirmation = false
@@ -38,6 +37,14 @@ struct FoodForm: View {
     @State var selectedPhotos: [PhotosPickerItem] = []
     
     @State var hasAppeared = false
+    
+    init(_ food: Food) {
+        _model = State(initialValue: FoodModel(food))
+    }
+    
+    init() {
+        _model = State(initialValue: FoodModel())
+    }
     
     var body: some View {
         content
@@ -103,7 +110,7 @@ struct FoodForm: View {
             Group {
                 Button("Discard Changes", role: .destructive) {
                     model.discardNewImages()
-                    model.resetFoodModel()
+//                    model.resetFoodModel()
                     dismiss()
                 }
                 Button("Keep Editing", role: .cancel) {
@@ -171,7 +178,7 @@ struct FoodForm: View {
                 
             }
         }
-        model.resetFoodModel()
+//        model.resetFoodModel()
 //        showingAlert = true
     }
     

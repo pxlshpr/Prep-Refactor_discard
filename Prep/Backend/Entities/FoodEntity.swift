@@ -96,11 +96,11 @@ extension FoodEntity: Entity {
         self.micros = legacy.info.nutrients.micros.map { FoodNutrient($0) }
         self.sizes = legacy.info.sizes.map { FoodSize(legacy: $0) }
         self.density = legacy.info.density?.density
-        self.url = nil
-        self.imageIDs = []
-        self.barcodes = []
+        self.url = legacy.info.linkUrl ?? legacy.info.prefilledUrl
+        self.imageIDs = legacy.info.imageIds ?? []
+        self.barcodes = legacy.barcodes ?? []
         self.type = .food
-        self.publishStatus = nil
+        self.publishStatus = .hidden
         self.dataset = legacy.dataset
         self.datasetID = nil
         

@@ -31,6 +31,8 @@ extension CoreDataManager {
             await run("Days", populateDays)
             await run("Meals", populateMeals)
 
+            await run("User Foods", populateUserFoods)
+            
             await run("Preset Foods", populatePresetFoods1)
             await run("Preset Foods", populatePresetFoods2)
             await run("Preset Foods", populatePresetFoods3)
@@ -38,8 +40,6 @@ extension CoreDataManager {
             await run("Preset Foods", populatePresetFoods5)
             await run("Preset Foods", populatePresetFoods6)
             await run("Preset Foods", populatePresetFoods7)
-            
-            await run("User Foods", populateUserFoods)
             
             await run("Food Items", populateFoodItems1)
             await run("Food Items", populateFoodItems2)

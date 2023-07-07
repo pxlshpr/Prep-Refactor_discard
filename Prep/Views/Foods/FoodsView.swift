@@ -10,24 +10,6 @@ struct FoodsView: View {
     
     let model = FoodsModel.shared
     
-    init() {
-//        let predicate = #Predicate<FoodEntity> {
-//            $0.datasetValue == nil
-//        }
-//        
-//        let sortDescriptors: [SortDescriptor<FoodEntity>] = [
-//            SortDescriptor(\.name),
-//            SortDescriptor(\.detail),
-//            SortDescriptor(\.brand)
-//        ]
-//        
-//        let descriptor = FetchDescriptor<FoodEntity>(
-//            predicate: predicate,
-//            sortBy: sortDescriptors
-//        )
-//        _foods = Query(descriptor)
-    }
-    
     var body: some View {
         NavigationStack {
             content
@@ -71,9 +53,6 @@ struct FoodsView: View {
             }
         }
     }
-}
-
-extension FoodsView {
     
     var buttonLayer: some View {
         var newFoodButton: some View {

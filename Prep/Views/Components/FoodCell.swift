@@ -7,6 +7,8 @@ struct FoodCell: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    let food: Food
+    
     let emoji: String
     let name: String
     let detail: String?
@@ -17,29 +19,9 @@ struct FoodCell: View {
 
     @Binding var showingForm: Bool
     
-//    init(food: Food, showingForm: Binding<Bool>) {
-//        self.emoji = food.emoji
-//        self.name = food.name
-//        self.detail = food.detail
-//        self.brand = food.brand
-//        self.carb = food.carb
-//        self.fat = food.fat
-//        self.protein = food.protein
-//        _showingForm = showingForm
-//    }
-
-//    init(foodResult result: FoodResult) {
-//        self.emoji = result.emoji
-//        self.name = result.name
-//        self.detail = result.detail
-//        self.brand = result.brand
-//        self.carb = result.carb
-//        self.fat = result.fat
-//        self.protein = result.protein
-//        _showingForm = .constant(false)
-//    }
-
     init(food: Food, showingForm: Binding<Bool> = .constant(false)) {
+        self.food = food
+        
         self.emoji = food.emoji
         self.name = food.name
         self.detail = food.detail
@@ -64,7 +46,7 @@ struct FoodCell: View {
     }
     
     var foodForm: some View {
-        FoodForm()
+        FoodForm(food)
     }
     
     var greyColor: Color { Color(hex: "6F7E88") }
