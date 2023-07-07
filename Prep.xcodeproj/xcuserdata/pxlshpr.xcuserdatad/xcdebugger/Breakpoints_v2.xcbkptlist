@@ -36,5 +36,68 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9584063A-12EB-45D7-AC4D-FB51E234F38E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Prep/Views/FoodForm/FoodForm.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "9584063A-12EB-45D7-AC4D-FB51E234F38E - cdc2131f78fa6d46"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prep.FoodForm.body.getter : some"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Views/FoodForm/FoodForm.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "808">
+               </Location>
+               <Location
+                  uuid = "9584063A-12EB-45D7-AC4D-FB51E234F38E - 2ff2eed03603ad89"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "implicit closure #2 () -&gt; () in implicit closure #1 (Prep.FoodForm) -&gt; () -&gt; () in Prep.FoodForm.body.getter : some"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Views/FoodForm/FoodForm.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  uuid = "9584063A-12EB-45D7-AC4D-FB51E234F38E - cdc2131f78fa6d46"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Prep.FoodForm.body.getter : some"
+                  moduleName = "Prep"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/pxlshpr/Developer/_wip/Prep/Prep/Views/FoodForm/FoodForm.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "660">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

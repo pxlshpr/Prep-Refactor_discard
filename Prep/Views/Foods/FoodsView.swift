@@ -40,13 +40,15 @@ struct FoodsView: View {
         List {
             ForEach(model.foods, id: \.self) { food in
                 Button {
-                    foodBeingEdited = food
+//                    foodBeingEdited = food
+                    FoodModel.shared.reset(for: food)
+                    showingFoodForm = true
                 } label: {
                     FoodCell(food: food)
                 }
 //                FoodsViewCell(food: food)
-                .popover(item: editedFoodBinding(for: food)) {
-                    FoodForm($0)
+                .popover(item: editedFoodBinding(for: food)) { _ in
+                    FoodForm()
                 }
                 .onAppear {
                     model.loadMoreContentIfNeeded(currentFood: food)

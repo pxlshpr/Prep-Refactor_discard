@@ -12,7 +12,7 @@ struct NutrientsForm: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    @Bindable var foodModel: FoodModel
+    var foodModel: FoodModel
 
     @State var showingMicroPicker = false
     @State var showingCamera = false
@@ -26,7 +26,8 @@ struct NutrientsForm: View {
     @State var selectedPhotos: [PhotosPickerItem] = []
 
     var body: some View {
-        form
+        let _ = Self._printChanges()
+        return form
             .navigationTitle("Nutrients")
             .toolbar { toolbarContent }
             .photosPicker(
@@ -72,19 +73,18 @@ struct NutrientsForm: View {
     @ViewBuilder
     var pieChartSection: some View {
         if foodModel.shouldShowPieChart {
-            Section {
-                Chart(foodModel.macrosChartData, id: \.macro) { macroValue in
-                    SectorMark(
-                        angle: .value("kcal", macroValue.kcal),
-                        angularInset: 1.5
-                    )
-                    .cornerRadius(5)
-                    .foregroundStyle(by: .value("Macro", macroValue.macro))
-                }
-                .chartForegroundStyleScale(Macro.chartStyleScale(colorScheme))
-                .chartLegend(position: .trailing, alignment: .center)
-                .padding(.vertical, 5)
-            }
+            pieChart
+        }
+    }
+    
+    var pieChart: some View {
+        let binding = Binding<[MacroValue]>(
+            get: { foodModel.macrosChartData },
+            set: { _ in }
+        )
+        return Section {
+//            MacrosPieChart(data: foodModel.macrosChartData)
+            MacrosPieChart(data: binding)
         }
     }
     

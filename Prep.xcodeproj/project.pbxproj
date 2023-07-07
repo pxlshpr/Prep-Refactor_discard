@@ -189,6 +189,7 @@
 		E280FED92A52B0A600C6D528 /* FoodDataTypes in Frameworks */ = {isa = PBXBuildFile; productRef = E280FED82A52B0A600C6D528 /* FoodDataTypes */; };
 		E280FEDC2A52B0B500C6D528 /* FoodLabelScanner in Frameworks */ = {isa = PBXBuildFile; productRef = E280FEDB2A52B0B500C6D528 /* FoodLabelScanner */; };
 		E293DB702A53742E00D8D4D2 /* ItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293DB6F2A53742E00D8D4D2 /* ItemForm.swift */; };
+		E29C6E472A581263002E1799 /* MacrosPieChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29C6E462A581263002E1799 /* MacrosPieChart.swift */; };
 		E2E1A0302A57E06B00A01D45 /* FoodsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A02F2A57E06B00A01D45 /* FoodsStore.swift */; };
 		E2E1A0322A57E11E00A01D45 /* HeroButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A0312A57E11E00A01D45 /* HeroButtonLabel.swift */; };
 		E2E1A0342A57F2DC00A01D45 /* FoodsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A0332A57F2DC00A01D45 /* FoodsModel.swift */; };
@@ -369,6 +370,7 @@
 		E280FC222A529E3E00C6D528 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E280FC242A529E3E00C6D528 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E293DB6F2A53742E00D8D4D2 /* ItemForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemForm.swift; sourceTree = "<group>"; };
+		E29C6E462A581263002E1799 /* MacrosPieChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacrosPieChart.swift; sourceTree = "<group>"; };
 		E2E1A02F2A57E06B00A01D45 /* FoodsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodsStore.swift; sourceTree = "<group>"; };
 		E2E1A0312A57E11E00A01D45 /* HeroButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroButtonLabel.swift; sourceTree = "<group>"; };
 		E2E1A0332A57F2DC00A01D45 /* FoodsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodsModel.swift; sourceTree = "<group>"; };
@@ -690,6 +692,7 @@
 				E28001E02A52B84300C6D528 /* EmojiPicker.swift */,
 				E28001E12A52B84300C6D528 /* FoodCell.swift */,
 				E2E1A0312A57E11E00A01D45 /* HeroButtonLabel.swift */,
+				E29C6E462A581263002E1799 /* MacrosPieChart.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1068,6 +1071,7 @@
 				E280FC182A529E3D00C6D528 /* Persistence.swift in Sources */,
 				E280028A2A52B84300C6D528 /* ImageManager.swift in Sources */,
 				E28002372A52B84300C6D528 /* FormSize.swift in Sources */,
+				E29C6E472A581263002E1799 /* MacrosPieChart.swift in Sources */,
 				E28002622A52B84300C6D528 /* Notification.swift in Sources */,
 				E28002722A52B84300C6D528 /* Database.swift in Sources */,
 				E28002002A52B84300C6D528 /* Import.swift in Sources */,

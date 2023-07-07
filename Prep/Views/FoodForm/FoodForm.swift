@@ -22,7 +22,7 @@ struct FoodForm: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
 
-    @State var model: FoodModel
+    var model: FoodModel = FoodModel.shared
 
     @State var path: [FoodFormRoute] = []
     @State var showingCancelConfirmation = false
@@ -38,16 +38,17 @@ struct FoodForm: View {
     
     @State var hasAppeared = false
     
-    init(_ food: Food) {
-        _model = State(initialValue: FoodModel(food))
-    }
+//    init(_ food: Food) {
+//        _model = State(initialValue: FoodModel(food))
+//    }
     
-    init() {
-        _model = State(initialValue: FoodModel())
-    }
+//    init() {
+//        _model = State(initialValue: FoodModel())
+//    }
     
     var body: some View {
-        content
+        let _ = Self._printChanges()
+        return content
             .onAppear(perform: appeared)
             .frame(idealWidth: 400, idealHeight: 730)
             .interactiveDismissDisabled(model.dismissDisabled)
@@ -97,10 +98,10 @@ struct FoodForm: View {
                 .navigationDestination(for: FoodFormRoute.self, destination: destination)
                 .toolbar { toolbarContent }
             }
-            AlertLayer(
-                message: $model.alertMessage,
-                isPresented: $model.isPresentingAlert
-            )
+//            AlertLayer(
+//                message: $model.alertMessage,
+//                isPresented: $model.isPresentingAlert
+//            )
         }
     }
     
@@ -294,7 +295,12 @@ struct FoodForm: View {
     
     var publishSection: some View {
         var urlField: some View {
-            TextField("URL", text: $model.urlString)
+            let binding = Binding<String>(
+                get: { model.urlString },
+                set: { model.urlString = $0 }
+            )
+            
+            return TextField("URL", text: binding)
                 .textFieldStyle(.plain)
                 .keyboardType(.URL)
                 .textContentType(.URL)

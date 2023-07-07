@@ -18,6 +18,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
 @Observable class FoodModel {
 
+    static let shared = FoodModel()
+    
     var foodBeingEdited: Food? = nil
 
     var emoji: String = ""
@@ -71,155 +73,98 @@ let DefaultServingValue = FormValue(100, .weight(.g))
     var smallChartData: [MacroValue] = []
     
     init() {
-        foodBeingEdited = nil
         emoji = String.randomFoodEmoji
-        name = ""
-        detail = ""
-        brand = ""
-        
-        amountValue = DefaultAmountValue.amount
-        amountUnit = DefaultAmountValue.unit
-        servingValue = DefaultServingValue.amount
-        servingUnit = DefaultServingValue.unit
-
-        energy = NutrientValue(value: 0, energyUnit: .kcal)
-        carb = NutrientValue(macro: .carb)
-        fat = NutrientValue(macro: .fat)
-        protein = NutrientValue(macro: .protein)
-        micros = []
-
-        sizes = []
-        newSize = FormSize()
-        sizeBeingEdited = nil
-
-        hasDensity = false
-        weightValue = DefaultDensity.weightAmount
-        weightUnit = .weight(DefaultDensity.weightUnit)
-        volumeValue = DefaultDensity.volumeAmount
-        volumeUnit = .volume(DefaultDensity.volumeUnit)
-        
-        barcode = nil
-        scanResult = nil
-        urlString = ""
-        isPublished = false
-        
-        images = []
-        imageIDs = []
-        smallChartData = []
-        
-        saveDisabled = true
-        dismissDisabled = false
     }
     
-    init(_ food: Food) {
-        /// Only set what's on the first screen on the main thread
-        foodBeingEdited = food
-        emoji = food.emoji
-        name = food.name
-        detail = food.detail ?? ""
-        brand = food.brand ?? ""
-        energy = NutrientValue(value: food.energy, energyUnit: food.energyUnit)
-        carb = NutrientValue(macro: .carb, value: food.carb)
-        fat = NutrientValue(macro: .fat, value: food.fat)
-        protein = NutrientValue(macro: .protein, value: food.protein)
-        
-        self.smallChartData = self.macrosChartData
-        
-        self.amountValue = food.amount.value
-        self.amountUnit = food.amount.formUnit(for: food) ?? .weight(.g)
-        self.servingValue = food.serving?.value ?? 0
-        self.servingUnit = food.serving?.formUnit(for: food) ?? .weight(.g)
+    func reset(for food: Food? = nil) {
+        if let food {
+            /// Only set what's on the first screen on the main thread
+            foodBeingEdited = food
+            emoji = food.emoji
+            name = food.name
+            detail = food.detail ?? ""
+            brand = food.brand ?? ""
+            energy = NutrientValue(value: food.energy, energyUnit: food.energyUnit)
+            carb = NutrientValue(macro: .carb, value: food.carb)
+            fat = NutrientValue(macro: .fat, value: food.fat)
+            protein = NutrientValue(macro: .protein, value: food.protein)
+            
+            self.smallChartData = self.macrosChartData
+            
+            self.amountValue = food.amount.value
+            self.amountUnit = food.amount.formUnit(for: food) ?? .weight(.g)
+            self.servingValue = food.serving?.value ?? 0
+            self.servingUnit = food.serving?.formUnit(for: food) ?? .weight(.g)
 
-        self.micros = food.micros.compactMap { NutrientValue($0) }
+            self.micros = food.micros.compactMap { NutrientValue($0) }
 
-        self.sizes = food.sizes.compactMap { $0.formSize(for: food) }
-        self.newSize = FormSize()
-        self.sizeBeingEdited = nil
-        
-        if let density = food.density {
-            self.hasDensity = true
-            self.weightValue = density.weightAmount
-            self.weightUnit = .weight(density.weightUnit)
-            self.volumeValue = density.volumeAmount
-            self.volumeUnit = .volume(density.volumeUnit)
+            self.sizes = food.sizes.compactMap { $0.formSize(for: food) }
+            self.newSize = FormSize()
+            self.sizeBeingEdited = nil
+            
+            if let density = food.density {
+                self.hasDensity = true
+                self.weightValue = density.weightAmount
+                self.weightUnit = .weight(density.weightUnit)
+                self.volumeValue = density.volumeAmount
+                self.volumeUnit = .volume(density.volumeUnit)
+            } else {
+                self.hasDensity = false
+                self.weightValue = DefaultDensity.weightAmount
+                self.weightUnit = .weight(DefaultDensity.weightUnit)
+                self.volumeValue = DefaultDensity.volumeAmount
+                self.volumeUnit = .volume(DefaultDensity.volumeUnit)
+            }
+            
+            self.barcode = food.barcodes.first
+            self.scanResult = nil
+            self.urlString = food.url ?? ""
+            self.isPublished = food.publishStatus == .hidden ? false : true
+            
+            self.images = []
+            self.imageIDs = food.imageIDs
+            self.loadImages()
+
         } else {
-            self.hasDensity = false
-            self.weightValue = DefaultDensity.weightAmount
-            self.weightUnit = .weight(DefaultDensity.weightUnit)
-            self.volumeValue = DefaultDensity.volumeAmount
-            self.volumeUnit = .volume(DefaultDensity.volumeUnit)
+            foodBeingEdited = nil
+            emoji = String.randomFoodEmoji
+            name = ""
+            detail = ""
+            brand = ""
+            
+            amountValue = DefaultAmountValue.amount
+            amountUnit = DefaultAmountValue.unit
+            servingValue = DefaultServingValue.amount
+            servingUnit = DefaultServingValue.unit
+            
+            energy = NutrientValue(value: 0, energyUnit: .kcal)
+            carb = NutrientValue(macro: .carb)
+            fat = NutrientValue(macro: .fat)
+            protein = NutrientValue(macro: .protein)
+            micros = []
+            
+            sizes = []
+            newSize = FormSize()
+            sizeBeingEdited = nil
+            
+            hasDensity = false
+            weightValue = DefaultDensity.weightAmount
+            weightUnit = .weight(DefaultDensity.weightUnit)
+            volumeValue = DefaultDensity.volumeAmount
+            volumeUnit = .volume(DefaultDensity.volumeUnit)
+            
+            barcode = nil
+            scanResult = nil
+            urlString = ""
+            isPublished = false
+            
+            images = []
+            imageIDs = []
+            smallChartData = []
+            
         }
-        
-        self.barcode = food.barcodes.first
-        self.scanResult = nil
-        self.urlString = food.url ?? ""
-        self.isPublished = food.publishStatus == .hidden ? false : true
-        
-        self.images = []
-        self.imageIDs = food.imageIDs
-        self.loadImages()
-
         saveDisabled = true
         dismissDisabled = false
-    }
-    
-    init(
-        emoji: String,
-        name: String,
-        detail: String,
-        brand: String,
-        amountValue: Double,
-        amountUnit: FormUnit,
-        servingValue: Double,
-        servingUnit: FormUnit,
-        energy: NutrientValue,
-        carb: NutrientValue,
-        fat: NutrientValue,
-        protein: NutrientValue,
-        micros: [NutrientValue],
-        sizes: [FormSize],
-        newSize: FormSize,
-        sizeBeingEdited: FormSize?,
-        hasDensity: Bool,
-        weightValue: Double,
-        weightUnit: FormUnit,
-        volumeValue: Double,
-        volumeUnit: FormUnit,
-        barcode: String?,
-        scanResult: ScanResult?,
-        urlString: String,
-        isPublished: Bool,
-        imageIDs: [UUID]
-    ) {
-        self.emoji = emoji
-        self.name = name
-        self.detail = detail
-        self.brand = brand
-        self.amountValue = amountValue
-        self.amountUnit = amountUnit
-        self.servingValue = servingValue
-        self.servingUnit = servingUnit
-        self.energy = energy
-        self.carb = carb
-        self.fat = fat
-        self.protein = protein
-        self.micros = micros
-        self.sizes = sizes
-        self.newSize = newSize
-        self.sizeBeingEdited = sizeBeingEdited
-        self.hasDensity = hasDensity
-        self.weightValue = weightValue
-        self.weightUnit = weightUnit
-        self.volumeValue = volumeValue
-        self.volumeUnit = volumeUnit
-        self.barcode = barcode
-        self.scanResult = scanResult
-        self.urlString = urlString
-        self.isPublished = isPublished
-        self.imageIDs = imageIDs
-        setSaveDisabled()
-        smallChartData = macrosChartData
-        loadImages()
     }
     
     func loadImages() {
