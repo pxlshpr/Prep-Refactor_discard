@@ -29,11 +29,18 @@ struct AmountField: View {
                 .layoutPriority(1)
         }
         .alert("Enter a name", isPresented: $showingNewSizeAlert) {
-            TextField("Enter a name", text: $newSizeName)
+            TextField("Enter a name", text: newSizeNameBinding)
             Button("OK", action: addNewSize)
         } message: {
             Text("Give this size a name.")
         }
+    }
+    
+    var newSizeNameBinding: Binding<String> {
+        Binding<String>(
+            get: { newSizeName },
+            set: { newSizeName = $0.lowercased() }
+        )
     }
     
     var textField: some View {

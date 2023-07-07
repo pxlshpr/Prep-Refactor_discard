@@ -634,6 +634,12 @@ extension FoodModel {
             unit: .serving
         )
         sizes.append(newSize)
+
+        amountUnit = .serving
+        if servingValue == nil {
+            servingValue = 1
+        }
+        servingUnit = .size(newSize, nil)
         setSaveDisabled()
     }
 }
