@@ -189,6 +189,9 @@
 		E280FED92A52B0A600C6D528 /* FoodDataTypes in Frameworks */ = {isa = PBXBuildFile; productRef = E280FED82A52B0A600C6D528 /* FoodDataTypes */; };
 		E280FEDC2A52B0B500C6D528 /* FoodLabelScanner in Frameworks */ = {isa = PBXBuildFile; productRef = E280FEDB2A52B0B500C6D528 /* FoodLabelScanner */; };
 		E293DB702A53742E00D8D4D2 /* ItemForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E293DB6F2A53742E00D8D4D2 /* ItemForm.swift */; };
+		E2E1A0302A57E06B00A01D45 /* FoodsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A02F2A57E06B00A01D45 /* FoodsStore.swift */; };
+		E2E1A0322A57E11E00A01D45 /* HeroButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A0312A57E11E00A01D45 /* HeroButtonLabel.swift */; };
+		E2E1A0342A57F2DC00A01D45 /* FoodsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A0332A57F2DC00A01D45 /* FoodsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -366,6 +369,9 @@
 		E280FC222A529E3E00C6D528 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E280FC242A529E3E00C6D528 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E293DB6F2A53742E00D8D4D2 /* ItemForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemForm.swift; sourceTree = "<group>"; };
+		E2E1A02F2A57E06B00A01D45 /* FoodsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodsStore.swift; sourceTree = "<group>"; };
+		E2E1A0312A57E11E00A01D45 /* HeroButtonLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroButtonLabel.swift; sourceTree = "<group>"; };
+		E2E1A0332A57F2DC00A01D45 /* FoodsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				E23652482A5317A30049C199 /* MealsStore.swift */,
+				E2E1A02F2A57E06B00A01D45 /* FoodsStore.swift */,
 				E22F84402A54B3C100096909 /* DaysStore.swift */,
 				E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */,
 			);
@@ -538,6 +545,7 @@
 			children = (
 				E28001922A52B84300C6D528 /* FoodModel.swift */,
 				E28001932A52B84300C6D528 /* FoodModel+Scan.swift */,
+				E2E1A0332A57F2DC00A01D45 /* FoodsModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -681,6 +689,7 @@
 				E28001DF2A52B84300C6D528 /* TimeSlider.swift */,
 				E28001E02A52B84300C6D528 /* EmojiPicker.swift */,
 				E28001E12A52B84300C6D528 /* FoodCell.swift */,
+				E2E1A0312A57E11E00A01D45 /* HeroButtonLabel.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -978,6 +987,7 @@
 				E28002812A52B84300C6D528 /* MealView.swift in Sources */,
 				E236524D2A5318420049C199 /* Fetchable.swift in Sources */,
 				E293DB702A53742E00D8D4D2 /* ItemForm.swift in Sources */,
+				E2E1A0342A57F2DC00A01D45 /* FoodsModel.swift in Sources */,
 				E22F84352A54ADAA00096909 /* NutrientMeter.swift in Sources */,
 				E280028E2A52B84300C6D528 /* MicroPicker.swift in Sources */,
 				E280028C2A52B84300C6D528 /* NutrientFieldModel.swift in Sources */,
@@ -1011,6 +1021,7 @@
 				E28002562A52B84300C6D528 /* FoodQuantity+Convert.swift in Sources */,
 				E22F84412A54B3C100096909 /* DaysStore.swift in Sources */,
 				E22F843D2A54AE9F00096909 /* PercentageType.swift in Sources */,
+				E2E1A0322A57E11E00A01D45 /* HeroButtonLabel.swift in Sources */,
 				E28002632A52B84300C6D528 /* String.swift in Sources */,
 				E28002012A52B84300C6D528 /* Day.swift in Sources */,
 				E28002832A52B84300C6D528 /* FoodsViewCell.swift in Sources */,
@@ -1025,6 +1036,7 @@
 				E23652472A53175E0049C199 /* CoreDataManager.swift in Sources */,
 				E28002332A52B84300C6D528 /* SoundPlayer.swift in Sources */,
 				E280025A2A52B84300C6D528 /* MacroValue.swift in Sources */,
+				E2E1A0302A57E06B00A01D45 /* FoodsStore.swift in Sources */,
 				E280024D2A52B84300C6D528 /* FoodValue.swift in Sources */,
 				E28002042A52B84300C6D528 /* Food.swift in Sources */,
 				E280027F2A52B84300C6D528 /* LogView.swift in Sources */,

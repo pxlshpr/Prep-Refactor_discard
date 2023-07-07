@@ -9,9 +9,10 @@ protocol Fetchable {
     static func object(with id: UUID, in context: NSManagedObjectContext) -> FetchableType?
     
     static func objects(
-        for predicate: NSPredicate?,
+        predicate: NSPredicate?,
         sortDescriptors: [NSSortDescriptor]?,
         fetchLimit: Int?,
-        in context: NSManagedObjectContext
+        fetchOffset: Int?,
+        context: NSManagedObjectContext
     ) -> [FetchableType]
 }

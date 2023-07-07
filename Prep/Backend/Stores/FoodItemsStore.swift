@@ -31,10 +31,10 @@ class FoodItemsStore {
 extension FoodItemsStore {
     static func latestFoodItemEntity(foodID: UUID, context: NSManagedObjectContext) -> FoodItemEntity? {
         FoodItemEntity.objects(
-            for: NSPredicate(format: "foodEntity.id == %@", foodID.uuidString),
+            predicate: NSPredicate(format: "foodEntity.id == %@", foodID.uuidString),
             sortDescriptors: [NSSortDescriptor(keyPath: \FoodItemEntity.updatedAt, ascending: false)],
             fetchLimit: 1,
-            in: context
+            context: context
         ).first
     }
 }
@@ -147,9 +147,9 @@ extension CoreDataManager {
                 do {
                     
                     let amounts = FoodItemEntity.objects(
-                        for: NSPredicate(format: "foodEntity.id == %@", food.id.uuidString),
+                        predicate: NSPredicate(format: "foodEntity.id == %@", food.id.uuidString),
                         sortDescriptors: [NSSortDescriptor(keyPath: \FoodItemEntity.updatedAt, ascending: false)],
-                        in: bgContext
+                        context: bgContext
                     )
                     .map { $0.amount }
                     .removingDuplicates()

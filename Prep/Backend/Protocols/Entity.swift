@@ -17,10 +17,11 @@ extension Entity {
     }
     
     static func objects(
-        for predicate: NSPredicate? = nil,
+        predicate: NSPredicate? = nil,
         sortDescriptors: [NSSortDescriptor]? = nil,
         fetchLimit: Int? = nil,
-        in context: NSManagedObjectContext
+        fetchOffset: Int? = nil,
+        context: NSManagedObjectContext
     ) -> [FetchableType] {
         do {
             let request = NSFetchRequest<FetchableType>(entityName: entityName)
@@ -30,6 +31,9 @@ extension Entity {
             }
             if let sortDescriptors {
                 request.sortDescriptors = sortDescriptors
+            }
+            if let fetchOffset {
+                request.fetchOffset = fetchOffset
             }
             return try context.fetch(request)
         } catch {

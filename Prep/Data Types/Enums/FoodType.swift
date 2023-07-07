@@ -6,12 +6,26 @@ enum FoodType: Int, Codable, CaseIterable {
     case plate
 }
 
+extension FoodType: Identifiable {
+    var id: Int { rawValue }
+}
+
+extension FoodType {
+    var systemImage: String {
+        switch self {
+        case .food:     "carrot"
+        case .plate:    "fork.knife"
+        case .recipe:   "frying.pan"
+        }
+    }
+}
+
 extension FoodType: CustomStringConvertible {
     var description: String {
         switch self {
-        case .food:     "food"
-        case .recipe:   "recipe"
-        case .plate:    "plate"
+        case .food:     "Food"
+        case .recipe:   "Recipe"
+        case .plate:    "Plate"
         }
     }
 }

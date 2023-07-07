@@ -1,20 +1,14 @@
 import SwiftUI
-//import SwiftData
 import OSLog
 
 import SwiftHaptics
 
-let FoodsPageSize: Int = 100
-
 struct FoodsView: View {
     
-//    @Environment(\.modelContext) var context: ModelContext
-    
-    var foods: [Food] = []
-    
     @State var showingFoodForm = false
-    
     @State var hasAppeared = false
+    
+    let model = FoodsModel.shared
     
     init() {
 //        let predicate = #Predicate<FoodEntity> {
@@ -41,14 +35,7 @@ struct FoodsView: View {
                 .navigationTitle("My Foods")
         }
     }
-    
-    func appeared() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-            withAnimation(.snappy) {
-                hasAppeared = true
-            }
-        }
-    }
+   
     
     var content: some View {
         ZStack {
@@ -61,8 +48,14 @@ struct FoodsView: View {
 
     var list: some View {
         List {
-            ForEach(foods, id: \.self) { food in
+            ForEach(model.foods, id: \.self) { food in
                 FoodsViewCell(food: food)
+                    .onAppear {
+                        model.loadMoreContentIfNeeded(currentFood: food)
+                    }
+            }
+            if model.isLoadingPage {
+                ProgressView()
             }
         }
         .safeAreaInset(edge: .bottom) {
@@ -70,45 +63,30 @@ struct FoodsView: View {
         }
         .listStyle(.plain)
     }
+    
+    func appeared() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            withAnimation(.snappy) {
+                hasAppeared = true
+            }
+        }
+    }
 }
 
 extension FoodsView {
     
     var buttonLayer: some View {
-        func button(_ systemImage: String, action: @escaping () -> ()) -> some View {
-            var label: some View {
-                ZStack {
-                    Circle()
-                        .foregroundStyle(Color.accentColor.gradient)
-                        .shadow(color: Color(.black).opacity(0.1), radius: 5, x: 0, y: 3)
-                    Image(systemName: systemImage)
-                        .font(.system(size: 25))
-                        .fontWeight(.medium)
-                        .foregroundStyle(Color(.systemBackground))
-                }
-                .frame(width: HeroButton.size, height: HeroButton.size)
-                .hoverEffect(.lift)
-            }
-            
-            var button: some View {
-                Button {
-                    Haptics.selectionFeedback()
-                    action()
-                } label: {
-                    label
-                }
-            }
-            
-            return ZStack {
-                label
-                button
-            }
-        }
-        
         var newFoodButton: some View {
-            button("plus") {
-                Haptics.selectionFeedback()
-                showingFoodForm = true
+            Menu {
+                ForEach(FoodType.allCases) { foodType in
+                    Button {
+                        Haptics.selectionFeedback()
+                    } label: {
+                        Label(foodType.description, systemImage: foodType.systemImage)
+                    }
+                }
+            } label: {
+                heroButtonLabel("plus")
             }
         }
         

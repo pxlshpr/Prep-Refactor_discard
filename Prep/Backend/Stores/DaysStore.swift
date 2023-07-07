@@ -62,9 +62,9 @@ extension CoreDataManager {
     
     func dayEntity(for date: Date, in context: NSManagedObjectContext) -> DayEntity? {
         DayEntity.objects(
-            for: NSPredicate(format: "dateString == %@", date.calendarDayString),
+            predicate: NSPredicate(format: "dateString == %@", date.calendarDayString),
             fetchLimit: 1,
-            in: context
+            context: context
         ).first
     }
     

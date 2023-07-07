@@ -181,7 +181,10 @@ extension CoreDataManager {
             }
             let dateString = legacyDay.calendarDayString
             let predicate = NSPredicate(format: "dateString == %@", dateString)
-            let dayEntity = try! DayEntity.objects(for: predicate, in: context).first
+            let dayEntity = DayEntity.objects(
+                predicate: predicate,
+                context: context
+            ).first
             
             guard let dayEntity else {
                 logger.error("Failed to find DayEntity with id: \(legacy.dayID, privacy: .public)")
@@ -294,8 +297,8 @@ extension CoreDataManager {
 
         logger.info("Prepopulating \(legacyObjects.count) food items…")
 
-        let mealEntities = MealEntity.objects(in: context)
-        let foodEntities = FoodEntity.objects(in: context)
+        let mealEntities = MealEntity.objects(context: context)
+        let foodEntities = FoodEntity.objects(context: context)
         
         for legacy in legacyObjects[range] {
 
@@ -330,7 +333,7 @@ extension CoreDataManager {
 
         let energyUnit: EnergyUnit = .kcal
 
-        let foodItemEntities = FoodItemEntity.objects(in: context)
+        let foodItemEntities = FoodItemEntity.objects(context: context)
         for entity in foodItemEntities {
             entity.energyUnit = energyUnit
             
@@ -345,7 +348,7 @@ extension CoreDataManager {
             entity.largestEnergyInKcal = entity.calculatedLargestEnergyInKcal
         }
         
-        let mealEntities = MealEntity.objects(in: context)
+        let mealEntities = MealEntity.objects(context: context)
         for entity in mealEntities {
             entity.energyUnit = energyUnit
             
@@ -358,7 +361,7 @@ extension CoreDataManager {
             entity.largestEnergyInKcal = entity.calculatedLargestEnergyInKcal
         }
         
-        let dayEntities = DayEntity.objects(in: context)
+        let dayEntities = DayEntity.objects(context: context)
         for entity in dayEntities {
             entity.energyUnit = energyUnit
             

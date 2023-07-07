@@ -19,7 +19,7 @@ struct LogView: View {
     @State var meals: [Meal] = []
 
     @State var mealToShowFoodPickerFor: Meal? = nil
-    
+       
     let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
     let didModifyMeal = NotificationCenter.default.publisher(for: .didModifyMeal)
 
@@ -152,49 +152,27 @@ struct LogView: View {
     
     var buttonsLayer: some View {
 
-        func buttonLabel(_ systemImage: String) -> some View {
-            ZStack {
-                Circle()
-                    .foregroundStyle(Color.accentColor.gradient)
-                    .shadow(color: Color(.black).opacity(0.1), radius: 5, x: 0, y: 3)
-                Image(systemName: systemImage)
-                    .font(.system(size: 25))
-                    .fontWeight(.medium)
-                    .foregroundStyle(Color(.systemBackground))
-            }
-            .frame(width: HeroButton.size, height: HeroButton.size)
-            .hoverEffect(.lift)
-        }
-        
-        var buttonLegacy: some View {
-            var menu: some View {
-                Menu {
-                    Button {
-                        showingFoodForm = true
-                    } label: {
-                        Label("New Food", systemImage: "plus")
-                    }
-                } label: {
-                    label
-                } primaryAction: {
-                    Haptics.selectionFeedback()
-                    showingFoodPicker = true
-                }
-            }
-
-            var label: some View { buttonLabel("carrot.fill") }
-            
-            return ZStack {
-                label
-                menu
-            }
-        }
-        
         var button: some View {
             var menu: some View {
-                Menu {
-                    Button("New Meal") {
-                        showingMealForm = true
+                
+                return Menu {
+                    Menu {
+                        Button {
+                            showingMealForm = true
+                        } label: {
+                            Label("Meal", systemImage: "note.text")
+                        }
+                        Divider()
+                        Section {
+                            ForEach(FoodType.allCases) { foodType in
+                                Button {
+                                } label: {
+                                    Label(foodType.description, systemImage: foodType.systemImage)
+                                }
+                            }
+                        }
+                    } label: {
+                        Text("New")
                     }
                     Section("Add Food") {
                         ForEach(meals.sorted().reversed()) { meal in
@@ -208,7 +186,7 @@ struct LogView: View {
                 }
             }
             
-            var label: some View { buttonLabel("plus") }
+            var label: some View { heroButtonLabel("plus") }
             
             return ZStack {
                 label.grayscale(1)
