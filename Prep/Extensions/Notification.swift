@@ -10,7 +10,7 @@ extension Notification.Name {
     static var didModifyMeal: Notification.Name { return .init("didModifyMeal") }
 //    static var didUpdateMeal: Notification.Name { return .init("didUpdateMeal") }
 //    static var didDeleteMeal: Notification.Name { return .init("didDeleteMeal") }
-
+    static var didAddFood: Notification.Name { return .init("didAddFood") }
     
     static var didAddFoodItem: Notification.Name { return .init("didAddFoodItem") }
     static var didDeleteFoodItem: Notification.Name { return .init("didDeleteFoodItem") }
@@ -22,6 +22,7 @@ extension Notification {
     enum PrepKeys: String {
         case day = "day"
         case meal = "meal"
+        case food = "food"
         case foodItem = "foodItem"
         case safeArea = "safeArea"
     }

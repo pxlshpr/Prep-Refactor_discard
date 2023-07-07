@@ -322,53 +322,52 @@ extension FoodModel {
         foodBeingEdited != nil
     }
     
-    func fillFood(_ food: Food) {
-        var food = food
-        food.emoji = emoji
-        food.name = name
-        food.detail = detail
-        food.brand = brand
-        
-        food.amount = FoodValue(amountValue, amountUnit)
-        if amountUnit == .serving {
-            food.serving = FoodValue(servingValue, servingUnit)
-        } else {
-            food.serving = nil
-        }
-        
-        food.energy = energy.value
-        food.energyUnit = energy.unit.energyUnit ?? .kcal
-        
-        food.carb = carb.value
-        food.protein = protein.value
-        food.fat = fat.value
-        food.micros = micros.compactMap { FoodNutrient($0) }
-        
-        food.sizes = sizes.map { FoodSize($0) }
-        food.density = density
-        
-        food.url = urlString
-//        food.imageIDs = ...
-        if let barcode {
-            food.barcodes = [barcode]
-        } else {
-            food.barcodes = []
-        }
-        
-        food.imageIDs = imageIDs
-        
-        switch food.publishStatus {
-        case .hidden, .pendingReview, .rejected, .none:
-            food.publishStatus = isPublished ? .pendingReview : .hidden
-        case .verified:
-            food.publishStatus = isPublished ? .pendingReview : .hidden
-        }
-    }
+//    func fillFood(_ food: Food) {
+//        var food = food
+//        food.emoji = emoji
+//        food.name = name
+//        food.detail = detail
+//        food.brand = brand
+//        
+//        food.amount = FoodValue(amountValue, amountUnit)
+//        if amountUnit == .serving {
+//            food.serving = FoodValue(servingValue, servingUnit)
+//        } else {
+//            food.serving = nil
+//        }
+//        
+//        food.energy = energy.value
+//        food.energyUnit = energy.unit.energyUnit ?? .kcal
+//        
+//        food.carb = carb.value
+//        food.fat = fat.value
+//        food.protein = protein.value
+//        food.micros = micros.compactMap { FoodNutrient($0) }
+//        
+//        food.sizes = sizes.map { FoodSize($0) }
+//        food.density = density
+//        
+//        if let barcode {
+//            food.barcodes = [barcode]
+//        } else {
+//            food.barcodes = []
+//        }
+//        food.url = urlString
+//
+//        switch food.publishStatus {
+//        case .hidden, .pendingReview, .rejected, .none:
+//            food.publishStatus = isPublished ? .pendingReview : .hidden
+//        case .verified:
+//            food.publishStatus = isPublished ? .pendingReview : .hidden
+//        }
+//        
+//        food.imageIDs = imageIDs
+//    }
     
     var updatedFood: Food? {
         guard let foodBeingEdited else { return nil }
         var food = foodBeingEdited
-        fillFood(food)
+        food.fill(with: self)
         food.updatedAt = Date.now
         return food
     }
@@ -383,7 +382,7 @@ extension FoodModel {
     
     var newFood: Food {
         var food = Food()
-        fillFood(food)
+        food.fill(with: self)
         food.createdAt = Date.now
         food.updatedAt = Date.now
         return food
@@ -725,5 +724,48 @@ extension FoodModel {
             MacroValue(macro: .fat, value: fat.value),
             MacroValue(macro: .protein, value: protein.value)
         ]
+    }
+}
+
+extension Food {
+    mutating func fill(with model: FoodModel) {
+        emoji = model.emoji
+        name = model.name
+        detail = model.detail
+        brand = model.brand
+        
+        amount = FoodValue(model.amountValue, model.amountUnit)
+        if model.amountUnit == .serving {
+            serving = FoodValue(model.servingValue, model.servingUnit)
+        } else {
+            serving = nil
+        }
+        
+        energy = model.energy.value
+        energyUnit = model.energy.unit.energyUnit ?? .kcal
+        
+        carb = model.carb.value
+        fat = model.fat.value
+        protein = model.protein.value
+        micros = model.micros.compactMap { FoodNutrient($0) }
+        
+        sizes = model.sizes.map { FoodSize($0) }
+        density = model.density
+        
+        if let barcode = model.barcode {
+            barcodes = [barcode]
+        } else {
+            barcodes = []
+        }
+        url = model.urlString
+
+        switch publishStatus {
+        case .hidden, .pendingReview, .rejected, .none:
+            publishStatus = model.isPublished ? .pendingReview : .hidden
+        case .verified:
+            publishStatus = model.isPublished ? .pendingReview : .hidden
+        }
+        
+        imageIDs = model.imageIDs
     }
 }

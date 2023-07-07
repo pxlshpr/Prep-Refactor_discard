@@ -401,3 +401,55 @@ extension Food {
         return amounts
     }
 }
+
+//MARK: - Sorting
+
+enum FoodSort {
+    case name
+    case latestCreated
+    case latestUsed
+}
+
+extension Array where Element == Food {
+    mutating func sort(using sort: FoodSort) {
+        self.sort(by: {
+            switch sort {
+            case .name:
+                if $0.name == $1.name {
+                    if let lhs = $0.detail,
+                       let rhs = $1.detail
+                    {
+                        if lhs == rhs {
+                            if let lhsBrand = $0.brand,
+                               let rhsBrand = $1.brand
+                            {
+                                return lhsBrand < rhsBrand
+                            }
+                        } else {
+                            return lhs < rhs
+                        }
+                    }
+                    
+                    if let lhs = $0.brand,
+                       let rhs = $1.brand
+                    {
+                        return lhs < rhs
+                    }
+                        
+                }
+                return $0.name < $1.name
+                    
+            case .latestCreated:
+                return $0.createdAt > $1.createdAt
+                
+            case .latestUsed:
+                guard let lhs = $0.lastUsedAt,
+                      let rhs = $1.lastUsedAt
+                else {
+                    return false
+                }
+                return lhs > rhs
+            }
+        })
+    }
+}

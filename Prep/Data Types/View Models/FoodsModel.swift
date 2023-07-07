@@ -11,8 +11,17 @@ let FoodPageSize: Int = 25
     var currentPage = 1
     var canLoadMorePages = true
     
+    var sort: FoodSort = .name
+    
     init() {
         loadMoreContent()
+    }
+    
+    func insertNewFood(_ food: Food) {
+        foods.append(food)
+        withAnimation {
+            foods.sort(using: sort)
+        }
     }
     
     func loadMoreContentIfNeeded(currentFood food: Food? = nil) {

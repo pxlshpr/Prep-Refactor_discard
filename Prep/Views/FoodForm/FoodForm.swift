@@ -15,17 +15,8 @@ struct FoodForm: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
 
-//    @State var model: FoodModel
     @Bindable var model: FoodModel
 
-//    init(_ food: Food) {
-//        _model = State(initialValue: FoodModel(food))
-//    }
-//    
-//    init() {
-//        _model = State(initialValue: FoodModel())
-//    }
-    
     var body: some View {
 //        let _ = Self._printChanges()
         return content
@@ -159,16 +150,18 @@ struct FoodForm: View {
             //TODO: Pre-save validations
             /// [ ] Make sure micros values are 0 if empty
             /// [ ] Clean up URL if need be
-            
-            do {
-//                let food = model.newFood
-//                context.insert(food)
-//                alertMessage = "Food added successfully."
-//                try context.save()
-            } catch {
-                
+            let food = model.newFood
+            Task.detached(priority: .userInitiated) {
+                guard let newFood = await FoodsStore.create(food) else {
+                    return
+                }
+                await MainActor.run {
+                    post(.didAddFood, userInfo: [.food: newFood])
+                }
             }
+//            alertMessage = "Food added successfully."
         }
+        model.reset()
 //        model.resetFoodModel()
 //        showingAlert = true
     }

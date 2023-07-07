@@ -20,16 +20,19 @@ extension FoodEntity: Entity {
         self.energy = food.energy
         self.energyUnit = food.energyUnit
         self.carb = food.carb
-        self.protein = food.protein
         self.fat = food.fat
+        self.protein = food.protein
         self.micros = food.micros
+        
         self.sizes = food.sizes
         self.density = food.density
-        self.url = food.url
-        self.imageIDs = food.imageIDs
+        
         self.barcodes = food.barcodes
-        self.type = food.type
+        self.url = food.url
         self.publishStatus = food.publishStatus
+        self.imageIDs = food.imageIDs
+        
+        self.type = food.type
         self.dataset = food.dataset
         self.datasetID = food.datasetID
         self.lastAmount = food.lastAmount
