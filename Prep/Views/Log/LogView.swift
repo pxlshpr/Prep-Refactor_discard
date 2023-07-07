@@ -80,7 +80,8 @@ struct LogView: View {
     }
     
     var foodForm: some View {
-        FoodForm()
+        EmptyView()
+//        FoodForm()
     }
     
     var foodPicker: some View {

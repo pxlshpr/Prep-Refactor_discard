@@ -13,7 +13,7 @@ struct HomeView: View {
     @Environment(\.verticalSizeClass) var verticalSizeClass
 
     @State var currentDate: Date? = nil
-    
+        
     var body: some View {
         GeometryReader { proxy in
             ZStack {

@@ -12,7 +12,7 @@ struct NutrientsForm: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    var foodModel: FoodModel
+    @Bindable var foodModel: FoodModel
 
     @State var showingMicroPicker = false
     @State var showingCamera = false
@@ -84,7 +84,9 @@ struct NutrientsForm: View {
         )
         return Section {
 //            MacrosPieChart(data: foodModel.macrosChartData)
-            MacrosPieChart(data: binding)
+//            MacrosPieChart(data: binding)
+//            MacrosPieChart()
+            MacrosPieChart(foodModel: foodModel)
         }
     }
     

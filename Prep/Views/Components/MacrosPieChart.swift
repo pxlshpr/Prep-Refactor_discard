@@ -7,11 +7,11 @@ struct MacrosPieChart: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    @Binding var data: [MacroValue]
+    @Bindable var foodModel: FoodModel
     
     var body: some View {
         let _ = Self._printChanges()
-        return Chart(data, id: \.macro) { macroValue in
+        return Chart(foodModel.largeChartData, id: \.macro) { macroValue in
             SectorMark(
                 angle: .value("kcal", macroValue.kcal),
                 angularInset: 1.5

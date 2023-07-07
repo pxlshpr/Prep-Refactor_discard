@@ -22,7 +22,8 @@ struct FoodForm: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
 
-    var model: FoodModel = FoodModel.shared
+//    @Bindable var model: FoodModel
+    @State var model: FoodModel = FoodModel.shared
 
     @State var path: [FoodFormRoute] = []
     @State var showingCancelConfirmation = false
@@ -210,6 +211,7 @@ struct FoodForm: View {
     
     var nutrientsForm: some View {
         NutrientsForm(foodModel: model)
+//            .environment(model)
     }
     
     var form: some View {

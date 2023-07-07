@@ -71,7 +71,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
     var saveDisabledTask: Task<Void, Error>? = nil
 
     var smallChartData: [MacroValue] = []
-    
+    var largeChartData: [MacroValue] = []
+
     init() {
         emoji = String.randomFoodEmoji
     }
@@ -90,7 +91,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
             protein = NutrientValue(macro: .protein, value: food.protein)
             
             self.smallChartData = self.macrosChartData
-            
+            self.largeChartData = self.macrosChartData
+
             self.amountValue = food.amount.value
             self.amountUnit = food.amount.formUnit(for: food) ?? .weight(.g)
             self.servingValue = food.serving?.value ?? 0
@@ -161,6 +163,7 @@ let DefaultServingValue = FormValue(100, .weight(.g))
             images = []
             imageIDs = []
             smallChartData = []
+            largeChartData = []
             
         }
         saveDisabled = true

@@ -48,7 +48,7 @@ struct FoodCell: View {
     var body: some View {
         HStack {
             emojiText
-                .popover(item: editedFoodBinding) { _ in FoodForm() }
+//                .popover(item: editedFoodBinding) { _ in FoodForm() }
             nameTexts
             Spacer()
 //            foodBadge

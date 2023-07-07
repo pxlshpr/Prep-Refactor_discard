@@ -44,6 +44,11 @@ struct NutrientField: View {
                 
                 if nutrientValue.isMacro {
                     foodModel.delayedUpdateSmallPieChart()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        withAnimation(.snappy) {
+                            foodModel.largeChartData = foodModel.macrosChartData
+                        }
+                    }
                 }
             }
         )

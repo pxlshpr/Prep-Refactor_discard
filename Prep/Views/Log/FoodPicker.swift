@@ -101,7 +101,8 @@ struct FoodPicker: View {
     }
     
     var foodForm: some View {
-        FoodForm()
+        EmptyView()
+//        FoodForm()
     }
     
     var list: some View {
