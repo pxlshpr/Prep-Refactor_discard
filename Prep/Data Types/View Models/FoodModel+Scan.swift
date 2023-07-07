@@ -61,10 +61,14 @@ extension FoodModel {
             
             Haptics.feedback(style: .rigid)
             
-            SoundPlayer.play(.letterpressSwoosh1)
+//            SoundPlayer.play(.letterpressSwoosh1)
+            SoundPlayer.play(.chiptunesScan)
 
             alertMessage = "\(extractedNutrients.count) nutrients extracted"
             isPresentingAlert = true
+            
+            smallChartData = macrosChartData
+            largeChartData = macrosChartData
         }
     }
 }

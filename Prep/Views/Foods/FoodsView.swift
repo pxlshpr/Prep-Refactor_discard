@@ -44,6 +44,7 @@ struct FoodsView: View {
         List {
             ForEach(model.foods, id: \.self) { food in
                 Button {
+                    Haptics.selectionFeedback()
                     foodModel.reset(for: food)
                     foodBeingEdited = food
 //                    showingFoodForm = true
@@ -82,6 +83,7 @@ struct FoodsView: View {
                 ForEach(FoodType.allCases) { foodType in
                     Button {
                         Haptics.selectionFeedback()
+                        foodModel.reset()
                         showingFoodForm = true
                     } label: {
                         Label(foodType.description, systemImage: foodType.systemImage)
@@ -97,7 +99,7 @@ struct FoodsView: View {
             HStack(alignment: .bottom) {
                 Spacer()
                 newFoodButton
-                    .popover(isPresented: $showingFoodForm) { foodForm }
+                    .popover(isPresented: $showingFoodForm) { newFoodForm }
 //                    .popover(item: $foodBeingEdited ) {
 //                        FoodForm($0)
 //                    }
@@ -121,10 +123,7 @@ struct FoodsView: View {
         )
     }
     
-    var foodForm: some View {
-        EmptyView()
-//        FoodForm(model: foodModel)
-//        FoodForm()
-//        FoodForm()
+    var newFoodForm: some View {
+        FoodForm(model: foodModel)
     }
 }

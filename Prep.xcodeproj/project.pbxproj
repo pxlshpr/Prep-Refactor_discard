@@ -30,6 +30,7 @@
 		E23B65692A561461003FFAC4 /* chiptunes_success_long.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65672A561461003FFAC4 /* chiptunes_success_long.wav */; };
 		E23B656A2A561461003FFAC4 /* chiptunes_error_long.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */; };
 		E250E4A62A5867C0002613A4 /* FoodImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E250E4A52A5867C0002613A4 /* FoodImageViewer.swift */; };
+		E256839E2A5888A200581FA2 /* chiptunes_scan.wav in Resources */ = {isa = PBXBuildFile; fileRef = E256839D2A5888A100581FA2 /* chiptunes_scan.wav */; };
 		E2672C7D2A52C1B00002E95C /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */; };
 		E2672C802A52C3F90002E95C /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity.swift */; };
 		E27CD16C2A56B36F00C1D339 /* ItemForm+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */; };
@@ -416,6 +417,7 @@
 		E23B65672A561461003FFAC4 /* chiptunes_success_long.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_success_long.wav; sourceTree = "<group>"; };
 		E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_error_long.wav; sourceTree = "<group>"; };
 		E250E4A52A5867C0002613A4 /* FoodImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodImageViewer.swift; sourceTree = "<group>"; };
+		E256839D2A5888A100581FA2 /* chiptunes_scan.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_scan.wav; sourceTree = "<group>"; };
 		E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemEntity.swift; sourceTree = "<group>"; };
 		E2672C7F2A52C3F90002E95C /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
 		E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemForm+Data.swift"; sourceTree = "<group>"; };
@@ -879,6 +881,7 @@
 		E28001652A52B84300C6D528 /* Sound Files */ = {
 			isa = PBXGroup;
 			children = (
+				E256839D2A5888A100581FA2 /* chiptunes_scan.wav */,
 				E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */,
 				E23B65672A561461003FFAC4 /* chiptunes_success_long.wav */,
 				E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */,
@@ -1617,6 +1620,7 @@
 				E29C6FE02A58311B002E1799 /* 6B9050FB-04FD-45C0-9A3C-893413DE9323.jpg in Resources */,
 				E29C6F782A58311B002E1799 /* B3A771C5-718D-4564-BD06-C8B0B9EAF4B9.jpg in Resources */,
 				E280022E2A52B84300C6D528 /* letterpress_delete.wav in Resources */,
+				E256839E2A5888A200581FA2 /* chiptunes_scan.wav in Resources */,
 				E29C6FE32A58311B002E1799 /* E797B991-5CEF-41CA-ADBB-896F7D558B8D.jpg in Resources */,
 				E29C6F7B2A58311B002E1799 /* D16C7AF8-6CF6-4F29-8FCF-96014096E68B.jpg in Resources */,
 				E29C6FD92A58311B002E1799 /* 7CFE2736-E0ED-47DE-93A9-F783BD6B4432.jpg in Resources */,

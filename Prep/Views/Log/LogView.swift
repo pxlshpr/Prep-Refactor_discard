@@ -19,7 +19,9 @@ struct LogView: View {
     @State var meals: [Meal] = []
 
     @State var mealToShowFoodPickerFor: Meal? = nil
-       
+    
+    @State var foodModel = FoodModel()
+    
     let didPopulate = NotificationCenter.default.publisher(for: .didPopulate)
     let didModifyMeal = NotificationCenter.default.publisher(for: .didModifyMeal)
 
@@ -79,9 +81,8 @@ struct LogView: View {
         )
     }
     
-    var foodForm: some View {
-        EmptyView()
-//        FoodForm()
+    var newFoodForm: some View {
+        FoodForm(model: foodModel)
     }
     
     var foodPicker: some View {
@@ -167,6 +168,15 @@ struct LogView: View {
                         Section {
                             ForEach(FoodType.allCases) { foodType in
                                 Button {
+                                    switch foodType {
+                                    case .food:
+                                        foodModel.reset()
+                                        showingFoodForm = true
+                                    case .recipe:
+                                        break
+                                    case .plate:
+                                        break
+                                    }
                                 } label: {
                                     Label(foodType.description, systemImage: foodType.systemImage)
                                 }
@@ -227,7 +237,7 @@ struct LogView: View {
             HStack(alignment: .bottom) {
                 Spacer()
                 addFoodButton
-                    .popover(isPresented: $showingFoodForm) { foodForm }
+                    .popover(isPresented: $showingFoodForm) { newFoodForm }
             }
             .padding(.horizontal, 20)
             .padding(.bottom, HeroButton.bottom)
