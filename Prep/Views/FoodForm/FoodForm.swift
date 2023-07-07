@@ -49,7 +49,7 @@ struct FoodForm: View {
     var body: some View {
         content
             .onAppear(perform: appeared)
-            .frame(idealWidth: 400, idealHeight: 800)
+            .frame(idealWidth: 400, idealHeight: 700)
             .interactiveDismissDisabled(model.dismissDisabled)
             
             .photosPicker(
