@@ -7,6 +7,8 @@ import Charts
 import Camera
 import AlertLayer
 import FoodDataTypes
+//import ImageViewer
+import ZoomImageViewer
 
 let foodModelLogger = Logger(subsystem: "FoodModel", category: "")
 
@@ -25,12 +27,15 @@ struct FoodForm: View {
     
     @State var showingPhotosPicker = false
     @State var showingCamera = false
-
+    
     @State var showingColumnConfirmation = false
     @State var selectedPhotos: [PhotosPickerItem] = []
     
     @State var hasAppeared = false
-    
+
+//    @State var showingImage = false
+    @State var presentedImage: UIImage? = nil
+
     init(_ food: Food) {
         _model = State(initialValue: FoodModel(food))
     }
@@ -53,6 +58,9 @@ struct FoodForm: View {
                 matching: .images
             )
             .onChange(of: selectedPhotos, selectedPhotosChanged)
+            .overlay {
+                ZoomImageViewer(uiImage: $presentedImage)
+            }
     }
     
     func appeared() {
@@ -257,15 +265,20 @@ struct FoodForm: View {
             model.removeImages(at: offsets)
         }
         
-        var imageCells: some View {
-            ForEach(model.images.indices, id: \.self) { index in
+        func imageCell(_ index: Int) -> some View {
+            var image: UIImage {
+                model.images[index]
+            }
+            
+            var label: some View {
                 HStack {
-                    Image(uiImage: model.images[index])
+                    Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 38, height: 38)
                         .cornerRadius(5)
                     Text("Image")
+                        .foregroundStyle(Color(.label))
                     Spacer()
                     if index == model.images.count - 1, model.isProcessingImage {
                         ProgressView()
@@ -277,6 +290,17 @@ struct FoodForm: View {
                             )
                     }
                 }
+            }
+            
+            return Button {
+                presentedImage = image
+            } label: {
+                label
+            }
+        }
+        var imageCells: some View {
+            ForEach(model.images.indices, id: \.self) { index in
+                imageCell(index)
             }
             .onDelete(perform: removeImages)
         }

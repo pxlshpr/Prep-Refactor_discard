@@ -91,12 +91,30 @@
       }
     },
     {
+      "identity" : "swiftui-image-viewer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Jake-Short/swiftui-image-viewer",
+      "state" : {
+        "revision" : "f61f298c0100c81dfb0c7908091e68aad12a892c",
+        "version" : "2.3.1"
+      }
+    },
+    {
       "identity" : "swiftuicamera",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pxlshpr/SwiftUICamera",
       "state" : {
         "revision" : "e15f94421a18ae82ae147f0ef02247590d091374",
         "version" : "0.0.46"
+      }
+    },
+    {
+      "identity" : "url-image",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dmytro-anokhin/url-image.git",
+      "state" : {
+        "revision" : "ccab89ad1cedb04f25dd4df1776dd8c8583b914a",
+        "version" : "2.2.5"
       }
     },
     {
@@ -115,6 +133,15 @@
       "state" : {
         "revision" : "603c843e2482d44233259a4eb38012114c859054",
         "version" : "0.0.80"
+      }
+    },
+    {
+      "identity" : "zoomimageviewer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ryanlintott/ZoomImageViewer",
+      "state" : {
+        "revision" : "32a1f7e60f82712c10205ab9be7eec67ec20eff5",
+        "version" : "0.4.1"
       }
     }
   ],
