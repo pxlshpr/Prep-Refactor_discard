@@ -17,6 +17,7 @@ struct FoodImageViewer: View {
                 tabView
             }
             .navigationTitle(title)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbarContent }
         }
     }
@@ -35,7 +36,7 @@ struct FoodImageViewer: View {
     }
     
     var title: String {
-        "Image \(foodModel.presentedImageIndex) of \(foodModel.images.count)"
+        "Image \(foodModel.presentedImageIndex + 1) of \(foodModel.images.count)"
     }
     
     var toolbarContent: some ToolbarContent {
