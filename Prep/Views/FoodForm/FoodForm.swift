@@ -27,7 +27,7 @@ struct FoodForm: View {
 //    }
     
     var body: some View {
-        let _ = Self._printChanges()
+//        let _ = Self._printChanges()
         return content
             .onAppear(perform: appeared)
             .frame(idealWidth: 400, idealHeight: 730)

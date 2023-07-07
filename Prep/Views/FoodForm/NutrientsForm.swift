@@ -26,7 +26,7 @@ struct NutrientsForm: View {
     @State var selectedPhotos: [PhotosPickerItem] = []
 
     var body: some View {
-        let _ = Self._printChanges()
+//        let _ = Self._printChanges()
         return form
             .navigationTitle("Nutrients")
             .toolbar { toolbarContent }
