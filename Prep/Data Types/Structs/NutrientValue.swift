@@ -117,3 +117,22 @@ extension NumberFormatter {
         return formatter
     }
 }
+
+extension NutrientValue {
+    func roughlyMatches(_ other: NutrientValue) -> Bool {
+        nutrient == other.nutrient
+        && unit == other.unit
+        && value.roughlyMatches(other.value)
+    }
+}
+
+extension Array where Element == NutrientValue {
+    func roughlyMatches(_ other: [NutrientValue]) -> Bool {
+        for nutrientValue in self {
+            guard other.contains(where: { $0.roughlyMatches(nutrientValue)}) else {
+                return false
+            }
+        }
+        return true
+    }
+}

@@ -49,6 +49,10 @@ extension Double {
         }
         return formatted
     }
+    
+    func roughlyMatches(_ other: Double) -> Bool {
+        self.rounded(toPlaces: 1) == other.rounded(toPlaces: 1)
+    }
 }
 
 extension Double {

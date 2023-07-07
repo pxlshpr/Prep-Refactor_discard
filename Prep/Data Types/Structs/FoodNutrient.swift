@@ -137,7 +137,7 @@ struct FoodNutrientRaw: Codable, Hashable {
             }
         }
     }
-
+    
     var unit: NutrientUnit {
         get {
             NutrientUnit(rawValue: unitValue) ?? .g

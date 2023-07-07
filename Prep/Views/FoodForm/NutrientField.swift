@@ -40,10 +40,12 @@ struct NutrientField: View {
                     nutrientValue.value = newValue
                 }
                 /// Delay so it doesn't interfere with the pie-chart animation
-                foodModel.delayedSetSaveDisabled()
-                
+//                foodModel.delayedSetSaveDisabled()
+                foodModel.setSaveDisabled()
+
                 if nutrientValue.isMacro {
-                    foodModel.delayedUpdateSmallPieChart()
+//                    foodModel.delayedUpdateSmallPieChart()
+                    foodModel.smallChartData = self.foodModel.macrosChartData
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         withAnimation(.snappy) {

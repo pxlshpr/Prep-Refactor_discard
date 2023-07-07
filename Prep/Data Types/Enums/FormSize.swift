@@ -116,3 +116,44 @@ extension FormSize {
         )
     }
 }
+
+extension FormSize {
+    func roughlyMatches(_ other: FormSize) -> Bool {
+        if let quantity {
+            guard let otherQuantity = other.quantity,
+                  otherQuantity.roughlyMatches(quantity) else {
+                return false
+            }
+        } else {
+            guard other.quantity == nil else {
+                return false
+            }
+        }
+        
+        if let amount {
+            guard let otherAmount = other.amount,
+                  otherAmount == amount else {
+                return false
+            }
+        } else {
+            guard other.amount == nil else {
+                return false
+            }
+        }
+        
+        return name == other.name
+        && volumeUnit == other.volumeUnit
+        && unit == other.unit
+    }
+}
+
+extension Array where Element == FormSize {
+    func roughlyMatches(_ other: [FormSize]) -> Bool {
+        for size in self {
+            guard other.contains(where: { $0.roughlyMatches(size) }) else {
+                return false
+            }
+        }
+        return true
+    }
+}

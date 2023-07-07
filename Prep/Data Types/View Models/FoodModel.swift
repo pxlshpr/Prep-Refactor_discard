@@ -392,36 +392,44 @@ extension FoodModel {
     }
     
     func hasPendingChanges(from food: Food) -> Bool {
-        !(
-            emoji == food.emoji
-            && name == food.name
-            && detail == food.detail ?? ""
-            && brand == food.brand ?? ""
-            
-            && amountValue == food.amount.value
-            && amountUnit == food.amount.formUnit(for: food) ?? .weight(.g)
-            && servingValue == food.serving?.value ?? 0
-            && servingUnit == food.serving?.formUnit(for: food) ?? .weight(.g)
+        let densityIsEqual = if let density = food.density {
+            weightValue.roughlyMatches(density.weightAmount)
+            && volumeValue.roughlyMatches(density.volumeAmount)
+            && weightUnit.weightUnit == density.weightUnit
+            && volumeUnit.volumeUnit == density.volumeUnit
+        } else {
+            !hasDensity
+        }
+        
+        let textsAreEqual = emoji == food.emoji
+        && name == food.name
+        && detail == food.detail ?? ""
+        && brand == food.brand ?? ""
+        && barcode == food.barcodes.first
+        && urlString == ""
 
-            && energy.value == food.energy
-            && energy.unit == food.energyUnit.nutrientUnit
-            && carb.value == food.carb
-            && fat.value == food.fat
-            && protein.value == food.protein
-            && micros == food.micros.compactMap { NutrientValue($0) }
+        let numbersAreEqual = amountValue.roughlyMatches(food.amount.value)
+        && servingValue.roughlyMatches(food.serving?.value ?? 0)
+        && energy.value.roughlyMatches(food.energy)
+        && carb.value.roughlyMatches(food.carb)
+        && fat.value.roughlyMatches(food.fat)
+        && protein.value.roughlyMatches(food.protein)
+        
+        let unitsAreEqual = amountUnit == food.amount.formUnit(for: food) ?? .weight(.g)
+        && servingUnit == food.serving?.formUnit(for: food) ?? .weight(.g)
+        && energy.unit == food.energyUnit.nutrientUnit
+        
+        let arraysAreEqual = imageIDs == food.imageIDs
+        && micros.roughlyMatches(food.micros.compactMap { NutrientValue($0) })
+        && sizes.roughlyMatches(food.sizes.compactMap { $0.formSize(for: food) })
 
-            && sizes == food.sizes.compactMap { $0.formSize(for: food) }
-            
-            && hasDensity == (food.density != nil)
-            && weightValue == food.density?.weightAmount
-            && weightUnit.weightUnit == food.density?.weightUnit
-            && volumeValue == food.density?.volumeAmount
-            && volumeUnit.volumeUnit == food.density?.volumeUnit
-            
-            && barcode == food.barcodes.first
-            && urlString == ""
+        return !(
+            textsAreEqual
+            && numbersAreEqual
+            && unitsAreEqual
+            && densityIsEqual
+            && arraysAreEqual
             && isPublished == food.isPublished
-            && imageIDs == food.imageIDs
         )
     }
     
