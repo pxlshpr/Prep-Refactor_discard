@@ -53,9 +53,10 @@ struct NutrientsForm: View {
     var form: some View {
         Form {
             amountAndServingSection
-            energySection
-            macrosSection
-            pieChartSection
+            energyMacrosAndPieChartSection
+//            energySection
+//            macrosSection
+//            pieChartSection
             microsSection
         }
         .scrollDismissesKeyboard(.interactively)
@@ -73,20 +74,9 @@ struct NutrientsForm: View {
     @ViewBuilder
     var pieChartSection: some View {
         if foodModel.shouldShowPieChart {
-            pieChart
-        }
-    }
-    
-    var pieChart: some View {
-        let binding = Binding<[MacroValue]>(
-            get: { foodModel.macrosChartData },
-            set: { _ in }
-        )
-        return Section {
-//            MacrosPieChart(data: foodModel.macrosChartData)
-//            MacrosPieChart(data: binding)
-//            MacrosPieChart()
-            MacrosPieChart(foodModel: foodModel)
+            Section {
+                pieChart
+            }
         }
     }
     
@@ -99,15 +89,37 @@ struct NutrientsForm: View {
         }
     }
     
+    var energyField: some View {
+        NutrientField($foodModel.energy)
+            .environment(foodModel)
+    }
+    
+    var energyMacrosAndPieChartSection: some View {
+        Section {
+            energyField
+            macroFields
+            pieChart
+        }
+    }
+    
     var energySection: some View {
         Section {
-            NutrientField($foodModel.energy)
-                .environment(foodModel)
+            energyField
         }
+    }
+    
+    var pieChart: some View {
+        MacrosPieChart(foodModel: foodModel)
     }
     
     var macrosSection: some View {
         Section("Macros") {
+            macroFields
+        }
+    }
+    
+    var macroFields: some View {
+        Group {
             NutrientField($foodModel.carb)
                 .environment(foodModel)
             NutrientField($foodModel.fat)
