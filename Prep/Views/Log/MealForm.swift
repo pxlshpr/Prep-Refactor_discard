@@ -64,7 +64,7 @@ struct MealForm: View {
     }
     
     var idealHeight: CGFloat {
-        isEditing ? 390 : 340
+        isEditing ? 430 : 360
     }
     
     @ViewBuilder
