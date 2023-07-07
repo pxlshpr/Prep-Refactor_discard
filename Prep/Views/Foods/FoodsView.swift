@@ -5,7 +5,7 @@ import SwiftHaptics
 
 struct FoodsView: View {
 
-//    @Environment(FoodModel.self) var foodModel: FoodModel
+    @Environment(FoodModel.self) var foodModel: FoodModel
 
     let model = FoodsModel.shared
     
@@ -42,15 +42,15 @@ struct FoodsView: View {
         List {
             ForEach(model.foods, id: \.self) { food in
                 Button {
+                    foodModel.reset(for: food)
                     foodBeingEdited = food
-//                    FoodModel.shared.reset(for: food)
 //                    showingFoodForm = true
                 } label: {
                     FoodCell(food: food)
                 }
 //                FoodsViewCell(food: food)
-                .popover(item: editedFoodBinding(for: food), attachmentAnchor: CellPopoverAnchor) {
-                    FoodForm($0)
+                .popover(item: editedFoodBinding(for: food), attachmentAnchor: CellPopoverAnchor) { food in
+                    FoodForm(model: foodModel)
                 }
                 .onAppear {
                     model.loadMoreContentIfNeeded(currentFood: food)
@@ -120,8 +120,9 @@ struct FoodsView: View {
     }
     
     var foodForm: some View {
+        EmptyView()
 //        FoodForm(model: foodModel)
-        FoodForm()
+//        FoodForm()
 //        FoodForm()
     }
 }

@@ -29,6 +29,7 @@
 		E23B65662A5612F6003FFAC4 /* chiptunes_error.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */; };
 		E23B65692A561461003FFAC4 /* chiptunes_success_long.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65672A561461003FFAC4 /* chiptunes_success_long.wav */; };
 		E23B656A2A561461003FFAC4 /* chiptunes_error_long.wav in Resources */ = {isa = PBXBuildFile; fileRef = E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */; };
+		E250E4A62A5867C0002613A4 /* FoodImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E250E4A52A5867C0002613A4 /* FoodImageViewer.swift */; };
 		E2672C7D2A52C1B00002E95C /* FoodItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */; };
 		E2672C802A52C3F90002E95C /* MealEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2672C7F2A52C3F90002E95C /* MealEntity.swift */; };
 		E27CD16C2A56B36F00C1D339 /* ItemForm+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */; };
@@ -388,9 +389,6 @@
 		E29C6FE52A58311B002E1799 /* B441147E-80A0-4DDF-9D4B-1C13ACEF6C85.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E29C6F172A58311B002E1799 /* B441147E-80A0-4DDF-9D4B-1C13ACEF6C85.jpg */; };
 		E29C6FE62A58311B002E1799 /* 2A313C3C-2E3D-4989-9D30-77C47FA9CCC6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E29C6F182A58311B002E1799 /* 2A313C3C-2E3D-4989-9D30-77C47FA9CCC6.jpg */; };
 		E29C6FE72A58311B002E1799 /* B20F50EA-CBB0-4E44-BF95-6DD71D432536.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E29C6F192A58311B002E1799 /* B20F50EA-CBB0-4E44-BF95-6DD71D432536.jpg */; };
-		E29C6FED2A58371F002E1799 /* ImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = E29C6FEC2A58371F002E1799 /* ImageViewer */; };
-		E29C6FEF2A58371F002E1799 /* ImageViewerRemote in Frameworks */ = {isa = PBXBuildFile; productRef = E29C6FEE2A58371F002E1799 /* ImageViewerRemote */; };
-		E29C6FF22A583826002E1799 /* ZoomImageViewer in Frameworks */ = {isa = PBXBuildFile; productRef = E29C6FF12A583826002E1799 /* ZoomImageViewer */; };
 		E2E1A0302A57E06B00A01D45 /* FoodsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A02F2A57E06B00A01D45 /* FoodsStore.swift */; };
 		E2E1A0322A57E11E00A01D45 /* HeroButtonLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A0312A57E11E00A01D45 /* HeroButtonLabel.swift */; };
 		E2E1A0342A57F2DC00A01D45 /* FoodsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2E1A0332A57F2DC00A01D45 /* FoodsModel.swift */; };
@@ -418,6 +416,7 @@
 		E23B65642A5612F6003FFAC4 /* chiptunes_error.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_error.wav; sourceTree = "<group>"; };
 		E23B65672A561461003FFAC4 /* chiptunes_success_long.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_success_long.wav; sourceTree = "<group>"; };
 		E23B65682A561461003FFAC4 /* chiptunes_error_long.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = chiptunes_error_long.wav; sourceTree = "<group>"; };
+		E250E4A52A5867C0002613A4 /* FoodImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodImageViewer.swift; sourceTree = "<group>"; };
 		E2672C7C2A52C1B00002E95C /* FoodItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemEntity.swift; sourceTree = "<group>"; };
 		E2672C7F2A52C3F90002E95C /* MealEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealEntity.swift; sourceTree = "<group>"; };
 		E27CD16B2A56B36F00C1D339 /* ItemForm+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemForm+Data.swift"; sourceTree = "<group>"; };
@@ -784,12 +783,9 @@
 				E23B655E2A558D93003FFAC4 /* FoodLabel in Frameworks */,
 				E280FEC12A52B03A00C6D528 /* SwiftHaptics in Frameworks */,
 				E280FEDC2A52B0B500C6D528 /* FoodLabelScanner in Frameworks */,
-				E29C6FED2A58371F002E1799 /* ImageViewer in Frameworks */,
 				E280FEC72A52B05000C6D528 /* ColorSugar in Frameworks */,
 				E280FECA2A52B05B00C6D528 /* ViewSugar in Frameworks */,
 				E280FED02A52B07100C6D528 /* AlertLayer in Frameworks */,
-				E29C6FEF2A58371F002E1799 /* ImageViewerRemote in Frameworks */,
-				E29C6FF22A583826002E1799 /* ZoomImageViewer in Frameworks */,
 				E280FED62A52B09800C6D528 /* VisionSugar in Frameworks */,
 				E280FED92A52B0A600C6D528 /* FoodDataTypes in Frameworks */,
 				E280FECD2A52B06500C6D528 /* FormSugar in Frameworks */,
@@ -1123,16 +1119,17 @@
 		E28001F22A52B84300C6D528 /* FoodForm */ = {
 			isa = PBXGroup;
 			children = (
-				E28001F32A52B84300C6D528 /* ServingField.swift */,
-				E28001F42A52B84300C6D528 /* SizesList.swift */,
+				E28001FA2A52B84300C6D528 /* FoodForm.swift */,
+				E250E4A52A5867C0002613A4 /* FoodImageViewer.swift */,
 				E28001F52A52B84300C6D528 /* ImageManager.swift */,
-				E28001F62A52B84300C6D528 /* NutrientsForm.swift */,
-				E28001F72A52B84300C6D528 /* NutrientFieldModel.swift */,
 				E28001F82A52B84300C6D528 /* LabelExtractor.swift */,
 				E28001F92A52B84300C6D528 /* MicroPicker.swift */,
-				E28001FA2A52B84300C6D528 /* FoodForm.swift */,
 				E28001FB2A52B84300C6D528 /* NutrientField.swift */,
+				E28001F72A52B84300C6D528 /* NutrientFieldModel.swift */,
+				E28001F62A52B84300C6D528 /* NutrientsForm.swift */,
+				E28001F32A52B84300C6D528 /* ServingField.swift */,
 				E28001FC2A52B84300C6D528 /* SizeForm.swift */,
+				E28001F42A52B84300C6D528 /* SizesList.swift */,
 			);
 			path = FoodForm;
 			sourceTree = "<group>";
@@ -1450,9 +1447,6 @@
 				E280FED82A52B0A600C6D528 /* FoodDataTypes */,
 				E280FEDB2A52B0B500C6D528 /* FoodLabelScanner */,
 				E23B655D2A558D93003FFAC4 /* FoodLabel */,
-				E29C6FEC2A58371F002E1799 /* ImageViewer */,
-				E29C6FEE2A58371F002E1799 /* ImageViewerRemote */,
-				E29C6FF12A583826002E1799 /* ZoomImageViewer */,
 			);
 			productName = Prep;
 			productReference = E280FC122A529E3D00C6D528 /* Prep.app */;
@@ -1494,8 +1488,6 @@
 				E280FED72A52B0A600C6D528 /* XCRemoteSwiftPackageReference "FoodDataTypes" */,
 				E280FEDA2A52B0B500C6D528 /* XCRemoteSwiftPackageReference "FoodLabelScanner" */,
 				E23B655C2A558D93003FFAC4 /* XCRemoteSwiftPackageReference "NutritionLabel" */,
-				E29C6FEB2A58371F002E1799 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */,
-				E29C6FF02A583826002E1799 /* XCRemoteSwiftPackageReference "ZoomImageViewer" */,
 			);
 			productRefGroup = E280FC132A529E3D00C6D528 /* Products */;
 			projectDirPath = "";
@@ -1779,6 +1771,7 @@
 				E28002732A52B84300C6D528 /* FoodItemStore.swift in Sources */,
 				E28002542A52B84300C6D528 /* FoodUnit.swift in Sources */,
 				E22F3DB92A541F5600BADE4A /* FoodItemsStore.swift in Sources */,
+				E250E4A62A5867C0002613A4 /* FoodImageViewer.swift in Sources */,
 				E280028B2A52B84300C6D528 /* NutrientsForm.swift in Sources */,
 				E28002482A52B84300C6D528 /* NutrientUnit.swift in Sources */,
 				E28002502A52B84300C6D528 /* FoodQuantity.Unit.swift in Sources */,
@@ -2204,22 +2197,6 @@
 				minimumVersion = 0.0.167;
 			};
 		};
-		E29C6FEB2A58371F002E1799 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Jake-Short/swiftui-image-viewer";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.1;
-			};
-		};
-		E29C6FF02A583826002E1799 /* XCRemoteSwiftPackageReference "ZoomImageViewer" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ryanlintott/ZoomImageViewer";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.4.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2277,21 +2254,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E280FEDA2A52B0B500C6D528 /* XCRemoteSwiftPackageReference "FoodLabelScanner" */;
 			productName = FoodLabelScanner;
-		};
-		E29C6FEC2A58371F002E1799 /* ImageViewer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E29C6FEB2A58371F002E1799 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
-			productName = ImageViewer;
-		};
-		E29C6FEE2A58371F002E1799 /* ImageViewerRemote */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E29C6FEB2A58371F002E1799 /* XCRemoteSwiftPackageReference "swiftui-image-viewer" */;
-			productName = ImageViewerRemote;
-		};
-		E29C6FF12A583826002E1799 /* ZoomImageViewer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E29C6FF02A583826002E1799 /* XCRemoteSwiftPackageReference "ZoomImageViewer" */;
-			productName = ZoomImageViewer;
 		};
 /* End XCSwiftPackageProductDependency section */
 

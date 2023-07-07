@@ -7,8 +7,6 @@ import Charts
 import Camera
 import AlertLayer
 import FoodDataTypes
-//import ImageViewer
-import ZoomImageViewer
 
 let foodModelLogger = Logger(subsystem: "FoodModel", category: "")
 
@@ -17,7 +15,8 @@ struct FoodForm: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.colorScheme) var colorScheme
 
-    @State var model: FoodModel
+//    @State var model: FoodModel
+    @Bindable var model: FoodModel
 
     @State var path: [FoodFormRoute] = []
     @State var showingCancelConfirmation = false
@@ -33,16 +32,15 @@ struct FoodForm: View {
     
     @State var hasAppeared = false
 
-//    @State var showingImage = false
-    @State var presentedImage: UIImage? = nil
+    @State var showingImageViewer = false
 
-    init(_ food: Food) {
-        _model = State(initialValue: FoodModel(food))
-    }
-    
-    init() {
-        _model = State(initialValue: FoodModel())
-    }
+//    init(_ food: Food) {
+//        _model = State(initialValue: FoodModel(food))
+//    }
+//    
+//    init() {
+//        _model = State(initialValue: FoodModel())
+//    }
     
     var body: some View {
         let _ = Self._printChanges()
@@ -58,9 +56,7 @@ struct FoodForm: View {
                 matching: .images
             )
             .onChange(of: selectedPhotos, selectedPhotosChanged)
-            .overlay {
-                ZoomImageViewer(uiImage: $presentedImage)
-            }
+            .sheet(isPresented: $showingImageViewer) { FoodImageViewer(model) }
     }
     
     func appeared() {
@@ -298,7 +294,8 @@ struct FoodForm: View {
             }
             
             return Button {
-                presentedImage = image
+                model.presentedImageIndex = index
+                showingImageViewer = true
             } label: {
                 label
             }

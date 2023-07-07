@@ -12,6 +12,7 @@ struct PrepApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .environment(foodModel)
         }
     }
 }
