@@ -149,6 +149,7 @@ import FoodLabelScanner
 
         self.micros = food.micros.compactMap { NutrientValue($0) }
 
+        
         self.sizes = food.sizes.compactMap { $0.formSize(for: food) }
         self.newSize = FormSize()
         self.sizeBeingEdited = nil
