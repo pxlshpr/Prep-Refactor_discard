@@ -7,10 +7,23 @@ struct FoodItemsForm: View {
     @Bindable var foodModel: FoodModel
 
     @State var showingFoodPicker = false
-    
+    @State var showingFoodPickerFromToolbar = false
+
     var body:  some View {
         form
             .navigationTitle(foodModel.foodItemsName)
+            .toolbar { toolbarContent }
+    }
+    
+    var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .bottomBar) {
+            Button {
+                showingFoodPickerFromToolbar = true
+            } label: {
+                Image(systemName: "plus")
+            }
+            .popover(isPresented: $showingFoodPickerFromToolbar) { foodPicker }
+        }
     }
     
     var form: some View {
