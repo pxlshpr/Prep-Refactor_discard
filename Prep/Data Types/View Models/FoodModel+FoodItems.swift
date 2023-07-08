@@ -56,6 +56,29 @@ extension FoodModel {
         self.carb.value = calculatedFoodItemsTotal(for: .carb)
         self.fat.value = calculatedFoodItemsTotal(for: .fat)
         self.protein.value = calculatedFoodItemsTotal(for: .protein)
+        
+        let start = CFAbsoluteTimeGetCurrent()
+        var calculatedMicros: [NutrientValue] = []
+        for micro in Micro.allCases {
+            /// Make sure at least food item has this micro
+            guard foodItemsHasMicro(micro) else {
+                continue
+            }
+            let nutrientValue = NutrientValue(
+                micro: micro,
+                value: calculatedFoodItemsTotal(for: micro),
+                unit: micro.defaultUnit
+            )
+            calculatedMicros.append(nutrientValue)
+        }
+        self.micros = calculatedMicros
+        print("Micro calculation took: \(CFAbsoluteTimeGetCurrent()-start)s")
+    }
+    
+    func foodItemsHasMicro(_ micro: Micro) -> Bool {
+        foodItems.contains(where: { foodItem in
+            foodItem.food.micros.contains(where: { $0.micro == micro })
+        })
     }
     
     var primaryFoodItemsMacro: Macro {
@@ -79,7 +102,9 @@ extension FoodModel {
         }
     }
     func value(for micro: Micro) -> Double {
-        0
+        micros
+            .first(where: { $0.micro == micro })?
+            .value ?? 0
     }
     
     func value(for nutrient: Nutrient) -> Double {

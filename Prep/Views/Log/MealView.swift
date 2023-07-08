@@ -166,7 +166,7 @@ struct MealView: View {
     }
     
     func cell(foodItem: FoodItem) -> some View {
-        FoodItemCell(item: foodItem, meal: meal)
+        FoodItemCell(foodItem, meal: meal)
 //        @ViewBuilder
 //        var menuItems: some View {
 //            Section(foodItem.food.name) {

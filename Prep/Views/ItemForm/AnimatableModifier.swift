@@ -181,3 +181,65 @@ extension View {
         ))
     }
 }
+
+//MARK: - Item Micro
+
+struct AnimatableItemMicroModifier: AnimatableModifier {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
+    var value: Double
+    var micro: Micro
+    var unit: NutrientUnit
+    
+    var animatableData: Double {
+        get { value }
+        set { value = newValue }
+    }
+    
+    var string: String {
+        value.formattedNutrientValue
+            .replacingLastOccurrence(of: "-", with: "")
+    }
+    
+    var foregroundStyle: Color {
+        Color(.secondaryLabel)
+    }
+    
+    func body(content: Content) -> some View {
+        content
+            .frame(maxWidth: .infinity)
+            .overlay(
+                HStack {
+                    Spacer()
+                    
+                    HStack(alignment: .center, spacing: 4) {
+                        Text(string)
+                            .multilineTextAlignment(.leading)
+                            .font(.headline)
+                        Text(unit.abbreviation)
+                            .lineLimit(3)
+                            .minimumScaleFactor(0.5)
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .foregroundStyle(foregroundStyle)
+                    .fontWeight(.regular)
+                }
+            )
+    }
+}
+
+extension View {
+    func animatedItemMicro(
+        value: Double,
+        micro: Micro,
+        unit: NutrientUnit
+    ) -> some View {
+        modifier(AnimatableItemMicroModifier(
+            value: value,
+            micro: micro,
+            unit: unit
+        ))
+    }
+}

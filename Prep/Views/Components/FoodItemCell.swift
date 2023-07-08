@@ -14,7 +14,7 @@ struct FoodItemCell: View {
     
     @Environment(\.colorScheme) var colorScheme
 
-    let item: FoodItem
+    let foodItem: FoodItem
     let meal: Meal?
 
     @State var width: CGFloat
@@ -24,11 +24,11 @@ struct FoodItemCell: View {
     let handleDelete: ((FoodItem) -> ())?
     
     init(
-        item: FoodItem,
+        _ foodItem: FoodItem,
         meal: Meal? = nil,
         handleDelete: ((FoodItem) -> ())? = nil
     ) {
-        self.item = item
+        self.foodItem = foodItem
         self.meal = meal
         self.handleDelete = handleDelete
         
@@ -63,7 +63,7 @@ struct FoodItemCell: View {
                 }
         }
         .contextMenu(menuItems: { menuItems }, preview: {
-            FoodLabel(data: .constant(item.foodLabelData))
+            FoodLabel(data: .constant(foodItem.foodLabelData))
         })
     }
     
@@ -77,7 +77,7 @@ struct FoodItemCell: View {
     }
 
     var menuItems: some View {
-        Section(item.food.name) {
+        Section(foodItem.food.name) {
             Button {
                 showEditForm()
             } label: {
@@ -86,7 +86,7 @@ struct FoodItemCell: View {
             Button(role: .destructive) {
                 if isMealItem {
                     Task.detached(priority: .high) {
-                        guard let updatedDay = await FoodItemsStore.delete(item) else {
+                        guard let updatedDay = await FoodItemsStore.delete(foodItem) else {
                             return
                         }
                         await MainActor.run {
@@ -94,7 +94,7 @@ struct FoodItemCell: View {
                         }
                     }
                 } else {
-                    
+                    handleDelete?(foodItem)
                 }
             } label: {
                 Label("Delete", systemImage: "trash")
@@ -116,7 +116,7 @@ struct FoodItemCell: View {
     
     var itemForm: some View {
         ItemForm(
-            foodItem: item,
+            foodItem: foodItem,
             meal: meal
         ) { _ in
             showingItemForm = false
@@ -126,18 +126,18 @@ struct FoodItemCell: View {
     var foodBadge: some View {
         let widthBinding = Binding<CGFloat>(
             get: {
-                guard item.largestEnergyInKcal > 0 else { return 0 }
+                guard foodItem.largestEnergyInKcal > 0 else { return 0 }
                 let max = width * 0.25
-                return (item.energy * max) / item.largestEnergyInKcal
+                return (foodItem.energy * max) / foodItem.largestEnergyInKcal
             },
             set: { _ in }
         )
 
         return Group {
 //            if UserManager.showingLogBadgesForFoods {
-            FoodBadge(food: item.food, width: widthBinding)
+            FoodBadge(food: foodItem.food, width: widthBinding)
 //                .opacity(model.hasPassed ? 0.7 : 1)
-//                .opacity(item.energyInKcal == 0 ? 0 : 1)
+//                .opacity(foodItem.energyInKcal == 0 ? 0 : 1)
                 .transition(.scale)
                 .padding(.trailing, 10)
 //            }
@@ -153,7 +153,7 @@ struct FoodItemCell: View {
 
         return Group {
 //            if model.showingEmojis {
-                Text(item.food.emoji)
+                Text(foodItem.food.emoji)
                 .font(.body)
                     .opacity(opacity)
                     .padding(.leading, 5)
@@ -169,19 +169,19 @@ struct FoodItemCell: View {
     }
     
     var amountText: Text {
-        Text(item.quantityDescription)
+        Text(foodItem.quantityDescription)
             .font(.callout)
             .fontWeight(.regular)
             .foregroundStyle(Color(.secondaryLabel))
     }
     
     func nameTexts(withAmount: Bool) -> some View {
-        var view = Text(item.food.name)
+        var view = Text(foodItem.food.name)
             .font(.body)
             .fontWeight(.medium)
             .foregroundStyle(nameColor)
 //        if model.showingFoodDetails {
-            if let detail = item.food.detail, !detail.isEmpty {
+            if let detail = foodItem.food.detail, !detail.isEmpty {
                 view = view
                 + Text(", ")
                     .font(.callout)
@@ -190,7 +190,7 @@ struct FoodItemCell: View {
                     .font(.callout)
                     .foregroundStyle(Color(.secondaryLabel))
             }
-            if let brand = item.food.brand, !brand.isEmpty {
+            if let brand = foodItem.food.brand, !brand.isEmpty {
                 view = view
                 + Text(", ")
                     .font(.callout)

@@ -26,7 +26,7 @@ struct FoodItemsForm: View {
         Group {
             Section {
                 ForEach(foodModel.foodItems) { foodItem in
-                    FoodItemCell(item: foodItem, handleDelete: handleDelete)
+                    FoodItemCell(foodItem, handleDelete: handleDelete)
                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
                 .onMove(perform: move)
@@ -82,8 +82,8 @@ struct FoodItemsForm: View {
     }
     
     func handleNewFoodItemsArray(_ foodItems: [FoodItem]) {
+        var foodItems = foodItems
         foodItems.setLargestEnergy()
-
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             withAnimation(.snappy) {
                 foodModel.foodItems = foodItems
@@ -121,18 +121,25 @@ struct FoodItemsForm: View {
                         energyUnit: .kcal,
                         isAnimating: false
                     )
-            case .macro:
+            case .macro(let macro):
                 Color.clear
                     .animatedItemMacro(
                         value: value(for: nutrient),
-                        macro: nutrient.macro!,
+                        macro: macro,
                         isPrimary: foodModel.primaryFoodItemsMacro == nutrient.macro,
                         isAnimating: false
                     )
 
-            case .micro:
-                Text(valueString(for: nutrient))
-                    .foregroundStyle(Color(.secondaryLabel))
+            case .micro(let micro):
+                Color.clear
+                    .animatedItemMicro(
+                        value: value(for: nutrient),
+                        micro: micro,
+                        unit: micro.defaultUnit
+                    )
+
+//                Text(valueString(for: nutrient))
+//                    .foregroundStyle(Color(.secondaryLabel))
             }
         }
     }
@@ -154,7 +161,7 @@ struct FoodItemsForm: View {
     }
 
     var energyAndMacrosSection: some View {
-        Section {
+        Section("Nutrients") {
             HStack {
                 Text("Energy")
                     .foregroundStyle(Color(.label))
@@ -177,7 +184,14 @@ struct FoodItemsForm: View {
     }
     
     var microsSection: some View {
-        Section {
+        Group {
+            ForEach(foodModel.microGroups, id: \.self) { group in
+                Section(group.name) {
+                    ForEach(foodModel.nutrients(for: group), id: \.self) { nutrient in
+                        field(for: nutrient)
+                    }
+                }
+            }
         }
     }
 }

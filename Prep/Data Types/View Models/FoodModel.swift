@@ -310,6 +310,14 @@ extension FoodModel {
         micros
             .filter { $0.micro?.group == group }
     }
+
+    func nutrients(for group: MicroGroup) -> [Nutrient] {
+        micros
+            .filter { $0.micro?.group == group }
+            .compactMap { $0.micro }
+            .map { Nutrient.micro($0) }
+    }
+
 }
 
 extension FoodModel {
