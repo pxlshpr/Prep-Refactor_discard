@@ -80,6 +80,12 @@ struct AnimatableItemMacroModifier: AnimatableModifier {
             .replacingLastOccurrence(of: "-", with: "")
     }
     
+    var foregroundStyle: Color {
+        isPrimary
+        ? macro.textColor(for: colorScheme)
+        : Color(.secondaryLabel)
+    }
+    
     func body(content: Content) -> some View {
         content
             .frame(maxWidth: .infinity)
@@ -97,8 +103,8 @@ struct AnimatableItemMacroModifier: AnimatableModifier {
                             .multilineTextAlignment(.leading)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    .foregroundStyle(macro.textColor(for: colorScheme))
-                    .bold(isPrimary)
+                    .foregroundStyle(foregroundStyle)
+//                    .bold(isPrimary)
                 }
             )
     }
