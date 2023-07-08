@@ -44,7 +44,7 @@ struct FoodItem: Identifiable, Codable, Hashable {
             carb: carb,
             fat: fat,
             protein: protein,
-            largestEnergyInKcal: 0,
+            largestEnergyInKcal: energy,
             sortPosition: 0,
             eatenAt: nil,
             updatedAt: Date.now,

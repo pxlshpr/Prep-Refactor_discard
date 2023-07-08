@@ -8,6 +8,7 @@ import FoodLabel
 private let logger = Logger(subsystem: "FoodItemCell", category: "")
 
 private var lastWidth: CGFloat = 0
+private var lastFoodItemWidth: CGFloat = 0
 
 struct FoodItemCell: View {
     
@@ -28,7 +29,12 @@ struct FoodItemCell: View {
         /// This it to mitigate a bug where newly added food items don't get their width set
         /// by `readSize`, and therefore get a badge width of `0` assigned until a proper
         /// view refresh. This only happens when re-inserting a food item that was just deleted.
-        _width = State(initialValue: lastWidth)
+        let width: CGFloat = if meal == nil {
+            lastFoodItemWidth
+        } else {
+            lastWidth
+        }
+        _width = State(initialValue: width)
     }
     
     var body: some View {
@@ -42,7 +48,11 @@ struct FoodItemCell: View {
                 .contentShape(Rectangle())
                 .hoverEffect(.highlight)
                 .readSize {
-                    lastWidth = $0.width
+                    if meal == nil {
+                        lastFoodItemWidth = $0.width
+                    } else {
+                        lastWidth = $0.width
+                    }
                     self.width = $0.width
                 }
         }
@@ -97,6 +107,7 @@ struct FoodItemCell: View {
     var foodBadge: some View {
         let widthBinding = Binding<CGFloat>(
             get: {
+                guard item.largestEnergyInKcal > 0 else { return 0 }
                 let max = width * 0.25
                 return (item.energy * max) / item.largestEnergyInKcal
             },

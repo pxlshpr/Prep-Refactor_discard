@@ -766,6 +766,7 @@ extension FoodModel {
             MacroValue(macro: .protein, value: protein.value)
         ]
     }
+
     
     var servingFoodValue: FoodValue? {
         guard let servingValue, let servingUnit else {
@@ -820,39 +821,5 @@ extension Food {
         }
         
         imageIDs = model.imageIDs
-    }
-}
-
-extension FoodModel {
-    var title: String {
-        let prefix = isEditing ? "Edit" : "New"
-        return "\(prefix) \(foodType.name)"
-    }
-    
-    var foodItemsName: String {
-        foodType == .recipe ? "Ingredients" : "Foods"
-    }
-    var foodItemsSingularName: String {
-        foodType == .recipe ? "Ingredients" : "Foods"
-    }
-    
-    var lastFoodItemsSortPosition: Int {
-        foodItems
-            .sorted(by: { $0.sortPosition < $1.sortPosition })
-            .last?.sortPosition ?? 1
-    }
-    
-    var largestEnergyInKcal: Double {
-        foodItems
-            .map { $0.energyUnit.convert($0.energy, to: .kcal) }
-            .sorted()
-            .last ?? 0
-    }
-    
-    func setLargestEnergyForAllFoodItems() {
-        let largest = largestEnergyInKcal
-        for i in foodItems.indices {
-            foodItems[i].largestEnergyInKcal = largest
-        }
     }
 }

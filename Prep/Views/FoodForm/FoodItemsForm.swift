@@ -22,8 +22,9 @@ struct FoodItemsForm: View {
     var foodItemsSection: some View {
         Group {
             Section {
-                ForEach(foodModel.foodItems, id: \.self) { foodItem in
+                ForEach(foodModel.foodItems) { foodItem in
                     FoodItemCell(item: foodItem)
+                        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
             }
             Section {
@@ -53,8 +54,34 @@ struct FoodItemsForm: View {
     func handleNewFoodItem(_ foodItem: FoodItem) {
         var foodItem = foodItem
         foodItem.sortPosition = foodModel.lastFoodItemsSortPosition
-        foodModel.foodItems.append(foodItem)
-        foodModel.setLargestEnergyForAllFoodItems()
+        SoundPlayer.play(.clearSwoosh)
+
+        var foodItems =  foodModel.foodItems
+        foodItems.append(foodItem)
+        foodItems.setLargestEnergy()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            withAnimation {
+                foodModel.foodItems = foodItems
+//                foodModel.foodItems.append(foodItem)
+            }
+            
+//            foodModel.calculateNutrients()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//                withAnimation {
+//                    foodModel.setLargestEnergyForAllFoodItems()
+//                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    foodModel.smallChartData = self.foodModel.macrosChartData
+                    withAnimation(.snappy) {
+                        foodModel.largeChartData = foodModel.macrosChartData
+                    }
+                }
+            }
+
+        }
     }
     
     var energyAndMacrosSection: some View {

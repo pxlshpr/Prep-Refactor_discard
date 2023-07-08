@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E21DE97E2A5907FB0022F802 /* FoodItemsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21DE97D2A5907FB0022F802 /* FoodItemsForm.swift */; };
+		E21DE9802A591DDF0022F802 /* FoodModel+FoodItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21DE97F2A591DDF0022F802 /* FoodModel+FoodItems.swift */; };
 		E22F3DB92A541F5600BADE4A /* FoodItemsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */; };
 		E22F84332A54AA5A00096909 /* LogNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84322A54AA5A00096909 /* LogNavigationBar.swift */; };
 		E22F84352A54ADAA00096909 /* NutrientMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84342A54ADAA00096909 /* NutrientMeter.swift */; };
@@ -398,6 +399,7 @@
 
 /* Begin PBXFileReference section */
 		E21DE97D2A5907FB0022F802 /* FoodItemsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsForm.swift; sourceTree = "<group>"; };
+		E21DE97F2A591DDF0022F802 /* FoodModel+FoodItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FoodModel+FoodItems.swift"; sourceTree = "<group>"; };
 		E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsStore.swift; sourceTree = "<group>"; };
 		E22F84322A54AA5A00096909 /* LogNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogNavigationBar.swift; sourceTree = "<group>"; };
 		E22F84342A54ADAA00096909 /* NutrientMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientMeter.swift; sourceTree = "<group>"; };
@@ -949,6 +951,7 @@
 			isa = PBXGroup;
 			children = (
 				E28001922A52B84300C6D528 /* FoodModel.swift */,
+				E21DE97F2A591DDF0022F802 /* FoodModel+FoodItems.swift */,
 				E28001932A52B84300C6D528 /* FoodModel+Scan.swift */,
 				E2E1A0332A57F2DC00A01D45 /* FoodsModel.swift */,
 			);
@@ -1827,6 +1830,7 @@
 				E28002892A52B84300C6D528 /* SizesList.swift in Sources */,
 				E280025C2A52B84300C6D528 /* FoodDensity.swift in Sources */,
 				E28002022A52B84300C6D528 /* Meal.swift in Sources */,
+				E21DE9802A591DDF0022F802 /* FoodModel+FoodItems.swift in Sources */,
 				E28002602A52B84300C6D528 /* Date.swift in Sources */,
 				E280023A2A52B84300C6D528 /* FoodFormRoute.swift in Sources */,
 				E28002852A52B84300C6D528 /* ItemFormEnergyLabel.swift in Sources */,
