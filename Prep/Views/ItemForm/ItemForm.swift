@@ -36,7 +36,7 @@ struct ItemForm: View {
     @State var startedAnimatingAmountChangeAt: Date = Date()
     
     @State var quickAmounts: [FoodValue] = []
-//    @State var showingShortcuts = false
+    @State var showingShortcuts = false
     
     @State var isDeleting = false
     @State var saveDisabled: Bool
@@ -117,17 +117,17 @@ struct ItemForm: View {
         .onAppear(perform: appeared)
         .frame(idealWidth: IdealItemFormWidth, idealHeight: IdealItemFormHeight)
         .presentationDetents([.medium, .fraction(0.90)])
-//        .onChange(of: isFocused, isFocusedChanged)
+        .onChange(of: isFocused, isFocusedChanged)
     }
     
-//    func isFocusedChanged(oldValue: Bool, newValue: Bool) {
-//        let delay = newValue == true ? 0.2 : 0
-//        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-//            withAnimation(.snappy) {
-//                showingShortcuts = newValue
-//            }
-//        }
-//    }
+    func isFocusedChanged(oldValue: Bool, newValue: Bool) {
+        let delay = newValue == true ? 0.2 : 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            withAnimation(.snappy) {
+                showingShortcuts = newValue
+            }
+        }
+    }
     
     var isEditing: Bool {
         foodItem != nil
@@ -323,9 +323,9 @@ struct ItemForm: View {
     
     var incrementField: some View {
         Group {
-//            if showingShortcuts {
+            if showingShortcuts {
                 stepButtons
-//            }
+            }
                 quickAmountsPicker
                     .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
 //            }

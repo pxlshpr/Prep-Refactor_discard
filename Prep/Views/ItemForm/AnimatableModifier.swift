@@ -104,6 +104,7 @@ struct AnimatableItemMacroModifier: AnimatableModifier {
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     .foregroundStyle(foregroundStyle)
+                    .fontWeight(.regular)
 //                    .bold(isPrimary)
                 }
             )

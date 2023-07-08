@@ -26,7 +26,7 @@ struct FoodItemsForm: View {
         Group {
             Section {
                 ForEach(foodModel.foodItems) { foodItem in
-                    FoodItemCell(item: foodItem)
+                    FoodItemCell(item: foodItem, handleDelete: handleDelete)
                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
                 .onMove(perform: move)
@@ -38,13 +38,18 @@ struct FoodItemsForm: View {
         }
     }
     
-    func delete(at offsets: IndexSet) {
-        foodModel.foodItems.remove(atOffsets: offsets)
-//        SoundPlayer.play(.letterpressDelete)
+    func handleDelete(_ foodItem: FoodItem) {
         SoundPlayer.play(.octaveSlideScissors)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            handleNutrientsChange()
-//        }
+        var foodItems =  foodModel.foodItems
+        foodItems.removeAll(where: { $0.id == foodItem.id })
+        handleNewFoodItemsArray(foodItems)
+    }
+    
+    func delete(at offsets: IndexSet) {
+        SoundPlayer.play(.octaveSlideScissors)
+        var foodItems =  foodModel.foodItems
+        foodItems.remove(atOffsets: offsets)
+        handleNewFoodItemsArray(foodItems)
     }
     
     func move(from source: IndexSet, to destination: Int) {
@@ -70,11 +75,13 @@ struct FoodItemsForm: View {
     }
     
     func handleNewFoodItem(_ foodItem: FoodItem) {
-//        SoundPlayer.play(.clearSwoosh)
         SoundPlayer.play(.octaveSlidePaper)
-
         var foodItems =  foodModel.foodItems
         foodItems.append(foodItem)
+        handleNewFoodItemsArray(foodItems)
+    }
+    
+    func handleNewFoodItemsArray(_ foodItems: [FoodItem]) {
         foodItems.setLargestEnergy()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -83,12 +90,12 @@ struct FoodItemsForm: View {
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                handleNutrientsChange()
+                calculateNutrients()
             }
         }
     }
     
-    func handleNutrientsChange() {
+    func calculateNutrients() {
         withAnimation(.snappy) {
             foodModel.calculateNutrients()
         }

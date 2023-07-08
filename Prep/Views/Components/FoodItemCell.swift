@@ -21,9 +21,16 @@ struct FoodItemCell: View {
     
     @State var showingItemForm = false
     
-    init(item: FoodItem, meal: Meal? = nil) {
+    let handleDelete: ((FoodItem) -> ())?
+    
+    init(
+        item: FoodItem,
+        meal: Meal? = nil,
+        handleDelete: ((FoodItem) -> ())? = nil
+    ) {
         self.item = item
         self.meal = meal
+        self.handleDelete = handleDelete
         
         /// Always reuse whatever the last saved width was as the start point.
         /// This it to mitigate a bug where newly added food items don't get their width set
@@ -39,8 +46,7 @@ struct FoodItemCell: View {
     
     var body: some View {
         Button {
-            Haptics.selectionFeedback()
-            showingItemForm = true
+            showEditForm()
         } label: {
             label
                 .padding(.horizontal, 8)
@@ -60,22 +66,35 @@ struct FoodItemCell: View {
             FoodLabel(data: .constant(item.foodLabelData))
         })
     }
+    
+    var isMealItem: Bool {
+        meal != nil
+    }
+    
+    func showEditForm() {
+        Haptics.selectionFeedback()
+        showingItemForm = true
+    }
 
     var menuItems: some View {
         Section(item.food.name) {
             Button {
-                
+                showEditForm()
             } label: {
                 Label("Edit", systemImage: "pencil")
             }
             Button(role: .destructive) {
-                Task.detached(priority: .high) {
-                    guard let updatedDay = await FoodItemsStore.delete(item) else {
-                        return
+                if isMealItem {
+                    Task.detached(priority: .high) {
+                        guard let updatedDay = await FoodItemsStore.delete(item) else {
+                            return
+                        }
+                        await MainActor.run {
+                            post(.didDeleteFoodItem, userInfo: [.day: updatedDay])
+                        }
                     }
-                    await MainActor.run {
-                        post(.didDeleteFoodItem, userInfo: [.day: updatedDay])
-                    }
+                } else {
+                    
                 }
             } label: {
                 Label("Delete", systemImage: "trash")
