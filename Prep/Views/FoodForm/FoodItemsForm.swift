@@ -13,6 +13,7 @@ struct FoodItemsForm: View {
         form
             .navigationTitle(foodModel.foodItemsName)
             .toolbar { toolbarContent }
+            .interactiveDismissDisabled()
     }
     
     var toolbarContent: some ToolbarContent {
@@ -211,9 +212,14 @@ struct FoodItemsForm: View {
     
     var microsSection: some View {
         return Group {
-            ForEach(foodModel.microGroups.nonEmptyGroups, id: \.self) { group in
-//            ForEach(foodModel.constructedMicroGroups, id: \.self) { group in
+//            ForEach(MicroGroup.allCases, id: \.self) { group in
+//            ForEach(foodModel.microGroups.nonEmptyGroups, id: \.self) { group in
+            ForEach(foodModel.constructedMicroGroups, id: \.self) { group in
                 Section(group.name) {
+//                    ForEach(group.micros, id: \.self) { micro in
+//                        let nutrientValue = NutrientValue(micro: micro)
+//                        rowForMicro(nutrientValue)
+//                    }
                     ForEach((foodModel.microGroups[group] ?? []), id: \.self) { nutrientValue in
                         rowForMicro(nutrientValue)
                     }
