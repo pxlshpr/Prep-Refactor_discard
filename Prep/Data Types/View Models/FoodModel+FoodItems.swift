@@ -51,12 +51,14 @@ extension FoodModel {
         }
     }
 
-    func calculateNutrients() {
+    func calculateEnergyAndMacros() {
         self.energy.value = calculatedFoodItemsTotalForEnergy(in: .kcal)
         self.carb.value = calculatedFoodItemsTotal(for: .carb)
         self.fat.value = calculatedFoodItemsTotal(for: .fat)
         self.protein.value = calculatedFoodItemsTotal(for: .protein)
-        
+    }
+    
+    func calculateMicros() {
         let start = CFAbsoluteTimeGetCurrent()
         var calculatedMicros: [NutrientValue] = []
         for micro in Micro.allCases {

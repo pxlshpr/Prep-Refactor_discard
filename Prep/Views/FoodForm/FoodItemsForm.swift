@@ -84,6 +84,7 @@ struct FoodItemsForm: View {
                 handleNewFoodItem(foodItem)
             }
             showingFoodPicker = false
+            showingFoodPickerFromToolbar = false
         }
     }
     
@@ -110,14 +111,18 @@ struct FoodItemsForm: View {
     
     func calculateNutrients() {
         withAnimation(.snappy) {
-            foodModel.calculateNutrients()
+            foodModel.calculateEnergyAndMacros()
         }
-        
-        foodModel.smallChartData = self.foodModel.macrosChartData
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             withAnimation(.snappy) {
                 foodModel.largeChartData = foodModel.macrosChartData
             }
+        }
+        foodModel.smallChartData = foodModel.macrosChartData
+
+        /// Do this later as its compute intensive and makes the number animations fail
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            foodModel.calculateMicros()
         }
     }
     
@@ -143,16 +148,16 @@ struct FoodItemsForm: View {
                         isAnimating: false
                     )
 
-            case .micro(let micro):
-                Color.clear
-                    .animatedItemMicro(
-                        value: value(for: nutrient),
-                        micro: micro,
-                        unit: micro.defaultUnit
-                    )
+            case .micro:
+//                Color.clear
+//                    .animatedItemMicro(
+//                        value: value(for: nutrient),
+//                        micro: micro,
+//                        unit: micro.defaultUnit
+//                    )
 
-//                Text(valueString(for: nutrient))
-//                    .foregroundStyle(Color(.secondaryLabel))
+                Text(valueString(for: nutrient))
+                    .foregroundStyle(Color(.secondaryLabel))
             }
         }
     }
