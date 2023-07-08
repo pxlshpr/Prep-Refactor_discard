@@ -362,7 +362,7 @@ struct FoodForm: View {
                 
             } label: {
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("Publish this food to be awarded \(Text("subscription tokens").bold()). An image or a URL is required for verification.")
+                    Text("Publish this food to earn \(Text("subscription credits").bold()) each time it's used.")
                         .foregroundStyle(Color(.secondaryLabel))
                         .multilineTextAlignment(.leading)
                     Label("Learn more", systemImage: "info.circle")
