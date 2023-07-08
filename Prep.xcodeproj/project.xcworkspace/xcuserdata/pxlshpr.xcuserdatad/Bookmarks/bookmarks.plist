@@ -706,6 +706,53 @@
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>50</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>49</string>
+					<key>Timestamp</key>
+					<string>710487804.6936899</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Prep/Data Types/View Models/FoodModel+FoodItems.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>            partialResult + foodItem.value(for: micro, in: micro.defaultUnit)
+</string>
+				<key>leading</key>
+				<string>    func calculatedFoodItemsTotal(for micro: Micro) -&gt; Double {
+        foodItems.reduce(0) { partialResult, foodItem in
+</string>
+				<key>trailing</key>
+				<string>        }
+    }
+
+</string>
+			</dict>
+			<key>title</key>
+			<string>Support different units here by returning in the user's current unit preferences</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
 	</array>
 </dict>
 </plist>

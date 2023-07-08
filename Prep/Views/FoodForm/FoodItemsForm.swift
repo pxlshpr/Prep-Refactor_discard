@@ -1,5 +1,7 @@
 import SwiftUI
 
+import FoodDataTypes
+
 struct FoodItemsForm: View {
     
     @Bindable var foodModel: FoodModel
@@ -17,6 +19,7 @@ struct FoodItemsForm: View {
             energyAndMacrosSection
             microsSection
         }
+        .listStyle(.grouped)
     }
     
     var foodItemsSection: some View {
@@ -26,11 +29,25 @@ struct FoodItemsForm: View {
                     FoodItemCell(item: foodItem)
                         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
                 }
+                .onMove(perform: move)
+                .onDelete(perform: delete)
             }
             Section {
                 addButton
             }
         }
+    }
+    
+    func delete(at offsets: IndexSet) {
+        foodModel.foodItems.remove(atOffsets: offsets)
+        SoundPlayer.play(.letterpressDelete)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            handleNutrientsChange()
+//        }
+    }
+    
+    func move(from source: IndexSet, to destination: Int) {
+        foodModel.foodItems.move(fromOffsets: source, toOffset: destination)
     }
     
     var addButton: some View {
@@ -52,40 +69,101 @@ struct FoodItemsForm: View {
     }
     
     func handleNewFoodItem(_ foodItem: FoodItem) {
-        var foodItem = foodItem
-        foodItem.sortPosition = foodModel.lastFoodItemsSortPosition
         SoundPlayer.play(.clearSwoosh)
 
         var foodItems =  foodModel.foodItems
         foodItems.append(foodItem)
         foodItems.setLargestEnergy()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            withAnimation {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.snappy) {
                 foodModel.foodItems = foodItems
-//                foodModel.foodItems.append(foodItem)
             }
             
-//            foodModel.calculateNutrients()
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//                withAnimation {
-//                    foodModel.setLargestEnergyForAllFoodItems()
-//                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    foodModel.smallChartData = self.foodModel.macrosChartData
-                    withAnimation(.snappy) {
-                        foodModel.largeChartData = foodModel.macrosChartData
-                    }
-                }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                handleNutrientsChange()
             }
-
         }
     }
     
+    func handleNutrientsChange() {
+        withAnimation(.snappy) {
+            foodModel.calculateNutrients()
+        }
+        
+        foodModel.smallChartData = self.foodModel.macrosChartData
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.snappy) {
+                foodModel.largeChartData = foodModel.macrosChartData
+            }
+        }
+    }
+    
+    func field(for nutrient: Nutrient) -> some View {
+        HStack {
+            Text(nutrient.description)
+                .foregroundStyle(Color(.label))
+            Spacer()
+            switch nutrient {
+            case .energy:
+                Color.clear
+                    .animatedItemEnergy(
+                        value: value(for: .energy),
+                        energyUnit: .kcal,
+                        isAnimating: false
+                    )
+            case .macro:
+                Color.clear
+                    .animatedItemMacro(
+                        value: value(for: nutrient),
+                        macro: nutrient.macro!,
+                        isPrimary: foodModel.primaryFoodItemsMacro == nutrient.macro,
+                        isAnimating: false
+                    )
+
+            case .micro:
+                Text(valueString(for: nutrient))
+                    .foregroundStyle(Color(.secondaryLabel))
+            }
+        }
+    }
+    
+    func value(for nutrient: Nutrient) -> Double {
+        foodModel.value(for: nutrient)
+    }
+
+    func unit(for nutrient: Nutrient) -> NutrientUnit {
+        switch nutrient {
+        case .energy:           .kcal
+        case .macro:            .g
+        case .micro(let micro): micro.defaultUnit
+        }
+    }
+
+    func valueString(for nutrient: Nutrient) -> String {
+        "\(value(for: nutrient).cleanAmount) \(unit(for: nutrient).abbreviation)"
+    }
+
     var energyAndMacrosSection: some View {
         Section {
+            HStack {
+                Text("Energy")
+                    .foregroundStyle(Color(.label))
+                Spacer()
+                Color.clear
+                    .animatedItemEnergy(
+                        value: value(for: .energy),
+                        energyUnit: .kcal,
+                        isAnimating: false
+                    )
+            }
+//            field(for: .energy)
+            
+            ForEach(Macro.allCases, id: \.self) {
+                field(for: .macro($0))
+            }
+            
+            MacrosPieChart(foodModel: foodModel)
         }
     }
     

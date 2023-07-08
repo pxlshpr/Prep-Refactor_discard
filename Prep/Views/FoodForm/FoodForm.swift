@@ -591,6 +591,8 @@ struct FoodForm: View {
                     label(model.foodItemsName, "list.bullet", .teal)
                     Spacer()
                     pieChart
+                    Text(model.foodItemsCountString)
+                        .foregroundStyle(Color(.secondaryLabel))
                 }
             }
         }
