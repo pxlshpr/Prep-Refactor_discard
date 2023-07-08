@@ -156,7 +156,9 @@ struct MealFooter: View {
     }
 
     var foodPicker: some View {
-        FoodPicker(isPresented: $showingFoodPicker, meal: meal)
+        FoodPicker(meal: meal) { _ in
+            showingFoodPicker = false
+        }
     }
     
     var stats: some View {

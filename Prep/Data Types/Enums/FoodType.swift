@@ -18,10 +18,8 @@ extension FoodType {
         case .recipe:   "frying.pan"
         }
     }
-}
-
-extension FoodType: CustomStringConvertible {
-    var description: String {
+    
+    var name: String {
         switch self {
         case .food:     "Food"
         case .recipe:   "Recipe"

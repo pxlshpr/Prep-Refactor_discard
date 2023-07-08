@@ -34,12 +34,62 @@ struct FoodForm: View {
             .sheet(isPresented: $model.showingImageViewer) { FoodImageViewer(model) }
     }
     
+    var content: some View {
+        ZStack {
+            NavigationStack(path: $model.path) {
+                Group {
+                    if model.hasAppeared {
+                        form
+                    } else {
+                        Color.clear
+                    }
+                }
+                .navigationTitle(model.title)
+                .navigationDestination(for: FoodFormRoute.self, destination: destination)
+                .toolbar { toolbarContent }
+            }
+//            AlertLayer(
+//                message: $model.alertMessage,
+//                isPresented: $model.isPresentingAlert
+//            )
+        }
+    }
+    
+    @ViewBuilder
+    var form: some View {
+        switch model.foodType {
+        case .food:
+            Form {
+                detailsSection
+                nutrientsAndSizesSection
+                barcodeSection
+                imagesSection
+                publishSection
+                deleteSection
+            }
+        case .recipe:
+            Form {
+                detailsSection
+                foodItemsAndSizesSection
+                publishSection
+                deleteSection
+            }
+        case .plate:
+            Form {
+                detailsSection
+                foodItemsAndSizesSection
+                publishSection
+                deleteSection
+            }
+        }
+    }
+    
     func appeared() {
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-//            withAnimation(.snappy) {
-//                hasAppeared = true
-//            }
-//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            withAnimation(.snappy) {
+                model.hasAppeared = true
+            }
+        }
     }
 
     func selectedPhotosChanged(oldValue: [PhotosPickerItem], newValue: [PhotosPickerItem]) {
@@ -56,31 +106,7 @@ struct FoodForm: View {
             }
         }
     }
-    var content: some View {
-        ZStack {
-            NavigationStack(path: $model.path) {
-                Group {
-//                    if hasAppeared {
-                        form
-//                    } else {
-//                        Color.clear
-//                    }
-                }
-                .navigationTitle(title)
-                .navigationDestination(for: FoodFormRoute.self, destination: destination)
-                .toolbar { toolbarContent }
-            }
-//            AlertLayer(
-//                message: $model.alertMessage,
-//                isPresented: $model.isPresentingAlert
-//            )
-        }
-    }
-    
-    var title: String {
-        model.isEditing ? "Edit Food" : "New Food"
-    }
-    
+
     var toolbarContent: some ToolbarContent {
         
         var cancelActions: some View {
@@ -177,6 +203,7 @@ struct FoodForm: View {
             case .emojiPicker:  emojiPicker
             case .nutrients:    nutrientsForm
             case .sizes:        sizesList
+            case .foodItems:    foodItemsForm
             }
         }
     }
@@ -199,20 +226,13 @@ struct FoodForm: View {
     
     var nutrientsForm: some View {
         NutrientsForm(foodModel: model)
-//            .environment(model)
     }
     
-    var form: some View {
-        Form {
-            detailsSection
-            nutrientsAndSizesSection
-            barcodeSection
-            imagesSection
-            publishSection
-            deleteSection
-        }
+    var foodItemsForm: some View {
+        FoodItemsForm(foodModel: model)
     }
     
+
     var imagesSection: some View {
         var camera: some View {
             Camera(
@@ -467,9 +487,6 @@ struct FoodForm: View {
             }
         }
         
-        var greyColor: Color { Color(hex: "6F7E88") }
-        var brownColor: Color { Color(hex: "AC8E68") }
-        
         return NavigationLink(value: FoodFormRoute.sizes) {
             HStack {
                 label("Other Sizes", "takeoutbag.and.cup.and.straw.fill", Color.orange)
@@ -560,38 +577,66 @@ struct FoodForm: View {
         Section {
             nameField
             detailField
-            brandField
+            if model.foodType == .food {
+                brandField
+            }
             emojiPickerLink
+        }
+    }
+
+    var foodItemsAndSizesSection: some View {
+        var foodItemsLink: some View {
+            NavigationLink(value: FoodFormRoute.foodItems) {
+                HStack {
+                    label(model.foodItemsName, "list.bullet", .teal)
+                    Spacer()
+                    pieChart
+                }
+            }
+        }
+        
+        return Section {
+            foodItemsLink
+            if model.foodType != .plate {
+                sizesLink
+            }
         }
     }
     
     var nutrientsAndSizesSection: some View {
         
-        @ViewBuilder
-        var details: some View {
-            Chart(model.smallChartData, id: \.macro) { macroValue in
-                SectorMark(
-                    angle: .value("kcal", macroValue.kcal),
-                    innerRadius: .ratio(0.5),
-                    angularInset: 0.5
-                )
-                .cornerRadius(3)
-                .foregroundStyle(by: .value("Macro", macroValue.macro))
-            }
-            .chartForegroundStyleScale(Macro.chartStyleScale(colorScheme))
-            .chartLegend(.hidden)
-            .frame(width: 28, height: 28)
-        }
-        
-        return Section {
+        var nutrientsLink: some View {
             NavigationLink(value: FoodFormRoute.nutrients) {
                 HStack {
                     label("Nutrients", "chart.bar.doc.horizontal", .blue)
                     Spacer()
-                    details
+                    pieChart
                 }
             }
+        }
+        
+        return Section {
+            nutrientsLink
             sizesLink
         }
     }
+    
+    @ViewBuilder
+    var pieChart: some View {
+        Chart(model.smallChartData, id: \.macro) { macroValue in
+            SectorMark(
+                angle: .value("kcal", macroValue.kcal),
+                innerRadius: .ratio(0.5),
+                angularInset: 0.5
+            )
+            .cornerRadius(3)
+            .foregroundStyle(by: .value("Macro", macroValue.macro))
+        }
+        .chartForegroundStyleScale(Macro.chartStyleScale(colorScheme))
+        .chartLegend(.hidden)
+        .frame(width: 28, height: 28)
+    }
+    
+    var greyColor: Color { Color(hex: "6F7E88") }
+    var brownColor: Color { Color(hex: "AC8E68") }
 }

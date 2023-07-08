@@ -5,22 +5,22 @@ import SwiftHaptics
 import ViewSugar
 import FoodLabel
 
-private let logger = Logger(subsystem: "MealItemCell", category: "")
+private let logger = Logger(subsystem: "FoodItemCell", category: "")
 
 private var lastWidth: CGFloat = 0
 
-struct MealItemCell: View {
+struct FoodItemCell: View {
     
     @Environment(\.colorScheme) var colorScheme
 
     let item: FoodItem
-    let meal: Meal
+    let meal: Meal?
 
     @State var width: CGFloat
     
     @State var showingItemForm = false
     
-    init(item: FoodItem, meal: Meal) {
+    init(item: FoodItem, meal: Meal? = nil) {
         self.item = item
         self.meal = meal
         
@@ -87,10 +87,11 @@ struct MealItemCell: View {
     
     var itemForm: some View {
         ItemForm(
-            isPresented: $showingItemForm,
             foodItem: item,
             meal: meal
-        )
+        ) { _ in
+            showingItemForm = false
+        }
     }
     
     var foodBadge: some View {

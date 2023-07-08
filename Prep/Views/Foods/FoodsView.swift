@@ -97,18 +97,29 @@ struct FoodsView: View {
     
     var buttonLayer: some View {
         var newFoodButton: some View {
-            Menu {
-                ForEach(FoodType.allCases) { foodType in
-                    Button {
-                        Haptics.selectionFeedback()
-                        foodModel.reset(newFoodType: foodType)
-                        showingFoodForm = true
-                    } label: {
-                        Label(foodType.description, systemImage: foodType.systemImage)
-                    }
-                }
-            } label: {
+            var label: some View {
                 heroButtonLabel("plus")
+            }
+            
+            var menu: some View {
+                Menu {
+                    ForEach(FoodType.allCases) { foodType in
+                        Button {
+                            Haptics.selectionFeedback()
+                            foodModel.reset(newFoodType: foodType)
+                            showingFoodForm = true
+                        } label: {
+                            Label(foodType.name, systemImage: foodType.systemImage)
+                        }
+                    }
+                } label: {
+                    label
+                }
+            }
+         
+            return ZStack {
+                label
+                menu
             }
         }
         
@@ -118,9 +129,7 @@ struct FoodsView: View {
                 Spacer()
                 newFoodButton
                     .popover(isPresented: $showingFoodForm) { newFoodForm }
-//                    .popover(item: $foodBeingEdited ) {
-//                        FoodForm($0)
-//                    }
+                    .hoverEffect(.lift)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, HeroButton.bottom)

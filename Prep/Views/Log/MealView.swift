@@ -82,7 +82,10 @@ struct MealView: View {
     }
     
     var foodPicker: some View {
-        FoodPicker(isPresented: $showingFoodPicker, meal: meal)
+//        FoodPicker(isPresented: $showingFoodPicker, meal: meal)
+        FoodPicker(meal: meal) { _ in
+            showingFoodPicker = false
+        }
     }
 
     func didModifyMeal(notification: Notification) {
@@ -163,7 +166,7 @@ struct MealView: View {
     }
     
     func cell(foodItem: FoodItem) -> some View {
-        MealItemCell(item: foodItem, meal: meal)
+        FoodItemCell(item: foodItem, meal: meal)
 //        @ViewBuilder
 //        var menuItems: some View {
 //            Section(foodItem.food.name) {
@@ -190,7 +193,7 @@ struct MealView: View {
 //        return Button {
 //            tapped(foodItem)
 //        } label: {
-//            MealItemCell(
+//            FoodItemCell(
 //                item: foodItem,
 //                meal: meal
 //            )

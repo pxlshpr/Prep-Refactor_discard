@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E21DE97E2A5907FB0022F802 /* FoodItemsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21DE97D2A5907FB0022F802 /* FoodItemsForm.swift */; };
 		E22F3DB92A541F5600BADE4A /* FoodItemsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */; };
 		E22F84332A54AA5A00096909 /* LogNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84322A54AA5A00096909 /* LogNavigationBar.swift */; };
 		E22F84352A54ADAA00096909 /* NutrientMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E22F84342A54ADAA00096909 /* NutrientMeter.swift */; };
@@ -148,7 +149,7 @@
 		E280027D2A52B84300C6D528 /* FoodPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E52A52B84300C6D528 /* FoodPickerModel.swift */; };
 		E280027E2A52B84300C6D528 /* MealFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E62A52B84300C6D528 /* MealFooter.swift */; };
 		E280027F2A52B84300C6D528 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E72A52B84300C6D528 /* LogView.swift */; };
-		E28002802A52B84300C6D528 /* MealItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E82A52B84300C6D528 /* MealItemCell.swift */; };
+		E28002802A52B84300C6D528 /* FoodItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E82A52B84300C6D528 /* FoodItemCell.swift */; };
 		E28002812A52B84300C6D528 /* MealView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001E92A52B84300C6D528 /* MealView.swift */; };
 		E28002822A52B84300C6D528 /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001EA2A52B84300C6D528 /* DayView.swift */; };
 		E28002842A52B84300C6D528 /* FoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28001ED2A52B84300C6D528 /* FoodsView.swift */; };
@@ -396,6 +397,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E21DE97D2A5907FB0022F802 /* FoodItemsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsForm.swift; sourceTree = "<group>"; };
 		E22F3DB82A541F5600BADE4A /* FoodItemsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemsStore.swift; sourceTree = "<group>"; };
 		E22F84322A54AA5A00096909 /* LogNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogNavigationBar.swift; sourceTree = "<group>"; };
 		E22F84342A54ADAA00096909 /* NutrientMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutrientMeter.swift; sourceTree = "<group>"; };
@@ -536,7 +538,7 @@
 		E28001E52A52B84300C6D528 /* FoodPickerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodPickerModel.swift; sourceTree = "<group>"; };
 		E28001E62A52B84300C6D528 /* MealFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealFooter.swift; sourceTree = "<group>"; };
 		E28001E72A52B84300C6D528 /* LogView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
-		E28001E82A52B84300C6D528 /* MealItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealItemCell.swift; sourceTree = "<group>"; };
+		E28001E82A52B84300C6D528 /* FoodItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodItemCell.swift; sourceTree = "<group>"; };
 		E28001E92A52B84300C6D528 /* MealView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealView.swift; sourceTree = "<group>"; };
 		E28001EA2A52B84300C6D528 /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		E28001ED2A52B84300C6D528 /* FoodsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodsView.swift; sourceTree = "<group>"; };
@@ -1078,16 +1080,17 @@
 		E28001DC2A52B84300C6D528 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				E28001DD2A52B84300C6D528 /* FoodBadge.swift */,
-				E22F84342A54ADAA00096909 /* NutrientMeter.swift */,
 				E22F843A2A54AE3700096909 /* DottedLine.swift */,
-				E22F84362A54ADCA00096909 /* NutrientMeter.Model.swift */,
-				E28001DE2A52B84300C6D528 /* Shimmer.swift */,
-				E28001DF2A52B84300C6D528 /* TimeSlider.swift */,
 				E28001E02A52B84300C6D528 /* EmojiPicker.swift */,
+				E28001DD2A52B84300C6D528 /* FoodBadge.swift */,
 				E28001E12A52B84300C6D528 /* FoodCell.swift */,
+				E28001E82A52B84300C6D528 /* FoodItemCell.swift */,
 				E2E1A0312A57E11E00A01D45 /* HeroButtonLabel.swift */,
 				E29C6E462A581263002E1799 /* MacrosPieChart.swift */,
+				E22F84362A54ADCA00096909 /* NutrientMeter.Model.swift */,
+				E22F84342A54ADAA00096909 /* NutrientMeter.swift */,
+				E28001DE2A52B84300C6D528 /* Shimmer.swift */,
+				E28001DF2A52B84300C6D528 /* TimeSlider.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1095,17 +1098,16 @@
 		E28001E22A52B84300C6D528 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				E28001E32A52B84300C6D528 /* FoodPicker.swift */,
-				E28001E42A52B84300C6D528 /* MealForm.swift */,
-				E28001E52A52B84300C6D528 /* FoodPickerModel.swift */,
-				E28001E62A52B84300C6D528 /* MealFooter.swift */,
-				E28001E72A52B84300C6D528 /* LogView.swift */,
 				E22F84422A55249700096909 /* CalendarView.swift */,
-				E22F84322A54AA5A00096909 /* LogNavigationBar.swift */,
-				E22F843E2A54AF1900096909 /* MetricsView+Animatable.swift */,
-				E28001E82A52B84300C6D528 /* MealItemCell.swift */,
-				E28001E92A52B84300C6D528 /* MealView.swift */,
 				E28001EA2A52B84300C6D528 /* DayView.swift */,
+				E28001E32A52B84300C6D528 /* FoodPicker.swift */,
+				E28001E52A52B84300C6D528 /* FoodPickerModel.swift */,
+				E22F84322A54AA5A00096909 /* LogNavigationBar.swift */,
+				E28001E72A52B84300C6D528 /* LogView.swift */,
+				E28001E62A52B84300C6D528 /* MealFooter.swift */,
+				E28001E42A52B84300C6D528 /* MealForm.swift */,
+				E28001E92A52B84300C6D528 /* MealView.swift */,
+				E22F843E2A54AF1900096909 /* MetricsView+Animatable.swift */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -1121,8 +1123,10 @@
 		E28001F22A52B84300C6D528 /* FoodForm */ = {
 			isa = PBXGroup;
 			children = (
+				E256839F2A58A0B700581FA2 /* AmountField.swift */,
 				E28001FA2A52B84300C6D528 /* FoodForm.swift */,
 				E250E4A52A5867C0002613A4 /* FoodImageViewer.swift */,
+				E21DE97D2A5907FB0022F802 /* FoodItemsForm.swift */,
 				E28001F52A52B84300C6D528 /* ImageManager.swift */,
 				E28001F82A52B84300C6D528 /* LabelExtractor.swift */,
 				E28001F92A52B84300C6D528 /* MicroPicker.swift */,
@@ -1132,7 +1136,6 @@
 				E28001F32A52B84300C6D528 /* ServingField.swift */,
 				E28001FC2A52B84300C6D528 /* SizeForm.swift */,
 				E28001F42A52B84300C6D528 /* SizesList.swift */,
-				E256839F2A58A0B700581FA2 /* AmountField.swift */,
 			);
 			path = FoodForm;
 			sourceTree = "<group>";
@@ -1876,12 +1879,13 @@
 				E28002432A52B84300C6D528 /* EnergyUnit.swift in Sources */,
 				E28002932A52B84300C6D528 /* AnimatableModifier.swift in Sources */,
 				E28002422A52B84300C6D528 /* NutrientMeterComponent.swift in Sources */,
-				E28002802A52B84300C6D528 /* MealItemCell.swift in Sources */,
+				E28002802A52B84300C6D528 /* FoodItemCell.swift in Sources */,
 				E28002452A52B84300C6D528 /* Tab.swift in Sources */,
 				E280028F2A52B84300C6D528 /* FoodForm.swift in Sources */,
 				E280023C2A52B84300C6D528 /* UnitType.swift in Sources */,
 				E28002752A52B84300C6D528 /* HomeView.swift in Sources */,
 				E28002762A52B84300C6D528 /* FoodBadge.swift in Sources */,
+				E21DE97E2A5907FB0022F802 /* FoodItemsForm.swift in Sources */,
 				E28002612A52B84300C6D528 /* PhotosPickerItem.swift in Sources */,
 				E28002492A52B84300C6D528 /* FormUnit.swift in Sources */,
 				E280FC182A529E3D00C6D528 /* Persistence.swift in Sources */,

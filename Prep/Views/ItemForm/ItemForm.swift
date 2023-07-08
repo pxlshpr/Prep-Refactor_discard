@@ -17,19 +17,21 @@ struct ItemForm: View {
     
     @FocusState var isFocused: Bool
     
-    @State var unit: FormUnit
+    let dismissHandler: (FoodItem?) -> ()
+    
     @State var meal: Meal? = nil
-
-//    @State var food: Food? = nil
+    @State var parentFood: Food? = nil
+    
     @State var food: Food
     @State var foodItem: FoodItem? = nil
 
     @State var hasAppeared = false
-    @Binding var isPresented: Bool
     
     @State var amountString: String
     @State var amountDouble: Double?
 
+    @State var unit: FormUnit
+    
     @State var isAnimatingAmountChange = false
     @State var startedAnimatingAmountChangeAt: Date = Date()
     
@@ -45,14 +47,17 @@ struct ItemForm: View {
     
     /// Creating new items
     init(
-        isPresented: Binding<Bool>,
         meal: Meal?,
-        food: Food
+        parentFood: Food?,
+        food: Food,
+        dismissHandler: @escaping (FoodItem?) -> ()
     ) {
-        _isPresented = isPresented
-        _meal = State(initialValue: meal)
-        _food = State(initialValue: food)
+        self.dismissHandler = dismissHandler
         
+        _meal = State(initialValue: meal)
+        _parentFood = State(initialValue: parentFood)
+
+        _food = State(initialValue: food)
 
         let amount: Double
         let unit: FormUnit
@@ -77,11 +82,11 @@ struct ItemForm: View {
 
     /// Editing existing items
     init(
-        isPresented: Binding<Bool>,
         foodItem: FoodItem,
-        meal: Meal
+        meal: Meal?,
+        dismissHandler: @escaping (FoodItem?) -> ()
     ) {
-        _isPresented = isPresented
+        self.dismissHandler = dismissHandler
         _meal = State(initialValue: meal)
         _food = State(initialValue: foodItem.food)
         _foodItem = State(initialValue: foodItem)
@@ -187,11 +192,6 @@ struct ItemForm: View {
         FoodValue((amountDouble ?? 0), unit)
     }
     
-    var scaleFactor: Double {
-        guard let quantity = food.quantity(for: foodValue) else { return 0 }
-        return food.nutrientScaleFactor(for: quantity) ?? 0
-    }
-    
     var toolbarContent: some ToolbarContent {
         Group {
             ToolbarItem(placement: .topBarTrailing) {
@@ -219,11 +219,23 @@ struct ItemForm: View {
     }
     
     func tappedSave() {
-        guard let meal else { return }
-        
         Haptics.successFeedback()
-        isPresented = false
         
+        if let meal {
+            dismissHandler(nil)
+            saveMealItem(for: meal)
+        } else {
+            let foodItem = FoodItem(food: food, amount: foodValue)
+            dismissHandler(foodItem)
+            saveChildFood()
+        }
+    }
+    
+    func saveChildFood() {
+        
+    }
+    
+    func saveMealItem(for meal: Meal) {
         Task.detached {
             if let foodItem {
                 /// Update
@@ -262,7 +274,9 @@ struct ItemForm: View {
         Form {
             Section {
                 foodField
-                mealField
+                if meal != nil {
+                    mealField
+                }
                 quantityField
                 incrementField
             }
@@ -361,12 +375,18 @@ struct ItemForm: View {
         )
     }
 
+    func value(for nutrient: Nutrient) -> Double {
+        food.value(for: nutrient, with: foodValue)
+//        nutrientValue(for: nutrient).value * scaleFactor
+    }
+
+//    var scaleFactor: Double {
+//        guard let quantity = food.quantity(for: foodValue) else { return 0 }
+//        return food.nutrientScaleFactor(for: quantity) ?? 0
+//    }
+//    
     func nutrientValue(for nutrient: Nutrient) -> NutrientValue {
         food.value(for: nutrient) ?? NutrientValue(nutrient: nutrient, value: 0, unit: .g)
-    }
-    
-    func value(for nutrient: Nutrient) -> Double {
-        nutrientValue(for: nutrient).value * scaleFactor
     }
 
     func valueString(for nutrient: Nutrient) -> String {

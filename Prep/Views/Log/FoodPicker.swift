@@ -19,16 +19,16 @@ struct FoodPicker: View {
 
     @State var model = FoodPickerModel.shared
 
-    @Binding var isPresented: Bool
     @State var hasAppeared = false
     
     let meal: Meal?
-    
+    let dismissHandler: (FoodItem?) -> ()
+
     init(
-        isPresented: Binding<Bool>,
-        meal: Meal? = nil
+        meal: Meal? = nil,
+        dismissHandler: @escaping (FoodItem?) -> ()
     ) {
-        _isPresented = isPresented
+        self.dismissHandler = dismissHandler
         self.meal = meal
     }
     
@@ -94,7 +94,7 @@ struct FoodPicker: View {
                             foodModel.reset(newFoodType: foodType)
                             showingFoodForm = true
                         } label: {
-                            Label(foodType.description, systemImage: foodType.systemImage)
+                            Label(foodType.name, systemImage: foodType.systemImage)
                         }
                     }
                 } label: {
@@ -119,9 +119,10 @@ struct FoodPicker: View {
             ForEach(model.foodResults, id: \.self) { food in
                 NavigationLink {
                     ItemForm(
-                        isPresented: $isPresented,
                         meal: meal,
-                        food: food
+                        parentFood: nil,
+                        food: food,
+                        dismissHandler: dismissHandler
                     )
                 } label: {
                     FoodCell(food: food)

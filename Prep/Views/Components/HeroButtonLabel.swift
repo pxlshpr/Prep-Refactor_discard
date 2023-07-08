@@ -11,5 +11,4 @@ func heroButtonLabel(_ systemImage: String) -> some View {
             .foregroundStyle(Color(.systemBackground))
     }
     .frame(width: HeroButton.size, height: HeroButton.size)
-    .hoverEffect(.lift)
 }

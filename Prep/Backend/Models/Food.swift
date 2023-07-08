@@ -458,3 +458,15 @@ extension Array where Element == Food {
         })
     }
 }
+
+extension Food {
+    func value(for nutrient: Nutrient, with amount: FoodValue) -> Double {
+        guard
+            let quantity = quantity(for: amount),
+            let scaleFactor = nutrientScaleFactor(for: quantity),
+            let value = value(for: nutrient)?.value
+        else { return 0 }
+        
+        return value * scaleFactor
+    }
+}

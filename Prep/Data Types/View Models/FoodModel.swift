@@ -6,19 +6,11 @@ import PhotosUI
 import FoodDataTypes
 import FoodLabelScanner
 
-let DefaultDensity = FoodDensity(
-    weightAmount: 200,
-    weightUnit: .g,
-    volumeAmount: 1,
-    volumeUnit: .cupMetric
-)
-
-let DefaultAmountValue = FormValue(100, .weight(.g))
-let DefaultServingValue = FormValue(100, .weight(.g))
-
 @Observable class FoodModel {
 
     var foodBeingEdited: Food? = nil
+    
+    var foodType: FoodType = .food
 
     var emoji: String = ""
     var name: String = ""
@@ -53,6 +45,9 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
     var imageIDs: [UUID] = []
 
+    /// Recipe and Plate related
+    var foodItems: [FoodItem] = []
+    
     /// Not stored
     var path: [FoodFormRoute] = []
     var images: [UIImage] = []
@@ -69,7 +64,6 @@ let DefaultServingValue = FormValue(100, .weight(.g))
     var hasAppeared = false
     var selectedPhotos: [PhotosPickerItem] = []
 
-    
     var isProcessingImage = false
     var processingStatus: String = ""
     var alertMessage: String = ""
@@ -91,6 +85,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
 
     func reset(newFoodType: FoodType) {
         foodBeingEdited = nil
+        foodType = newFoodType
+        
         emoji = String.randomFoodEmoji
         name = ""
         detail = ""
@@ -132,6 +128,8 @@ let DefaultServingValue = FormValue(100, .weight(.g))
     
     func reset(existingFood food: Food) {
         foodBeingEdited = food
+        foodType = food.type
+        
         emoji = food.emoji
         name = food.name
         detail = food.detail ?? ""
@@ -822,5 +820,39 @@ extension Food {
         }
         
         imageIDs = model.imageIDs
+    }
+}
+
+extension FoodModel {
+    var title: String {
+        let prefix = isEditing ? "Edit" : "New"
+        return "\(prefix) \(foodType.name)"
+    }
+    
+    var foodItemsName: String {
+        foodType == .recipe ? "Ingredients" : "Foods"
+    }
+    var foodItemsSingularName: String {
+        foodType == .recipe ? "Ingredients" : "Foods"
+    }
+    
+    var lastFoodItemsSortPosition: Int {
+        foodItems
+            .sorted(by: { $0.sortPosition < $1.sortPosition })
+            .last?.sortPosition ?? 1
+    }
+    
+    var largestEnergyInKcal: Double {
+        foodItems
+            .map { $0.energyUnit.convert($0.energy, to: .kcal) }
+            .sorted()
+            .last ?? 0
+    }
+    
+    func setLargestEnergyForAllFoodItems() {
+        let largest = largestEnergyInKcal
+        for i in foodItems.indices {
+            foodItems[i].largestEnergyInKcal = largest
+        }
     }
 }

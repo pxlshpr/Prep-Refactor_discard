@@ -25,6 +25,34 @@ struct FoodItem: Identifiable, Codable, Hashable {
     let createdAt: Date
     
     init(
+        food: Food,
+        amount: FoodValue
+    ) {
+        
+        let energy = food.value(for: .energy, with: amount)
+        let carb = food.value(for: .macro(.carb), with: amount)
+        let fat = food.value(for: .macro(.fat), with: amount)
+        let protein = food.value(for: .macro(.protein), with: amount)
+
+        self.init(
+            id: UUID(),
+            amount: amount,
+            food: food,
+            mealID: nil,
+            energy: energy,
+            energyUnit: food.energyUnit,
+            carb: carb,
+            fat: fat,
+            protein: protein,
+            largestEnergyInKcal: 0,
+            sortPosition: 0,
+            eatenAt: nil,
+            updatedAt: Date.now,
+            createdAt: Date.now
+        )
+    }
+    
+    init(
         id: UUID,
         amount: FoodValue,
         food: Food,

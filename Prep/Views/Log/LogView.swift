@@ -86,7 +86,9 @@ struct LogView: View {
     }
     
     var foodPicker: some View {
-        FoodPicker(isPresented: $showingFoodPicker)
+        FoodPicker { _ in
+            showingFoodPicker = false
+        }
     }
     
     func scrollView(_ proxy: GeometryProxy) -> some View {
@@ -172,7 +174,7 @@ struct LogView: View {
                                     foodModel.reset(newFoodType: foodType)
                                     showingFoodForm = true
                                 } label: {
-                                    Label(foodType.description, systemImage: foodType.systemImage)
+                                    Label(foodType.name, systemImage: foodType.systemImage)
                                 }
                             }
                         }
@@ -194,21 +196,24 @@ struct LogView: View {
             var label: some View { heroButtonLabel("plus") }
             
             return ZStack {
-                label.grayscale(1)
+                label
                 menu
             }
         }
         
         func foodPicker(for meal: Meal) -> some View {
-            let binding = Binding<Bool>(
-                get: { mealToShowFoodPickerFor != nil },
-                set: { newValue in
-                    if !newValue {
-                        mealToShowFoodPickerFor = nil
-                    }
-                }
-            )
-            return FoodPicker(isPresented: binding, meal: meal)
+//            let binding = Binding<Bool>(
+//                get: { mealToShowFoodPickerFor != nil },
+//                set: { newValue in
+//                    if !newValue {
+//                        mealToShowFoodPickerFor = nil
+//                    }
+//                }
+//            )
+//            return FoodPicker(isPresented: binding, meal: meal)
+            return FoodPicker { _ in
+                mealToShowFoodPickerFor = nil
+            }
         }
 
         var addFoodButton: some View {
@@ -232,6 +237,7 @@ struct LogView: View {
                 Spacer()
                 addFoodButton
                     .popover(isPresented: $showingFoodForm) { newFoodForm }
+                    .hoverEffect(.lift)
             }
             .padding(.horizontal, 20)
             .padding(.bottom, HeroButton.bottom)
