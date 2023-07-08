@@ -121,8 +121,10 @@ struct FoodItemsForm: View {
         foodModel.smallChartData = foodModel.macrosChartData
 
         /// Do this later as its compute intensive and makes the number animations fail
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            foodModel.calculateMicros()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.snappy) {
+                foodModel.calculateMicros()
+            }
         }
     }
     
@@ -147,18 +149,24 @@ struct FoodItemsForm: View {
                         isPrimary: foodModel.primaryFoodItemsMacro == nutrient.macro,
                         isAnimating: false
                     )
+            default:
+                EmptyView()
 
-            case .micro:
-//                Color.clear
-//                    .animatedItemMicro(
-//                        value: value(for: nutrient),
-//                        micro: micro,
-//                        unit: micro.defaultUnit
-//                    )
-
-                Text(valueString(for: nutrient))
-                    .foregroundStyle(Color(.secondaryLabel))
             }
+        }
+    }
+    
+    func rowForMicro(_ nutrientValue: NutrientValue) -> some View {
+        HStack {
+            Text(nutrientValue.nutrient.description)
+                .foregroundStyle(Color(.label))
+            Spacer()
+            Group {
+//                Text(valueString(for: nutrient))
+                Text(nutrientValue.value.formattedMealItemAmount)
+                Text(nutrientValue.unit.abbreviation)
+            }
+                .foregroundStyle(Color(.secondaryLabel))
         }
     }
     
@@ -202,14 +210,24 @@ struct FoodItemsForm: View {
     }
     
     var microsSection: some View {
-        Group {
-            ForEach(foodModel.microGroups, id: \.self) { group in
+        return Group {
+            ForEach(foodModel.microGroups.nonEmptyGroups, id: \.self) { group in
+//            ForEach(foodModel.constructedMicroGroups, id: \.self) { group in
                 Section(group.name) {
-                    ForEach(foodModel.nutrients(for: group), id: \.self) { nutrient in
-                        field(for: nutrient)
+                    ForEach((foodModel.microGroups[group] ?? []), id: \.self) { nutrientValue in
+                        rowForMicro(nutrientValue)
                     }
                 }
             }
         }
+    }
+}
+
+extension Sequence where Iterator.Element == (key: MicroGroup, value: [NutrientValue]) {
+    var nonEmptyGroups: [MicroGroup] {
+        self
+            .filter { !$0.value.isEmpty } /// Filter out all the groups that aren't empty
+            .map { $0.key } /// Only returning the keys
+            .sorted()
     }
 }

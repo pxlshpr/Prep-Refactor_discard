@@ -26,7 +26,9 @@ import FoodLabelScanner
     var carb = NutrientValue(macro: .carb)
     var fat = NutrientValue(macro: .fat)
     var protein = NutrientValue(macro: .protein)
+    
     var micros: [NutrientValue] = []
+    var microGroups: [MicroGroup: [NutrientValue]] = [:]
 
     var sizes: [FormSize] = []
     var newSize: FormSize = FormSize()
@@ -270,7 +272,7 @@ extension FoodModel {
         })
     }
     
-    var microGroups: [MicroGroup] {
+    var constructedMicroGroups: [MicroGroup] {
         micros
             .compactMap { $0.micro?.group }
             .removingDuplicates()

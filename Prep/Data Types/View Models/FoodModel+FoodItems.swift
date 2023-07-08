@@ -60,10 +60,14 @@ extension FoodModel {
     
     func calculateMicros() {
         let start = CFAbsoluteTimeGetCurrent()
-        var calculatedMicros: [NutrientValue] = []
+        var micros: [NutrientValue] = []
+        var microGroups: [MicroGroup: [NutrientValue]] = [:]
+        
         for micro in Micro.allCases {
             /// Make sure at least food item has this micro
-            guard foodItemsHasMicro(micro) else {
+            guard let group = micro.group,
+                  foodItemsHasMicro(micro)
+            else {
                 continue
             }
             let nutrientValue = NutrientValue(
@@ -71,9 +75,18 @@ extension FoodModel {
                 value: calculatedFoodItemsTotal(for: micro),
                 unit: micro.defaultUnit
             )
-            calculatedMicros.append(nutrientValue)
+            micros.append(nutrientValue)
+            
+            if let existing = microGroups[group] {
+                var new = existing
+                new.append(nutrientValue)
+                microGroups[group] = new
+            } else {
+                microGroups[group] = [nutrientValue]
+            }
         }
-        self.micros = calculatedMicros
+        self.micros = micros
+        self.microGroups = microGroups
         print("Micro calculation took: \(CFAbsoluteTimeGetCurrent()-start)s")
     }
     

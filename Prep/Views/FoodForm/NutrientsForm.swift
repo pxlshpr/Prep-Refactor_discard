@@ -82,7 +82,7 @@ struct NutrientsForm: View {
     
     var microsSection: some View {
         Group {
-            ForEach(foodModel.microGroups, id: \.self) { group in
+            ForEach(foodModel.constructedMicroGroups, id: \.self) { group in
                 microGroupSection(for: group)
             }
             addMicrosSection
