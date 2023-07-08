@@ -40,7 +40,8 @@ struct FoodItemsForm: View {
     
     func delete(at offsets: IndexSet) {
         foodModel.foodItems.remove(atOffsets: offsets)
-        SoundPlayer.play(.letterpressDelete)
+//        SoundPlayer.play(.letterpressDelete)
+        SoundPlayer.play(.octaveSlideScissors)
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             handleNutrientsChange()
 //        }
@@ -69,7 +70,8 @@ struct FoodItemsForm: View {
     }
     
     func handleNewFoodItem(_ foodItem: FoodItem) {
-        SoundPlayer.play(.clearSwoosh)
+//        SoundPlayer.play(.clearSwoosh)
+        SoundPlayer.play(.octaveSlidePaper)
 
         var foodItems =  foodModel.foodItems
         foodItems.append(foodItem)
