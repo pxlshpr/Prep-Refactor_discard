@@ -87,9 +87,16 @@ struct FoodPicker: View {
             }
             ToolbarItemGroup(placement: .bottomBar) {
                 Spacer()
-                Button {
-                    foodModel.reset()
-                    showingFoodForm = true
+                Menu {
+                    ForEach(FoodType.allCases) { foodType in
+                        Button {
+                            Haptics.selectionFeedback()
+                            foodModel.reset(newFoodType: foodType)
+                            showingFoodForm = true
+                        } label: {
+                            Label(foodType.description, systemImage: foodType.systemImage)
+                        }
+                    }
                 } label: {
                     Image(systemName: "plus")
                 }

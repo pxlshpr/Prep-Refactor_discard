@@ -63,7 +63,7 @@ struct FoodsView: View {
             ForEach(model.foods, id: \.self) { food in
                 Button {
                     Haptics.selectionFeedback()
-                    foodModel.reset(for: food)
+                    foodModel.reset(existingFood: food)
                     foodBeingEdited = food
 //                    showingFoodForm = true
                 } label: {
@@ -101,7 +101,7 @@ struct FoodsView: View {
                 ForEach(FoodType.allCases) { foodType in
                     Button {
                         Haptics.selectionFeedback()
-                        foodModel.reset()
+                        foodModel.reset(newFoodType: foodType)
                         showingFoodForm = true
                     } label: {
                         Label(foodType.description, systemImage: foodType.systemImage)

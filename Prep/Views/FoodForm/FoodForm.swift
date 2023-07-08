@@ -167,7 +167,7 @@ struct FoodForm: View {
             }
 //            alertMessage = "Food added successfully."
         }
-        model.reset()
+//        model.reset()
 //        showingAlert = true
     }
     

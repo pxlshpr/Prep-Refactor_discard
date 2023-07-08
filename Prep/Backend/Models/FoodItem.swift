@@ -421,3 +421,9 @@ extension Micro {
         }
     }
 }
+
+extension FoodItem: Comparable {
+    static func <(lhs: FoodItem, rhs: FoodItem) -> Bool {
+        return lhs.sortPosition < rhs.sortPosition
+    }
+}

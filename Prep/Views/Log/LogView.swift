@@ -168,15 +168,9 @@ struct LogView: View {
                         Section {
                             ForEach(FoodType.allCases) { foodType in
                                 Button {
-                                    switch foodType {
-                                    case .food:
-                                        foodModel.reset()
-                                        showingFoodForm = true
-                                    case .recipe:
-                                        break
-                                    case .plate:
-                                        break
-                                    }
+                                    Haptics.selectionFeedback()
+                                    foodModel.reset(newFoodType: foodType)
+                                    showingFoodForm = true
                                 } label: {
                                     Label(foodType.description, systemImage: foodType.systemImage)
                                 }

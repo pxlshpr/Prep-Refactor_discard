@@ -286,3 +286,14 @@ extension FoodEntity {
         }
     }
 }
+
+extension FoodEntity {
+    var childrenFoodItemsArray: [FoodItemEntity] {
+        childrenFoodItemEntities?.allObjects as? [FoodItemEntity] ?? []
+    }
+    var childrenFoodItems: [FoodItem] {
+        childrenFoodItemsArray
+            .compactMap { FoodItem($0) }
+            .sorted()
+    }
+}

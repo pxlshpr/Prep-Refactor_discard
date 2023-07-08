@@ -39,6 +39,8 @@ struct Food: Identifiable, Codable, Hashable {
     var updatedAt: Date
     var createdAt: Date
     
+    var childrenFoodItems: [FoodItem]
+    
     init(
         id: UUID = UUID(),
         emoji: String = String.randomFoodEmoji,
@@ -65,7 +67,8 @@ struct Food: Identifiable, Codable, Hashable {
         lastUsedAt: Date? = nil,
         lastAmount: FoodValue? = nil,
         updatedAt: Date = Date.now,
-        createdAt: Date = Date.now
+        createdAt: Date = Date.now,
+        childrenFoodItems: [FoodItem] = []
     ) {
         self.id = id
         self.emoji = emoji
@@ -93,6 +96,7 @@ struct Food: Identifiable, Codable, Hashable {
         self.lastAmount = lastAmount
         self.updatedAt = updatedAt
         self.createdAt = createdAt
+        self.childrenFoodItems = childrenFoodItems
     }
 }
 
@@ -124,7 +128,8 @@ extension Food {
             lastUsedAt: entity.lastUsedAt,
             lastAmount: entity.lastAmount,
             updatedAt: entity.updatedAt!,
-            createdAt: entity.createdAt!
+            createdAt: entity.createdAt!,
+            childrenFoodItems: entity.childrenFoodItems
         )
     }
 }
